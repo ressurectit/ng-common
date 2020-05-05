@@ -98,7 +98,7 @@
         "rxjs": ">=6.5.0",
         "@jscrpt/common": ">=1.1.0",
         "numeral": "~2.0.6",
-        "angular2-hotkeys": "~2.1.0",
+        "angular2-hotkeys": "~2.2.0",
         "store": "~2.0.12",
         "structured-log": "~0.2.0",
         "moment": "^2.24.0",
