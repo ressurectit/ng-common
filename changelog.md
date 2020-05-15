@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 7.3.2 (2020-05-15)
+
+### Bug Fixes
+
+- fixed `NumberInputControlValueAccessor` now supports spaces in number
+
 ## Version 7.3.1
 
 - fixed `LocalPermanentStorageService` now correctly stores data indefinitely if `expire` is not provided or it is null
