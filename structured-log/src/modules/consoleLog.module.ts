@@ -29,7 +29,7 @@ export class ConsoleLogModule
     /**
      * Registers structured-log as logger service, with console component sink
      */
-    public static forRoot(): ModuleWithProviders
+    public static forRoot(): ModuleWithProviders<ConsoleLogModule>
     {
         return {
             ngModule: ConsoleLogModule,

@@ -14,5 +14,5 @@
 </div>
 
 <div class="console-filter">
-    <input type="text" placeholder="Filter messages" (input)="filterValue = $event.target.value; setMessages()">
+    <input type="text" placeholder="Filter messages" (input)="filterValue = $any($event.target).value; setMessages()">
 </div>

@@ -39,7 +39,7 @@ export class RestSinkConfigService
 
         if(isBlank(restrictToLevel))
         {
-            this.restrictToLevel = LogEventLevel.verbose;
+            this.restrictToLevel = LogEventLevel.warning;
         }
     }
 }
