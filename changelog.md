@@ -5,12 +5,13 @@
 ### Features
 
 - added new parameter `flipCallback` to `positionsWithFlip`, which is called when flip occurs during positioning
+- *subpackage* `@anglr/common/positions`
+   - added new `PositionToDirective` which allows positioning elements relative to each other, part of `PositionsModule`
 - *subpackage* `@anglr/common/structured-log`
    - added new `RestSinkService` as `Sink` implementation that allows storing logs using `LoggerRestClient`
    - added new `LoggerRestClient` interface, if implemented and provided using `LOGGER_REST_CLIENT` allows storing logs using REST
    - added new `RestSinkConfigService` used as configuration for `RestSinkService`, allows setting log level, interval, log count for flushing, also possible to set log level for immediate flush
    - added new `REST_SINK` provider for providing `RestSinkService` as `Sink`
-
 
 ### BREAKING CHANGES
 
