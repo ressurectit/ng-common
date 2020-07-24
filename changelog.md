@@ -4,8 +4,9 @@
 
 ### Features
 
-- added new parameter `flipCallback` to `positionsWithFlip`, which is called when flip occurs during positioning
+- added new `ClickOutsideDirective` which allows changing value of boolean if user clicks outside of selected element, or provided element, part of `ClickOutsideModule`
 - *subpackage* `@anglr/common/positions`
+   - added new parameter `flipCallback` to `positionsWithFlip`, which is called when flip occurs during positioning
    - added new `PositionToDirective` which allows positioning elements relative to each other, part of `PositionsModule`
 - *subpackage* `@anglr/common/structured-log`
    - added new `RestSinkService` as `Sink` implementation that allows storing logs using `LoggerRestClient`

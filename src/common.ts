@@ -10,6 +10,8 @@ export {ProgressIndicatorService} from './modules/progressIndicator/services/pro
 export {DebugDataModule} from './modules/debugData/modules/debugData.module';
 export {DebugDataComponent} from './modules/debugData/components/debugData/debugData.component';
 export {DebugDataEnabledService} from './modules/debugData/services/debugDataEnabled/debugDataEnabled.service';
+export {ClickOutsideDirective} from './modules/clickOutside/directives/clickOutside/clickOutside.directive';
+export {ClickOutsideModule} from './modules/clickOutside/modules/clickOutside.module';
 export * from './types/tokens';
 export * from './utils';
 export {IsNaNPipe} from './pipes/isNaN/isNaN.pipe';
