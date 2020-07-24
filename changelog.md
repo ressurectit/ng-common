@@ -2,6 +2,17 @@
 
 ## Version 8.0.0 (2020-07-24)
 
+### Features
+
+- added new `RestSinkService` as `Sink` implementation that allows storing logs using `LoggerRestClient`
+- added new `LoggerRestClient` interface, if implemented and provided using `LOGGER_REST_CLIENT` allows storing logs using REST
+- added new `RestSinkConfigService` used as configuration for `RestSinkService`, allows setting log level, interval, log count for flushing, also possible to set log level for immediate flush
+- added new `REST_SINK` provider for providing `RestSinkService` as `Sink`
+
+### BREAKING CHANGES
+
+- minimal supported version of *Angular* is `10.0.0`
+
 ## Version 7.3.2 (2020-05-15)
 
 ### Bug Fixes

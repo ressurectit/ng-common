@@ -1,10 +1,10 @@
+import {Injectable} from "@angular/core";
 import {Sink, LogEvent, LogEventLevel} from "structured-log";
 import {Observable, Subject} from "rxjs";
 
-import {ConsoleComponentSink, ConsoleComponentLog} from "../types/logger.interface";
-import {toText, isEnabled} from "../misc/utils";
+import {ConsoleComponentSink, ConsoleComponentLog} from "../../types/logger.interface";
+import {toText, isEnabled} from "../../misc/utils";
 import {ConsoleSinkConfigService} from "./consoleSinkConfig.service";
-import {Injectable} from "@angular/core";
 
 /**
  * Sink that is used for storing logs in `ConsoleComponent`
