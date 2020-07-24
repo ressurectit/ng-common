@@ -33,8 +33,14 @@ function updateHeight(element: HTMLElement, target: HTMLElement, htmlDocument: H
  * @param target - Target element which will be element positioned against
  * @param targetCoordinates - Relative coordinates of target element
  * @param htmlDocument - HTML document instance
+ * @param flipCallback - Callback called when flip occured during positioning
  */
-function flipIfCollision(element: HTMLElement, elementCoordinates: Positions.PositionsCoordinates, target: HTMLElement, targetCoordinates: Positions.PositionsCoordinates, htmlDocument: HTMLDocument): [Positions.PositionsCss, Positions.PositionsCoordinates, Positions.PositionsCoordinates]
+function flipIfCollision(element: HTMLElement,
+                         elementCoordinates: Positions.PositionsCoordinates,
+                         target: HTMLElement,
+                         targetCoordinates: Positions.PositionsCoordinates,
+                         htmlDocument: HTMLDocument,
+                         flipCallback: () => void): [Positions.PositionsCss, Positions.PositionsCoordinates, Positions.PositionsCoordinates]
 {
     let w = Math.max(htmlDocument.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(htmlDocument.documentElement.clientHeight, window.innerHeight || 0),
@@ -53,6 +59,7 @@ function flipIfCollision(element: HTMLElement, elementCoordinates: Positions.Pos
     {
         elementCoordinates = flipVertiacal(elementCoordinates);
         targetCoordinates = flipVertiacal(targetCoordinates);
+        flipCallback();
     }
 
     //horizontal overflow
@@ -63,6 +70,7 @@ function flipIfCollision(element: HTMLElement, elementCoordinates: Positions.Pos
     {
         elementCoordinates = flipHorizontal(elementCoordinates);
         targetCoordinates = flipHorizontal(targetCoordinates);
+        flipCallback();
     }
 
     return [positions(element, elementCoordinates, target, targetCoordinates), elementCoordinates, targetCoordinates];
@@ -111,8 +119,14 @@ function flipHorizontal(position: Positions.PositionsCoordinates): Positions.Pos
  * @param target - Target element which will be element positioned against
  * @param targetCoordinates - Relative coordinates of target element
  * @param htmlDocument - HTML document instance
+ * @param flipCallback - Callback called when flip occured during positioning
  */
-export function positionsWithFlip(element: HTMLElement, elementCoordinates: Positions.PositionsCoordinates, target: HTMLElement, targetCoordinates: Positions.PositionsCoordinates, htmlDocument: HTMLDocument = document): void
+export function positionsWithFlip(element: HTMLElement,
+                                  elementCoordinates: Positions.PositionsCoordinates,
+                                  target: HTMLElement,
+                                  targetCoordinates: Positions.PositionsCoordinates,
+                                  htmlDocument: HTMLDocument = document,
+                                  flipCallback: () => void = () => {}): void
 {
     //set to default position
     let popupCoordinates = positions(element, elementCoordinates, target, targetCoordinates);
@@ -121,7 +135,7 @@ export function positionsWithFlip(element: HTMLElement, elementCoordinates: Posi
     element.style.maxHeight = '';
 
     //flip if collision with viewport
-    [popupCoordinates, elementCoordinates, targetCoordinates] = flipIfCollision(element, elementCoordinates, target, targetCoordinates, htmlDocument);
+    [popupCoordinates, elementCoordinates, targetCoordinates] = flipIfCollision(element, elementCoordinates, target, targetCoordinates, htmlDocument, flipCallback);
     element.style.left = `${popupCoordinates.left}px`;
     element.style.top = `${popupCoordinates.top}px`;
 
