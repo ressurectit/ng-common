@@ -1,5 +1,7 @@
 # Changelog
 
+## Version 8.0.0 (2020-07-24)
+
 ## Version 7.3.2 (2020-05-15)
 
 ### Bug Fixes
