@@ -1,4 +1,4 @@
-import * as positions from 'positions';
+import positions from 'positions';
 
 /**
  * Updates height of element

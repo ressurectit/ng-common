@@ -1,1 +1,1 @@
-export * from './services';
+export {LocalPermanentStorageService, SessionTemporaryStorageService} from './services';

@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from "@angular/core";
 import {isPresent} from "@jscrpt/common";
-import * as moment from 'moment';
+import moment from 'moment';
 
 /**
  * Performs moment conversion

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {TemporaryStorage} from "@anglr/common";
-import * as store from 'store/storages/sessionStorage';
+import store from 'store/storages/sessionStorage';
 
 /**
  * Implementation of temporary storage using SessionStorage

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {PermanentStorage} from "@anglr/common";
-import * as store from 'store';
-import * as expirePlugin from 'store/plugins/expire';
+import store from 'store';
+import expirePlugin from 'store/plugins/expire';
 
 /**
  * Implementation of permanent storage using LocalStorage
