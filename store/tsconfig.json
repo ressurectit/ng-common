@@ -9,7 +9,6 @@
         },
         "types":
         [
-            "storejs",
             "storejs-expire"
         ],
         "typeRoots":

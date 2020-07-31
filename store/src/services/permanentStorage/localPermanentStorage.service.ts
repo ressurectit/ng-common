@@ -16,7 +16,7 @@ export class LocalPermanentStorageService implements PermanentStorage
         store.addPlugin(expirePlugin);
     }
 
-    //######################### public methods - implementation of StringLocalization #########################
+    //######################### public methods - implementation of PermanentStorage #########################
 
     /**
      * Gets value that was stored with 'name' from permanent storage

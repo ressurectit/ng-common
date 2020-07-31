@@ -1,10 +1,12 @@
 # Changelog
 
-## Version 8.0.0 (2020-07-24)
+## Version 8.0.0 (2020-07-31)
 
 ### Features
 
 - added new `ClickOutsideDirective` which allows changing value of boolean if user clicks outside of selected element, or provided element, part of `ClickOutsideModule`
+- *subpackage* `@anglr/common/store`
+   - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
 - *subpackage* `@anglr/common/positions`
    - added new parameter `flipCallback` to `positionsWithFlip`, which is called when flip occurs during positioning
    - added new `PositionToDirective` which allows positioning elements relative to each other, part of `PositionsModule`
