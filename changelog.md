@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2020-07-31)
+## Version 8.0.0 (2020-08-04)
 
 ### Features
 
@@ -19,6 +19,7 @@
 ### BREAKING CHANGES
 
 - minimal supported version of *Angular* is `10.0.0`
+- minimal supported version of `@jscrpt/common` is `1.2.0`
 
 ## Version 7.3.2 (2020-05-15)
 
