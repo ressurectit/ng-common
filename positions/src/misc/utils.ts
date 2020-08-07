@@ -1,6 +1,19 @@
 import positions from 'positions';
 
 /**
+ * Available flip directions
+ */
+export type FLIP_DIRECTION = 'vertical'|'horizontal';
+
+/**
+ * Function to be called when flip occurs
+ */
+export interface FlipCallback
+{
+    (direction: FLIP_DIRECTION): void;
+}
+
+/**
  * Updates height of element
  * @param element - Element that will be positioned
  * @param target - Target element which will be element positioned against
@@ -40,7 +53,7 @@ function flipIfCollision(element: HTMLElement,
                          target: HTMLElement,
                          targetCoordinates: Positions.PositionsCoordinates,
                          htmlDocument: HTMLDocument,
-                         flipCallback: () => void): [Positions.PositionsCss, Positions.PositionsCoordinates, Positions.PositionsCoordinates]
+                         flipCallback: FlipCallback): [Positions.PositionsCss, Positions.PositionsCoordinates, Positions.PositionsCoordinates]
 {
     let w = Math.max(htmlDocument.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(htmlDocument.documentElement.clientHeight, window.innerHeight || 0),
@@ -59,7 +72,7 @@ function flipIfCollision(element: HTMLElement,
     {
         elementCoordinates = flipVertiacal(elementCoordinates);
         targetCoordinates = flipVertiacal(targetCoordinates);
-        flipCallback();
+        flipCallback('vertical');
     }
 
     //horizontal overflow
@@ -70,7 +83,7 @@ function flipIfCollision(element: HTMLElement,
     {
         elementCoordinates = flipHorizontal(elementCoordinates);
         targetCoordinates = flipHorizontal(targetCoordinates);
-        flipCallback();
+        flipCallback('horizontal');
     }
 
     return [positions(element, elementCoordinates, target, targetCoordinates), elementCoordinates, targetCoordinates];
@@ -126,7 +139,7 @@ export function positionsWithFlip(element: HTMLElement,
                                   target: HTMLElement,
                                   targetCoordinates: Positions.PositionsCoordinates,
                                   htmlDocument: HTMLDocument = document,
-                                  flipCallback: () => void = () => {}): void
+                                  flipCallback: FlipCallback = () => {}): void
 {
     //set to default position
     let popupCoordinates = positions(element, elementCoordinates, target, targetCoordinates);

@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2020-08-04)
+## Version 8.0.0 (2020-08-07)
 
 ### Features
 
@@ -9,6 +9,7 @@
    - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
 - *subpackage* `@anglr/common/positions`
    - added new parameter `flipCallback` to `positionsWithFlip`, which is called when flip occurs during positioning
+   - added new `FLIP_DIRECTION` type defining direction of occured flip, used as parameter to `flipCallback`
    - added new `PositionToDirective` which allows positioning elements relative to each other, part of `PositionsModule`
 - *subpackage* `@anglr/common/structured-log`
    - added new `RestSinkService` as `Sink` implementation that allows storing logs using `LoggerRestClient`
