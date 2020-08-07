@@ -3,7 +3,7 @@ import positions from 'positions';
 /**
  * Available flip directions
  */
-export type FLIP_DIRECTION = 'vertical'|'horizontal';
+export type FLIP_DIRECTION = 'vertical'|'horizontal'|'verticalOriginal'|'horizontalOriginal';
 
 /**
  * Function to be called when flip occurs
@@ -74,6 +74,10 @@ function flipIfCollision(element: HTMLElement,
         targetCoordinates = flipVertiacal(targetCoordinates);
         flipCallback('vertical');
     }
+    else
+    {
+        flipCallback('verticalOriginal');
+    }
 
     //horizontal overflow
     if((w < (rect.left + rect.width) &&
@@ -84,6 +88,10 @@ function flipIfCollision(element: HTMLElement,
         elementCoordinates = flipHorizontal(elementCoordinates);
         targetCoordinates = flipHorizontal(targetCoordinates);
         flipCallback('horizontal');
+    }
+    else
+    {
+        flipCallback('horizontalOriginal');
     }
 
     return [positions(element, elementCoordinates, target, targetCoordinates), elementCoordinates, targetCoordinates];
