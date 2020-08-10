@@ -1,6 +1,18 @@
 import {Injectable, Type} from "@angular/core";
 import {HttpRequest} from '@angular/common/http'
 
+//updates http request clone to correctly append also request id to cloned request
+const clone = HttpRequest.prototype.clone;
+
+HttpRequest.prototype.clone = (function()
+{
+    let request: IgnoredInterceptorId = clone.apply(this, arguments);
+
+    request.requestId = this.requestId;
+
+    return request;
+}) as any;
+
 /**
  * Contains id of request, used for IgnoredInterceptorsService
  */

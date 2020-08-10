@@ -1,10 +1,11 @@
 # Changelog
 
-## Version 8.0.0 (2020-08-07)
+## Version 8.0.0 (2020-08-10)
 
 ### Features
 
 - added new `ClickOutsideDirective` which allows changing value of boolean if user clicks outside of selected element, or provided element, part of `ClickOutsideModule`
+- added code that modifies `HttpRequest` prototype `clone` method, adds support for cloning also `requestId`
 - *subpackage* `@anglr/common/store`
    - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
 - *subpackage* `@anglr/common/positions`
