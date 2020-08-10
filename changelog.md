@@ -5,7 +5,10 @@
 ### Features
 
 - added new `ClickOutsideDirective` which allows changing value of boolean if user clicks outside of selected element, or provided element, part of `ClickOutsideModule`
-- added code that modifies `HttpRequest` prototype `clone` method, adds support for cloning also `requestId`
+- added code that modifies `HttpRequest` prototype `clone` method, adds support for cloning also `additionalInfo`
+- added new `AdditionalInfo` generic interface, which allows definition of additional data
+- updated `ProgressInterceptor`, which now supports local progress indicator using `additionalInfo` with `LocalProgressIndicatorName`
+- added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
 - *subpackage* `@anglr/common/store`
    - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
 - *subpackage* `@anglr/common/positions`
@@ -22,6 +25,8 @@
 
 - minimal supported version of *Angular* is `10.0.0`
 - minimal supported version of `@jscrpt/common` is `1.2.0`
+- removed `HttpRequestIgnoredInterceptorId` interface, explicitly using type unions where needed
+- changed `IgnoredInterceptorId` to generic `AdditionalInfo`, allowing broader usage
 
 ## Version 7.3.2 (2020-05-15)
 

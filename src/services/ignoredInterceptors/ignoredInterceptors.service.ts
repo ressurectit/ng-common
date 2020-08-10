@@ -1,17 +1,4 @@
 import {Injectable, Type} from "@angular/core";
-import {HttpRequest} from '@angular/common/http'
-
-//updates http request clone to correctly append also request id to cloned request
-const clone = HttpRequest.prototype.clone;
-
-HttpRequest.prototype.clone = (function()
-{
-    let request: IgnoredInterceptorId = clone.apply(this, arguments);
-
-    request.requestId = this.requestId;
-
-    return request;
-}) as any;
 
 /**
  * Contains id of request, used for IgnoredInterceptorsService
@@ -22,13 +9,6 @@ export interface IgnoredInterceptorId
      * Identification of request
      */
     requestId?: string;
-}
-
-/**
- * Http request with request id for IgnoredInterceptorsService
- */
-export interface HttpRequestIgnoredInterceptorId<TBody> extends HttpRequest<TBody>, IgnoredInterceptorId
-{
 }
 
 /**
@@ -57,21 +37,21 @@ export class IgnoredInterceptorsService
     /**
      * Adds interceptor type that should be ignored for specified url
      * @param interceptorType - Type of interceptor should be ignored
-     * @param requestId - Object containing request id
+     * @param additionalInfo - Object containing additional info - request id
      */
-    public addInterceptor<TType>(interceptorType: Type<TType>, requestId: IgnoredInterceptorId): void
+    public addInterceptor<TType>(interceptorType: Type<TType>, additionalInfo: IgnoredInterceptorId): void
     {
-        if(!requestId.requestId)
+        if(!additionalInfo?.requestId)
         {
             return;
         }
 
-        if(!this._ignoredInterceptors.find(itm => itm.type == interceptorType && itm.requestId == requestId.requestId))
+        if(!this._ignoredInterceptors.find(itm => itm.type == interceptorType && itm.requestId == additionalInfo.requestId))
         {
             this._ignoredInterceptors.push(
             {
                 type: interceptorType,
-                requestId: requestId.requestId
+                requestId: additionalInfo.requestId
             });
         }
     }
