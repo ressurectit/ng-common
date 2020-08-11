@@ -63,7 +63,7 @@ export class IgnoredInterceptorsService
      */
     public isIgnored<TType>(interceptorType: Type<TType>, requestId: IgnoredInterceptorId): boolean
     {
-        if(!requestId.requestId)
+        if(!requestId?.requestId)
         {
             return false;
         }
