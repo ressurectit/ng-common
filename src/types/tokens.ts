@@ -6,19 +6,19 @@ import {Logger, DummyLoggerService} from '../services/logger';
 import {TemporaryStorage, MemoryTemporaryStorageService} from '../services/temporaryStorage';
 
 /**
- * Base url used during SSR when using HTTP (example: http://localhost:8888/)
+ * Base url when using HTTP (example: http://localhost:8888/)
  */
-export const SERVER_BASE_URL: InjectionToken<string> = new InjectionToken<string>('serverBaseUrl');
+export const HTTP_REQUEST_BASE_URL: InjectionToken<string> = new InjectionToken<string>('HTTP_REQUEST_BASE_URL');
 
 /**
- * Token is used to transfer server cookie header
+ * Token is used to transfer http request cookie header
  */
-export const SERVER_COOKIE_HEADER: InjectionToken<string> = new InjectionToken<string>('serverCookieHeader');
+export const HTTP_REQUEST_COOKIE_HEADER: InjectionToken<string> = new InjectionToken<string>('HTTP_REQUEST_COOKIE_HEADER');
 
 /**
- * Token is used to transfer server authentication header
+ * Token is used to transfer http request authentication header
  */
-export const SERVER_AUTH_HEADER: InjectionToken<string> = new InjectionToken<string>('serverAuthHeader');
+export const HTTP_REQUEST_AUTH_HEADER: InjectionToken<string> = new InjectionToken<string>('HTTP_REQUEST_AUTH_HEADER');
 
 /**
  * Token used for injecting Logger implementation

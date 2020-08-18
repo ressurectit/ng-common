@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2020-08-10)
+## Version 8.0.0 (2020-08-18)
 
 ### Features
 
@@ -27,6 +27,10 @@
 - minimal supported version of `@jscrpt/common` is `1.2.0`
 - removed `HttpRequestIgnoredInterceptorId` interface, explicitly using type unions where needed, `HttpRequest<any> & AdditionalInfo<IgnoredInterceptorId>`
 - changed `IgnoredInterceptorId` to generic `AdditionalInfo`, allowing broader usage
+- renamed `SERVER_BASE_URL` to `HTTP_REQUEST_BASE_URL`
+- renamed `SERVER_COOKIE_HEADER` to `HTTP_REQUEST_COOKIE_HEADER`
+- renamed `SERVER_AUTH_HEADER` to `HTTP_REQUEST_AUTH_HEADER`
+- `CookieService` now using `HTTP_REQUEST_COOKIE_HEADER` instead of `SERVER_COOKIE_HEADER`
 
 ## Version 7.3.2 (2020-05-15)
 

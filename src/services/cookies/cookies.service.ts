@@ -2,7 +2,7 @@ import {PLATFORM_ID, Inject, Optional, Injectable} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 import {isBlank} from '@jscrpt/common';
 
-import {SERVER_COOKIE_HEADER} from '../../types/tokens';
+import {HTTP_REQUEST_COOKIE_HEADER} from '../../types/tokens';
 
 /**
  * Class that is used as wrapper for working with cookies
@@ -19,7 +19,7 @@ export class CookieService
 
     //######################### constructor #########################
     constructor(@Inject(PLATFORM_ID) platformId: Object,
-                @Optional() @Inject(SERVER_COOKIE_HEADER) private _serverCookies: string)
+                @Optional() @Inject(HTTP_REQUEST_COOKIE_HEADER) private _serverCookies: string)
     {
         this._isBrowser = isPlatformBrowser(platformId);
     }

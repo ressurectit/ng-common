@@ -113,7 +113,6 @@ export class RestSinkService implements Sink
      */
     public flush(): Promise<void>
     {
-        console.log('flush called');
         let promise: Promise<void>;
 
         //no logs available
