@@ -21,6 +21,8 @@
    - added new `LoggerRestClient` interface, if implemented and provided using `LOGGER_REST_CLIENT` allows storing logs using REST
    - added new `RestSinkConfigService` used as configuration for `RestSinkService`, allows setting log level, interval, log count for flushing, also possible to set log level for immediate flush
    - added new `REST_SINK` provider for providing `RestSinkService` as `Sink`
+- *subpackage* `@anglr/common/forms`
+   - added new `RequiredClassModule` containing `RequiredClassDirective`
 
 ### BREAKING CHANGES
 
@@ -32,6 +34,8 @@
 - renamed `SERVER_COOKIE_HEADER` to `HTTP_REQUEST_COOKIE_HEADER`
 - renamed `SERVER_AUTH_HEADER` to `HTTP_REQUEST_AUTH_HEADER`
 - `CookieService` now using `HTTP_REQUEST_COOKIE_HEADER` instead of `SERVER_COOKIE_HEADER`
+- *subpackage* `@anglr/common/forms`
+   - `RequiredClassDirective` moved to separate module `RequiredClassModule`
 
 ## Version 7.3.2 (2020-05-15)
 
