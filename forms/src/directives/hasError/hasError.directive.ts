@@ -1,6 +1,6 @@
 import {Directive, ElementRef, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input} from "@angular/core";
 import {DOCUMENT} from "@angular/common";
-import {FormControlDirective, FormControlName, FormControl} from "@angular/forms";
+import {FormControlDirective, FormControlName, FormControl, NgModel} from "@angular/forms";
 import {extend, generateId, StringDictionary} from "@jscrpt/common";
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {Subscription} from "rxjs";
@@ -134,7 +134,7 @@ export class HasErrorDirective implements OnInit, OnDestroy
      */
     private get control(): FormControl
     {
-        return (this._formControl && this._formControl.control) || (this._formControlName && this._formControlName.control);
+        return this._formControl?.control || this._formControlName?.control || this._ngModel?.control;
     }
 
     //######################### public properties - inputs #########################
@@ -157,6 +157,7 @@ export class HasErrorDirective implements OnInit, OnDestroy
                 @Optional() @SkipSelf() private _groupHasError: GroupHasErrorDirective,
                 @Optional() private _formControl: FormControlDirective,
                 @Optional() private _formControlName: FormControlName,
+                @Optional() private _ngModel: NgModel,
                 @Optional() private _submittedSvc: SubmittedService,
                 @Inject(DOCUMENT) private _document: HTMLDocument,
                 @Inject(STRING_LOCALIZATION) protected _stringLocalization: StringLocalization,

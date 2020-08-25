@@ -1,3 +1,4 @@
+import "./utils/httpRequest.extension";
 export {HmrData} from './decorators/hmrData.decorator';
 export {HmrServiceData} from './decorators/hmrServiceData.decorator';
 export {HmrServiceDataConstructor} from './decorators/hmrServiceDataConstructor.decorator';
