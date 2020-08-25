@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2020-08-18)
+## Version 8.0.0 (2020-08-25)
 
 ### Features
 
@@ -9,6 +9,7 @@
 - added new `AdditionalInfo` generic interface, which allows definition of additional data
 - updated `ProgressInterceptor`, which now supports local progress indicator using `additionalInfo` with `LocalProgressIndicatorName`
 - added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
+- added new `updateHttpRequestClone` function, that needs to be called to make `additionalInfo` working correctly with `HttpRequest`
 - *subpackage* `@anglr/common/store`
    - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
 - *subpackage* `@anglr/common/positions`

@@ -1,6 +1,3 @@
-import {HttpRequest} from '@angular/common/http';
-import {AdditionalInfo} from './types/additionalInfo';
-
 export {HmrData} from './decorators/hmrData.decorator';
 export {HmrServiceData} from './decorators/hmrServiceData.decorator';
 export {HmrServiceDataConstructor} from './decorators/hmrServiceDataConstructor.decorator';
@@ -31,17 +28,6 @@ export {NoStringLocalizationService, StringLocalization} from './services/string
 export {Logger} from './services/logger';
 export {IgnoredInterceptorsService, IgnoredInterceptorId} from './services/ignoredInterceptors/ignoredInterceptors.service';
 export {NgComponentOutletEx} from "./directives/ngComponentOutletEx/ngComponentOutletEx.directive";
-export {APP_STABLE, extractAppStableResolve} from "./utils";
+export {APP_STABLE, extractAppStableResolve, runWhenModuleStable} from "./utils";
+export {updateHttpRequestClone} from "./utils/httpRequest.extension";
 export {PROGRESS_INTERCEPTOR_PROVIDER, ProgressInterceptor} from './modules/progressIndicator/interceptors/progressInterceptor';
-
-//updates http request clone to correctly append also additional info to cloned request
-const clone = HttpRequest.prototype.clone;
-
-HttpRequest.prototype.clone = (function(this: AdditionalInfo)
-{
-    let request: AdditionalInfo = clone.apply(this, arguments);
-
-    request.additionalInfo = this.additionalInfo;
-
-    return request;
-}) as any;
