@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2020-08-25)
+## Version 8.0.0 (2020-09-02)
 
 ### Features
 
@@ -23,6 +23,20 @@
    - added new `REST_SINK` provider for providing `RestSinkService` as `Sink`
 - *subpackage* `@anglr/common/forms`
    - added new `RequiredClassModule` containing `RequiredClassDirective`
+   - completely refactored `HasErrorDirective`, now also supports custom component for rendering errors
+   - added `ValidationErrorsResult` as type holding validation error results
+   - added new `ErrorMessagesExtractor` that is used as service used for obtaining validation error messages and validation errors in form of `ValidationErrorsResult`
+   - added new types
+      - `IsSubmittedOrDirtyFunc` - Describes function that is used for performing actions when form is submitted or dirty
+      - `ValidationErrorsComponent` - Component that is used for rendering validation errors
+      - `ValidationErrorsTemplateContext` - Context passed to template that is used for rendering validation errors
+      - `ValidationErrorsRendererOptions` - Options for ValidationErrorRenderer
+      - `ValidationErrorRendererFactoryOptions` - Options for ValidationErrorRendererFactory
+      - `ValidationErrorRendererCtor` - Describes type that represents ValidationErrorRenderer
+      - `ValidationErrorRenderer` - Describes service that is used for rendering validation errors
+   - added new `ValidationErrorRendererFactory` that is used for obtaining validation error renderer implementation
+   - added new `DefaultValidationErrorRenderer` which is default implementation of validation error renderer
+   - added new `VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS` which is used for obtaining renderer factory options using DI
 
 ### BREAKING CHANGES
 
@@ -36,6 +50,7 @@
 - `CookieService` now using `HTTP_REQUEST_COOKIE_HEADER` instead of `SERVER_COOKIE_HEADER`
 - *subpackage* `@anglr/common/forms`
    - `RequiredClassDirective` moved to separate module `RequiredClassModule`
+   - refactored `HasErrorDirective`, changed constructor parameters
 
 ## Version 7.3.2 (2020-05-15)
 
