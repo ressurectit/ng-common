@@ -3,7 +3,7 @@ import {FormControl} from '@angular/forms';
 import {STRING_LOCALIZATION, StringLocalization} from '@anglr/common';
 import {StringDictionary, extend, isString} from '@jscrpt/common';
 
-import {HAS_ERROR_DEFAULT_MESSAGES} from '../../misc/types';
+import {VALIDATION_ERROR_MESSAGES} from '../../misc/types';
 import {ValidationErrorsResult} from './errorMessagesExtractor.interface';
 
 /**
@@ -35,7 +35,7 @@ export class ErrorMessagesExtractor
 
     //######################### constructor #########################
     constructor(@Inject(STRING_LOCALIZATION) protected _stringLocalization: StringLocalization,
-                @Inject(HAS_ERROR_DEFAULT_MESSAGES) @Optional() globalErrorMessages?: StringDictionary)
+                @Inject(VALIDATION_ERROR_MESSAGES) @Optional() globalErrorMessages?: StringDictionary)
     {
         this._errorMessages = extend(true, {}, defaultErrorMessages, globalErrorMessages);
     }

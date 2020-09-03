@@ -1,14 +1,7 @@
 import {InjectionToken} from "@angular/core";
 import {StringDictionary} from "@jscrpt/common";
 
-import {HasErrorOptions} from "../directives/hasError/hasError.directive";
-
 /**
- * Injection token for hasError default messages
+ * Injection token containing validation error messages
  */
-export const HAS_ERROR_DEFAULT_MESSAGES: InjectionToken<StringDictionary> = new InjectionToken<StringDictionary>('HAS_ERROR_DEFAULT_MESSAGES');
-
-/**
- * Injection token for 'HasErrorOptions'
- */
-export const HAS_ERROR_OPTIONS: InjectionToken<HasErrorOptions> = new InjectionToken<HasErrorOptions>('HAS_ERROR_OPTIONS');
+export const VALIDATION_ERROR_MESSAGES: InjectionToken<StringDictionary> = new InjectionToken<StringDictionary>('VALIDATION_ERROR_MESSAGES');

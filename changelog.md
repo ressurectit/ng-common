@@ -51,6 +51,8 @@
 - *subpackage* `@anglr/common/forms`
    - `RequiredClassDirective` moved to separate module `RequiredClassModule`
    - refactored `HasErrorDirective`, changed constructor parameters
+   - removed `HAS_ERROR_OPTIONS` token, replaced by `VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS`
+   - renamed `HAS_ERROR_DEFAULT_MESSAGES` to `VALIDATION_ERROR_MESSAGES`
 
 ## Version 7.3.2 (2020-05-15)
 
