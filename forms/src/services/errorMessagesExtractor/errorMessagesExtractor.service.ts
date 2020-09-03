@@ -1,6 +1,6 @@
-import {Injectable, Inject, Optional} from '@angular/core';
+import {Injectable, Inject, Optional, Injector} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {STRING_LOCALIZATION, StringLocalization} from '@anglr/common';
+import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {StringDictionary, extend, isString} from '@jscrpt/common';
 
 import {VALIDATION_ERROR_MESSAGES} from '../../misc/types';
@@ -33,11 +33,17 @@ export class ErrorMessagesExtractor
      */
     protected _errorMessages: StringDictionary;
 
+    /**
+     * String localization service
+     */
+    protected _stringLocalization: StringLocalization;
+
     //######################### constructor #########################
-    constructor(@Inject(STRING_LOCALIZATION) protected _stringLocalization: StringLocalization,
+    constructor(injector: Injector,
                 @Inject(VALIDATION_ERROR_MESSAGES) @Optional() globalErrorMessages?: StringDictionary)
     {
         this._errorMessages = extend(true, {}, defaultErrorMessages, globalErrorMessages);
+        this._stringLocalization = injector.get(STRING_LOCALIZATION);
     }
 
     //######################### public methods #########################
