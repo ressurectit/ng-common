@@ -303,7 +303,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
      * Renders template with errors
      * @param add - Indication whether add or remove errors
      */
-    protected _renderTemplate(add: boolean = true)
+    protected _renderTemplate(_add: boolean = true)
     {
 
     }
