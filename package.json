@@ -112,7 +112,7 @@
         "@angular/cdk": "^10.0.0",
         "@angular/material": "^10.0.0",
         "rxjs": "^6.5.0",
-        "@jscrpt/common": "^1.2.0-beta",
+        "@jscrpt/common": "^1.2.0-beta.20200804115143",
         "angular2-hotkeys": "~2.2.0",
         "store": "~2.0.12",
         "structured-log": "~0.2.0",
