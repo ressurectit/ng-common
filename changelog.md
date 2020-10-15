@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2020-09-02)
+## Version 8.0.0 (2020-10-15)
 
 ### Features
 
@@ -16,6 +16,18 @@
    - added new parameter `flipCallback` to `positionsWithFlip`, which is called when flip occurs during positioning
    - added new `FLIP_DIRECTION` type defining direction of occured flip, used as parameter to `flipCallback`
    - added new `PositionToDirective` which allows positioning elements relative to each other, part of `PositionsModule`
+   - added new `TooltipModule` which allows user to use *tooltip* directives and components
+   - added new `TooltipDirective` that allows user to use *tooltip* attribute to create tooltip
+      - added new `TooltipOptions` which allows to customize *tooltip*
+         - `delay` - delay for displaying of tooltip on hover
+         - `fixedPosition` - indication whether is tooltip displayed at fixed position, or if it is displayed where cursor enters element
+         - `elementPositionAt` - position where should be tooltip displayed at element
+         - `tooltipPosition` - position of tooltip where should placed at
+         - `tooltipCssClass` - css class that is applied to tooltip renderer component
+         - `tooltipRenderer` - type of tooltip renderer that is used for rendering tooltip
+   - added new `TooltipRenderer` as representation of component that is used for rendering tooltip
+   - added new `TooltipComponent` as default component implementing `TooltipRenderer`
+   - added new `TOOLTIP_OPTIONS` injection token used for injecting tooltip options
 - *subpackage* `@anglr/common/structured-log`
    - added new `RestSinkService` as `Sink` implementation that allows storing logs using `LoggerRestClient`
    - added new `LoggerRestClient` interface, if implemented and provided using `LOGGER_REST_CLIENT` allows storing logs using REST
