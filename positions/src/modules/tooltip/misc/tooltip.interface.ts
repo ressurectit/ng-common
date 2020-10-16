@@ -30,6 +30,13 @@ export interface TooltipRenderer<TData = any>
     //######################### methods #########################
 
     /**
+     * Registers handlers that allows reaction to entering or leaving tooltip
+     * @param enter - Called when mouse enter tooltip component, hover
+     * @param leave - Called when mouse leaves tooltip component
+     */
+    registerHoverEvents(enter: () => void, leave: () => void);
+
+    /**
      * Explicitly runs invalidation of content (change detection)
      */
     invalidateVisuals(): void;
@@ -59,6 +66,11 @@ export interface TooltipOptions
      * Position of tooltip where should placed at
      */
     tooltipPosition?: Positions.PositionsCoordinates;
+
+    /**
+     * Allows selection of text in tooltip
+     */
+    allowSelection?: boolean|null;
 
     /**
      * Css class that is applied to tooltip renderer component

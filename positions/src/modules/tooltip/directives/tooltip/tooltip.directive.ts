@@ -1,5 +1,5 @@
 import {ApplicationRef, ComponentFactoryResolver, ComponentRef, ContentChild, Directive, ElementRef, EmbeddedViewRef, HostListener, Inject, Injector, Input, OnChanges, OnDestroy, Optional, SimpleChanges, TemplateRef} from '@angular/core';
-import {extend, isBlank, nameof} from '@jscrpt/common';
+import {extend, isBlank, isPresent, nameof} from '@jscrpt/common';
 
 import {TooltipComponent} from '../../components';
 import {TooltipOptions, TooltipRenderer} from '../../misc/tooltip.interface';
@@ -11,10 +11,11 @@ import {positionsWithFlip} from '../../../../misc/utils';
  */
 const defaultOptions: TooltipOptions =
 {
-    delay: 145,
+    delay: 245,
     elementPositionAt: 'top left',
     tooltipPosition: 'bottom left',
     fixedPosition: false,
+    allowSelection: false,
     tooltipRenderer: TooltipComponent,
     tooltipCssClass: null
 };
@@ -49,6 +50,16 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      * Indication whether there is active show tooltip request
      */
     protected _showRequest: boolean = false;
+
+    /**
+     * Indication whether keep open tooltip component
+     */
+    protected _keepOpen: boolean = false;
+
+    /**
+     * Timeout that is used for handling mouse move
+     */
+    protected _timeout: number|null = null;
 
     //######################### public properties - inputs #########################
 
@@ -108,7 +119,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     }
 
     //######################### public methods - implementation of OnChanges #########################
-    
+
     /**
      * Called when input value changes
      */
@@ -128,7 +139,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     }
 
     //######################### public methods - implementation of OnDestroy #########################
-    
+
     /**
      * Called when component is destroyed
      */
@@ -140,30 +151,6 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     //######################### public methods - host #########################
 
     /**
-     * Handles mouse enter event, hover start
-     * @param event - Mouse event that occured
-     * @internal
-     */
-    @HostListener('mouseenter', ['$event'])
-    public mouseEnter(event: MouseEvent)
-    {
-        if(isBlank(this.tooltipVisible))
-        {
-            this._showRequest = true;
-
-            setTimeout(() =>
-            {
-                if(this._showRequest)
-                {
-                    this._showTooltip(event.clientX);
-
-                    this._showRequest = false;
-                }
-            }, this._options.delay);
-        }
-    }
-
-    /**
      * Handles mouse leave event, hover ends
      * @internal
      */
@@ -172,9 +159,49 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     {
         if(isBlank(this.tooltipVisible))
         {
-            this._showRequest = false;
-            this._hideTooltip();
+            setTimeout(() =>
+            {
+                if(!this._keepOpen)
+                {
+                    this._showRequest = false;
+                    this._hideTooltip();
+                }
+            }, 10);
         }
+    }
+
+    /**
+     * Handles mouse move event, displaying tooltip
+     * @param event - Mouse event that occured
+     * @internal
+     */
+    @HostListener('mousemove', ['$event'])
+    public mouseMove(event: MouseEvent)
+    {
+        this._showRequest = true;
+
+        //do nothing if tooltip is visible
+        if(this._tooltipComponent || isPresent(this.tooltipVisible))
+        {
+            return;
+        }
+
+        if(isPresent(this._timeout))
+        {
+            clearTimeout(this._timeout);
+        }
+
+        this._timeout = setTimeout(() =>
+        {
+            this._timeout = null;
+
+            if(this._showRequest)
+            {
+                this._showTooltip(event.clientX);
+
+                this._showRequest = false;
+            }
+        }, this._options.delay) as any;
     }
 
     //######################### protected methods #########################
@@ -225,18 +252,18 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
         // 0. Destroyes absolute popup if it exists
         this._destroyTooltip();
 
-        // 1. Create a component reference from the component 
+        // 1. Create a component reference from the component
         this._tooltipComponent = this._componentFactoryResolver
             .resolveComponentFactory(this._options.tooltipRenderer)
             .create(this._injector);
-        
+
         // 2. Attach component to the appRef so that it's inside the ng component tree
         this._appRef.attachView(this._tooltipComponent.hostView);
-        
+
         // 3. Get DOM element from component
         this._tooltipElement = (this._tooltipComponent.hostView as EmbeddedViewRef<any>)
             .rootNodes[0] as HTMLElement;
-        
+
         // 4. Append DOM element to the body
         document.body.appendChild(this._tooltipElement);
     }
@@ -252,6 +279,30 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
             this._tooltipComponent.instance.data = this.tooltip;
             this._tooltipComponent.instance.template = this.tooltipTemplate ?? this.tooltipTemplateChild;
             this._tooltipComponent.instance.cssClass = this._options.tooltipCssClass;
+
+            this._tooltipComponent.instance.registerHoverEvents(() =>
+                                                                {
+                                                                    if(this._options.allowSelection)
+                                                                    {
+                                                                        this._keepOpen = true;
+                                                                        this._showRequest = false;
+                                                                    }
+                                                                },
+                                                                () =>
+                                                                {
+                                                                    setTimeout(() =>
+                                                                    {
+                                                                        this._keepOpen = false;
+
+                                                                        if(!this._showRequest)
+                                                                        {
+                                                                            this._hideTooltip();
+                                                                        }
+
+                                                                        this._showRequest = false;
+                                                                    }, 5);
+                                                                });
+
             this._tooltipComponent.instance.invalidateVisuals();
         }
     }

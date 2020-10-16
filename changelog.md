@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2020-10-15)
+## Version 8.0.0 (2020-10-16)
 
 ### Features
 
@@ -23,6 +23,7 @@
          - `fixedPosition` - indication whether is tooltip displayed at fixed position, or if it is displayed where cursor enters element
          - `elementPositionAt` - position where should be tooltip displayed at element
          - `tooltipPosition` - position of tooltip where should placed at
+         - `allowSelection` - allows selection of text in tooltip
          - `tooltipCssClass` - css class that is applied to tooltip renderer component
          - `tooltipRenderer` - type of tooltip renderer that is used for rendering tooltip
    - added new `TooltipRenderer` as representation of component that is used for rendering tooltip

@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, HostBinding, ElementRef} from '@angular/core';
+import {Component, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, HostBinding, ElementRef, HostListener} from '@angular/core';
 import {fadeInOutTrigger} from '@anglr/animations';
 
 import {TooltipRenderer} from '../../misc/tooltip.interface';
@@ -16,6 +16,18 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
 })
 export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
 {
+    //######################### protected fields #########################
+
+    /**
+     * Called when mouse enter tooltip component, hover
+     */
+    protected _enterFn: () => void = () => null;
+
+    /**
+     * Called when mouse leaves tooltip component
+     */
+    protected _leaveFn: () => void = () => null;
+
     //######################### public properties - implementation of TooltipRenderer #########################
 
     /**
@@ -56,6 +68,17 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
     //######################### public methods - implementation of TooltipRenderer #########################
 
     /**
+     * Registers handlers that allows reaction to entering or leaving tooltip
+     * @param enter - Called when mouse enter tooltip component, hover
+     * @param leave - Called when mouse leaves tooltip component
+     */
+    public registerHoverEvents(enter: () => void, leave: () => void)
+    {
+        this._enterFn = enter;
+        this._leaveFn = leave;
+    }
+
+    /**
      * Explicitly runs invalidation of content (change detection)
      */
     public invalidateVisuals(): void
@@ -66,5 +89,27 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
         }
 
         this._changeDetector.detectChanges();
+    }
+
+    //######################### public methods - host #########################
+
+    /**
+     * Handles mouse enter event over tooltip
+     * @internal
+     */
+    @HostListener('mouseenter')
+    public mouseEnter()
+    {
+        this._enterFn();
+    }
+
+    /**
+     * Handles mouse leave event over tooltip
+     * @internal
+     */
+    @HostListener('mouseleave')
+    public mouseLeave()
+    {
+        this._leaveFn();
     }
 }
