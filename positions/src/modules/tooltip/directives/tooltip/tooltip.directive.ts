@@ -1,9 +1,9 @@
 import {ApplicationRef, ComponentFactoryResolver, ComponentRef, ContentChild, Directive, ElementRef, EmbeddedViewRef, HostListener, Inject, Injector, Input, OnChanges, OnDestroy, Optional, SimpleChanges, TemplateRef} from '@angular/core';
 import {extend, isBlank, isPresent, nameof} from '@jscrpt/common';
 
-import {TooltipComponent} from '../../components';
+import {TooltipComponent} from '../../components/tooltip/tooltip.component';
 import {TooltipOptions, TooltipRenderer} from '../../misc/tooltip.interface';
-import {TOOLTIP_OPTIONS} from '../../misc';
+import {TOOLTIP_OPTIONS} from '../../misc/tokens';
 import {positionsWithFlip} from '../../../../misc/utils';
 
 /**
