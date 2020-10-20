@@ -1,5 +1,6 @@
 import {Component, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, HostBinding, ElementRef, HostListener} from '@angular/core';
-import {fadeInOutTrigger} from '@anglr/animations';
+import {transition, trigger, useAnimation} from '@angular/animations';
+import {fadeInAnimation} from '@anglr/animations';
 
 import {TooltipRenderer} from '../../misc/tooltip.interface';
 
@@ -11,7 +12,20 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
     selector: 'tooltip-popup',
     templateUrl: 'tooltip.component.html',
     styleUrls: ['tooltip.component.scss'],
-    animations: [fadeInOutTrigger],
+    animations:
+    [
+        trigger('fadeInOut',
+        [
+            transition(':enter', 
+            [
+                useAnimation(fadeInAnimation, {params: {duration: 260}})
+            ]),
+            transition(':leave', 
+            [
+                useAnimation(fadeInAnimation, {params: {duration: 260}})
+            ])
+        ])
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipComponent<TData = any> implements TooltipRenderer<TData>

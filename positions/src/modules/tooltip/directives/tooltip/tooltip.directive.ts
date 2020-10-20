@@ -11,7 +11,7 @@ import {positionsWithFlip} from '../../../../misc/utils';
  */
 const defaultOptions: TooltipOptions =
 {
-    delay: 245,
+    delay: 200,
     elementPositionAt: 'top left',
     tooltipPosition: 'bottom left',
     fixedPosition: false,

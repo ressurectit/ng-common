@@ -5,7 +5,15 @@
         "baseUrl": ".",
         "paths":
         {
-        }
+        },
+        "types":
+        [
+            "mousetrap"
+        ],
+        "typeRoots":
+        [
+            "../node_modules/@types"
+        ]
     },
     "files":
     [

@@ -124,6 +124,7 @@
         "@types/node": "11.11.1",
         "@types/numeral": "0.0.25",
         "@types/store": "2.0.2",
+        "@types/mousetrap": "1.6.3",
         "@angular/compiler-cli": "^10.0.0",
         "@angular/compiler": "^10.0.0",
         "@angular/language-service": "^10.0.0",
