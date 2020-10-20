@@ -1,6 +1,6 @@
 import {Component, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, HostBinding, ElementRef, HostListener} from '@angular/core';
 import {transition, trigger, useAnimation} from '@angular/animations';
-import {fadeInAnimation} from '@anglr/animations';
+import {fadeInAnimation, fadeOutAnimation} from '@anglr/animations';
 
 import {TooltipRenderer} from '../../misc/tooltip.interface';
 
@@ -22,7 +22,7 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
             ]),
             transition(':leave', 
             [
-                useAnimation(fadeInAnimation, {params: {duration: '260ms'}})
+                useAnimation(fadeOutAnimation, {params: {duration: '260ms'}})
             ])
         ])
     ],
