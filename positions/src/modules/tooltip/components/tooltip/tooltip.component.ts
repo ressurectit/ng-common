@@ -18,11 +18,11 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
         [
             transition(':enter', 
             [
-                useAnimation(fadeInAnimation, {params: {duration: 260}})
+                useAnimation(fadeInAnimation, {params: {duration: '260ms'}})
             ]),
             transition(':leave', 
             [
-                useAnimation(fadeInAnimation, {params: {duration: 260}})
+                useAnimation(fadeInAnimation, {params: {duration: '260ms'}})
             ])
         ])
     ],
