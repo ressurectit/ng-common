@@ -32,7 +32,7 @@ export class ProgressInterceptor implements HttpInterceptor
         return next.handle(req)
             .pipe(tap(event =>
             {
-                if (this._ignoredInterceptorsService && this._ignoredInterceptorsService.isIgnored(ProgressInterceptor, req.additionalInfo))
+                if (this._ignoredInterceptorsService && this._ignoredInterceptorsService.isIgnored(ProgressInterceptor, req.additionalInfo!))
                 {
                     return;
                 }
@@ -40,14 +40,14 @@ export class ProgressInterceptor implements HttpInterceptor
                 //request started
                 if(event.type == HttpEventType.Sent)
                 {
-                    this._indicatorSvc.showProgress(req.additionalInfo?.progressGroupName);
+                    this._indicatorSvc.showProgress(req.additionalInfo?.progressGroupName!);
                 }
                 //response received
                 else if(event.type == HttpEventType.Response)
                 {
-                    this._indicatorSvc.hideProgress(req.additionalInfo?.progressGroupName);
+                    this._indicatorSvc.hideProgress(req.additionalInfo?.progressGroupName!);
                 }
-            }, () => this._indicatorSvc.hideProgress(req.additionalInfo?.progressGroupName)));
+            }, () => this._indicatorSvc.hideProgress(req.additionalInfo?.progressGroupName!)));
     }
 }
 

@@ -48,7 +48,7 @@ export class CookiePermanentStorageService implements PermanentStorage
      */
     public set(name: string, value: any, expires?: Date): void
     {
-        this._cookies.setCookie(name, value, expires ? expires.valueOf() : null, '/');
+        this._cookies.setCookie(name, value, expires ? expires.valueOf() : undefined, '/');
     }
 
     /**

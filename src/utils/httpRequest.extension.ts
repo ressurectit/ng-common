@@ -12,7 +12,7 @@ export function updateHttpRequestClone()
 
     HttpRequest.prototype.clone = (function(this: AdditionalInfo)
     {
-        let request: AdditionalInfo = clone.apply(this, arguments);
+        let request: AdditionalInfo&HttpRequest<any> = clone.apply(this, arguments as any);
 
         request.additionalInfo = this.additionalInfo;
 

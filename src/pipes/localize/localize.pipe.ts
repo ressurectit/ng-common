@@ -19,7 +19,7 @@ export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
     /**
      * Subscription for changes of texts
      */
-    private _subscription: Subscription;
+    private _subscription?: Subscription|null;
 
     //######################### constructor #########################
     constructor(@Inject(STRING_LOCALIZATION) private _localizationSvc: StringLocalization,
@@ -59,10 +59,7 @@ export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
      */
     public ngOnDestroy()
     {
-        if(this._subscription)
-        {
-            this._subscription.unsubscribe();
-            this._subscription = null;
-        }
+        this._subscription?.unsubscribe();
+        this._subscription = null;
     }
 }

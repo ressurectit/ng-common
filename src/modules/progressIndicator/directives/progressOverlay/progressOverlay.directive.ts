@@ -20,37 +20,37 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
     /**
      * Previous css position value
      */
-    private _notRunningCssPosition: string;
+    private _notRunningCssPosition: string|null = null;
 
     /**
      * Previous css overflow value
      */
-    private _notRunningOverflow: string;
+    private _notRunningOverflow: string|null = null;
 
     /**
      * Subscription for changes in ProgressIndicatorService
      */
-    private _subscription: Subscription|null;
+    private _subscription: Subscription|null = null;
 
     /**
      * Array of messages that should be displayed
      */
-    private _messages: string[];
+    private _messages: string[] = [];
 
     /**
      * Indication that this progress indicator is running
      */
-    private _running: boolean;
+    private _running: boolean = false;
 
     /**
      * Element that is displaying progress indicator overlay
      */
-    private _progressElement: HTMLDivElement;
+    private _progressElement: HTMLDivElement|null = null;
 
     /**
      * Html messages element
      */
-    private _messagesElement: HTMLDivElement;
+    private _messagesElement: HTMLDivElement|null = null;
 
     /**
      * Html message elements, last three
@@ -63,7 +63,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
      * Name of progress indicator group
      */
     @Input('progressOverlay')
-    public name: string;
+    public name: string = '';
 
     //######################### constructor #########################
     constructor(private _service: ProgressIndicatorService,
@@ -128,9 +128,9 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
             this._messagesElement = null;
             this._lastThreeMessages = [];
 
-            this._element.nativeElement.style.position = this._notRunningCssPosition;
+            this._element.nativeElement.style.position = this._notRunningCssPosition!;
             this._notRunningCssPosition = null;
-            this._element.nativeElement.style.overflow = this._notRunningOverflow;
+            this._element.nativeElement.style.overflow = this._notRunningOverflow!;
             this._notRunningOverflow = null;
         }
         //adds progress indicator

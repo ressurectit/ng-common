@@ -57,7 +57,7 @@
 
 ### BREAKING CHANGES
 
-- minimal supported version of *Angular* is `10.0.0`
+- minimal supported version of *Angular* is `11.0.0`
 - minimal supported version of `@jscrpt/common` is `1.2.0`
 - removed `HttpRequestIgnoredInterceptorId` interface, explicitly using type unions where needed, `HttpRequest<any> & AdditionalInfo<IgnoredInterceptorId>`
 - changed `IgnoredInterceptorId` to generic `AdditionalInfo`, allowing broader usage

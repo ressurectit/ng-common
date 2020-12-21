@@ -43,25 +43,25 @@ export class NgComponentOutletEx<TComponent> implements OnChanges, OnDestroy
      * Type that should be dynamically created into current container
      */
     @Input() 
-    public ngComponentOutletEx: Type<TComponent>;
+    public ngComponentOutletEx?: Type<TComponent>;
 
     /**
      * Custom injector that will be used for newly created component
      */
     @Input() 
-    public ngComponentOutletExInjector: Injector;
+    public ngComponentOutletExInjector?: Injector;
 
     /**
      * Projectable nodes that can be injected into component
      */
     @Input() 
-    public ngComponentOutletExContent: any[][];
+    public ngComponentOutletExContent?: any[][];
 
     /**
      * Different module factory that is used for creation of new component
      */
     @Input() 
-    public ngComponentOutletExNgModuleFactory: NgModuleFactory<any>;
+    public ngComponentOutletExNgModuleFactory?: NgModuleFactory<any>;
 
     //######################### public properties - outputs #########################
 

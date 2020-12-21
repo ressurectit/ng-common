@@ -41,7 +41,7 @@ export class MemoryTemporaryStorageService implements TemporaryStorage
      * Removes value stored with 'name' from temporary storage
      * @param name - Name of stored value that will be removed
      */
-    public remove(name): void
+    public remove(name: string): void
     {
         delete this._memory[name];
     }

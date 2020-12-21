@@ -17,13 +17,13 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
      * Variable that is used for displaying element that handles click outside
      */
     @Input('clickOutside')
-    public clickOutsideCondition: boolean;
+    public clickOutsideCondition: boolean = false;
 
     /**
      * Additional element that is checked for click
      */
     @Input()
-    public clickOutsideElement: HTMLElement;
+    public clickOutsideElement?: HTMLElement;
 
     //######################### public properties - outputs #########################
 

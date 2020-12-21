@@ -74,7 +74,7 @@ export class ProgressIndicatorService
     /**
      * Messages for each group
      */
-    public messages: {[group: string]: string[]} = {};
+    public messages: {[group: string]: string[]|undefined} = {};
 
     /**
      * Occurs when state of one of progress groups have changed, passing name of group as parameter
@@ -86,11 +86,11 @@ export class ProgressIndicatorService
 
     //######################### constructors #########################
     constructor(@Inject(PLATFORM_ID) private _platformId: Object,
-                @Optional() public config?: ProgressIndicatorOptions)
+                @Optional() public config: ProgressIndicatorOptions)
     {
         if(config && !(config instanceof ProgressIndicatorOptions))
         {
-            this.config = undefined;
+            this.config = undefined!;
             console.warn("Provided configuration for 'ProgressIndicatorService' is not of type 'ProgressIndicatorOptions' and will be ignored!");
         }
 
@@ -98,7 +98,7 @@ export class ProgressIndicatorService
         {
             runningRequests: 0,
             running: false,
-            messages: null,
+            messages: undefined,
             timeout: null
         };
 
@@ -249,7 +249,7 @@ export class ProgressIndicatorService
         {
             clearTimeout(group.timeout);
             group.timeout = null;
-            this._onRunning(name, false, null);
+            this._onRunning(name, false);
         }
     }
 
@@ -271,7 +271,7 @@ export class ProgressIndicatorService
      * @param nameOrMessage - Name of progress group (separate counter) or Message to display what is happening
      * @param message - Message to display what is happening
      */
-    public addMessage(nameOrMessage?: string, message?: string): void
+    public addMessage(nameOrMessage: string, message?: string): void
     {
         let name: string = DEFAULT_PROGRESS_NAME;
 
@@ -306,7 +306,7 @@ export class ProgressIndicatorService
 
         let group = this._getGroup(name);
 
-        this._onRunning(name, group.running, null);
+        this._onRunning(name, group.running);
     }
 
     /**
@@ -350,7 +350,7 @@ export class ProgressIndicatorService
      * Gets name of group based on existance of this group
      * @param name - Name of group that is requested
      */
-    private _getName(name): string
+    private _getName(name: string): string
     {
         if(name == DEFAULT_PROGRESS_NAME || !this.config.fallbackToDefault)
         {
@@ -371,7 +371,7 @@ export class ProgressIndicatorService
      * @param value - Value whether is progress running
      * @param messages - Messages to be displayed for this group
      */
-    private _onRunning(name: string, value: boolean, messages: string[])
+    private _onRunning(name: string, value: boolean, messages?: string[])
     {
         let group = this._getGroup(name);
 
@@ -388,7 +388,7 @@ export class ProgressIndicatorService
     private _updateState()
     {
         let running: {[group: string]: boolean} = {};
-        let messages: {[group: string]: string[]} = {};
+        let messages: {[group: string]: string[]|undefined} = {};
 
         Object.keys(this._runningRequests).forEach(group =>
         {
@@ -417,7 +417,7 @@ export class ProgressIndicatorService
         {
             runningRequests: 0,
             running: false,
-            messages: null,
+            messages: undefined,
             timeout: null
         };
 

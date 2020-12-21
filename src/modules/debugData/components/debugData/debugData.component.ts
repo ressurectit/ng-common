@@ -20,7 +20,7 @@ export class DebugDataComponent implements OnDestroy, OnInit
     /**
      * Subscription for changes of debug data enabled
      */
-    protected _debugDataEnabledChangeSubscription: Subscription;
+    protected _debugDataEnabledChangeSubscription?: Subscription|null;
 
     //######################### public properties - template bindings #########################
 
