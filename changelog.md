@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2020-10-16)
+## Version 8.0.0 (2021-02-25)
 
 ### Features
 
@@ -10,6 +10,8 @@
 - updated `ProgressInterceptor`, which now supports local progress indicator using `additionalInfo` with `LocalProgressIndicatorName`
 - added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
 - added new `updateHttpRequestClone` function, that needs to be called to make `additionalInfo` working correctly with `HttpRequest`
+- *subpackage* `@anglr/common/moment`
+   - added new `readEncodedFilterWithDates`function that reads filter value from encoded string, deserialize date properties into moment
 - *subpackage* `@anglr/common/store`
    - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
 - *subpackage* `@anglr/common/positions`
@@ -50,6 +52,8 @@
    - added new `ValidationErrorRendererFactory` that is used for obtaining validation error renderer implementation
    - added new `DefaultValidationErrorRenderer` which is default implementation of validation error renderer
    - added new `VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS` which is used for obtaining renderer factory options using DI
+   - added new `prepareForFormBuilder` function that prepares object for form builder, wraps each property in array
+   - added new `readEncodedFilter` function that reads filter value from encoded string
 
 ### BREAKING CHANGES
 

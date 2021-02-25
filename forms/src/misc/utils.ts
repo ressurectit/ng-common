@@ -1,4 +1,5 @@
 import {NgForm, FormGroup} from '@angular/forms';
+import {deserializeFromUrlQuery, extend, isJsObject} from '@jscrpt/common';
 
 /**
  * Gets indication whether controls have errors, with custom indication of submitted
@@ -94,4 +95,50 @@ export function alertHidden(form: NgForm, control: string, errors: string[] = []
     });
 
     return form.controls[control].valid || !requestedErrors || (!form.controls[control].dirty && !form.submitted);
+}
+
+/**
+ * Prepares object for form builder, wraps each property in array
+ * @param value Object which properties will be wrapped to array
+ */
+export function prepareForFormBuilder(value: Object)
+{
+    let result = {};
+
+    Object.keys(value).forEach(prop =>
+    {
+        let val = value[prop];
+
+        //recursively wrap nested object properties
+        if(isJsObject(val) && !Array.isArray(val))
+        {
+            result[prop] = prepareForFormBuilder(val);
+        }
+        else
+        {
+            result[prop] = [val];
+        }
+    });
+
+    return result;
+}
+
+/**
+ * Reads filter value from encoded string
+ * @param defaultValue Default value of filter, which is overriden by values from filterValue
+ * @param filterValue Encoded string containing filter value
+ * @param reviver A function that transforms the results. This function is called for each member of the object.
+ */
+export function readEncodedFilter<TFilter>(defaultValue: TFilter, filterValue: string, reviver?: (this: any, key: string, value: any) => any): TFilter
+{
+    try
+    {
+        return extend(true, defaultValue, deserializeFromUrlQuery(filterValue, reviver));
+    }
+    catch(e)
+    {
+        console.warn("Failed to deserialize filter from encoded string! Exc:" + e);
+
+        return defaultValue;
+    }
 }
