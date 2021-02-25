@@ -5,7 +5,8 @@
         "baseUrl": ".",
         "paths": 
         {
-            "@anglr/common/forms": ["../forms/src/forms.ts"]
+            "@anglr/common/forms": ["../forms/src/forms.ts"],
+            "@anglr/common": ["../src/common"]
         }
     },
     "files":
