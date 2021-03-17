@@ -17,7 +17,8 @@ const defaultOptions: TooltipOptions =
     fixedPosition: false,
     allowSelection: false,
     tooltipRenderer: TooltipComponent,
-    tooltipCssClass: null
+    tooltipCssClass: null,
+    stopPropagation: false
 };
 
 /**
@@ -152,11 +153,17 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
 
     /**
      * Handles mouse leave event, hover ends
+     * @param event - Mouse event that occured
      * @internal
      */
-    @HostListener('mouseleave')
-    public mouseLeave()
+    @HostListener('mouseleave', ['$event'])
+    public mouseLeave(event: MouseEvent)
     {
+        if(this._options.stopPropagation)
+        {
+            event.stopPropagation();
+        }
+
         if(isBlank(this.tooltipVisible))
         {
             setTimeout(() =>
@@ -178,6 +185,11 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     @HostListener('mousemove', ['$event'])
     public mouseMove(event: MouseEvent)
     {
+        if(this._options.stopPropagation)
+        {
+            event.stopPropagation();
+        }
+
         this._showRequest = true;
 
         //do nothing if tooltip is visible

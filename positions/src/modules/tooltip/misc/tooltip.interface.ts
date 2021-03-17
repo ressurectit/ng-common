@@ -77,6 +77,11 @@ export interface TooltipOptions
      */
     tooltipCssClass?: string|null;
 
+    /**\
+     * Indication whether stop propagation of "hover" event
+     */
+    stopPropagation?: boolean|null;
+
     /**
      * Type of tooltip renderer that is used for rendering tooltip
      */

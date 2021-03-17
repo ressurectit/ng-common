@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-02-25)
+## Version 8.0.0 (2021-03-17)
 
 ### Features
 
@@ -28,6 +28,7 @@
          - `allowSelection` - allows selection of text in tooltip
          - `tooltipCssClass` - css class that is applied to tooltip renderer component
          - `tooltipRenderer` - type of tooltip renderer that is used for rendering tooltip
+         - `stopPropagation` - indication whether stop propagation of "hover" event
    - added new `TooltipRenderer` as representation of component that is used for rendering tooltip
    - added new `TooltipComponent` as default component implementing `TooltipRenderer`
    - added new `TOOLTIP_OPTIONS` injection token used for injecting tooltip options
