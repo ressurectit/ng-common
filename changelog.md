@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-03-17)
+## Version 8.0.0 (2021-03-25)
 
 ### Features
 
@@ -10,8 +10,11 @@
 - updated `ProgressInterceptor`, which now supports local progress indicator using `additionalInfo` with `LocalProgressIndicatorName`
 - added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
 - added new `updateHttpRequestClone` function, that needs to be called to make `additionalInfo` working correctly with `HttpRequest`
-- *subpackage* `@anglr/common/moment`
-   - added new `readEncodedFilterWithDates`function that reads filter value from encoded string, deserialize date properties into moment
+- added *subpackage* `@anglr/common/date-fns`
+- *subpackage* `@anglr/common/date-fns`
+   - `readEncodedFilterWithDates` function that reads filter value from encoded string, deserialize date properties into date
+- *subpackage* `@anglr/common/moment` 
+   - added new `readEncodedFilterWithDates` function that reads filter value from encoded string, deserialize date properties into moment
 - *subpackage* `@anglr/common/store`
    - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
 - *subpackage* `@anglr/common/positions`
