@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-03-25)
+## Version 8.0.0 (2021-04-19)
 
 ### Features
 
@@ -10,6 +10,15 @@
 - updated `ProgressInterceptor`, which now supports local progress indicator using `additionalInfo` with `LocalProgressIndicatorName`
 - added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
 - added new `updateHttpRequestClone` function, that needs to be called to make `additionalInfo` working correctly with `HttpRequest`
+- *subpackage* `@anglr/common/material`
+   - added new `ConfirmationDialogComponent` confirmation dialog component
+   - added new `ConfirmationDialogDirective` directive that enables confirmation dialog on click
+   - added new `CONFIRMATION_DIALOG_DATA` injection token used for setting global default data for confirmation dialog
+   - added new `ConfirmationDialogData` interface data that can be passed to confirmation dialog
+      - `confirmationText` - text that is displazed as confirmation text (localization constant)
+      - `dialogCancelText` - text that is displayed as cancel button text (localization constant)
+      - `dialogConfirmText` - text that is displayed as confirm button text (localization constant)
+   - added new `ConfirmationDialogModule` module as module containing confirmation dialog component and directive
 - added *subpackage* `@anglr/common/date-fns`
 - *subpackage* `@anglr/common/date-fns`
    - `readEncodedFilterWithDates` function that reads filter value from encoded string, deserialize date properties into date

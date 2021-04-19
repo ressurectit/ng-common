@@ -1,0 +1,13 @@
+<div>{{data?.confirmationText | localize}}</div>
+
+<div class="flex-row flex-end margin-top-big">
+    <button class="btn btn-danger margin-right-extra-small" (click)="dialog.close(false)">
+        <span class="fa fa-ban"></span>
+        <span>{{data?.dialogCancelText | localize}}</span>
+    </button>
+    
+    <button class="btn btn-primary" (click)="dialog.close(true)">
+        <span class="fa fa-check"></span>
+        <span>{{data?.dialogConfirmText | localize}}</span>
+    </button>
+</div>
