@@ -2,7 +2,7 @@ import {Component, ChangeDetectionStrategy, Inject, Injector, ValueProvider, Tem
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ComponentType} from "@angular/cdk/portal";
 
-import {ɵTitledDialogOptions, TITLED_DIALOG_DATA} from "../../misc/titledDialog.interface";
+import {ɵTitledDialogOptions, TITLED_DIALOG_DATA} from "../../misc/interfaces/titledDialog.interface";
 
 /**
  * Component used as wrapper for material dialog enhanced with title
