@@ -1,0 +1,15 @@
+<div [ngClass]="[cssClass, cssClasses?.mainButtonDiv]">
+    <div (click)="click.emit($event)" [ngClass]="cssClasses?.mainButtonContentDiv">
+        <ng-content></ng-content>
+    </div>
+
+    <span [ngClass]="cssClasses?.mainButtonSeparatorDiv"></span>
+
+    <div [ngClass]="cssClasses?.mainButtonClickAreaDiv" (click)="showSubButtons($event)">
+        <div [ngClass]="cssClasses?.mainButtonMultiOptionDiv"></div>
+    </div>
+</div>
+
+<div [ngClass]="cssClasses?.subButtonsDiv" *ngIf="subButtonsVisible" [style.top.px]="subButtonsOffset">
+    <ng-container *ngTemplateOutlet="subButtonsContent"></ng-container>
+</div>

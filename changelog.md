@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-04-19)
+## Version 8.0.0 (2021-06-11)
 
 ### Features
 
@@ -10,6 +10,10 @@
 - updated `ProgressInterceptor`, which now supports local progress indicator using `additionalInfo` with `LocalProgressIndicatorName`
 - added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
 - added new `updateHttpRequestClone` function, that needs to be called to make `additionalInfo` working correctly with `HttpRequest`
+- added new `MultiButtonComponent` class used for displaying multibutton
+- added new `MultiButtonCssClasses` interface that describes multi button css classes
+- added new `MULTI_BUTTON_CSS_CLASSES` injection token for default css classes for multibutton
+- added new `MultiButtonModule` module containing components for displaying multi button
 - *subpackage* `@anglr/common/material`
    - added new `ConfirmationDialogComponent` confirmation dialog component
    - added new `ConfirmationDialogDirective` directive that enables confirmation dialog on click

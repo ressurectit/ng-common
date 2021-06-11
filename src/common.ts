@@ -13,6 +13,10 @@ export {DebugDataComponent} from './modules/debugData/components/debugData/debug
 export {DebugDataEnabledService} from './modules/debugData/services/debugDataEnabled/debugDataEnabled.service';
 export {ClickOutsideDirective} from './modules/clickOutside/directives/clickOutside/clickOutside.directive';
 export {ClickOutsideModule} from './modules/clickOutside/modules/clickOutside.module';
+export {MultiButtonComponent} from './modules/multiButton/components/multiButton/multiButton.component';
+export {MultiButtonCssClasses} from './modules/multiButton/components/multiButton/multiButton.interface';
+export {MULTI_BUTTON_CSS_CLASSES} from './modules/multiButton/misc/tokens';
+export {MultiButtonModule} from './modules/multiButton/modules/multiButton.module';
 export * from './types/tokens';
 export * from './types/additionalInfo';
 export * from './utils';
