@@ -22,7 +22,7 @@ const defaultCssClasses: MultiButtonCssClasses =
 {
     selector: 'multi-button',
     templateUrl: 'multiButton.component.html',
-    styleUrls: ['multiButton.component.scss'],
+    styleUrls: ['multiButton.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiButtonComponent implements OnDestroy

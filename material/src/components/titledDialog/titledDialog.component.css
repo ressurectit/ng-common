@@ -4,11 +4,10 @@
     text-transform: capitalize;
     font-size: 14px;
     font-weight: bold;
-
-    .close-dialog
-    {
-        margin-left: 10px;
-    }
+}
+.titled-dialog-title .close-dialog
+{
+    margin-left: 10px;
 }
 
 .titled-dialog-content

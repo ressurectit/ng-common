@@ -10,7 +10,7 @@ import {DebugDataEnabledService} from "../../services/debugDataEnabled/debugData
 {
     selector: 'debug-data',
     templateUrl: 'debugData.component.html',
-    styleUrls: ['debugData.component.scss'],
+    styleUrls: ['debugData.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DebugDataComponent implements OnDestroy, OnInit

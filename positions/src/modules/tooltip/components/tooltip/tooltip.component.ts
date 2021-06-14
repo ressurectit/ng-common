@@ -11,7 +11,7 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
 {
     selector: 'tooltip-popup',
     templateUrl: 'tooltip.component.html',
-    styleUrls: ['tooltip.component.scss'],
+    styleUrls: ['tooltip.component.css'],
     animations:
     [
         trigger('fadeInOut',

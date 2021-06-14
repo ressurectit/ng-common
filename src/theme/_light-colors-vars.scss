@@ -1,8 +1,0 @@
-@use "light-colors" as theme;
-
-.multibutton-light-theme
-{
-    --multibutton-subbuttons-background: theme.$multibuttonSubbuttonsBackground;
-    --multibutton-subbuttons-foreground: theme.$multibuttonSubbuttonsForeground;
-    --multibutton-subbuttons-shadow: theme.$multibuttonSubbuttonsShadow;
-}

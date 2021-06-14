@@ -11,7 +11,7 @@ import {ɵTitledDialogOptions, TITLED_DIALOG_DATA} from "../../misc/interfaces/t
 {
     selector: 'titled-dialog',
     templateUrl: 'titledDialog.component.html',
-    styleUrls: ['titledDialog.component.scss'],
+    styleUrls: ['titledDialog.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitledDialogComponent

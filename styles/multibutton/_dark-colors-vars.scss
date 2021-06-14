@@ -1,0 +1,8 @@
+@use "dark-colors" as theme;
+
+.multibutton-dark-theme
+{
+    --multibutton-subbuttons-background: #{theme.$multibuttonSubbuttonsBackground};
+    --multibutton-subbuttons-foreground: #{theme.$multibuttonSubbuttonsForeground};
+    --multibutton-subbuttons-shadow: #{theme.$multibuttonSubbuttonsShadow};
+}
