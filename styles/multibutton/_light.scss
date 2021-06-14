@@ -12,7 +12,7 @@ multi-button
         {
             background-color: var(--multibutton-subbuttons-background, theme.$multibuttonSubbuttonsBackground);
             color: var(--multibutton-subbuttons-foreground, theme.$multibuttonSubbuttonsForeground);
-            border: none;
+            border-color: transparent;
         }
     }
 }
