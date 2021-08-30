@@ -81,14 +81,14 @@
       - added new `ValidatorFnFactoryFn` and `AsyncValidatorFnFactoryFn` interfaces describing factory functions for validators functions
       - added validations *decorators*
          - `Email` - validation of email
-         - `minLength` - validation of min string length
-         - `maxLength` - validation of max string length
-         - `minValue` - validation of min number value
-         - `maxValue` - validation of max number value
-         - `number` - validation for number
-         - `pattern` - validation for reqular expression pattern
-         - `required` - validation for mandatory value
-         - `requiredIf` - conditional validation for mandatory value
+         - `MinLength` - validation of min string length
+         - `MaxLength` - validation of max string length
+         - `MinValue` - validation of min number value
+         - `MaxValue` - validation of max number value
+         - `Number` - validation for number
+         - `Pattern` - validation for reqular expression pattern
+         - `Required` - validation for mandatory value
+         - `RequiredIf` - conditional validation for mandatory value
       - added *decorators*
          - `AsyncValidator` - allows setting of `AsyncValidatorFn`
          - `Validator` - allows setting of `ValidatorFn`
