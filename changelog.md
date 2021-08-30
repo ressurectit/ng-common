@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-06-11)
+## Version 8.0.0 (2021-08-30)
 
 ### Features
 
@@ -71,6 +71,33 @@
    - added new `VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS` which is used for obtaining renderer factory options using DI
    - added new `prepareForFormBuilder` function that prepares object for form builder, wraps each property in array
    - added new `readEncodedFilter` function that reads filter value from encoded string
+   - added new **Form Model Builder**
+      - added new `buildFormModel` method for building `FormGroup` from *decorated model*
+      - added new `ValidatorFnFactory` and `AsyncValidatorFnFactory` as factories for `validationFn` and `asyncValidationFn` respectively with arguments from component context
+      - added new `CurrentValue` class which allows obtaining of current value when needed from component context
+      - added new `getCurrentValue` which should be used for obtaining argument current value in `ValidatorFnFactory` or `AsyncValidatorFnFactory`
+      - added new `ModelDecoratorMetadata` interface describing metadata for whole model
+      - added new `ModelPropertyDecoratorMetadata` interface describing metadata for model of single property
+      - added new `ValidatorFnFactoryFn` and `AsyncValidatorFnFactoryFn` interfaces describing factory functions for validators functions
+      - added validations *decorators*
+         - `Email` - validation of email
+         - `minLength` - validation of min string length
+         - `maxLength` - validation of max string length
+         - `minValue` - validation of min number value
+         - `maxValue` - validation of max number value
+         - `number` - validation for number
+         - `pattern` - validation for reqular expression pattern
+         - `required` - validation for mandatory value
+         - `requiredIf` - conditional validation for mandatory value
+      - added *decorators*
+         - `AsyncValidator` - allows setting of `AsyncValidatorFn`
+         - `Validator` - allows setting of `ValidatorFn`
+         - `Disabled` - sets control as disabled
+         - `FormGroupAsyncValidator` - allows setting of `AsyncValidatorFn` for whole `FormGroup`
+         - `FormGroupValidator` - allows setting of `ValidatorFn` for whole `FormGroup`
+         - `FormGroupProperty` - indicating that property is `FormGroup`
+         - `FormArrayProperty` - indicating that property is `FormArray`
+         - `ModelPropertyMetadata` - allows setting of `ModelPropertyDecoratorMetadata` for property
 
 ### BREAKING CHANGES
 
