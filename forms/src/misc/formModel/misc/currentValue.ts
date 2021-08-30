@@ -9,7 +9,7 @@ export function getCurrentValue<TValue>(value: CurrentValue<TValue>|TValue): TVa
 {
     if(isBlank(value))
     {
-        return value;
+        return null;
     }
 
     if(value instanceof CurrentValue)
