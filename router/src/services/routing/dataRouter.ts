@@ -1,19 +1,21 @@
 import {Injectable} from '@angular/core';
-import {Router, NavigationEnd, NavigationError} from '@angular/router';
-import {isPresent} from '@jscrpt/common';
+import {Router, NavigationEnd, NavigationError, ResolveStart, NavigationStart} from '@angular/router';
+import {isBlank} from '@jscrpt/common';
+
+//TODO: think of complicated redirects between ResolveStart and NavigationEnd
 
 /**
  * Special implementation of router that allows routing with sending complex data to routed component
  */
-@Injectable({providedIn: 'root'})
-export class DataRouter
+@Injectable({providedIn: 'platform'})
+export class DataRouter<TData = any>
 {
     //######################### private fields #########################
 
     /**
      * Value that is going to be used for next routed data
      */
-    private _nextValue: any = null;
+    private _nextValue: TData = null;
 
     /**
      * Url path of next route
@@ -21,26 +23,18 @@ export class DataRouter
     private _nextUrlPath: string|null = null;
 
     /**
-     * Resolver function that is used for resolving routed value
-     */
-    private _valuePromiseResolver: (data: any) => void;
-    
-    /**
      * Promise that resolves into value for current route
      */
-    private _valuePromise: Promise<any>|null = null;
+    private _valuePromise: Promise<TData>|null = null;
 
     //######################### public properties #########################
 
     /**
      * Gets promise that resolves into value for current route
      */
-    public get valuePromise(): Promise<any>
+    public get valuePromise(): Promise<TData>
     {
-        return this._valuePromise || new Promise(resolve =>
-        {
-            resolve(null);
-        });
+        return this._valuePromise || Promise.resolve(null);
     }
 
     //######################### constructor #########################
@@ -48,36 +42,54 @@ export class DataRouter
     {
         this._router.events.subscribe(next =>
         {
-            if(!(next instanceof NavigationEnd) && !(next instanceof NavigationError))
+            //do not use DataRouter
+            if(isBlank(this._nextUrlPath))
             {
                 return;
             }
 
-            let error = next instanceof NavigationError;
+            //if navigation started throw away previous promise
+            if(next instanceof NavigationStart)
+            {
+                this._valuePromise = null;
 
-            if(isPresent(this._valuePromiseResolver) && isPresent(this._nextUrlPath) && !error)
+                return;
+            }
+
+            //clears next value and next url after end of navigation
+            if(next instanceof NavigationEnd)
             {
-                if(this._nextUrlPath == next.url)
+                this._nextUrlPath = null;
+                this._nextValue = null;
+
+                //if navigated to different route clear value promise
+                if(this._nextUrlPath != next.url)
                 {
-                    this._valuePromiseResolver(this._nextValue);
-                }
-                else
-                {
-                    this._valuePromiseResolver(null);
+                    this._valuePromise = null;
                 }
             }
-            else if(isPresent(this._valuePromiseResolver))
+
+            //if error throw away data
+            if(next instanceof NavigationError)
             {
-                this._valuePromiseResolver(null);
+                this._nextUrlPath = null;
+                this._nextValue = null;
+                this._valuePromise = Promise.resolve(null);
+
+                return;
             }
-            
-            this._nextUrlPath = null;
-            this._nextValue = null;
-            
-            this._valuePromise = new Promise(resolve =>
+
+            //if not ResolveStart, do nothing
+            if(!(next instanceof ResolveStart))
             {
-                this._valuePromiseResolver = resolve;
-            });
+                return;
+            }
+
+            //navigating to requested URL
+            if(this._nextUrlPath == next.url)
+            {
+                this._valuePromise = Promise.resolve(this._nextValue);
+            }
         });
     }
 
@@ -89,7 +101,7 @@ export class DataRouter
      * @param routeData - Any type of object that can be passed to your routed component
      * @returns Promise
      */
-    public navigate(linkParams: any[], routeData: any): Promise<any>
+    public navigate(linkParams: any[], routeData: TData): Promise<boolean>
     {
         this._nextValue = routeData;
         this._nextUrlPath = this._router.createUrlTree(linkParams).toString();

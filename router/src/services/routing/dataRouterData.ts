@@ -3,6 +3,7 @@ import {DataRouter} from './dataRouter';
 
 /**
  * Class that is used for obtaining complex routed data
+ * @deprecated - Do not use this class, use directly DataRouter
  */
 @Injectable()
 export class DataRouterData

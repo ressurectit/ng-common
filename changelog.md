@@ -1,9 +1,10 @@
 # Changelog
 
-## Version 8.0.0 (2021-08-30)
+## Version 8.0.0 (2021-09-10)
 
 ### Features
 
+- `DataRouter` can now be used inside of `Resolve` of *route*
 - added new `ClickOutsideDirective` which allows changing value of boolean if user clicks outside of selected element, or provided element, part of `ClickOutsideModule`
 - added code that modifies `HttpRequest` prototype `clone` method, adds support for cloning also `additionalInfo`
 - added new `AdditionalInfo` generic interface, which allows definition of additional data
@@ -108,6 +109,7 @@
 - renamed `SERVER_BASE_URL` to `HTTP_REQUEST_BASE_URL`
 - renamed `SERVER_COOKIE_HEADER` to `HTTP_REQUEST_COOKIE_HEADER`
 - renamed `SERVER_AUTH_HEADER` to `HTTP_REQUEST_AUTH_HEADER`
+- refactored `DataRouter`, deprecated DataRouterData, use `DataRouter` `valuePromise` directly
 - `CookieService` now using `HTTP_REQUEST_COOKIE_HEADER` instead of `SERVER_COOKIE_HEADER`
 - *subpackage* `@anglr/common/forms`
    - `RequiredClassDirective` moved to separate module `RequiredClassModule`
