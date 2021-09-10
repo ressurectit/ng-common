@@ -7,7 +7,7 @@ import {isBlank} from '@jscrpt/common';
 /**
  * Special implementation of router that allows routing with sending complex data to routed component
  */
-@Injectable({providedIn: 'platform'})
+@Injectable({providedIn: 'root'})
 export class DataRouter<TData = any>
 {
     //######################### private fields #########################
