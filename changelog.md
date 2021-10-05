@@ -17,6 +17,17 @@
 - added new `MultiButtonModule` module containing components for displaying multi button
 - fixed `DebugDataEnabledService.setEnabled()` now triggers `enabledChange` only when there is change of `enabled` value
 - improved `DebugDataComponent` new styling, `display: none` when not enabled, `.clickable` css class
+- added new `NOTIFICATIONS` `InjectionToken` used for injecting notifications service implementation
+- added new `NOTIFICATIONS_SCOPE` `InjectionToken` used for injecting notifications scope name
+- added new `NotificationsOptions` as configuration object that is used by `Notifications` default implementation
+- added new `NotificationSeverity` as severity of notification message
+- added new `Notification` as instance of notification that is being displayed
+- added new `Notifications` interface that manages currently displayed notifications
+- added new `NotificationsScopeProvider` as tuple that will hold notification provider and notifications scope provider
+- added new `NotificationsScopeProviderFactory` as factory for creating `NotificationsScopeProvider`
+- added new `NotificationsProvider` as notifications provider that allows to create scoped notifications provider
+- added new `DefaultNotificationsService` default notifications service implementation
+- added new `DEFAULT_NOTIFICATIONS` as default notifications provider
 - *subpackage* `@anglr/common/material`
    - added new `ConfirmationDialogComponent` confirmation dialog component
    - added new `ConfirmationDialogDirective` directive that enables confirmation dialog on click

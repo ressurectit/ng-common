@@ -4,6 +4,8 @@ import {StringLocalization, NoStringLocalizationService} from '../services/strin
 import {PermanentStorage} from '../services/permanentStorage';
 import {Logger, DummyLoggerService} from '../services/logger';
 import {TemporaryStorage, MemoryTemporaryStorageService} from '../services/temporaryStorage';
+import {Notifications} from '../services/notifications';
+import {Positioning} from '../services/positioning';
 
 /**
  * Base url when using HTTP (example: http://localhost:8888/)
@@ -39,3 +41,18 @@ export const PERMANENT_STORAGE: InjectionToken<PermanentStorage> = new Injection
  * Token used for injecting temporary storage
  */
 export const TEMPORARY_STORAGE: InjectionToken<TemporaryStorage> = new InjectionToken<TemporaryStorage>('TEMPORARY_STORAGE', {providedIn: 'root', factory: () => new MemoryTemporaryStorageService()});
+
+/**
+ * Token used for injecting positioning service implementation
+ */
+export const POSITIONING: InjectionToken<Positioning> = new InjectionToken<Positioning>('POSITIONING');
+
+/**
+ * Token used for injecting notifications service implementation
+ */
+export const NOTIFICATIONS: InjectionToken<Notifications> = new InjectionToken<Notifications>('NOTIFICATIONS');
+
+/**
+ * Token used for injecting notifications scope name
+ */
+export const NOTIFICATIONS_SCOPE: InjectionToken<string> = new InjectionToken<string>('NOTIFICATIONS_SCOPE');

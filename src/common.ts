@@ -35,3 +35,4 @@ export {NgComponentOutletEx} from "./directives/ngComponentOutletEx/ngComponentO
 export {APP_STABLE, extractAppStableResolve, runWhenModuleStable} from "./utils";
 export {updateHttpRequestClone} from "./utils/httpRequest.extension";
 export {PROGRESS_INTERCEPTOR_PROVIDER, ProgressInterceptor} from './modules/progressIndicator/interceptors/progressInterceptor';
+export {DEFAULT_NOTIFICATIONS, DefaultNotificationsService, Notification, NotificationSeverity, Notifications, NotificationsOptions, NotificationsProvider, NotificationsScopeProvider, NotificationsScopeProviderFactory} from './services/notifications';
