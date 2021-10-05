@@ -39,6 +39,12 @@ export class ConfirmationDialogDirective
     @Input()
     public confirmationCancel: string;
 
+    /**
+     * Condidition that determines whether display confirmation dialog or skip it and run confirm directly
+     */
+    @Input()
+    public skipConfirmation: boolean = false;
+
     //######################### public properties - outputs #########################
 
     /**
@@ -60,6 +66,13 @@ export class ConfirmationDialogDirective
     @HostListener('click')
     public async click()
     {
+        if(!this.skipConfirmation)
+        {
+            this.confirm.emit();
+
+            return;
+        }
+
         let result = await this._dialog.open<ConfirmationDialogComponent, ConfirmationDialogData, boolean>(ConfirmationDialogComponent,
         {
             title: this.confirmationTitle,

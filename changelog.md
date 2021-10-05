@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-09-10)
+## Version 8.0.0 (2021-10-05)
 
 ### Features
 
@@ -15,6 +15,8 @@
 - added new `MultiButtonCssClasses` interface that describes multi button css classes
 - added new `MULTI_BUTTON_CSS_CLASSES` injection token for default css classes for multibutton
 - added new `MultiButtonModule` module containing components for displaying multi button
+- fixed `DebugDataEnabledService.setEnabled()` now triggers `enabledChange` only when there is change of `enabled` value
+- improved `DebugDataComponent` new styling, `display: none` when not enabled, `.clickable` css class
 - *subpackage* `@anglr/common/material`
    - added new `ConfirmationDialogComponent` confirmation dialog component
    - added new `ConfirmationDialogDirective` directive that enables confirmation dialog on click
@@ -23,7 +25,10 @@
       - `confirmationText` - text that is displazed as confirmation text (localization constant)
       - `dialogCancelText` - text that is displayed as cancel button text (localization constant)
       - `dialogConfirmText` - text that is displayed as confirm button text (localization constant)
+      - `skipConfirmation` - condidition that determines whether display confirmation dialog or skip it and run confirm directly
    - added new `ConfirmationDialogModule` module as module containing confirmation dialog component and directive
+   - added new `DebugDataCopyClickDirective` that allows to copy data to clipboard on click on `<debug-data>`
+   - added new `DebugDataCopyClickModule` as module for debug data copy click directive
 - added *subpackage* `@anglr/common/date-fns`
 - *subpackage* `@anglr/common/date-fns`
    - `readEncodedFilterWithDates` function that reads filter value from encoded string, deserialize date properties into date

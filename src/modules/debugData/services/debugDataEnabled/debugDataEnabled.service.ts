@@ -45,6 +45,11 @@ export class DebugDataEnabledService
      */
     public setEnabled(enabled: boolean = true)
     {
+        if(this._enabled === enabled)
+        {
+            return;
+        }
+
         this._enabled = enabled;
 
         this._enabledChangeSubject.next();
