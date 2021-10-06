@@ -166,10 +166,11 @@ export class DefaultNotificationsService implements Notifications
      */
     public getScope(scopeName: string): Notifications
     {
-        let [scope] = this._scopes[scopeName];
+        let scopeObj = this._scopes[scopeName];
+        let scope: Notifications;
 
         // no scope yet
-        if(!scope)
+        if(!scopeObj)
         {
             scope = new DefaultNotificationsService(this._options);
             const subscription = new Subscription();
@@ -182,6 +183,10 @@ export class DefaultNotificationsService implements Notifications
                 delete this._scopes[scopeName];
                 subscription.unsubscribe();
             }));
+        }
+        else
+        {
+            scope = scopeObj[0];
         }
 
         return scope;
