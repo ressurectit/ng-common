@@ -263,7 +263,7 @@ const notificationsFactory = (scopeName: string, token?: Function | Type<any> | 
             {
                 return notifications.getScope(scopeName);
             },
-            deps: [new SkipSelf(), NOTIFICATIONS]
+            deps: [[new SkipSelf(), NOTIFICATIONS]]
         }
     ];
 };
