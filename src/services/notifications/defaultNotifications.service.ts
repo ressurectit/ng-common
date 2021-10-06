@@ -1,4 +1,4 @@
-import {Injectable, InjectionToken, Type} from '@angular/core';
+import {Injectable, InjectionToken, Optional, SkipSelf, Type} from '@angular/core';
 import {Dictionary, generateId} from '@jscrpt/common';
 import {Observable, Subject, Subscription} from 'rxjs';
 
@@ -66,7 +66,7 @@ export class DefaultNotificationsService implements Notifications
     }
 
     //######################### constructor #########################
-    constructor(protected _options: NotificationsOptions)
+    constructor(@Optional() protected _options: NotificationsOptions)
     {
         if(!this._options || !(this._options instanceof NotificationsOptions))
         {
@@ -263,7 +263,7 @@ const notificationsFactory = (scopeName: string, token?: Function | Type<any> | 
             {
                 return notifications.getScope(scopeName);
             },
-            deps: [NOTIFICATIONS]
+            deps: [new SkipSelf(), NOTIFICATIONS]
         }
     ];
 };
