@@ -27,12 +27,12 @@ export class DefaultNotificationsService implements Notifications
     /**
      * Subject used for emitting changes of current notifications
      */
-    protected _notificationsChange: Subject<void>;
+    protected _notificationsChange: Subject<void> = new Subject<void>();
 
     /**
      * Subject used for emitting event when instance is being destroyed
      */
-    protected _destroy: Subject<void>;
+    protected _destroy: Subject<void> = new Subject<void>();
 
     /**
      * Array of scoped notifications
