@@ -194,6 +194,8 @@ export class DefaultNotificationsService implements Notifications
 
     /**
      * @inheritdoc
+     * 
+     * Call this manualy for scoped instances until this is fixed https://github.com/angular/angular/issues/28738
      */
     public ngOnDestroy(): void
     {
@@ -251,6 +253,8 @@ const DEFAULT_NOTIFICATIONS: NotificationsProvider =
     provide: NOTIFICATIONS,
     useClass: DefaultNotificationsService
 };
+
+//TODO: add options to notifications factory
 
 /**
  * Factory that creates notifications provider for scope

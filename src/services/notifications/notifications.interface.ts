@@ -1,6 +1,7 @@
 import {ClassProvider, FactoryProvider, InjectionToken, Type, ValueProvider} from '@angular/core';
-import {generateId} from '@jscrpt/common';
 import {Observable} from 'rxjs';
+
+//TODO: allow changing and merging options
 
 /**
  * Severity of notification message
@@ -38,23 +39,6 @@ export enum NotificationSeverity
  */
 export class Notification
 {
-    //######################### protected fields #########################
-
-    /**
-     * Unique id of notification
-     */
-    protected _id: string;
-
-    //######################### public properties #########################
-
-    /**
-     * Gets unique id of notification
-     */
-    public get id(): string
-    {
-        return this._id;
-    }
-
     /**
      * Gets message that this notification represents
      */
@@ -81,7 +65,6 @@ export class Notification
     constructor(private _message: string,
                 private _severity: NotificationSeverity)
     {
-        this._id = generateId(6);
     }
 }
 

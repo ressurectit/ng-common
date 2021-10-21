@@ -5,6 +5,7 @@ export * from './formArrayProperty.decorator';
 export * from './formGroupAsyncValidator.decorator';
 export * from './formGroupProperty.decorator';
 export * from './formGroupValidator.decorator';
+export * from './invalidateOnChange.decorator';
 export * from './maxLength.decorator';
 export * from './maxValue.decorator';
 export * from './minLength.decorator';
