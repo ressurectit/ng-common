@@ -1,6 +1,10 @@
 # Changelog
 
-## Version 8.0.0 (2021-10-20)
+## Version 8.0.0 (2021-10-29)
+
+### Bug Fixes
+
+- fixed `RestSinkService` calling `setInterval` only after application is stable
 
 ### Features
 

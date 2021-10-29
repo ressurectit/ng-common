@@ -1,6 +1,7 @@
 import {Injectable, Inject} from "@angular/core";
-import {Sink, LogEvent, LogEventLevel} from "structured-log";
+import {APP_STABLE} from '@anglr/common';
 import {isPresent} from '@jscrpt/common';
+import {Sink, LogEvent, LogEventLevel} from "structured-log";
 
 import {toText, isEnabled} from "../../misc/utils";
 import {RestSinkConfigService} from './restSinkConfig.service';
@@ -32,12 +33,16 @@ export class RestSinkService implements Sink
 
     //######################### constructor #########################
     constructor(private _configSvc: RestSinkConfigService,
+                @Inject(APP_STABLE) isStable: Promise<void>,
                 @Inject(LOGGER_REST_CLIENT) private _restClient: LoggerRestClient)
     {
-        this._timer = setInterval(() =>
+        isStable.then(() =>
         {
-            this.flush();
-        }, this._configSvc.secondsToFlushAfter * 1000) as any;
+            this._timer = setInterval(() =>
+            {
+                this.flush();
+            }, this._configSvc.secondsToFlushAfter * 1000) as any;
+        });
     }
 
     //######################### public methods - implementation of OnDestroy #########################
