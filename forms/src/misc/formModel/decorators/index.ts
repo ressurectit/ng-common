@@ -1,4 +1,5 @@
 export * from './asyncValidator.decorator';
+export * from './controlOptions.decorator';
 export * from './disabled.decorator';
 export * from './email.decorator';
 export * from './formArrayProperty.decorator';

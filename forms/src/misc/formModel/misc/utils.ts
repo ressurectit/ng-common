@@ -43,6 +43,8 @@ function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecor
             {
                 control = buildFormGroup(defaultValue, args);
 
+                //TODO: think of setting metadata from property to model
+
                 break;
             }
             case FormArray:
@@ -51,7 +53,8 @@ function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecor
                 control = new FormArray([],
                                         {
                                             validators: validators,
-                                            asyncValidators: asyncValidators
+                                            asyncValidators: asyncValidators,
+                                            ...metadata.controlOptions
                                         });
 
                 if(defaultValue && Array.isArray(defaultValue))
@@ -78,7 +81,8 @@ function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecor
                                 formArray.push(new FormControl(val,
                                                                {
                                                                    validators: validators,
-                                                                   asyncValidators: asyncValidators
+                                                                   asyncValidators: asyncValidators,
+                                                                   ...metadata.controlOptions
                                                                }));
 
                                 break;
@@ -95,7 +99,8 @@ function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecor
                 control = new FormControl(defaultValue,
                                           {
                                               validators: validators,
-                                              asyncValidators: asyncValidators
+                                              asyncValidators: asyncValidators,
+                                              ...metadata.controlOptions
                                           });
 
                 break;

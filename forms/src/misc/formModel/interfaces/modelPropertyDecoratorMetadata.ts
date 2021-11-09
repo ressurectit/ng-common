@@ -1,7 +1,12 @@
-import {AsyncValidatorFn, FormArray, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
+import {AbstractControlOptions, AsyncValidatorFn, FormArray, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
 import {Dictionary} from '@jscrpt/common';
 
 import {AsyncValidatorFnFactory, ValidatorFnFactory} from '../misc/validatorFactories';
+
+/**
+ * Type that represents options that can be passed to control represented by model property
+ */
+export type ModelPropertyOptions = Omit<AbstractControlOptions, keyof Pick<AbstractControlOptions, 'asyncValidators'|'validators'>>;
 
 /**
  * Metadata describing model of single property
@@ -37,4 +42,9 @@ export interface ModelPropertyDecoratorMetadata<TArgs extends Dictionary<any> = 
      * Object storing additional arguments for customization
      */
     args?: TArgs;
+
+    /**
+     * Options that can be passed to control represented by model property
+     */
+    controlOptions?: ModelPropertyOptions;
 }

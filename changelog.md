@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-10-29)
+## Version 8.0.0 (2021-11-09)
 
 ### Bug Fixes
 
@@ -100,6 +100,7 @@
       - added new `getCurrentValue` which should be used for obtaining argument current value in `ValidatorFnFactory` or `AsyncValidatorFnFactory`
       - added new `ModelDecoratorMetadata` interface describing metadata for whole model
       - added new `ModelPropertyDecoratorMetadata` interface describing metadata for model of single property
+      - added new `ModelPropertyOptions` type that represents options that can be passed to control represented by model property
       - added new `ValidatorFnFactoryFn` and `AsyncValidatorFnFactoryFn` interfaces describing factory functions for validators functions
       - added validations *decorators*
          - `Email` - validation of email
@@ -113,6 +114,7 @@
          - `RequiredIf` - conditional validation for mandatory value
       - added *decorators*
          - `InvalidateOnChange` - allows invalidation of sibling `FormControl`s on changes of `FormControl` value
+         - `ControlOptions` - allows to set control options for property
          - `AsyncValidator` - allows setting of `AsyncValidatorFn`
          - `Validator` - allows setting of `ValidatorFn`
          - `Disabled` - sets control as disabled
