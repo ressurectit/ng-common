@@ -51,13 +51,19 @@ export class ConfirmationDialogDirective
     @Input()
     public skipConfirmation: boolean = false;
 
+    /**
+     * Indication whether prevent default and stop propagation of click event, defaults to true
+     */
+    @Input()
+    public preventDefaultsAndPropagation: boolean = true;
+
     //######################### public properties - outputs #########################
 
     /**
      * Occurs when user confirms confirmation
      */
     @Output()
-    public confirm: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+    public confirm: EventEmitter<void> = new EventEmitter<void>();
 
     //######################### constructor #########################
     constructor(private _dialog: TitledDialogService)
@@ -72,9 +78,15 @@ export class ConfirmationDialogDirective
     @HostListener('click', ['$event'])
     public async click(event: MouseEvent)
     {
+        if(this.preventDefaultsAndPropagation)
+        {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
         if(this.skipConfirmation)
         {
-            this.confirm.emit(event);
+            this.confirm.emit();
 
             return;
         }
@@ -94,7 +106,7 @@ export class ConfirmationDialogDirective
 
         if(result)
         {
-            this.confirm.emit(event);
+            this.confirm.emit();
         }
     }
 }

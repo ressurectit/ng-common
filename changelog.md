@@ -43,6 +43,7 @@
          - `confirmationCancel` - text for cancel confirmation button
          - `confirmationCssClasses` - object with css classes to be applied to confirmation dialog component
          - `skipConfirmation` - condidition that determines whether display confirmation dialog or skip it and run confirm directly
+         - `preventDefaultsAndPropagation` - indication whether prevent default and stop propagation of click event, defaults to `true`
       - `Outputs`
          - `confirm` - occurs when user confirms confirmation
    - added new `CONFIRMATION_DIALOG_OPTIONS` injection token used for setting global default options for confirmation dialog
