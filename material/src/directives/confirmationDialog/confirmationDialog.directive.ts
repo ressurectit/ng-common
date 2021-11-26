@@ -2,7 +2,7 @@ import {Directive, Input, EventEmitter, Output, HostListener} from "@angular/cor
 
 import {TitledDialogService} from "../../services/titledDialog/titledDialog.service";
 import {ConfirmationDialogComponent} from "../../components/confirmationDialog/confirmationDialog.component";
-import {ConfirmationDialogData} from "../../misc/interfaces/confirmationDialog.interface";
+import {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from "../../misc/interfaces/confirmationDialog.interface";
 
 /**
  * Directive that enables confirmation dialog on click
@@ -19,7 +19,7 @@ export class ConfirmationDialogDirective
      * Confirmation text that is displayed in dialog
      */
     @Input('confirmation')
-    public confirmationText: string = 'Do you wish to continue?';
+    public confirmationText: string = undefined;
 
     /**
      * Title for confirmation dialog
@@ -31,13 +31,19 @@ export class ConfirmationDialogDirective
      * Text for confirm confirmation button
      */
     @Input()
-    public confirmationConfirm: string;
+    public confirmationConfirm: string = undefined;
 
     /**
      * Text for cancel confirmation button
      */
     @Input()
-    public confirmationCancel: string;
+    public confirmationCancel: string = undefined;
+
+    /**
+     * Object with css classes to be applied to confirmation dialog component
+     */
+    @Input()
+    public confirmationCssClasses: ConfirmationDialogCssClasses = undefined;
 
     /**
      * Condidition that determines whether display confirmation dialog or skip it and run confirm directly
@@ -66,22 +72,23 @@ export class ConfirmationDialogDirective
     @HostListener('click')
     public async click()
     {
-        if(!this.skipConfirmation)
+        if(this.skipConfirmation)
         {
             this.confirm.emit();
 
             return;
         }
 
-        let result = await this._dialog.open<ConfirmationDialogComponent, ConfirmationDialogData, boolean>(ConfirmationDialogComponent,
+        const result = await this._dialog.open<ConfirmationDialogComponent, ConfirmationDialogOptions, boolean>(ConfirmationDialogComponent,
         {
             title: this.confirmationTitle,
-            width: '26vw',
+            width: '33vw',
             data:
             {
-                confirmationText: this.confirmationText,
+                confirmationText: this.confirmationText || undefined,
                 dialogCancelText: this.confirmationCancel,
-                dialogConfirmText: this.confirmationConfirm
+                dialogConfirmText: this.confirmationConfirm,
+                cssClasses: this.confirmationCssClasses,
             }
         }).afterClosed().toPromise();
 

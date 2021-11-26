@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-11-09)
+## Version 8.0.0 (2021-11-26)
 
 ### Bug Fixes
 
@@ -36,12 +36,27 @@
 - *subpackage* `@anglr/common/material`
    - added new `ConfirmationDialogComponent` confirmation dialog component
    - added new `ConfirmationDialogDirective` directive that enables confirmation dialog on click
-   - added new `CONFIRMATION_DIALOG_DATA` injection token used for setting global default data for confirmation dialog
-   - added new `ConfirmationDialogData` interface data that can be passed to confirmation dialog
-      - `confirmationText` - text that is displazed as confirmation text (localization constant)
+      - `Inputs`
+         - `confirmation` - confirmation text that is displayed in dialog
+         - `confirmationTitle` - title for confirmation dialog
+         - `confirmationConfirm` - text for confirm confirmation button
+         - `confirmationCancel` - text for cancel confirmation button
+         - `confirmationCssClasses` - object with css classes to be applied to confirmation dialog component
+         - `skipConfirmation` - condidition that determines whether display confirmation dialog or skip it and run confirm directly
+      - `Outputs`
+         - `confirm` - occurs when user confirms confirmation
+   - added new `CONFIRMATION_DIALOG_OPTIONS` injection token used for setting global default options for confirmation dialog
+   - added new `ConfirmationDialogOptions` options for confirmation dialog component
+      - `confirmationText` - text that is displayed as confirmation text (localization constant)
       - `dialogCancelText` - text that is displayed as cancel button text (localization constant)
       - `dialogConfirmText` - text that is displayed as confirm button text (localization constant)
-      - `skipConfirmation` - condidition that determines whether display confirmation dialog or skip it and run confirm directly
+      - `cssClasses` - css classes for confirmation dialog component
+   - added new `ConfirmationDialogCssClasses` css classes for confirmation dialog component
+      - `buttonsContainerDiv` - css classes applied to container div containing buttons
+      - `closeButton` - css classes applied to close button
+      - `closeButtonIcon` - css classes applied to close button icon span
+      - `confirmButton` - css classes applied to confirm button
+      - `confirmButtonIcon` - css classes applied to confirm button icon span
    - added new `ConfirmationDialogModule` module as module containing confirmation dialog component and directive
    - added new `DebugDataCopyClickDirective` that allows to copy data to clipboard on click on `<debug-data>`
    - added new `DebugDataCopyClickModule` as module for debug data copy click directive

@@ -1,10 +1,29 @@
 import {Component, ChangeDetectionStrategy, Inject, Optional} from "@angular/core";
 import {MatDialogRef} from "@angular/material/dialog";
-import {isBlank} from "@jscrpt/common";
+import {extend} from "@jscrpt/common";
 
-import {CONFIRMATION_DIALOG_DATA} from '../../misc/tokens';
-import {ConfirmationDialogData} from "../../misc/interfaces/confirmationDialog.interface";
+import {CONFIRMATION_DIALOG_OPTIONS} from '../../misc/tokens';
 import {TITLED_DIALOG_DATA} from '../../misc/interfaces/titledDialog.interface';
+import {ConfirmationDialogOptions} from '../../misc/interfaces/confirmationDialog.interface';
+
+/**
+ * Default options for dialog
+ * @internal
+ */
+const defaultOptions: ConfirmationDialogOptions =
+{
+    confirmationText: 'Do you wish to continue?',
+    dialogCancelText: 'No',
+    dialogConfirmText: 'Yes',
+    cssClasses:
+    {
+        buttonsContainerDiv: 'flex-row flex-end margin-top-big',
+        closeButton: 'btn btn-danger margin-right-extra-small',
+        closeButtonIcon: 'fa fa-ban',
+        confirmButton: 'btn btn-primary',
+        confirmButtonIcon: 'fa fa-check'
+    }
+};
 
 /**
  * Confirmation dialog component
@@ -17,37 +36,19 @@ import {TITLED_DIALOG_DATA} from '../../misc/interfaces/titledDialog.interface';
 })
 export class ConfirmationDialogComponent
 {
+    //######################### public properties - template bindings #########################
+
+    /**
+     * Options used for confirmation dialog component
+     * @internal
+     */
+    public options: ConfirmationDialogOptions;
+
     //######################### constructor #########################
-    constructor(@Inject(TITLED_DIALOG_DATA) public data: ConfirmationDialogData,
-                public dialog: MatDialogRef<ConfirmationDialogData, boolean>,
-                @Inject(CONFIRMATION_DIALOG_DATA) @Optional() globalData: ConfirmationDialogData)
+    constructor(@Inject(TITLED_DIALOG_DATA) data: ConfirmationDialogOptions,
+                public dialog: MatDialogRef<ConfirmationDialogOptions, boolean>,
+                @Inject(CONFIRMATION_DIALOG_OPTIONS) @Optional() options: ConfirmationDialogOptions)
     {
-        //no value from data
-        if(isBlank(data.dialogCancelText))
-        {
-            //no global value
-            if(isBlank(globalData?.dialogCancelText))
-            {
-                data.dialogCancelText = "No";
-            }
-            else
-            {
-                data.dialogCancelText = globalData.dialogCancelText;
-            }
-        }
-        
-        //no value from data
-        if(isBlank(data.dialogConfirmText))
-        {
-            //no global value
-            if(isBlank(globalData?.dialogConfirmText))
-            {
-                data.dialogConfirmText = "Yes";
-            }
-            else
-            {
-                data.dialogConfirmText = globalData.dialogConfirmText;
-            }
-        }
+        this.options = extend(true, {}, defaultOptions, options ?? {}, data);
     }
 }

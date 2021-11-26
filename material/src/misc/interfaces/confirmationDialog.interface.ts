@@ -1,10 +1,46 @@
 /**
- * Data that can be passed to confirmation dialog
+ * Css classes for confirmation dialog component
  */
-export interface ConfirmationDialogData
+export interface ConfirmationDialogCssClasses
 {
     /**
-     * Text that is displazed as confirmation text (localization constant)
+     * Css classes applied to container div containing buttons
+     */
+    buttonsContainerDiv?: string;
+
+    /**
+     * Css classes applied to close button
+     */
+    closeButton?: string;
+
+    /**
+     * Css classes applied to close button icon span
+     */
+    closeButtonIcon?: string;
+
+    /**
+     * Css classes applied to confirm button
+     */
+    confirmButton?: string;
+
+    /**
+     * Css classes applied to confirm button icon span
+     */
+    confirmButtonIcon?: string;
+}
+
+/**
+ * Options for confirmation dialog component
+ */
+export interface ConfirmationDialogOptions
+{
+    /**
+     * Css classes for confirmation dialog component
+     */
+    cssClasses?: ConfirmationDialogCssClasses;
+
+    /**
+     * Text that is displayed as confirmation text (localization constant)
      */
     confirmationText?: string;
     

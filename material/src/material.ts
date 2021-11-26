@@ -6,5 +6,5 @@ export {ConfirmationDialogModule} from './modules/confirmationDialog.module';
 export {ConfirmationDialogComponent} from './components/confirmationDialog/confirmationDialog.component';
 export {ConfirmationDialogDirective} from './directives/confirmationDialog/confirmationDialog.directive';
 export {DebugDataCopyClickDirective} from './directives/debugDataCopyClick/debugDataCopyClick.directive';
-export {ConfirmationDialogData} from './misc/interfaces/confirmationDialog.interface';
-export {CONFIRMATION_DIALOG_DATA} from './misc/tokens';
+export {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from './misc/interfaces/confirmationDialog.interface';
+export {CONFIRMATION_DIALOG_OPTIONS} from './misc/tokens';
