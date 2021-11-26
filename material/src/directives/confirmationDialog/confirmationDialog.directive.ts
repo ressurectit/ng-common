@@ -57,7 +57,7 @@ export class ConfirmationDialogDirective
      * Occurs when user confirms confirmation
      */
     @Output()
-    public confirm: EventEmitter<void> = new EventEmitter<void>();
+    public confirm: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     //######################### constructor #########################
     constructor(private _dialog: TitledDialogService)
@@ -69,12 +69,12 @@ export class ConfirmationDialogDirective
     /**
      * Method called when user clicks on element
      */
-    @HostListener('click')
-    public async click()
+    @HostListener('click', ['$event'])
+    public async click(event: MouseEvent)
     {
         if(this.skipConfirmation)
         {
-            this.confirm.emit();
+            this.confirm.emit(event);
 
             return;
         }
@@ -94,7 +94,7 @@ export class ConfirmationDialogDirective
 
         if(result)
         {
-            this.confirm.emit();
+            this.confirm.emit(event);
         }
     }
 }
