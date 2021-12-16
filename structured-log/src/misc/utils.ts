@@ -44,7 +44,7 @@ export function toText(property: any): string
     }
 
     return property.toString();
-};
+}
 
 /**
  * Checks if a log event level includes the target log event level.

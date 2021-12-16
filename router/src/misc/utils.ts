@@ -18,7 +18,7 @@ interface RoutesDecoratedComponent extends RouteDecoratedComponent, RedirectRout
  */
 export function extractRoutes(components: any[]): Route[]
 {
-    var result: Route[] = [];
+    const result: Route[] = [];
     
     if(!components)
     {

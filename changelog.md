@@ -5,6 +5,7 @@
 ### Bug Fixes
 
 - fixed `RestSinkService` calling `setInterval` only after application is stable
+- fixed `ComponentRoute`, now accepts `ComponentRouteDefinition` new route definition without `component` as it should be
 
 ### Features
 

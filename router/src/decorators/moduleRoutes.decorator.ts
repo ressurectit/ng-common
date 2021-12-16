@@ -48,7 +48,7 @@ function extractChildrenComponents(route: ComponentRouteChildren): Route
 {
     if(route.childrenComponents && route.childrenComponents.length)
     {
-        let routes: ComponentRouteChildren[] = extractRoutes(route.childrenComponents).map(extractChildrenComponents);
+        const routes: ComponentRouteChildren[] = extractRoutes(route.childrenComponents).map(extractChildrenComponents);
 
         if(route.children && route.children.length)
         {
@@ -76,7 +76,7 @@ export function ModuleRoutes(routedComponents: Type<any>[], options: ModuleRoute
 {
     return function<TFunction extends Function> (target: TFunction): TFunction
     {
-        let ngModule: 
+        const ngModule: 
         {
             ɵinj:
             {
@@ -86,7 +86,7 @@ export function ModuleRoutes(routedComponents: Type<any>[], options: ModuleRoute
         
         if(ngModule.ɵinj && Array.isArray(ngModule.ɵinj.imports))
         {
-            let routes = 
+            const routes = 
             [
                 ...(options.staticRoutesBefore || []).map(extractChildrenComponents),
                 ...extractRoutes(routedComponents).map(extractChildrenComponents),

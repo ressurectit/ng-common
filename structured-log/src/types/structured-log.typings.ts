@@ -1,5 +1,6 @@
 
-export declare class BatchedSink implements Sink {
+export declare class BatchedSink implements Sink 
+{
     protected durableStorageKey: string;
     protected options: BatchedSinkOptions;
     protected innerSink: Sink;
@@ -40,7 +41,8 @@ export declare interface ConsoleProxy {
     log(message?: any, ...properties: any[]): any;
 }
 
-export declare class ConsoleSink implements Sink {
+export declare class ConsoleSink implements Sink 
+{
     private options;
     private console;
     constructor(options?: ConsoleSinkOptions);
@@ -61,7 +63,8 @@ export declare const defaultBatchedSinkOptions: BatchedSinkOptions;
 /**
  * Allows dynamic control of the logging level.
  */
-export declare class DynamicLevelSwitch implements LogEventLevelSwitch<Promise<any>> {
+export declare class DynamicLevelSwitch implements LogEventLevelSwitch<Promise<any>> 
+{
     private minLevel;
     /**
      * Gets or sets a delegate that can be called when the pipeline needs to be flushed.
@@ -78,7 +81,8 @@ export declare class DynamicLevelSwitch implements LogEventLevelSwitch<Promise<a
     isEnabled(level: LogEventLevel): boolean;
 }
 
-export declare class DynamicLevelSwitchStage extends FilterStage {
+export declare class DynamicLevelSwitchStage extends FilterStage 
+{
     private dynamicLevelSwitch;
     /**
      * Sets a delegate that can be called when the pipeline needs to be flushed.
@@ -87,14 +91,16 @@ export declare class DynamicLevelSwitchStage extends FilterStage {
     constructor(dynamicLevelSwitch: DynamicLevelSwitch);
 }
 
-export declare class EnrichStage implements PipelineStage {
+export declare class EnrichStage implements PipelineStage 
+{
     private enricher;
     constructor(enricher: Object | ObjectFactory);
     emit(events: LogEvent[]): LogEvent[];
     flush(): Promise<any>;
 }
 
-export declare class FilterStage implements PipelineStage {
+export declare class FilterStage implements PipelineStage 
+{
     private predicate;
     constructor(predicate: (e: LogEvent) => boolean);
     emit(events: LogEvent[]): LogEvent[];
@@ -112,7 +118,8 @@ export declare function isEnabled(level: LogEventLevel, target: LogEventLevel): 
 /**
  * Represents a log event.
  */
-export declare class LogEvent {
+export declare class LogEvent 
+{
     /**
      * Creates a new log event instance.
      */
@@ -168,7 +175,8 @@ export declare interface LogEventLevelSwitch<T> {
 /**
  * Logs events.
  */
-export declare class Logger implements Sink {
+export declare class Logger implements Sink 
+{
     private pipeline;
     suppressErrors: boolean;
     /**
@@ -268,7 +276,8 @@ export declare class Logger implements Sink {
 /**
  * Configures pipelines for new logger instances.
  */
-export declare class LoggerConfiguration {
+export declare class LoggerConfiguration 
+{
     private pipeline;
     private _suppressErrors;
     constructor();
@@ -303,7 +312,8 @@ export declare class LoggerConfiguration {
 /**
  * Represents a message template that can be rendered into a log message.
  */
-export declare class MessageTemplate {
+export declare class MessageTemplate 
+{
     /**
      * Gets or sets the raw message template of this instance.
      */
@@ -336,7 +346,8 @@ export declare interface MinLevel extends LogEventLevelSwitch<LoggerConfiguratio
 
 export declare type ObjectFactory = (properties?: Object) => Object;
 
-export declare class Pipeline {
+export declare class Pipeline 
+{
     private stages;
     private eventQueue;
     private flushInProgress;
@@ -370,11 +381,10 @@ export declare interface Sink {
     flush(): Promise<any>;
 }
 
-export declare class SinkStage implements PipelineStage {
+export declare class SinkStage implements PipelineStage 
+{
     private sink;
     constructor(sink: Sink);
     emit(events: LogEvent[]): LogEvent[];
     flush(): Promise<any>;
 }
-
-export { }
