@@ -41,7 +41,7 @@ export class DebugDataCopyClickDirective
      * @internal
      */
     @HostListener('click')
-    public copyData()
+    public copyData(): void
     {
         this._clipboard.copy(JSON.stringify(this.data, null, 4));
     }

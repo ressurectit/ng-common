@@ -110,7 +110,7 @@
    - added new `prepareForFormBuilder` function that prepares object for form builder, wraps each property in array
    - added new `readEncodedFilter` function that reads filter value from encoded string
    - added new **Form Model Builder**
-      - added new `buildFormModel` method for building `FormGroup` from *decorated model*
+      - added new `buildFormModel` method for building `FormGroup` from *decorated model*, only for properties with non `undefined` value
       - added new `ValidatorFnFactory` and `AsyncValidatorFnFactory` as factories for `validationFn` and `asyncValidationFn` respectively with arguments from component context
       - added new `CurrentValue` class which allows obtaining of current value when needed from component context
       - added new `getCurrentValue` which should be used for obtaining argument current value in `ValidatorFnFactory` or `AsyncValidatorFnFactory`
@@ -143,7 +143,7 @@
 ### BREAKING CHANGES
 
 - minimal supported version of *Angular* is `13.1.0`
-- minimal supported version of `@jscrpt/common` is `2.1.0`
+- minimal supported version of `@jscrpt/common` is `2.2.0`
 - compiled as *Angular IVY* **only** with new *APF*
 - removed support of *es5* target and using latest package.json features
 - dropped support of `Node.js <= 12.20`
@@ -159,6 +159,8 @@
    - refactored `HasErrorDirective`, changed constructor parameters
    - removed `HAS_ERROR_OPTIONS` token, replaced by `VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS`
    - renamed `HAS_ERROR_DEFAULT_MESSAGES` to `VALIDATION_ERROR_MESSAGES`
+- *subpackage* `@anglr/common/hmr`
+   - removed `hmrAccept` function, replaced by built in Angular loader
 
 ## Version 7.3.2 (2020-05-15)
 

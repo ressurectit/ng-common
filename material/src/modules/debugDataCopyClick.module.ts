@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {NgModule} from '@angular/core';
 import {DebugDataModule} from '@anglr/common';
 
 import {DebugDataCopyClickDirective} from '../directives/debugDataCopyClick/debugDataCopyClick.directive';

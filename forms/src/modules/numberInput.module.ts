@@ -10,14 +10,20 @@ import {NumberInputValidatorDirective} from '../directives/numberInput/numberInp
  */
 @NgModule(
 {
-    declarations: [MaxValueNumberValidatorDirective,
-                   MinValueNumberValidatorDirective,
-                   NumberInputControlValueAccessor,
-                   NumberInputValidatorDirective],
-    exports: [MaxValueNumberValidatorDirective,
-              MinValueNumberValidatorDirective,
-              NumberInputControlValueAccessor,
-              NumberInputValidatorDirective]
+    declarations: 
+    [
+        MaxValueNumberValidatorDirective,
+        MinValueNumberValidatorDirective,
+        NumberInputControlValueAccessor,
+        NumberInputValidatorDirective
+    ],
+    exports:
+    [
+        MaxValueNumberValidatorDirective,
+        MinValueNumberValidatorDirective,
+        NumberInputControlValueAccessor,
+        NumberInputValidatorDirective
+    ]
 })
 export class NumberInputModule
 {

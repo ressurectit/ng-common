@@ -71,9 +71,9 @@ export class AppHotkeysService
      * @param element - Html element used as scope base for hotkeys
      * @param scopedInitialization - Method used for initialization scoped hotkeys, hotkeys can be initialized only inside this method
      */
-    public withScope(element: HTMLElement, scopedInitialization: (appHotkeysService: AppHotkeysService) => void)
+    public withScope(element: HTMLElement, scopedInitialization: (appHotkeysService: AppHotkeysService) => void): void
     {
-        let tmp = this._scoped.find(itm => itm.element == element);
+        const tmp = this._scoped.find(itm => itm.element == element);
         let appHotkeysService: AppHotkeysService;
 
         if(!tmp)
@@ -86,7 +86,7 @@ export class AppHotkeysService
             appHotkeysService = tmp.hotkeys;
         }
 
-        let oldHotkeys = appHotkeysService._hotkeySvc.mousetrap;
+        const oldHotkeys = appHotkeysService._hotkeySvc.mousetrap;
         appHotkeysService._hotkeySvc.mousetrap = appHotkeysService._mousetrap;
 
         scopedInitialization(appHotkeysService);
@@ -97,7 +97,7 @@ export class AppHotkeysService
     /**
      * This method should be called in ngOnDestroy for each component which registered new hotkeys
      */
-    public destroy()
+    public destroy(): void
     {
         this._scoped.forEach(scoped =>
         {
@@ -144,7 +144,7 @@ export class AppHotkeysService
      * Process added hotkeys, stores old ones
      * @param hotkey - Hotkey to be added
      */
-    private _processAddedHotkeys(hotkey: Hotkey | Hotkey[])
+    private _processAddedHotkeys(hotkey: Hotkey | Hotkey[]): void
     {
         if(Array.isArray(hotkey)) 
         {
@@ -156,7 +156,16 @@ export class AppHotkeysService
             return;
         }
 
-        let oldHotkey = this._hotkeySvc.get(hotkey.combo)[0];
+        const oldHotkeyVal = this._hotkeySvc.get(hotkey.combo);
+
+        if(!Array.isArray(oldHotkeyVal))
+        {
+            console.warn('Unexpected array of hotkeys');
+
+            return;
+        }
+
+        const oldHotkey = oldHotkeyVal[0];
 
         if(oldHotkey)
         {

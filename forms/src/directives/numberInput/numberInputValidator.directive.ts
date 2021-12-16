@@ -1,5 +1,5 @@
-import {NG_VALIDATORS, AbstractControl, Validator, ValidationErrors} from '@angular/forms';
 import {ExistingProvider, forwardRef, Directive} from '@angular/core';
+import {NG_VALIDATORS, AbstractControl, Validator, ValidationErrors} from '@angular/forms';
 
 import {Validators} from '../../misc/validators';
 
@@ -18,7 +18,7 @@ const NUMBER_VALIDATOR = <ExistingProvider>
  */
 @Directive(
 {
-    selector: "input[number][formControlName],input[number][formControl],input[number][ngModel]",
+    selector: 'input[number][formControlName],input[number][formControl],input[number][ngModel]',
     providers: [NUMBER_VALIDATOR]
 })
 export class NumberInputValidatorDirective implements Validator

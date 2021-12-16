@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {Subject, Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Subject, Observable} from 'rxjs';
 
 /**
  * Service used for handling submitted state of form
@@ -43,7 +43,7 @@ export class SubmittedService
      * Sets submitted to true
      * @param submitted - If set to false, sets submitted to false
      */
-    public setSubmitted(submitted: boolean = true)
+    public setSubmitted(submitted: boolean = true): void
     {
         if(this._submitted != submitted)
         {

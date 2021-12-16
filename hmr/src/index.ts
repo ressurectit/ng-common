@@ -1,45 +1,11 @@
-import {PlatformRef} from "@angular/core";
 import '@jscrpt/common';
-
-/**
- * Enables Webpack Hot Module Replacement, call this at application entry file after module['hot'].accept()
- * @param platformGet - Callback used for obtaining platform used for bootstraping main module
- * @param rootComponentSelector - Name of root component, defaults to 'app'
- */
-export function hmrAccept(platformGet: () => PlatformRef, rootComponentSelector: string = 'app')
-{
-    // Enable Hot Module Reloading if available
-    if (jsDevMode && module['hot'])
-    {
-        module['hot'].dispose(() =>
-        {
-            platformGet().destroy();
-
-            if(!document.querySelector(rootComponentSelector))
-            {
-                document.body.append(document.createElement(rootComponentSelector));
-            }
-
-            if((<any>window).___hmrDataGetters)
-            {
-                let getters = (<any>window).___hmrDataGetters;
-                let data = (<any>window).___hmrData = {};
-            
-                Object.keys(getters).forEach((hmrKey: string) =>
-                {
-                    data[hmrKey] = getters[hmrKey]();
-                });
-            }
-        });
-    }
-}
 
 /**
  * Enables displaying of notification when HMR finished work
  */
-export function hmrFinishedNotification()
+export function hmrFinishedNotification(): void
 {
-    if (jsDevMode && module['hot'])
+    if (jsDevMode && (module as any)['hot'])
     {
         let div = document.createElement('div');
         div.style.position = 'absolute';
@@ -56,7 +22,7 @@ export function hmrFinishedNotification()
         div.style.opacity = '0';
 
         div.id = 'hmrdiv';
-        div.innerText = "HMR finished, app updated!";
+        div.innerText = 'HMR finished, app updated!';
 
         document.body.append(div);
 

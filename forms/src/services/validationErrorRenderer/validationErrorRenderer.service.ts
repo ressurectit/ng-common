@@ -10,7 +10,7 @@ import {ValidationErrorsResult} from '../errorMessagesExtractor/errorMessagesExt
 /**
  * Injection token used for injecting global options for ValidationErrorRendererFactory
  */
-export const VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS: InjectionToken<ValidationErrorRendererFactoryOptions> = new InjectionToken<ValidationErrorRendererFactoryOptions>("VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS");
+export const VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS: InjectionToken<ValidationErrorRendererFactoryOptions> = new InjectionToken<ValidationErrorRendererFactoryOptions>('VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS');
 
 /**
  * Service used for creating validation errors renderer
@@ -48,7 +48,7 @@ export class ValidationErrorRendererFactory
                   isSubmittedOrDirty: IsSubmittedOrDirtyFunc,
                   options: ValidationErrorRendererFactoryOptions): ValidationErrorRenderer
     {
-        let opts: ValidationErrorRendererFactoryOptions = extend(true, {}, this._options, options);
+        const opts: ValidationErrorRendererFactoryOptions = extend(true, {}, this._options, options);
 
         return new opts.rendererType(this._errorMessagesExtractor,
                                      control,
@@ -134,12 +134,12 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
                                      {
                                          this._show();
                                          this._toggleErrors();
-                                         result = true
+                                         result = true;
                                      },
                                      () =>
                                      {
                                          this._hide();
-                                         result = false
+                                         result = false;
                                      },
                                      !!this._lastErrors);
 
@@ -179,14 +179,14 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
      * Toggles css classes for errors that are currently set
      * @param add - Indication whether add or remove errors
      */
-    protected _toggleErrors(add: boolean = true)
+    protected _toggleErrors(add: boolean = true): void
     {
         if(!this._lastErrors)
         {
             return;
         }
 
-        let errorsClasses = this._lastErrors.errors.map(error => `${this._options.prefix}${error.toLowerCase()}${this._options.suffix}`);
+        const errorsClasses = this._lastErrors.errors.map(error => `${this._options.prefix}${error.toLowerCase()}${this._options.suffix}`);
 
         (add ? this._controlElement.classList.add : this._controlElement.classList.remove).apply(this._controlElement.classList, errorsClasses);
         (add ? this.wrapperElement.classList.add : this.wrapperElement.classList.remove).apply(this.wrapperElement.classList, errorsClasses);
@@ -200,7 +200,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
     /**
      * Initialize renderer
      */
-    protected _initialize()
+    protected _initialize(): void
     {
         this.wrapperElement = this._document.createElement('div');
         this._hide();
@@ -216,7 +216,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
      * Renders error messages
      * @param add - Indication whether add or remove errors
      */
-    protected _render(add: boolean)
+    protected _render(add: boolean): void
     {
         if(this._options.component)
         {
@@ -236,11 +236,11 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
      * Renders divs with errors
      * @param add - Indication whether add or remove errors
      */
-    protected _renderDivs(add: boolean = true)
+    protected _renderDivs(add: boolean = true): void
     {
         if(!add)
         {
-            let children = this.wrapperElement.children;
+            const children = this.wrapperElement.children;
     
             //first clean old messages
             for(let x = children.length - 1; x >= 0; x--)
@@ -255,7 +255,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
         {
             this._lastErrors.errorMessages.forEach(message =>
             {
-                let errorDiv = this._document.createElement('div');
+                const errorDiv = this._document.createElement('div');
 
                 errorDiv.innerText = message;
 
@@ -268,7 +268,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
      * Renders component with errors
      * @param add - Indication whether add or remove errors
      */
-    protected _renderComponent(add: boolean = true)
+    protected _renderComponent(add: boolean = true): void
     {
         if(add)
         {
@@ -303,7 +303,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
      * Renders template with errors
      * @param add - Indication whether add or remove errors
      */
-    protected _renderTemplate(_add: boolean = true)
+    protected _renderTemplate(_add: boolean = true): void
     {
 
     }
@@ -311,7 +311,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
     /**
      * Shows wrapper element
      */
-    protected _show()
+    protected _show(): void
     {
         this.wrapperElement.style.display = 'block';
     }
@@ -319,7 +319,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
     /**
      * Hides wrapper element
      */
-    protected _hide()
+    protected _hide(): void
     {
         this.wrapperElement.style.display = 'none';
     }
