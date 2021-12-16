@@ -95,6 +95,14 @@ export class AppHotkeysService
     }
 
     /**
+     * Called when component is destroyed
+     */
+    public ngOnDestroy(): void
+    {
+        this.destroy();
+    }
+
+    /**
      * This method should be called in ngOnDestroy for each component which registered new hotkeys
      */
     public destroy(): void

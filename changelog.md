@@ -33,6 +33,8 @@
    - added new `NotificationsProvider` as notifications provider that allows to create scoped notifications provider
    - added new `DefaultNotificationsService` default notifications service implementation
    - added new `DEFAULT_NOTIFICATIONS` as default notifications provider
+- *subpackage* `@anglr/common/hotkeys`
+   - updated `AppHotkeysService` added `ngOnDestroy` which wraps existing `destroy` method
 - *subpackage* `@anglr/common/material`
    - added new `ConfirmationDialogComponent` confirmation dialog component
    - added new `ConfirmationDialogDirective` directive that enables confirmation dialog on click
@@ -146,6 +148,7 @@
 - minimal supported version of `@jscrpt/common` is `2.2.0`
 - compiled as *Angular IVY* **only** with new *APF*
 - removed support of *es5* target and using latest package.json features
+- removed dependency `@anglr/types`, all mising types used directly here
 - dropped support of `Node.js <= 12.20`
 - removed `HttpRequestIgnoredInterceptorId` interface, explicitly using type unions where needed, `HttpRequest<any> & AdditionalInfo<IgnoredInterceptorId>`
 - changed `IgnoredInterceptorId` to generic `AdditionalInfo`, allowing broader usage
@@ -161,6 +164,8 @@
    - renamed `HAS_ERROR_DEFAULT_MESSAGES` to `VALIDATION_ERROR_MESSAGES`
 - *subpackage* `@anglr/common/hmr`
    - removed `hmrAccept` function, replaced by built in Angular loader
+- *subpackage* `@anglr/common/numeral`
+   - for `NumeralPipe` pipe `transform` has strict `format` parameter of type `string`
 
 ## Version 7.3.2 (2020-05-15)
 

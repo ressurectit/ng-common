@@ -86,7 +86,7 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
      * @param enter - Called when mouse enter tooltip component, hover
      * @param leave - Called when mouse leaves tooltip component
      */
-    public registerHoverEvents(enter: () => void, leave: () => void)
+    public registerHoverEvents(enter: () => void, leave: () => void): void
     {
         this._enterFn = enter;
         this._leaveFn = leave;
@@ -112,7 +112,7 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
      * @internal
      */
     @HostListener('mouseenter')
-    public mouseEnter()
+    public mouseEnter(): void
     {
         this._enterFn();
     }
@@ -122,7 +122,7 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
      * @internal
      */
     @HostListener('mouseleave')
-    public mouseLeave()
+    public mouseLeave(): void
     {
         this._leaveFn();
     }

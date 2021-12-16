@@ -1,4 +1,5 @@
 import positions from 'positions';
+import type {PositionsCoordinates, PositionsCss} from 'positions';
 
 /**
  * Available flip directions
@@ -21,9 +22,9 @@ export interface FlipCallback
  */
 function updateHeight(element: HTMLElement, target: HTMLElement, htmlDocument: Document): void
 {
-    let rect = element.getBoundingClientRect(),
-        targetRect = target.getBoundingClientRect(),
-        h = Math.max(htmlDocument.documentElement.clientHeight, window.innerHeight || 0);
+    const rect = element.getBoundingClientRect(),
+          targetRect = target.getBoundingClientRect(),
+          h = Math.max(htmlDocument.documentElement.clientHeight, window.innerHeight || 0);
 
     //popup is above
     if(rect.top < targetRect.top)
@@ -49,20 +50,20 @@ function updateHeight(element: HTMLElement, target: HTMLElement, htmlDocument: D
  * @param flipCallback - Callback called when flip occured during positioning
  */
 function flipIfCollision(element: HTMLElement,
-                         elementCoordinates: Positions.PositionsCoordinates,
+                         elementCoordinates: PositionsCoordinates,
                          target: HTMLElement,
-                         targetCoordinates: Positions.PositionsCoordinates,
+                         targetCoordinates: PositionsCoordinates,
                          htmlDocument: Document,
-                         flipCallback: FlipCallback): [Positions.PositionsCss, Positions.PositionsCoordinates, Positions.PositionsCoordinates]
+                         flipCallback: FlipCallback): [PositionsCss, PositionsCoordinates, PositionsCoordinates]
 {
-    let w = Math.max(htmlDocument.documentElement.clientWidth, window.innerWidth || 0),
-        h = Math.max(htmlDocument.documentElement.clientHeight, window.innerHeight || 0),
-        rect = element.getBoundingClientRect(),
-        targetRect = target.getBoundingClientRect(),
-        spaceAbove = targetRect.top,
-        spaceUnder = h - targetRect.bottom,
-        spaceBefore = targetRect.left,
-        spaceAfter = w - targetRect.right;
+    const w = Math.max(htmlDocument.documentElement.clientWidth, window.innerWidth || 0),
+          h = Math.max(htmlDocument.documentElement.clientHeight, window.innerHeight || 0),
+          rect = element.getBoundingClientRect(),
+          targetRect = target.getBoundingClientRect(),
+          spaceAbove = targetRect.top,
+          spaceUnder = h - targetRect.bottom,
+          spaceBefore = targetRect.left,
+          spaceAfter = w - targetRect.right;
 
     //vertical overflow
     if((h < rect.bottom &&
@@ -101,15 +102,15 @@ function flipIfCollision(element: HTMLElement,
  * Flips vertical position
  * @param position - Position to be flipped vertically
  */
-function flipVertiacal(position: Positions.PositionsCoordinates): Positions.PositionsCoordinates
+function flipVertiacal(position: PositionsCoordinates): PositionsCoordinates
 {
     if(position.indexOf('top') >= 0)
     {
-        return position.replace('top', 'bottom') as Positions.PositionsCoordinates;
+        return position.replace('top', 'bottom') as PositionsCoordinates;
     }
     else if(position.indexOf('bottom') >= 0)
     {
-        return position.replace('bottom', 'top') as Positions.PositionsCoordinates;
+        return position.replace('bottom', 'top') as PositionsCoordinates;
     }
 
     return position;
@@ -119,15 +120,15 @@ function flipVertiacal(position: Positions.PositionsCoordinates): Positions.Posi
  * Flips horizontal position
  * @param position - Position to be flipped horizontally
  */
-function flipHorizontal(position: Positions.PositionsCoordinates): Positions.PositionsCoordinates
+function flipHorizontal(position: PositionsCoordinates): PositionsCoordinates
 {
     if(position.indexOf('right') >= 0)
     {
-        return position.replace('right', 'left') as Positions.PositionsCoordinates;
+        return position.replace('right', 'left') as PositionsCoordinates;
     }
     else if(position.indexOf('left') >= 0)
     {
-        return position.replace('left', 'right') as Positions.PositionsCoordinates;
+        return position.replace('left', 'right') as PositionsCoordinates;
     }
 
     return position;
@@ -143,9 +144,9 @@ function flipHorizontal(position: Positions.PositionsCoordinates): Positions.Pos
  * @param flipCallback - Callback called when flip occured during positioning
  */
 export function positionsWithFlip(element: HTMLElement,
-                                  elementCoordinates: Positions.PositionsCoordinates,
+                                  elementCoordinates: PositionsCoordinates,
                                   target: HTMLElement,
-                                  targetCoordinates: Positions.PositionsCoordinates,
+                                  targetCoordinates: PositionsCoordinates,
                                   htmlDocument: Document = document,
                                   flipCallback: FlipCallback = () => {}): void
 {

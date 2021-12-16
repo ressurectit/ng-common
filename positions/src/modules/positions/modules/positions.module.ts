@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {NgModule} from '@angular/core';
 
 import {PositionToDirective} from '../directives/positionTo/positionTo.directive';
 

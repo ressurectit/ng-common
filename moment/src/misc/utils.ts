@@ -10,14 +10,14 @@ import moment from 'moment';
  */
 export function readEncodedFilterWithDates<TFilter>(defaultValue: TFilter, filterValue: string, offsetCorrelation: boolean = true): TFilter
 {
-    let dateRegex = /^(\d+-){2}\d+(T(\d+:){2}\d+(\.\d+)?)?/g;
+    const dateRegex = /^(\d+-){2}\d+(T(\d+:){2}\d+(\.\d+)?)?/g;
 
     return readEncodedFilter(defaultValue, filterValue, (_key, value) =>
     {
         //it is date value
         if(isString(value) && dateRegex.test(value))
         {
-            let val = moment(value);
+            const val = moment(value);
         
             if(!val.isValid)
             {
