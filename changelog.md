@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-11-26)
+## Version 8.0.0 (2021-12-16)
 
 ### Bug Fixes
 
@@ -142,8 +142,11 @@
 
 ### BREAKING CHANGES
 
-- minimal supported version of *Angular* is `10.0.0`
-- minimal supported version of `@jscrpt/common` is `1.2.0`
+- minimal supported version of *Angular* is `13.1.0`
+- minimal supported version of `@jscrpt/common` is `2.1.0`
+- compiled as *Angular IVY* **only** with new *APF*
+- removed support of *es5* target and using latest package.json features
+- dropped support of `Node.js <= 12.20`
 - removed `HttpRequestIgnoredInterceptorId` interface, explicitly using type unions where needed, `HttpRequest<any> & AdditionalInfo<IgnoredInterceptorId>`
 - changed `IgnoredInterceptorId` to generic `AdditionalInfo`, allowing broader usage
 - renamed `SERVER_BASE_URL` to `HTTP_REQUEST_BASE_URL`
