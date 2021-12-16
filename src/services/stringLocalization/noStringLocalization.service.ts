@@ -1,7 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Subject, Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Dictionary} from '@jscrpt/common';
+import {Subject, Observable} from 'rxjs';
 
-import {StringLocalization} from "./stringLocalization.interface";
+import {StringLocalization} from './stringLocalization.interface';
 
 /**
  * Default implementation of StringLocalization, which uses 'key' as localization text
@@ -33,7 +34,7 @@ export class NoStringLocalizationService implements StringLocalization
      * @param key - Key to be localized
      * @param interpolateParams - Optional object storing interpolation parameters
      */
-    public get(key: string, interpolateParams?: Object): string
+    public get(key: string, interpolateParams?: Dictionary<any>): string
     {
         if(!interpolateParams)
         {

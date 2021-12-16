@@ -156,6 +156,10 @@
 - renamed `SERVER_BASE_URL` to `HTTP_REQUEST_BASE_URL`
 - renamed `SERVER_COOKIE_HEADER` to `HTTP_REQUEST_COOKIE_HEADER`
 - renamed `SERVER_AUTH_HEADER` to `HTTP_REQUEST_AUTH_HEADER`
+- removed not working `HmrData` decorator
+- removed not working `HmrServiceData` decorator
+- removed not working `HmrServiceDataConstructor` decorator
+- from `NgComponentOutletEx` removed `ngComponentOutletExNgModuleFactory` property which is useless for IVY
 - refactored `DataRouter`, deprecated DataRouterData, use `DataRouter` `valuePromise` directly
 - `CookieService` now using `HTTP_REQUEST_COOKIE_HEADER` instead of `SERVER_COOKIE_HEADER`
 - *subpackage* `@anglr/common/forms`

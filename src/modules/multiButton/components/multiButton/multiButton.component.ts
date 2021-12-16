@@ -1,6 +1,6 @@
-import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ContentChild, TemplateRef, Inject, OnDestroy, ChangeDetectorRef, Optional, ElementRef} from "@angular/core";
-import {DOCUMENT} from "@angular/common";
-import {extend} from "@jscrpt/common";
+import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ContentChild, TemplateRef, Inject, OnDestroy, ChangeDetectorRef, Optional, ElementRef} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {extend} from '@jscrpt/common';
 
 import {MultiButtonCssClasses} from './multiButton.interface';
 import {MULTI_BUTTON_CSS_CLASSES} from '../../misc/tokens';
@@ -99,7 +99,7 @@ export class MultiButtonComponent implements OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy()
+    public ngOnDestroy(): void
     {
         this._removeRegistration();
     }
@@ -109,7 +109,7 @@ export class MultiButtonComponent implements OnDestroy
     /**
      * Method called when sub buttons should be shown
      */
-    public showSubButtons(event: MouseEvent)
+    public showSubButtons(event: MouseEvent): void
     {
         event.preventDefault();
         event.stopPropagation();
@@ -143,7 +143,7 @@ export class MultiButtonComponent implements OnDestroy
     /**
      * Removes event registration
      */
-    protected _removeRegistration()
+    protected _removeRegistration(): void
     {
         this._document.removeEventListener('click', this._handleClickOutside);
     }

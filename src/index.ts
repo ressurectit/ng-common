@@ -1,6 +1,3 @@
-export {HmrData} from './decorators/hmrData.decorator';
-export {HmrServiceData} from './decorators/hmrServiceData.decorator';
-export {HmrServiceDataConstructor} from './decorators/hmrServiceDataConstructor.decorator';
 export {GlobalizationService} from './services/globalization/globalization.service';
 export {CommonModule} from './modules/common.module';
 export {ProgressIndicatorOptions} from './modules/progressIndicator/services/progressIndicatorOptions';

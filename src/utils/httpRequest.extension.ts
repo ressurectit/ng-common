@@ -10,9 +10,9 @@ export function updateHttpRequestClone()
     //updates http request clone to correctly append also additional info to cloned request
     const clone = HttpRequest.prototype.clone;
 
-    HttpRequest.prototype.clone = (function(this: AdditionalInfo)
+    HttpRequest.prototype.clone = (function(this: AdditionalInfo, ...args: any[])
     {
-        let request: AdditionalInfo = clone.apply(this, arguments);
+        const request: AdditionalInfo = clone.apply(this, args);
 
         request.additionalInfo = this.additionalInfo;
 

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule as AngularCommonModule} from '@angular/common';
 
-import {NgComponentOutletEx} from "../directives/ngComponentOutletEx/ngComponentOutletEx.directive";
+import {NgComponentOutletEx} from '../directives/ngComponentOutletEx/ngComponentOutletEx.directive';
 import {IsNaNPipe} from '../pipes/isNaN/isNaN.pipe';
 import {IsPresentPipe} from '../pipes/isPresent/isPresent.pipe';
 import {UrlEncodePipe} from '../pipes/urlEncode/urlEncode.pipe';

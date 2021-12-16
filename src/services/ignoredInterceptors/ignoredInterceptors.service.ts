@@ -1,4 +1,4 @@
-import {Injectable, Type} from "@angular/core";
+import {Injectable, Type} from '@angular/core';
 
 /**
  * Contains id of request, used for IgnoredInterceptorsService
@@ -68,7 +68,7 @@ export class IgnoredInterceptorsService
             return false;
         }
 
-        let item = this._ignoredInterceptors.find(itm => itm.requestId == requestId.requestId && itm.type == interceptorType);
+        const item = this._ignoredInterceptors.find(itm => itm.requestId == requestId.requestId && itm.type == interceptorType);
 
         if(item)
         {

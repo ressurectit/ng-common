@@ -29,7 +29,7 @@ export class StatusCodeService
      * Sets current status code
      * @param code - Status code value that will be set
      */
-    public setStatusCode(code?: number)
+    public setStatusCode(code?: number): void
     {
         this._statusCode = code;
     }

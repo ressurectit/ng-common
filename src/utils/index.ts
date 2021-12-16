@@ -1,4 +1,4 @@
-import {NgModuleRef, ApplicationRef, InjectionToken} from "@angular/core";
+import {NgModuleRef, ApplicationRef, InjectionToken} from '@angular/core';
 import {enableDebugTools} from '@angular/platform-browser';
 import {filter, first} from 'rxjs/operators';
 
@@ -19,7 +19,7 @@ export function extractAppStableResolve(appStablePromise: Promise<void>): () => 
 export function appStablePromiseFactory()
 {
     let appStableResolve;
-    let appStablePromise = new Promise<void>(resolve => appStableResolve = resolve);
+    const appStablePromise = new Promise<void>(resolve => appStableResolve = resolve);
 
     (appStablePromise as any).__resolve = appStableResolve;
 
@@ -29,7 +29,7 @@ export function appStablePromiseFactory()
 /**
  * Injection token used for obtaining promise that is resolved when application is first time stable
  */
-export const APP_STABLE: InjectionToken<Promise<void>> = new InjectionToken<Promise<void>>("APP_STABLE", {providedIn: 'root', factory: appStablePromiseFactory});
+export const APP_STABLE: InjectionToken<Promise<void>> = new InjectionToken<Promise<void>>('APP_STABLE', {providedIn: 'root', factory: appStablePromiseFactory});
 
 /**
  * Runs callback function when angular module is bootstrapped and stable
@@ -50,18 +50,18 @@ export function runWhenModuleStable(moduleRefPromise: Promise<NgModuleRef<{}>>, 
                     first())
             .subscribe(() => 
             {
-                let appStablePromise = moduleRef.injector.get(APP_STABLE);
+                const appStablePromise = moduleRef.injector.get(APP_STABLE);
 
                 if(angularProfiler)
                 {
                     enableDebugTools(appRef.components[0]);
                 }
 
-                callback(moduleRef)
+                callback(moduleRef);
 
                 if(appStablePromise)
                 {
-                    let resolveAsStable = extractAppStableResolve(appStablePromise);
+                    const resolveAsStable = extractAppStableResolve(appStablePromise);
 
                     resolveAsStable();
                 }
