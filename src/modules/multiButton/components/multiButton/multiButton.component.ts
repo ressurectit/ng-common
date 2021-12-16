@@ -86,7 +86,7 @@ export class MultiButtonComponent implements OnDestroy
     public subButtonsContent: TemplateRef<void>;
 
     //######################### constructor #########################
-    constructor(@Inject(DOCUMENT) protected _document: HTMLDocument,
+    constructor(@Inject(DOCUMENT) protected _document: Document,
                 @Inject(MULTI_BUTTON_CSS_CLASSES) @Optional() _cssClasess: MultiButtonCssClasses,
                 protected _element: ElementRef<HTMLElement>,
                 protected _changeDetector: ChangeDetectorRef)

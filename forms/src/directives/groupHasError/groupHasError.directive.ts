@@ -1,5 +1,5 @@
-import {Directive, ElementRef} from "@angular/core";
-import {extend} from "@jscrpt/common";
+import {Directive, ElementRef} from '@angular/core';
+import {extend} from '@jscrpt/common';
 
 /**
  * Default options for GroupHasErrorDirective
@@ -7,7 +7,7 @@ import {extend} from "@jscrpt/common";
 const defaultOptions: GroupHasErrorOptions =
 {
     cssClass: 'has-error'
-}
+};
 
 /**
  * Options for GroupHasErrorDirective
@@ -53,7 +53,7 @@ export class GroupHasErrorDirective
      * Registers control as invalid control
      * @param id - Name of control to be registered
      */
-    public registerControl(id: string)
+    public registerControl(id: string): void
     {
         //control is not registered yet
         if(!this._invalidControls.find(itm => itm == id))
@@ -68,7 +68,7 @@ export class GroupHasErrorDirective
      * Unregisters control from invalid controls
      * @param id - Id of control to be unregistered
      */
-    public unregisterControl(id: string)
+    public unregisterControl(id: string): void
     {
         //control was registered already
         if(this._invalidControls.find(itm => itm == id))
@@ -84,7 +84,7 @@ export class GroupHasErrorDirective
     /**
      * Updates status of element (css classes)
      */
-    private _updateStatus()
+    private _updateStatus(): void
     {
         if(this._invalidControls.length)
         {

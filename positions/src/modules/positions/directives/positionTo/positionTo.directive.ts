@@ -43,7 +43,7 @@ export class PositionToDirective implements OnChanges
 
     //######################### constructor #########################
     constructor(private _element: ElementRef<HTMLElement>,
-                @Inject(DOCUMENT) private _document: HTMLDocument)
+                @Inject(DOCUMENT) private _document: Document)
     {
     }
 

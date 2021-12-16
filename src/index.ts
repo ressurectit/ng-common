@@ -31,8 +31,11 @@ export {MemoryTemporaryStorageService, TemporaryStorage} from './services/tempor
 export {NoStringLocalizationService, StringLocalization} from './services/stringLocalization';
 export {Logger} from './services/logger';
 export {IgnoredInterceptorsService, IgnoredInterceptorId} from './services/ignoredInterceptors/ignoredInterceptors.service';
-export {NgComponentOutletEx} from "./directives/ngComponentOutletEx/ngComponentOutletEx.directive";
-export {APP_STABLE, extractAppStableResolve, runWhenModuleStable} from "./utils";
-export {updateHttpRequestClone} from "./utils/httpRequest.extension";
+export {NgComponentOutletEx} from './directives/ngComponentOutletEx/ngComponentOutletEx.directive';
+export {APP_STABLE, extractAppStableResolve, runWhenModuleStable} from './utils';
+export {updateHttpRequestClone} from './utils/httpRequest.extension';
 export {PROGRESS_INTERCEPTOR_PROVIDER, ProgressInterceptor} from './modules/progressIndicator/interceptors/progressInterceptor';
 export {DEFAULT_NOTIFICATIONS, DefaultNotificationsService, Notification, NotificationSeverity, Notifications, NotificationsOptions, NotificationsProvider, NotificationsScopeProvider, NotificationsScopeProviderFactory} from './services/notifications';
+
+//TODO: any to unknown
+//TODO: strict null checks

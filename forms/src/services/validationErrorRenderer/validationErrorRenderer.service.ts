@@ -27,7 +27,7 @@ export class ValidationErrorRendererFactory
 
     //######################### constructor #########################
     constructor(protected _errorMessagesExtractor: ErrorMessagesExtractor,
-                @Inject(DOCUMENT) protected _document: HTMLDocument,
+                @Inject(DOCUMENT) protected _document: Document,
                 @Optional() @Inject(VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS) options: ValidationErrorRendererFactoryOptions)
     {
         this._options = extend(true, {}, DEFAULT_OPTIONS, options);
@@ -93,7 +93,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
     constructor(protected _errorMessagesExtractor: ErrorMessagesExtractor,
                 protected _control: FormControl,
                 protected _controlElement: HTMLElement,
-                protected _document: HTMLDocument,
+                protected _document: Document,
                 protected _injector: Injector,
                 protected _isSubmittedOrDirty: IsSubmittedOrDirtyFunc,
                 protected _options: ValidationErrorsRendererOptions)

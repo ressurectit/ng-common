@@ -1,5 +1,6 @@
-import {Injectable} from "@angular/core";
-import {HotkeysService, Hotkey} from "angular2-hotkeys";
+import {Injectable} from '@angular/core';
+import {HotkeysService, Hotkey} from 'angular2-hotkeys';
+import Mousetrap, {MousetrapInstance} from 'mousetrap';
 
 /**
  * Application hotkeys service

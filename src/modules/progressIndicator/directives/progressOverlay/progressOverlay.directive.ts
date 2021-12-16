@@ -68,7 +68,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
     //######################### constructor #########################
     constructor(private _service: ProgressIndicatorService,
                 private _element: ElementRef<HTMLElement>,
-                @Inject(DOCUMENT) private _document: HTMLDocument,
+                @Inject(DOCUMENT) private _document: Document,
                 @Inject(STRING_LOCALIZATION) private _localizationSvc: StringLocalization)
     {
     }

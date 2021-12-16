@@ -38,7 +38,7 @@ export function toText(property: any): string
 
     if (typeof property === 'object')
     {
-        let s = JSON.stringify(property, null, 4);
+        const s = JSON.stringify(property, null, 4);
 
         return s;
     }

@@ -6,9 +6,9 @@ import {isDescendant} from '@jscrpt/common';
  * Directive that handles click outside of element
  */
 @Directive(
-{
-    selector: "[clickOutside]"
-})
+    {
+        selector: '[clickOutside]'
+    })
 export class ClickOutsideDirective implements OnInit, OnDestroy
 {
     //######################### public properties - inputs #########################
@@ -35,7 +35,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
 
     //######################### constructor #########################
     constructor(private _element: ElementRef<HTMLElement>,
-                @Inject(DOCUMENT) private _document: HTMLDocument)
+                @Inject(DOCUMENT) private _document: Document)
     {
     }
 

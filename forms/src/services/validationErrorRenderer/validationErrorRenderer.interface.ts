@@ -102,7 +102,7 @@ export interface ValidationErrorRendererCtor
     new(errorMessagesExtractor: ErrorMessagesExtractor,
         control: FormControl,
         controlElement: HTMLElement,
-        document: HTMLDocument,
+        document: Document,
         injector: Injector,
         isSubmittedOrDirty: IsSubmittedOrDirtyFunc,
         options: ValidationErrorsRendererOptions): ValidationErrorRenderer;

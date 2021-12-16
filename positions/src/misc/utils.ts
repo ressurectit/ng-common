@@ -19,7 +19,7 @@ export interface FlipCallback
  * @param target - Target element which will be element positioned against
  * @param htmlDocument - HTML document instance
  */
-function updateHeight(element: HTMLElement, target: HTMLElement, htmlDocument: HTMLDocument): void
+function updateHeight(element: HTMLElement, target: HTMLElement, htmlDocument: Document): void
 {
     let rect = element.getBoundingClientRect(),
         targetRect = target.getBoundingClientRect(),
@@ -52,7 +52,7 @@ function flipIfCollision(element: HTMLElement,
                          elementCoordinates: Positions.PositionsCoordinates,
                          target: HTMLElement,
                          targetCoordinates: Positions.PositionsCoordinates,
-                         htmlDocument: HTMLDocument,
+                         htmlDocument: Document,
                          flipCallback: FlipCallback): [Positions.PositionsCss, Positions.PositionsCoordinates, Positions.PositionsCoordinates]
 {
     let w = Math.max(htmlDocument.documentElement.clientWidth, window.innerWidth || 0),
@@ -146,7 +146,7 @@ export function positionsWithFlip(element: HTMLElement,
                                   elementCoordinates: Positions.PositionsCoordinates,
                                   target: HTMLElement,
                                   targetCoordinates: Positions.PositionsCoordinates,
-                                  htmlDocument: HTMLDocument = document,
+                                  htmlDocument: Document = document,
                                   flipCallback: FlipCallback = () => {}): void
 {
     //set to default position
