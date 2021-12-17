@@ -16,7 +16,7 @@ export function extractAppStableResolve(appStablePromise: Promise<void>): () => 
  * 
  * @internal
  */
-export function appStablePromiseFactory()
+export function appStablePromiseFactory(): Promise<void>
 {
     let appStableResolve;
     const appStablePromise = new Promise<void>(resolve => appStableResolve = resolve);
@@ -37,17 +37,17 @@ export const APP_STABLE: InjectionToken<Promise<void>> = new InjectionToken<Prom
  * @param callback - Callback that is called
  * @param angularProfiler - Indication that angular profiler should be enabled
  */
-export function runWhenModuleStable(moduleRefPromise: Promise<NgModuleRef<{}>>, callback: (moduleRef: NgModuleRef<{}>) => void, angularProfiler?: boolean): void
+export function runWhenModuleStable(moduleRefPromise: Promise<NgModuleRef<unknown>>, callback: (moduleRef: NgModuleRef<unknown>) => void, angularProfiler?: boolean): void
 {
     angularProfiler = angularProfiler || false;
 
-    moduleRefPromise.then((moduleRef: NgModuleRef<{}>) => 
+    moduleRefPromise.then((moduleRef: NgModuleRef<unknown>) => 
     {
         const appRef: ApplicationRef = moduleRef.injector.get(ApplicationRef);
 
         appRef.isStable
             .pipe(filter((isStable: boolean) => isStable),
-                    first())
+                  first())
             .subscribe(() => 
             {
                 const appStablePromise = moduleRef.injector.get(APP_STABLE);

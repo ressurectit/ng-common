@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 8.0.0 (2021-12-16)
+## Version 8.0.0 (2021-12-17)
 
 ### Bug Fixes
 
@@ -11,17 +11,21 @@
 
 - `DataRouter` can now be used inside of `Resolve` of *route*
 - added new `ClickOutsideDirective` which allows changing value of boolean if user clicks outside of selected element, or provided element, part of `ClickOutsideModule`
-- added code that modifies `HttpRequest` prototype `clone` method, adds support for cloning also `additionalInfo`
-- added new `AdditionalInfo` generic interface, which allows definition of additional data
-- updated `ProgressInterceptor`, which now supports local progress indicator using `additionalInfo` with `LocalProgressIndicatorName`
+- updated `ProgressInterceptor`, which now supports local progress indicator using `httpContext` with `LocalProgressIndicatorName` TODO
 - added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
-- added new `updateHttpRequestClone` function, that needs to be called to make `additionalInfo` working correctly with `HttpRequest`
 - added new `MultiButtonComponent` class used for displaying multibutton
 - added new `MultiButtonCssClasses` interface that describes multi button css classes
 - added new `MULTI_BUTTON_CSS_CLASSES` injection token for default css classes for multibutton
 - added new `MultiButtonModule` module containing components for displaying multi button
 - fixed `DebugDataEnabledService.setEnabled()` now triggers `enabledChange` only when there is change of `enabled` value
 - improved `DebugDataComponent` new styling, `display: none` when not enabled, `.clickable` css class
+- added new `GoBackModule` module for *GoBack* directive
+- added new `GoBackDirective` directive that performs browser back button action on click
+- added new `MergeCssClassesPipe` that merges css classes that will be passed to ngClass
+- added new `NgClassType` type of css class definition for NgClass and merge used within `MergeCssClassesPipe`
+- added new `CommonDynamicModule` for `NgComponentOutletEx` directive
+- added new `CommonLocalizeModule` for `LocalizePipe` pipe
+- added new `CommonUtilsModule` for `IsNaNPipe`, `IsPresentPipe`, `UrlEncodePipe`, `MergeCssClassesPipe` pipes
 - added new **Notifications**
    - added new `NOTIFICATIONS` `InjectionToken` used for injecting notifications service implementation
    - added new `NOTIFICATIONS_SCOPE` `InjectionToken` used for injecting notifications scope name
@@ -151,11 +155,12 @@
 - removed support of *es5* target and using latest package.json features
 - removed dependency `@anglr/types`, all mising types used directly here
 - dropped support of `Node.js <= 12.20`
-- removed `HttpRequestIgnoredInterceptorId` interface, explicitly using type unions where needed, `HttpRequest<any> & AdditionalInfo<IgnoredInterceptorId>`
-- changed `IgnoredInterceptorId` to generic `AdditionalInfo`, allowing broader usage
+- removed `HttpRequestIgnoredInterceptorId` interface, now using builtin `HttpContext`
+- removed `IgnoredInterceptorId`, now using buildin `HttpContext`
 - renamed `SERVER_BASE_URL` to `HTTP_REQUEST_BASE_URL`
 - renamed `SERVER_COOKIE_HEADER` to `HTTP_REQUEST_COOKIE_HEADER`
 - renamed `SERVER_AUTH_HEADER` to `HTTP_REQUEST_AUTH_HEADER`
+- removed `CommonModule` in favor of new more specific modules `CommonDynamicModule`, `CommonLocalizeModule`, `CommonUtilsModule`
 - removed not working `HmrData` decorator
 - removed not working `HmrServiceData` decorator
 - removed not working `HmrServiceDataConstructor` decorator
