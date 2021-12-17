@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CommonModule as NgCommonModule} from '@anglr/common';
+import {CommonLocalizeModule} from '@anglr/common';
 
 import {ConfirmationDialogComponent} from '../components/confirmationDialog/confirmationDialog.component';
 import {TitledDialogModule} from './titledDialog.module';
@@ -14,7 +14,7 @@ import {ConfirmationDialogDirective} from '../directives/confirmationDialog/conf
     imports:
     [
         CommonModule,
-        NgCommonModule,
+        CommonLocalizeModule,
         TitledDialogModule
     ],
     declarations:

@@ -11,8 +11,9 @@
 
 - `DataRouter` can now be used inside of `Resolve` of *route*
 - added new `ClickOutsideDirective` which allows changing value of boolean if user clicks outside of selected element, or provided element, part of `ClickOutsideModule`
-- updated `ProgressInterceptor`, which now supports local progress indicator using `httpContext` with `LocalProgressIndicatorName` TODO
-- added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
+- updated `ProgressInterceptor`, which now supports local progress indicator using `httpContext` with `PROGRESS_INDICATOR_GROUP_NAME` token
+- added new `PROGRESS_INDICATOR_GROUP_NAME` http context token used for passing progress indicator group name for local progress indicator
+- added new `IGNORED_INTERCEPTORS` http context token storing array of ignored interceptors types
 - added new `MultiButtonComponent` class used for displaying multibutton
 - added new `MultiButtonCssClasses` interface that describes multi button css classes
 - added new `MULTI_BUTTON_CSS_CLASSES` injection token for default css classes for multibutton
@@ -155,8 +156,9 @@
 - removed support of *es5* target and using latest package.json features
 - removed dependency `@anglr/types`, all mising types used directly here
 - dropped support of `Node.js <= 12.20`
-- removed `HttpRequestIgnoredInterceptorId` interface, now using builtin `HttpContext`
-- removed `IgnoredInterceptorId`, now using buildin `HttpContext`
+- removed `HttpRequestIgnoredInterceptorId` interface, now using builtin `HttpContextToken` named `IGNORED_INTERCEPTORS`
+- removed `IgnoredInterceptorId`, now using buildin `HttpContextToken` named `IGNORED_INTERCEPTORS`
+- removed `IgnoredInterceptorsService`, now using buildin `HttpContextToken` named `IGNORED_INTERCEPTORS`
 - renamed `SERVER_BASE_URL` to `HTTP_REQUEST_BASE_URL`
 - renamed `SERVER_COOKIE_HEADER` to `HTTP_REQUEST_COOKIE_HEADER`
 - renamed `SERVER_AUTH_HEADER` to `HTTP_REQUEST_AUTH_HEADER`

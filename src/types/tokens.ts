@@ -1,4 +1,5 @@
-import {InjectionToken} from '@angular/core';
+import {InjectionToken, Type} from '@angular/core';
+import {HttpContextToken} from '@angular/common/http';
 
 import {StringLocalization, NoStringLocalizationService} from '../services/stringLocalization';
 import {PermanentStorage} from '../services/permanentStorage';
@@ -56,3 +57,8 @@ export const NOTIFICATIONS: InjectionToken<Notifications> = new InjectionToken<N
  * Token used for injecting notifications scope name
  */
 export const NOTIFICATIONS_SCOPE: InjectionToken<string> = new InjectionToken<string>('NOTIFICATIONS_SCOPE');
+
+/**
+ * Http context token storing array of ignored interceptors types
+ */
+export const IGNORED_INTERCEPTORS: HttpContextToken<Type<unknown>[]> = new HttpContextToken<Type<unknown>[]>(() => []);
