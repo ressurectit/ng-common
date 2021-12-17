@@ -19,7 +19,7 @@ export class GoBackDirective
 
     /**
      * Navigates back in browser
-     * @param event Mouse event that occured
+     * @param event - Mouse event that occured
      */
     @HostListener('click', ['$event'])
     public goBack(event: MouseEvent): void
