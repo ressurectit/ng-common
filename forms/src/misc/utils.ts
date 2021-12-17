@@ -99,7 +99,7 @@ export function alertHidden(form: NgForm, control: string, errors: string[] = []
 
 /**
  * Prepares object for form builder, wraps each property in array
- * @param value Object which properties will be wrapped to array
+ * @param value - Object which properties will be wrapped to array
  */
 export function prepareForFormBuilder(value: Dictionary<any>): Dictionary
 {
@@ -125,9 +125,9 @@ export function prepareForFormBuilder(value: Dictionary<any>): Dictionary
 
 /**
  * Reads filter value from encoded string
- * @param defaultValue Default value of filter, which is overriden by values from filterValue
- * @param filterValue Encoded string containing filter value
- * @param reviver A function that transforms the results. This function is called for each member of the object.
+ * @param defaultValue - Default value of filter, which is overriden by values from filterValue
+ * @param filterValue - Encoded string containing filter value
+ * @param reviver - A function that transforms the results. This function is called for each member of the object.
  */
 export function readEncodedFilter<TFilter>(defaultValue: TFilter, filterValue: string, reviver?: (this: any, key: string, value: any) => any): TFilter
 {

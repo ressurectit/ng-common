@@ -4,9 +4,9 @@ import moment from 'moment';
 
 /**
  * Reads filter value from encoded string, deserialize date properties into moment
- * @param defaultValue Default value of filter, which is overriden by values from filterValue
- * @param filterValue Encoded string containing filter value
- * @param offsetCorrelation Indication whether perform timezone offset correlation, defaults to true
+ * @param defaultValue - Default value of filter, which is overriden by values from filterValue
+ * @param filterValue - Encoded string containing filter value
+ * @param offsetCorrelation - Indication whether perform timezone offset correlation, defaults to true
  */
 export function readEncodedFilterWithDates<TFilter>(defaultValue: TFilter, filterValue: string, offsetCorrelation: boolean = true): TFilter
 {

@@ -8,7 +8,7 @@
         "build": "ngc --declaration --declarationDir . --declarationMap && ngc -t es2015 --outDir es2015 && npm run dts:rollup",
         "dts:rollup": "npm run api -- api-extractor.json && npm run api -- date-fns/api-extractor.json && npm run api -- forms/api-extractor.json && npm run api -- hmr/api-extractor.json && npm run api -- hotkeys/api-extractor.json && npm run api -- material/api-extractor.json && npm run api -- moment/api-extractor.json && npm run api -- numeral/api-extractor.json && npm run api -- positions/api-extractor.json && npm run api -- router/api-extractor.json && npm run api -- store/api-extractor.json && npm run api -- structured-log/api-extractor.json",
         "api": "api-extractor run --local --verbose -c",
-        "clean": "rimraf temp es2015 es2020 **/tsdoc-metadata.json src/**/*.d.ts src/**/*.d.ts.map */src/**/*.d.ts */src/**/*.d.ts.map ./*.d.ts ./*d.ts.map",
+        "clean": "rimraf */temp temp es2015 es2020 **/tsdoc-metadata.json src/**/*.d.ts src/**/*.d.ts.map */src/**/*.d.ts */src/**/*.d.ts.map ./*.d.ts ./*.d.ts.map */*.d.ts",
         "clean:deps": "rimraf package-lock.json node_modules",
         "clean:all": "npm run clean && npm run clean:deps",
         "ngc": "ngc",
@@ -153,18 +153,106 @@
     "es2020": "./es2020/src/index.js",
     "es2015": "./es2015/src/index.js",
     "module": "./es2015/src/index.js",
-    "typings": "./animations.d.ts",
+    "typings": "./common.d.ts",
     "exports": {
         "./package.json": {
             "default": "./package.json"
         },
         ".": {
-            "types": "./animations.d.ts",
+            "types": "./common.d.ts",
             "esm2020": "./es2020/src/index.js",
             "es2020": "./es2020/src/index.js",
             "es2015": "./es2015/src/index.js",
             "node": "./es2015/src/index.js",
             "default": "./es2020/src/index.js"
+        },
+        "./date-fns": {
+            "types": "./date-fns/common-date-fns.d.ts",
+            "esm2020": "./es2020/date-fns/src/index.js",
+            "es2020": "./es2020/date-fns/src/index.js",
+            "es2015": "./es2015/date-fns/src/index.js",
+            "node": "./es2015/date-fns/src/index.js",
+            "default": "./es2020/date-fns/src/index.js"
+        },
+        "./forms": {
+            "types": "./forms/common-forms.d.ts",
+            "esm2020": "./es2020/forms/src/index.js",
+            "es2020": "./es2020/forms/src/index.js",
+            "es2015": "./es2015/forms/src/index.js",
+            "node": "./es2015/forms/src/index.js",
+            "default": "./es2020/forms/src/index.js"
+        },
+        "./hmr": {
+            "types": "./hmr/common-hmr.d.ts",
+            "esm2020": "./es2020/hmr/src/index.js",
+            "es2020": "./es2020/hmr/src/index.js",
+            "es2015": "./es2015/hmr/src/index.js",
+            "node": "./es2015/hmr/src/index.js",
+            "default": "./es2020/hmr/src/index.js"
+        },
+        "./hotkeys": {
+            "types": "./hotkeys/common-hotkeys.d.ts",
+            "esm2020": "./es2020/hotkeys/src/index.js",
+            "es2020": "./es2020/hotkeys/src/index.js",
+            "es2015": "./es2015/hotkeys/src/index.js",
+            "node": "./es2015/hotkeys/src/index.js",
+            "default": "./es2020/hotkeys/src/index.js"
+        },
+        "./material": {
+            "types": "./material/common-material.d.ts",
+            "esm2020": "./es2020/material/src/index.js",
+            "es2020": "./es2020/material/src/index.js",
+            "es2015": "./es2015/material/src/index.js",
+            "node": "./es2015/material/src/index.js",
+            "default": "./es2020/material/src/index.js"
+        },
+        "./moment": {
+            "types": "./moment/common-moment.d.ts",
+            "esm2020": "./es2020/moment/src/index.js",
+            "es2020": "./es2020/moment/src/index.js",
+            "es2015": "./es2015/moment/src/index.js",
+            "node": "./es2015/moment/src/index.js",
+            "default": "./es2020/moment/src/index.js"
+        },
+        "./numeral": {
+            "types": "./numeral/common-numeral.d.ts",
+            "esm2020": "./es2020/numeral/src/index.js",
+            "es2020": "./es2020/numeral/src/index.js",
+            "es2015": "./es2015/numeral/src/index.js",
+            "node": "./es2015/numeral/src/index.js",
+            "default": "./es2020/numeral/src/index.js"
+        },
+        "./positions": {
+            "types": "./positions/common-positions.d.ts",
+            "esm2020": "./es2020/positions/src/index.js",
+            "es2020": "./es2020/positions/src/index.js",
+            "es2015": "./es2015/positions/src/index.js",
+            "node": "./es2015/positions/src/index.js",
+            "default": "./es2020/positions/src/index.js"
+        },
+        "./router": {
+            "types": "./router/common-router.d.ts",
+            "esm2020": "./es2020/router/src/index.js",
+            "es2020": "./es2020/router/src/index.js",
+            "es2015": "./es2015/router/src/index.js",
+            "node": "./es2015/router/src/index.js",
+            "default": "./es2020/router/src/index.js"
+        },
+        "./store": {
+            "types": "./store/common-store.d.ts",
+            "esm2020": "./es2020/store/src/index.js",
+            "es2020": "./es2020/store/src/index.js",
+            "es2015": "./es2015/store/src/index.js",
+            "node": "./es2015/store/src/index.js",
+            "default": "./es2020/store/src/index.js"
+        },
+        "./structured-log": {
+            "types": "./structured-log/common-structured-log.d.ts",
+            "esm2020": "./es2020/structured-log/src/index.js",
+            "es2020": "./es2020/structured-log/src/index.js",
+            "es2015": "./es2015/structured-log/src/index.js",
+            "node": "./es2015/structured-log/src/index.js",
+            "default": "./es2020/structured-log/src/index.js"
         }
     }
 }
