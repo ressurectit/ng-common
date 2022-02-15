@@ -74,6 +74,9 @@
         "doc:md:material": "api-documenter markdown -i material/temp -o docs/content/api/ng-common-material",
         "doc:api:material": "copyfiles -u 2 material/temp/common-material.api.md docs/content/api/ng-common-material && rimraf material/temp"
     },
+    "engines": {
+        "node": "^12.20.0 || ^14.15.0 || >=16.10.0"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/ressurectit/ng-common.git"
@@ -125,8 +128,8 @@
         "angular2-hotkeys": "^2.4.0",
         "store": "^2.0.12",
         "structured-log": "^0.2.0",
-        "moment": "^2.27.0",
-        "date-fns": "^2.19.0",
+        "moment": "^2.29.1",
+        "date-fns": "^2.27.0",
         "positions": "^1.6.2",
         "@types/node": "^14.14.31",
         "@types/numeral": "^2.0.2",
