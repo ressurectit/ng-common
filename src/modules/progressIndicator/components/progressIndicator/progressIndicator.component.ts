@@ -8,7 +8,7 @@ import {ProgressIndicatorService, DEFAULT_PROGRESS_NAME} from '../../services/pr
  */
 @Component(
 {
-    selector: "progress-indicator",
+    selector: 'progress-indicator',
     templateUrl: 'progressIndicator.component.html',
     styleUrls: ['progressIndicator.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,7 +28,7 @@ export class ProgressIndicatorComponent implements OnDestroy
      * Applied css classes
      * @internal
      */
-    public appliedClass: {[key: string]: boolean} = { "progress-indicator": true };
+    public appliedClass: {[key: string]: boolean} = { 'progress-indicator': true };
 
     /**
      * Array of messages that should be displayed
@@ -56,8 +56,8 @@ export class ProgressIndicatorComponent implements OnDestroy
      */
     private set running(running: boolean)
     {
-        this.appliedClass["running"] = running;
-    };
+        this.appliedClass['running'] = running;
+    }
 
     //######################### constructor #########################
     constructor(private _service: ProgressIndicatorService,
@@ -83,7 +83,7 @@ export class ProgressIndicatorComponent implements OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy()
+    public ngOnDestroy(): void
     {
         if(this._subscription)
         {

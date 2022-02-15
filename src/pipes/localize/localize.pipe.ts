@@ -1,15 +1,15 @@
-import {Pipe, PipeTransform, Inject, ChangeDetectorRef, OnInit, OnDestroy} from "@angular/core";
-import {Subscription} from "rxjs";
+import {Pipe, PipeTransform, Inject, ChangeDetectorRef, OnInit, OnDestroy} from '@angular/core';
+import {Subscription} from 'rxjs';
 
-import {STRING_LOCALIZATION} from "../../types/tokens";
-import {StringLocalization} from "../../services/stringLocalization";
+import {STRING_LOCALIZATION} from '../../types/tokens';
+import {StringLocalization} from '../../services/stringLocalization';
 
 /**
  * Localize strings using 'StringLocalization'
  */
 @Pipe(
 {
-    name: "localize",
+    name: 'localize',
     pure: false
 })
 export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
@@ -44,7 +44,7 @@ export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
     /**
      * Initialize component
      */
-    public ngOnInit()
+    public ngOnInit(): void
     {
         this._subscription = this._localizationSvc.textsChange.subscribe(() =>
         {
@@ -57,7 +57,7 @@ export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy()
+    public ngOnDestroy(): void
     {
         if(this._subscription)
         {

@@ -1,5 +1,50 @@
 # Changelog
 
+## Version 10.0.0 (2022-02-15)
+
+### Bug Fixes
+
+- fixed `ComponentRoute`, now accepts `ComponentRouteDefinition` new route definition without `component` as it should be
+
+### Features
+
+- updated `ProgressInterceptor`, which now supports local progress indicator using `httpContext` with `PROGRESS_INDICATOR_GROUP_NAME` token
+- added new `PROGRESS_INDICATOR_GROUP_NAME` http context token used for passing progress indicator group name for local progress indicator
+- added new `IGNORED_INTERCEPTORS` http context token storing array of ignored interceptors types
+- added new `GoBackModule` module for *GoBack* directive
+- added new `GoBackDirective` directive that performs browser back button action on click
+- added new `MergeCssClassesPipe` that merges css classes that will be passed to ngClass
+- added new `NgClassType` type of css class definition for NgClass and merge used within `MergeCssClassesPipe`
+- added new `CommonDynamicModule` for `NgComponentOutletEx` directive
+- added new `CommonLocalizeModule` for `LocalizePipe` pipe
+- added new `CommonUtilsModule` for `IsNaNPipe`, `IsPresentPipe`, `UrlEncodePipe`, `MergeCssClassesPipe` pipes
+- *subpackage* `@anglr/common/hotkeys`
+   - updated `AppHotkeysService` added `ngOnDestroy` which wraps existing `destroy` method
+- *subpackage* `@anglr/common/forms`
+   - **Form Model Builder**
+      - added new `buildFormModel` method for building `FormGroup` from *decorated model*, only for properties with non `undefined` value
+
+### BREAKING CHANGES
+
+- minimal supported version of *Angular* is `13.1.0`
+- minimal supported version of `@jscrpt/common` is `2.2.0`
+- compiled as *Angular IVY* **only** with new *APF*
+- removed support of *es5* target and using latest package.json features
+- removed dependency `@anglr/types`, all mising types used directly here
+- dropped support of `Node.js <= 12.20`
+- removed `HttpRequestIgnoredInterceptorId` interface, now using builtin `HttpContextToken` named `IGNORED_INTERCEPTORS`
+- removed `IgnoredInterceptorId`, now using buildin `HttpContextToken` named `IGNORED_INTERCEPTORS`
+- removed `IgnoredInterceptorsService`, now using buildin `HttpContextToken` named `IGNORED_INTERCEPTORS`
+- removed `CommonModule` in favor of new more specific modules `CommonDynamicModule`, `CommonLocalizeModule`, `CommonUtilsModule`
+- removed not working `HmrData` decorator
+- removed not working `HmrServiceData` decorator
+- removed not working `HmrServiceDataConstructor` decorator
+- from `NgComponentOutletEx` removed `ngComponentOutletExNgModuleFactory` property which is useless for IVY
+- *subpackage* `@anglr/common/hmr`
+   - removed `hmrAccept` function, replaced by built in Angular loader
+- *subpackage* `@anglr/common/numeral`
+   - for `NumeralPipe` pipe `transform` has strict `format` parameter of type `string`
+
 ## Version 9.0.0 (2022-02-15)
 
 ### Bug Fixes
@@ -157,27 +202,33 @@
    - removed `HAS_ERROR_OPTIONS` token, replaced by `VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS`
    - renamed `HAS_ERROR_DEFAULT_MESSAGES` to `VALIDATION_ERROR_MESSAGES`
 
-## Version 8.0.0 (2021-11-26)
+## Version 8.0.0 (2021-12-17)
 
 ### Bug Fixes
 
 - fixed `RestSinkService` calling `setInterval` only after application is stable
+- fixed `ComponentRoute`, now accepts `ComponentRouteDefinition` new route definition without `component` as it should be
 
 ### Features
 
 - `DataRouter` can now be used inside of `Resolve` of *route*
 - added new `ClickOutsideDirective` which allows changing value of boolean if user clicks outside of selected element, or provided element, part of `ClickOutsideModule`
-- added code that modifies `HttpRequest` prototype `clone` method, adds support for cloning also `additionalInfo`
-- added new `AdditionalInfo` generic interface, which allows definition of additional data
-- updated `ProgressInterceptor`, which now supports local progress indicator using `additionalInfo` with `LocalProgressIndicatorName`
-- added new `LocalProgressIndicatorName` interface as type for additionalInfo with `progressGroupName`
-- added new `updateHttpRequestClone` function, that needs to be called to make `additionalInfo` working correctly with `HttpRequest`
+- updated `ProgressInterceptor`, which now supports local progress indicator using `httpContext` with `PROGRESS_INDICATOR_GROUP_NAME` token
+- added new `PROGRESS_INDICATOR_GROUP_NAME` http context token used for passing progress indicator group name for local progress indicator
+- added new `IGNORED_INTERCEPTORS` http context token storing array of ignored interceptors types
 - added new `MultiButtonComponent` class used for displaying multibutton
 - added new `MultiButtonCssClasses` interface that describes multi button css classes
 - added new `MULTI_BUTTON_CSS_CLASSES` injection token for default css classes for multibutton
 - added new `MultiButtonModule` module containing components for displaying multi button
 - fixed `DebugDataEnabledService.setEnabled()` now triggers `enabledChange` only when there is change of `enabled` value
 - improved `DebugDataComponent` new styling, `display: none` when not enabled, `.clickable` css class
+- added new `GoBackModule` module for *GoBack* directive
+- added new `GoBackDirective` directive that performs browser back button action on click
+- added new `MergeCssClassesPipe` that merges css classes that will be passed to ngClass
+- added new `NgClassType` type of css class definition for NgClass and merge used within `MergeCssClassesPipe`
+- added new `CommonDynamicModule` for `NgComponentOutletEx` directive
+- added new `CommonLocalizeModule` for `LocalizePipe` pipe
+- added new `CommonUtilsModule` for `IsNaNPipe`, `IsPresentPipe`, `UrlEncodePipe`, `MergeCssClassesPipe` pipes
 - added new **Notifications**
    - added new `NOTIFICATIONS` `InjectionToken` used for injecting notifications service implementation
    - added new `NOTIFICATIONS_SCOPE` `InjectionToken` used for injecting notifications scope name
@@ -190,6 +241,8 @@
    - added new `NotificationsProvider` as notifications provider that allows to create scoped notifications provider
    - added new `DefaultNotificationsService` default notifications service implementation
    - added new `DEFAULT_NOTIFICATIONS` as default notifications provider
+- *subpackage* `@anglr/common/hotkeys`
+   - updated `AppHotkeysService` added `ngOnDestroy` which wraps existing `destroy` method
 - *subpackage* `@anglr/common/material`
    - added new `ConfirmationDialogComponent` confirmation dialog component
    - added new `ConfirmationDialogDirective` directive that enables confirmation dialog on click
@@ -267,7 +320,7 @@
    - added new `prepareForFormBuilder` function that prepares object for form builder, wraps each property in array
    - added new `readEncodedFilter` function that reads filter value from encoded string
    - added new **Form Model Builder**
-      - added new `buildFormModel` method for building `FormGroup` from *decorated model*
+      - added new `buildFormModel` method for building `FormGroup` from *decorated model*, only for properties with non `undefined` value
       - added new `ValidatorFnFactory` and `AsyncValidatorFnFactory` as factories for `validationFn` and `asyncValidationFn` respectively with arguments from component context
       - added new `CurrentValue` class which allows obtaining of current value when needed from component context
       - added new `getCurrentValue` which should be used for obtaining argument current value in `ValidatorFnFactory` or `AsyncValidatorFnFactory`
@@ -299,13 +352,23 @@
 
 ### BREAKING CHANGES
 
-- minimal supported version of *Angular* is `10.0.0`
-- minimal supported version of `@jscrpt/common` is `1.2.0`
-- removed `HttpRequestIgnoredInterceptorId` interface, explicitly using type unions where needed, `HttpRequest<any> & AdditionalInfo<IgnoredInterceptorId>`
-- changed `IgnoredInterceptorId` to generic `AdditionalInfo`, allowing broader usage
+- minimal supported version of *Angular* is `13.1.0`
+- minimal supported version of `@jscrpt/common` is `2.2.0`
+- compiled as *Angular IVY* **only** with new *APF*
+- removed support of *es5* target and using latest package.json features
+- removed dependency `@anglr/types`, all mising types used directly here
+- dropped support of `Node.js <= 12.20`
+- removed `HttpRequestIgnoredInterceptorId` interface, now using builtin `HttpContextToken` named `IGNORED_INTERCEPTORS`
+- removed `IgnoredInterceptorId`, now using buildin `HttpContextToken` named `IGNORED_INTERCEPTORS`
+- removed `IgnoredInterceptorsService`, now using buildin `HttpContextToken` named `IGNORED_INTERCEPTORS`
 - renamed `SERVER_BASE_URL` to `HTTP_REQUEST_BASE_URL`
 - renamed `SERVER_COOKIE_HEADER` to `HTTP_REQUEST_COOKIE_HEADER`
 - renamed `SERVER_AUTH_HEADER` to `HTTP_REQUEST_AUTH_HEADER`
+- removed `CommonModule` in favor of new more specific modules `CommonDynamicModule`, `CommonLocalizeModule`, `CommonUtilsModule`
+- removed not working `HmrData` decorator
+- removed not working `HmrServiceData` decorator
+- removed not working `HmrServiceDataConstructor` decorator
+- from `NgComponentOutletEx` removed `ngComponentOutletExNgModuleFactory` property which is useless for IVY
 - refactored `DataRouter`, deprecated DataRouterData, use `DataRouter` `valuePromise` directly
 - `CookieService` now using `HTTP_REQUEST_COOKIE_HEADER` instead of `SERVER_COOKIE_HEADER`
 - *subpackage* `@anglr/common/forms`
@@ -313,6 +376,10 @@
    - refactored `HasErrorDirective`, changed constructor parameters
    - removed `HAS_ERROR_OPTIONS` token, replaced by `VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS`
    - renamed `HAS_ERROR_DEFAULT_MESSAGES` to `VALIDATION_ERROR_MESSAGES`
+- *subpackage* `@anglr/common/hmr`
+   - removed `hmrAccept` function, replaced by built in Angular loader
+- *subpackage* `@anglr/common/numeral`
+   - for `NumeralPipe` pipe `transform` has strict `format` parameter of type `string`
 
 ## Version 7.3.2 (2020-05-15)
 

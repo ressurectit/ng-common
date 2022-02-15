@@ -1,4 +1,5 @@
 import {AbstractControl, FormArray, FormControl, FormGroup} from '@angular/forms';
+import {Dictionary} from '@jscrpt/common';
 
 import {ModelDecoratorMetadata} from '../interfaces/modelDecoratorMetadata';
 import {ModelPropertyDecoratorMetadata} from '../interfaces/modelPropertyDecoratorMetadata';
@@ -11,7 +12,7 @@ import {AsyncValidatorFnFactory, ValidatorFnFactory} from './validatorFactories'
  * @param args - Object storing arguments from owning component for customization
  * @returns
  */
-function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecoratorMetadata<TModel>, args?: TArgs): FormGroup
+function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecoratorMetadata<TModel> & Dictionary<any>, args?: TArgs): FormGroup
 {
     if(!model)
     {
@@ -22,16 +23,21 @@ function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecor
                              });
     }
 
-    const modelMetadata = model.ɵControlsMetadata ?? {};
+    const modelMetadata: Dictionary<any> = model.ɵControlsMetadata ?? {};
     const properties = Object.keys(model);
     const formGroup: FormGroup = new FormGroup({});
 
     for(const propertyName of properties)
     {
         const metadata: ModelPropertyDecoratorMetadata = modelMetadata[propertyName] ?? ɵDefaultPropertyMetadata;
-
-        // gets default value from decorator only if current value is undefined
         const defaultValue = model[propertyName];
+
+        //Skip control creation if value is undefined
+        if(defaultValue === undefined)
+        {
+            continue;
+        }
+
         const validators = metadata.validators.map(validator => validator instanceof ValidatorFnFactory ? validator.valueOf()({...metadata.args, ...args}) : validator).filter(itm => !!itm);
         const asyncValidators = metadata.asyncValidators.map(validator => validator instanceof AsyncValidatorFnFactory ? validator.valueOf()({...metadata.args, ...args}) : validator).filter(itm => !!itm);
 
@@ -119,7 +125,7 @@ function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecor
 }
 
 /**
- * Builds form from decorated model
+ * Builds form from decorated model, only for properties with non `undefined` value
  * @param model - Model that can be decorated for enhancing created form group with validation and so on
  * @param args - Object storing arguments from owning component for customization
  * @returns

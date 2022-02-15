@@ -1,11 +1,13 @@
-import {Injectable, Inject, Injector} from "@angular/core";
-import {isBlank} from "@jscrpt/common";
+import {Injectable, Inject, Injector} from '@angular/core';
+import {isBlank} from '@jscrpt/common';
 import {LogEventLevel} from 'structured-log';
 
 /**
  * Maximal number of logs that can be stored
  */
 const MAX_LOGS: number = 1500;
+
+//TODO: cleanup parameters and remove hack
 
 /**
  * Service used as configuration for *console sink component*

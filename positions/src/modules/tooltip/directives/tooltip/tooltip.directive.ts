@@ -26,7 +26,7 @@ const defaultOptions: TooltipOptions =
  */
 @Directive(
 {
-    selector: "[tooltip]"
+    selector: '[tooltip]'
 })
 export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
 {
@@ -144,7 +144,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy()
+    public ngOnDestroy(): void
     {
         this._destroyTooltip();
     }
@@ -157,7 +157,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      * @internal
      */
     @HostListener('mouseleave', ['$event'])
-    public mouseLeave(event: MouseEvent)
+    public mouseLeave(event: MouseEvent): void
     {
         if(this._options.stopPropagation)
         {
@@ -183,7 +183,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      * @internal
      */
     @HostListener('mousemove', ['$event'])
-    public mouseMove(event: MouseEvent)
+    public mouseMove(event: MouseEvent): void
     {
         if(this._options.stopPropagation)
         {
@@ -222,7 +222,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      * Shows tooltip
      * @param xCoordinate - X coordinate of mouse event in viewport
      */
-    protected _showTooltip(xCoordinate?: number)
+    protected _showTooltip(xCoordinate?: number): void
     {
         this._createTooltip();
         this._showData();
@@ -237,7 +237,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     /**
      * Hides tooltip
      */
-    protected _hideTooltip()
+    protected _hideTooltip(): void
     {
         this._destroyTooltip();
     }
@@ -245,7 +245,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     /**
      * Destroys tooltip component
      */
-    protected _destroyTooltip()
+    protected _destroyTooltip(): void
     {
         if(this._tooltipComponent)
         {
@@ -259,7 +259,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     /**
      * Creates tooltip renderer component
      */
-    protected _createTooltip()
+    protected _createTooltip(): void
     {
         // 0. Destroyes absolute popup if it exists
         this._destroyTooltip();
@@ -283,7 +283,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     /**
      * Sets data to tooltip component and shows them
      */
-    protected _showData()
+    protected _showData(): void
     {
         if(this._tooltipComponent)
         {

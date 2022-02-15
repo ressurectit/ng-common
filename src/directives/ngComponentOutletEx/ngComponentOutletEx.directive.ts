@@ -1,19 +1,4 @@
-import {ComponentFactoryResolver,
-        EventEmitter,
-        ComponentRef,
-        Directive,
-        Injector,
-        Input,
-        NgModuleFactory,
-        NgModuleRef,
-        OnChanges,
-        OnDestroy,
-        SimpleChanges,
-        Type,
-        ViewContainerRef,
-        Output} from '@angular/core';
-import {nameof} from '@jscrpt/common';
-        
+import {EventEmitter, ComponentRef, Directive, Injector, Input, OnChanges, Type, ViewContainerRef, Output} from '@angular/core';
 
 /**
  * Instantiates a single Component type and inserts its Host View into current View.
@@ -23,7 +8,7 @@ import {nameof} from '@jscrpt/common';
     selector: '[ngComponentOutletEx]',
     exportAs: 'ngComponentOutletEx'
 })
-export class NgComponentOutletEx<TComponent> implements OnChanges, OnDestroy
+export class NgComponentOutletEx<TComponent> implements OnChanges
 {
     //######################### private fields #########################
 
@@ -32,11 +17,6 @@ export class NgComponentOutletEx<TComponent> implements OnChanges, OnDestroy
      */
     private _componentRef: ComponentRef<TComponent>|null = null;
     
-    /**
-     * Created custom module reference
-     */
-    private _moduleRef: NgModuleRef<any>|null = null;
-
     //######################### public properties - inputs #########################
     
     /**
@@ -56,12 +36,6 @@ export class NgComponentOutletEx<TComponent> implements OnChanges, OnDestroy
      */
     @Input() 
     public ngComponentOutletExContent: any[][];
-
-    /**
-     * Different module factory that is used for creation of new component
-     */
-    @Input() 
-    public ngComponentOutletExNgModuleFactory: NgModuleFactory<any>;
 
     //######################### public properties - outputs #########################
 
@@ -92,47 +66,22 @@ export class NgComponentOutletEx<TComponent> implements OnChanges, OnDestroy
     }
 
     //######################### public methods - implementation of OnChanges #########################
-    public ngOnChanges(changes: SimpleChanges)
+    public ngOnChanges(): void
     {
         this._viewContainerRef.clear();
         this._componentRef = null;
 
         if (this.ngComponentOutletEx)
         {
-            const elInjector = this.ngComponentOutletExInjector || this._viewContainerRef.parentInjector;
+            const injector = this.ngComponentOutletExInjector || this._viewContainerRef.injector;
 
-            if (changes[nameof<NgComponentOutletEx<TComponent>>('ngComponentOutletExNgModuleFactory')])
-            {
-                if (this._moduleRef)
-                {
-                    this._moduleRef.destroy();
-                }
-
-                if (this.ngComponentOutletExNgModuleFactory)
-                {
-                    const parentModule = elInjector.get(NgModuleRef);
-                    this._moduleRef = this.ngComponentOutletExNgModuleFactory.create(parentModule.injector);
-                }
-                else
-                {
-                    this._moduleRef = null;
-                }
-            }
-
-            const componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver : elInjector.get(ComponentFactoryResolver);
-            const componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutletEx);
-            this._componentRef = this._viewContainerRef.createComponent<TComponent>(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletExContent);
+            this._componentRef = this._viewContainerRef.createComponent<TComponent>(this.ngComponentOutletEx,
+                                                                                    {
+                                                                                        injector: injector,
+                                                                                        projectableNodes: this.ngComponentOutletExContent
+                                                                                    });
         }
 
         this.ngComponentOutletExCreated.emit(this.component);
-    }
-
-    //######################### public methods - implementation of OnDestroy #########################
-    public ngOnDestroy()
-    {
-        if (this._moduleRef)
-        {
-            this._moduleRef.destroy();
-        }
     }
 }

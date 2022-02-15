@@ -1,4 +1,4 @@
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 /**
  * Definition of sink that will write to `ConsoleComponent`
@@ -18,7 +18,7 @@ export interface ConsoleComponentSink
     /**
      * Clears all current logs
      */
-    clear();
+    clear(): void;
 }
 
 /**

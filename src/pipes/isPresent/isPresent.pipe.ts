@@ -1,12 +1,12 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {isPresent} from "@jscrpt/common";
+import {Pipe, PipeTransform} from '@angular/core';
+import {isPresent} from '@jscrpt/common';
 
 /**
  * Returns true if object is different from null or undefined
  */
 @Pipe(
 {
-    name: "isPresent"
+    name: 'isPresent'
 })
 export class IsPresentPipe implements PipeTransform
 {

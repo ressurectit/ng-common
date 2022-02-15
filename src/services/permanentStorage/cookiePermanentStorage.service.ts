@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
-import {PermanentStorage} from "./permanentStorage.interface";
-import {CookieService} from "../cookies/cookies.service";
+import {PermanentStorage} from './permanentStorage.interface';
+import {CookieService} from '../cookies/cookies.service';
 
 /**
  * Implementation of permanent storage using cookies

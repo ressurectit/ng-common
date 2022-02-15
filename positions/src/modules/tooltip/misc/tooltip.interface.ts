@@ -1,4 +1,5 @@
 import {TemplateRef, Type} from '@angular/core';
+import type {PositionsCoordinates} from 'positions';
 
 /**
  * Represents component that is used for rendering tooltip
@@ -34,7 +35,7 @@ export interface TooltipRenderer<TData = any>
      * @param enter - Called when mouse enter tooltip component, hover
      * @param leave - Called when mouse leaves tooltip component
      */
-    registerHoverEvents(enter: () => void, leave: () => void);
+    registerHoverEvents(enter: () => void, leave: () => void): void;
 
     /**
      * Explicitly runs invalidation of content (change detection)
@@ -60,12 +61,12 @@ export interface TooltipOptions
     /**
      * Position where should be tooltip displayed at element
      */
-    elementPositionAt?: Positions.PositionsCoordinates;
+    elementPositionAt?: PositionsCoordinates;
 
     /**
      * Position of tooltip where should placed at
      */
-    tooltipPosition?: Positions.PositionsCoordinates;
+    tooltipPosition?: PositionsCoordinates;
 
     /**
      * Allows selection of text in tooltip
@@ -77,7 +78,7 @@ export interface TooltipOptions
      */
     tooltipCssClass?: string|null;
 
-    /**\
+    /**
      * Indication whether stop propagation of "hover" event
      */
     stopPropagation?: boolean|null;

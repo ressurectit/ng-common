@@ -1,8 +1,9 @@
 {
     "name": "@anglr/common-hmr",
-    "module": "./dist/es5/hmr/index.js",
-    "esm2015": "./dist/es2015/hmr/index.js",
-    "esm5": "./dist/es5/hmr/index.js",
-    "typings": "./index.d.ts",
-    "sideEffects": false
-}
+    "sideEffects": false,
+    "module": "../es2015/hmr/src/index.js",
+    "es2015": "../es2015/hmr/src/index.js",
+    "es2020": "../es2020/hmr/src/index.js",
+    "esm2020": "../es2020/hmr/src/index.js",
+    "typings": "./src/index.d.ts"
+  }

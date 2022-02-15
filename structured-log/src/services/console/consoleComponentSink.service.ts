@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Sink, LogEvent, LogEventLevel} from "structured-log";
-import {Observable, Subject} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Sink, LogEvent, LogEventLevel} from 'structured-log';
+import {Observable, Subject} from 'rxjs';
 
-import {ConsoleComponentSink, ConsoleComponentLog} from "../../types/logger.interface";
-import {toText, isEnabled} from "../../misc/utils";
-import {ConsoleSinkConfigService} from "./consoleSinkConfig.service";
+import {ConsoleComponentSink, ConsoleComponentLog} from '../../types/logger.interface';
+import {toText, isEnabled} from '../../misc/utils';
+import {ConsoleSinkConfigService} from './consoleSinkConfig.service';
 
 /**
  * Sink that is used for storing logs in `ConsoleComponent`
@@ -57,7 +57,7 @@ export class ConsoleComponentSinkService implements Sink, ConsoleComponentSink
     /**
      * Clears all current logs
      */
-    public clear()
+    public clear(): void
     {
         this._currentLogs = [];
         this._logsChangeSubject.next();
@@ -65,7 +65,7 @@ export class ConsoleComponentSinkService implements Sink, ConsoleComponentSink
 
     //######################### public methods - implementation of Sink #########################
 
-    public emit(events: LogEvent[])
+    public emit(events: LogEvent[]): void
     {
         if(!events || !events.length)
         {
@@ -86,8 +86,8 @@ export class ConsoleComponentSinkService implements Sink, ConsoleComponentSink
                 return;
             }
 
-            let logLevel = LogEventLevel[e.level];
-            let output = `${e.timestamp} [${logLevel.toUpperCase()}] ${e.messageTemplate.render(e.properties)}`;
+            const logLevel = LogEventLevel[e.level];
+            const output = `${e.timestamp} [${logLevel.toUpperCase()}] ${e.messageTemplate.render(e.properties)}`;
 
             this._currentLogs.push(
             {
@@ -98,7 +98,7 @@ export class ConsoleComponentSinkService implements Sink, ConsoleComponentSink
             //TRIM LOGS
             if(this._currentLogs.length > this._configSvc.maxLogsCount)
             {
-                let removeCount = this._currentLogs.length - this._configSvc.maxLogsCount;
+                const removeCount = this._currentLogs.length - this._configSvc.maxLogsCount;
 
                 this._currentLogs.splice(0, removeCount);
             }
@@ -107,7 +107,7 @@ export class ConsoleComponentSinkService implements Sink, ConsoleComponentSink
         });
     }
 
-    public flush(): Promise<any>
+    public flush(): Promise<void>
     {
         return Promise.resolve();
     }
@@ -117,9 +117,9 @@ export class ConsoleComponentSinkService implements Sink, ConsoleComponentSink
     /**
      * Updates prototype of MessageTemplate
      */
-    private _updatePrototype(e: LogEvent)
+    private _updatePrototype(e: LogEvent): void
     {
-        let messageTemplateInstance = (<any>e.messageTemplate);
+        const messageTemplateInstance = (<any>e.messageTemplate);
 
         if(messageTemplateInstance.constructor && messageTemplateInstance.constructor.prototype && messageTemplateInstance.constructor.prototype.toText)
         {

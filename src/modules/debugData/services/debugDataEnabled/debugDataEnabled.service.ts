@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {Subject, Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Subject, Observable} from 'rxjs';
 
 /**
  * Service used for handling enabled state for debug data component
@@ -43,7 +43,7 @@ export class DebugDataEnabledService
      * Sets enabled state
      * @param enabled - Indication whether will be enabled state set to true, or false, defaults to true
      */
-    public setEnabled(enabled: boolean = true)
+    public setEnabled(enabled: boolean = true): void
     {
         if(this._enabled === enabled)
         {

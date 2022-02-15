@@ -42,7 +42,7 @@ export class CookieService
 
         name = encodeURIComponent(name);
         
-        let regexp = new RegExp('(?:^' + name + '|;\\s*' + name + ')=(.*?)(?:;|$)', 'g');
+        const regexp = new RegExp('(?:^' + name + '|;\\s*' + name + ')=(.*?)(?:;|$)', 'g');
         let result;
 
         if(isBlank(this._serverCookies))
@@ -59,7 +59,7 @@ export class CookieService
             return null;
         }
 
-        let val = decodeURIComponent(result[1]);
+        const val = decodeURIComponent(result[1]);
 
         return skipSerialization ? val : JSON.parse(val);
     }
@@ -74,19 +74,19 @@ export class CookieService
      * @param domain - Domain where the cookie should be avaiable. Default current domain
      * @param skipSerialization - Indication whether skip serialization to json string
      */
-    public setCookie(name: string, value: any, expires?: number, path?: string, domain?: string, skipSerialization?: boolean)
+    public setCookie(name: string, value: any, expires?: number, path?: string, domain?: string, skipSerialization?: boolean): void
     {
         if(!this._isBrowser)
         {
             return;
         }
 
-        let val = skipSerialization ? value : JSON.stringify(value);
+        const val = skipSerialization ? value : JSON.stringify(value);
         let cookieStr = encodeURIComponent(name) + '=' + encodeURIComponent(val) + ';';
 
         if (expires)
         {
-            let dtExpires = new Date(new Date().getTime() + expires * 1000 * 60 * 60 * 24);
+            const dtExpires = new Date(new Date().getTime() + expires * 1000 * 60 * 60 * 24);
             cookieStr += 'expires=' + dtExpires.toUTCString() + ';';
         }
         
@@ -110,7 +110,7 @@ export class CookieService
      * @param path - Path relative to the domain where the cookie should be avaiable. Default /
      * @param domain - Domain where the cookie should be avaiable. Default current domain
      */
-    public deleteCookie(name: string, path?: string, domain?: string)
+    public deleteCookie(name: string, path?: string, domain?: string): void
     {
         if(!this._isBrowser)
         {

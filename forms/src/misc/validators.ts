@@ -1,5 +1,5 @@
-import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
-import {isPresent} from "@jscrpt/common";
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {isPresent} from '@jscrpt/common';
 
 /**
  * Validations functions
@@ -15,7 +15,7 @@ export class Validators
         if(isNaN(control.value))
         {
             return {
-                "number": true
+                'number': true
             };
         }
 
@@ -30,10 +30,10 @@ export class Validators
     {
         return (control: AbstractControl): ValidationErrors|null =>
         {
-            if(!isNaN(control.value) && isPresent(control.value) && isPresent(max) && control.value > max!)
+            if(!isNaN(control.value) && isPresent(control.value) && isPresent(max) && control.value > max)
             {
                 return {
-                    "maxValue": max,
+                    'maxValue': max,
                     'actualValue': control.value
                 };
             }
@@ -50,10 +50,10 @@ export class Validators
     {
         return (control: AbstractControl): ValidationErrors|null =>
         {
-            if(!isNaN(control.value) && isPresent(control.value) && isPresent(min) && control.value < min!)
+            if(!isNaN(control.value) && isPresent(control.value) && isPresent(min) && control.value < min)
             {
                 return {
-                    "minValue": min,
+                    'minValue': min,
                     'actualValue': control.value
                 };
             }
