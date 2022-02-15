@@ -55,7 +55,7 @@ export class ErrorMessagesExtractor
      */
     public getErrors(control: FormControl, messages?: StringDictionary): ValidationErrorsResult
     {
-        const errorMessages: StringDictionary = extend(true, {}, this._errorMessages, messages);
+        let errorMessages: StringDictionary = extend(true, {}, this._errorMessages, messages);
 
         //no control or no errors
         if(!control || !control.errors)
@@ -63,7 +63,7 @@ export class ErrorMessagesExtractor
             return null;
         }
 
-        const result: ValidationErrorsResult =
+        let result: ValidationErrorsResult =
         {
             errors: Object.keys(control.errors),
             errorMessages: []
@@ -71,7 +71,7 @@ export class ErrorMessagesExtractor
 
         result.errors.forEach(error =>
         {
-            const errorData = control.errors[error];
+            let errorData = control.errors[error];
             
             //error message is present for error
             if(errorMessages[error])

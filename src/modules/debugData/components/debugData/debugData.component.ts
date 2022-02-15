@@ -1,12 +1,12 @@
-import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, ChangeDetectorRef, ElementRef} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, ChangeDetectorRef, ElementRef} from "@angular/core";
+import {Subscription} from "rxjs";
 
-import {DebugDataEnabledService} from '../../services/debugDataEnabled/debugDataEnabled.service';
+import {DebugDataEnabledService} from "../../services/debugDataEnabled/debugDataEnabled.service";
 
 /**
  * Name of css class for enabled debug data
  */
-const ENABLED = 'enabled';
+ const ENABLED = 'enabled';
 
 /**
  * Component used for displaying debug data
@@ -48,7 +48,7 @@ export class DebugDataComponent implements OnDestroy, OnInit
     /**
      * Initialize component
      */
-    public ngOnInit(): void
+    public ngOnInit()
     {
         this.enabled = this._debugDataEnabledSvc.enabled;
         this._setEnabledCssClass();
@@ -67,7 +67,7 @@ export class DebugDataComponent implements OnDestroy, OnInit
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy(): void
+    public ngOnDestroy()
     {
         this._debugDataEnabledChangeSubscription?.unsubscribe();
         this._debugDataEnabledChangeSubscription = null;
@@ -78,15 +78,15 @@ export class DebugDataComponent implements OnDestroy, OnInit
     /**
      * Sets enabled css class according enabled state
      */
-    private _setEnabledCssClass(): void
-    {
-        if(this.enabled)
-        {
-            this._element.nativeElement.classList.add(ENABLED);
-        }
-        else
-        {
-            this._element.nativeElement.classList.remove(ENABLED);
-        }
-    }
+     private _setEnabledCssClass(): void
+     {
+         if(this.enabled)
+         {
+             this._element.nativeElement.classList.add(ENABLED);
+         }
+         else
+         {
+             this._element.nativeElement.classList.remove(ENABLED);
+         }
+     }
 }

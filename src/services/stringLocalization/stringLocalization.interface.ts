@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs';
+import {Observable} from "rxjs";
 
 /**
  * Provides api to localize strings

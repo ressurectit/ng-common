@@ -1,5 +1,5 @@
-import {InjectionToken} from '@angular/core';
-import {StringDictionary} from '@jscrpt/common';
+import {InjectionToken} from "@angular/core";
+import {StringDictionary} from "@jscrpt/common";
 
 /**
  * Injection token containing validation error messages

@@ -1,6 +1,6 @@
-import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ContentChild, TemplateRef, Inject, OnDestroy, ChangeDetectorRef, Optional, ElementRef} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {extend} from '@jscrpt/common';
+import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ContentChild, TemplateRef, Inject, OnDestroy, ChangeDetectorRef, Optional, ElementRef} from "@angular/core";
+import {DOCUMENT} from "@angular/common";
+import {extend} from "@jscrpt/common";
 
 import {MultiButtonCssClasses} from './multiButton.interface';
 import {MULTI_BUTTON_CSS_CLASSES} from '../../misc/tokens';
@@ -86,7 +86,7 @@ export class MultiButtonComponent implements OnDestroy
     public subButtonsContent: TemplateRef<void>;
 
     //######################### constructor #########################
-    constructor(@Inject(DOCUMENT) protected _document: Document,
+    constructor(@Inject(DOCUMENT) protected _document: HTMLDocument,
                 @Inject(MULTI_BUTTON_CSS_CLASSES) @Optional() _cssClasess: MultiButtonCssClasses,
                 protected _element: ElementRef<HTMLElement>,
                 protected _changeDetector: ChangeDetectorRef)
@@ -99,7 +99,7 @@ export class MultiButtonComponent implements OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy(): void
+    public ngOnDestroy()
     {
         this._removeRegistration();
     }
@@ -109,7 +109,7 @@ export class MultiButtonComponent implements OnDestroy
     /**
      * Method called when sub buttons should be shown
      */
-    public showSubButtons(event: MouseEvent): void
+    public showSubButtons(event: MouseEvent)
     {
         event.preventDefault();
         event.stopPropagation();
@@ -143,7 +143,7 @@ export class MultiButtonComponent implements OnDestroy
     /**
      * Removes event registration
      */
-    protected _removeRegistration(): void
+    protected _removeRegistration()
     {
         this._document.removeEventListener('click', this._handleClickOutside);
     }

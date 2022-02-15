@@ -1,8 +1,8 @@
-import {Component, ChangeDetectionStrategy, Inject, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, ChangeDetectionStrategy, Inject, OnInit, OnDestroy, ChangeDetectorRef} from "@angular/core";
+import {Subscription} from "rxjs";
 
-import {CONSOLE_COMPONENT_SINK_SERVICE} from '../../types/tokens';
-import {ConsoleComponentSink, ConsoleComponentLog} from '../../types/logger.interface';
+import {CONSOLE_COMPONENT_SINK_SERVICE} from "../../types/tokens";
+import {ConsoleComponentSink, ConsoleComponentLog} from "../../types/logger.interface";
 
 /**
  * Component used for displaying console logs
@@ -38,7 +38,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Current value of filter
      */
-    public filterValue: string = '';
+    public filterValue: string = "";
 
     //######################### constructor #########################
     constructor(@Inject(CONSOLE_COMPONENT_SINK_SERVICE) private _consoleSvc: ConsoleComponentSink,
@@ -51,7 +51,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Initialize component
      */
-    public ngOnInit(): void
+    public ngOnInit()
     {
         this.setMessages();
         
@@ -67,7 +67,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy(): void
+    public ngOnDestroy()
     {
         if(this._logsChangeSubscription)
         {
@@ -81,7 +81,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Copies content of whole console log into clipboard
      */
-    public copy(): void
+    public copy()
     {
         if(!navigator || !navigator.clipboard)
         {
@@ -95,7 +95,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
      * Copies message to clipboard
      * @param message - Message to be copied
      */
-    public copyMessage(message: string): void
+    public copyMessage(message: string)
     {
         if(!navigator || !navigator.clipboard)
         {
@@ -108,7 +108,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Clears existing logs
      */
-    public clear(): void
+    public clear()
     {
         this._consoleSvc.clear();
     }
@@ -116,7 +116,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Sets messages using filter
      */
-    public setMessages(): void
+    public setMessages()
     {
         if(!this.filterValue)
         {

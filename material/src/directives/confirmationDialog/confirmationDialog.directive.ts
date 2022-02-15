@@ -1,8 +1,8 @@
-import {Directive, Input, EventEmitter, Output, HostListener} from '@angular/core';
+import {Directive, Input, EventEmitter, Output, HostListener} from "@angular/core";
 
-import {TitledDialogService} from '../../services/titledDialog/titledDialog.service';
-import {ConfirmationDialogComponent} from '../../components/confirmationDialog/confirmationDialog.component';
-import {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from '../../misc/interfaces/confirmationDialog.interface';
+import {TitledDialogService} from "../../services/titledDialog/titledDialog.service";
+import {ConfirmationDialogComponent} from "../../components/confirmationDialog/confirmationDialog.component";
+import {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from "../../misc/interfaces/confirmationDialog.interface";
 
 /**
  * Directive that enables confirmation dialog on click
@@ -76,7 +76,7 @@ export class ConfirmationDialogDirective
      * Method called when user clicks on element
      */
     @HostListener('click', ['$event'])
-    public async click(event: MouseEvent): Promise<void>
+    public async click(event: MouseEvent)
     {
         if(this.preventDefaultsAndPropagation)
         {

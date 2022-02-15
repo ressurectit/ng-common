@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {TemporaryStorage} from '@anglr/common';
+import {Injectable} from "@angular/core";
+import {TemporaryStorage} from "@anglr/common";
 import store from 'store/storages/sessionStorage';
 
 /**

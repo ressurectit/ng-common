@@ -11,13 +11,11 @@ import {ɵDefaultPropertyMetadata} from '../misc/defaults';
 export function ModelPropertyMetadata<TArgs extends Dictionary<any> = any,
                                       TModel = any>(metadata: ModelPropertyDecoratorMetadata<TArgs>): PropertyDecorator
 {
-    return function(target: Object, propertyKey: string|symbol): void
+    return function(target: ModelDecoratorMetadata<TModel>, propertyKey: string): void
     {
-        const trgt = target as ModelDecoratorMetadata<TModel>;
-
-        if(!trgt.ɵControlsMetadata)
+        if(!target.ɵControlsMetadata)
         {
-            Object.defineProperty(trgt, nameof<ModelDecoratorMetadata>('ɵControlsMetadata'),
+            Object.defineProperty(target, nameof<ModelDecoratorMetadata>('ɵControlsMetadata'),
             {
                 value: {},
                 writable: false,
@@ -27,19 +25,19 @@ export function ModelPropertyMetadata<TArgs extends Dictionary<any> = any,
         }
 
         //keep current validators
-        const originValidators = trgt.ɵControlsMetadata[propertyKey as keyof TModel]?.validators ?? [];
-        const originAsyncValidators = trgt.ɵControlsMetadata[propertyKey as keyof TModel]?.asyncValidators ?? [];
+        const originValidators = target.ɵControlsMetadata[propertyKey as keyof TModel]?.validators ?? [];
+        const originAsyncValidators = target.ɵControlsMetadata[propertyKey as keyof TModel]?.asyncValidators ?? [];
 
         //merge all other values
-        trgt.ɵControlsMetadata[propertyKey as keyof TModel] = 
+        target.ɵControlsMetadata[propertyKey] = 
         {
-            ...trgt.ɵControlsMetadata[propertyKey as keyof TModel],
+            ...target.ɵControlsMetadata[propertyKey],
             ...ɵDefaultPropertyMetadata,
             ...metadata
         };
 
         //merge validators
-        const propertyMetadata = trgt.ɵControlsMetadata[propertyKey as keyof TModel];
+        const propertyMetadata = target.ɵControlsMetadata[propertyKey as keyof TModel];
 
         propertyMetadata.validators =
         [

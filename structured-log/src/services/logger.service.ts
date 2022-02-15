@@ -20,7 +20,7 @@ export class LoggerService implements LoggerInterface
     //######################### constructor #########################
     constructor(@Inject(LOGGER_SINKS) sinks: Sink[])
     {
-        const configuration = configure();
+        let configuration = configure();
 
         sinks.forEach(sink =>
         {
@@ -37,7 +37,7 @@ export class LoggerService implements LoggerInterface
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    fatal(messageTemplate: string, ...properties: any[]): void;
+    fatal(messageTemplate: string, ...properties: any[]);
 
     /**
      * Logs an event with the LogEventLevel.fatal severity.
@@ -45,19 +45,19 @@ export class LoggerService implements LoggerInterface
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    fatal(error: Error, messageTemplate: string, ...properties: any[]): void;
+    fatal(error: Error, messageTemplate: string, ...properties: any[]);
 
-    fatal(errorOrMessageTemplate: any, ...properties: any[]): void
+    fatal(errorOrMessageTemplate: any, ...properties: any[]) 
     {
         this._logger.fatal(errorOrMessageTemplate, properties);
     }
-
+    
     /**
      * Logs an event with the LogEventLevel.error severity.
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    error(messageTemplate: string, ...properties: any[]): void;
+    error(messageTemplate: string, ...properties: any[]);
 
     /**
      * Logs an event with the LogEventLevel.error severity.
@@ -65,19 +65,19 @@ export class LoggerService implements LoggerInterface
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    error(error: Error, messageTemplate: string, ...properties: any[]): void;
+    error(error: Error, messageTemplate: string, ...properties: any[]);
 
-    error(errorOrMessageTemplate: any, ...properties: any[]): void
+    error(errorOrMessageTemplate: any, ...properties: any[]) 
     {
         this._logger.error(errorOrMessageTemplate, properties);
     }
-
+    
     /**
      * Logs an event with the LogEventLevel.warning severity.
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    warn(messageTemplate: string, ...properties: any[]): void;
+    warn(messageTemplate: string, ...properties: any[]);
 
     /**
      * Logs an event with the LogEventLevel.warning severity.
@@ -85,19 +85,19 @@ export class LoggerService implements LoggerInterface
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    warn(error: Error, messageTemplate: string, ...properties: any[]): void;
+    warn(error: Error, messageTemplate: string, ...properties: any[]);
 
-    warn(errorOrMessageTemplate: any, ...properties: any[]): void
+    warn(errorOrMessageTemplate: any, ...properties: any[]) 
     {
         this._logger.warn(errorOrMessageTemplate, properties);
     }
-
+    
     /**
      * Logs an event with the LogEventLevel.information severity.
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    info(messageTemplate: string, ...properties: any[]): void;
+    info(messageTemplate: string, ...properties: any[]);
 
     /**
      * Logs an event with the LogEventLevel.information severity.
@@ -105,19 +105,19 @@ export class LoggerService implements LoggerInterface
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    info(error: Error, messageTemplate: string, ...properties: any[]): void;
+    info(error: Error, messageTemplate: string, ...properties: any[]);
 
-    info(errorOrMessageTemplate: any, ...properties: any[]): void
+    info(errorOrMessageTemplate: any, ...properties: any[]) 
     {
         this._logger.info(errorOrMessageTemplate, properties);
     }
-
+    
     /**
      * Logs an event with the LogEventLevel.debug severity.
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    debug(messageTemplate: string, ...properties: any[]): void;
+    debug(messageTemplate: string, ...properties: any[]);
 
     /**
      * Logs an event with the LogEventLevel.debug severity.
@@ -125,19 +125,19 @@ export class LoggerService implements LoggerInterface
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    debug(error: Error, messageTemplate: string, ...properties: any[]): void;
+    debug(error: Error, messageTemplate: string, ...properties: any[]);
 
-    debug(errorOrMessageTemplate: any, ...properties: any[]): void
+    debug(errorOrMessageTemplate: any, ...properties: any[]) 
     {
         this._logger.debug(errorOrMessageTemplate, properties);
     }
-
+    
     /**
      * Logs an event with the LogEventLevel.verbose severity.
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    verbose(messageTemplate: string, ...properties: any[]): void;
+    verbose(messageTemplate: string, ...properties: any[]);
 
     /**
      * Logs an event with the LogEventLevel.verbose severity.
@@ -145,9 +145,9 @@ export class LoggerService implements LoggerInterface
      * @param messageTemplate - Message template for the log event.
      * @param properties - Properties that can be used to render the message template.
      */
-    verbose(error: Error, messageTemplate: string, ...properties: any[]): void;
+    verbose(error: Error, messageTemplate: string, ...properties: any[]);
 
-    verbose(errorOrMessageTemplate: any, ...properties: any[]): void
+    verbose(errorOrMessageTemplate: any, ...properties: any[]) 
     {
         this._logger.verbose(errorOrMessageTemplate, properties);
     }

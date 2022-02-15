@@ -68,7 +68,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
     //######################### constructor #########################
     constructor(private _service: ProgressIndicatorService,
                 private _element: ElementRef<HTMLElement>,
-                @Inject(DOCUMENT) private _document: Document,
+                @Inject(DOCUMENT) private _document: HTMLDocument,
                 @Inject(STRING_LOCALIZATION) private _localizationSvc: StringLocalization)
     {
     }
@@ -78,7 +78,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
     /**
      * Initialize component
      */
-    public ngOnInit(): void
+    public ngOnInit()
     {
         this._service.registerOverlayGroup(this.name);
 
@@ -102,7 +102,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy(): void
+    public ngOnDestroy()
     {
         this._service.unregisterOverlayGroup(this.name);
 
@@ -142,14 +142,14 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
             this._element.nativeElement.style.overflow = 'hidden';
 
             this._progressElement = this._document.createElement('div');
-            this._progressElement.className = 'progress-overlay-div';
+            this._progressElement.className = "progress-overlay-div";
 
-            const spinner = this._document.createElement('div');
-            spinner.className = 'spinner';
+            let spinner = this._document.createElement('div');
+            spinner.className = "spinner";
             this._progressElement.append(spinner);
 
             this._messagesElement = this._document.createElement('div');
-            this._messagesElement.className = 'messages';
+            this._messagesElement.className = "messages";
             this._progressElement.append(this._messagesElement);
 
             this._element.nativeElement.append(this._progressElement);
@@ -169,21 +169,21 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
             return;
         }
 
-        const newMessages = this._messages.slice(this._messagesElement.childNodes.length);
+        let newMessages = this._messages.slice(this._messagesElement.childNodes.length);
 
-        for(const message of newMessages)
+        for(let message of newMessages)
         {
-            const messageDiv = this._document.createElement('div');
+            let messageDiv = this._document.createElement('div');
             messageDiv.textContent = this._localizationSvc.get(message);
 
             this._lastThreeMessages.unshift(messageDiv);
             this._messagesElement.append(messageDiv);
             
-            const outMessagesDiv = this._lastThreeMessages.splice(3);
+            let outMessagesDiv = this._lastThreeMessages.splice(3);
 
             outMessagesDiv.forEach(outMsg =>
             {
-                outMsg.className = 'message-out';
+                outMsg.className = "message-out";
             });
 
             this._lastThreeMessages.forEach((msg, index) =>

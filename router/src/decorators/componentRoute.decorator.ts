@@ -13,24 +13,16 @@ export interface RouteDecoratedComponent
 }
 
 /**
- * Type that represents options that can be passed to control represented by model property
- */
-export type ComponentRouteDefinition = Omit<Route, keyof Pick<Route, 'component'>>;
-
-/**
  * Defines route for component on which is this decorator applied
  * @param route - route Definition of route, does not require component to be set
  */
-export function ComponentRoute(route: ComponentRouteDefinition): ClassDecorator
+export function ComponentRoute(route: Route): ClassDecorator
 {
-
     return function <TFunction extends Function> (target: TFunction): TFunction
     {
-        const rt = route as Route;
-
-        rt.component = <any>target;
+        route.component = <any>target;
         
-        const routeDecoratedComponent: RouteDecoratedComponent = <any>target;
+        let routeDecoratedComponent: RouteDecoratedComponent = <any>target;
 
         if(isBlank(routeDecoratedComponent.routeValues))
         {
@@ -44,7 +36,7 @@ export function ComponentRoute(route: ComponentRouteDefinition): ClassDecorator
                                   });
         }
 
-        routeDecoratedComponent.routeValues.push(rt);
+        routeDecoratedComponent.routeValues.push(route);
         
         return target;
     };

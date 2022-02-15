@@ -1,8 +1,8 @@
-import {Directive, ElementRef, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector} from '@angular/core';
-import {FormControlDirective, FormControlName, FormControl, NgModel} from '@angular/forms';
+import {Directive, ElementRef, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector} from "@angular/core";
+import {FormControlDirective, FormControlName, FormControl, NgModel} from "@angular/forms";
+import {generateId, BindThis, StringDictionary} from "@jscrpt/common";
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
-import {generateId, BindThis, StringDictionary} from '@jscrpt/common';
-import {Subscription} from 'rxjs';
+import {Subscription} from "rxjs";
 
 import {ValidationErrorRendererFactory} from '../../services/validationErrorRenderer/validationErrorRenderer.service';
 import {ValidationErrorRenderer} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
@@ -90,16 +90,17 @@ export class HasErrorDirective implements OnInit, OnDestroy
     /**
      * Initialize component
      */
-    public ngOnInit(): void
+    public ngOnInit()
     {
         this._registerMutationObserver();
 
         this.renderer = this._rendererFactory.create(this.control,
-                                                     this._element.nativeElement,
-                                                     this._injector,
-                                                     this._isSubmittedOrDirty,
-                                                     {
-                                                     });
+                                                      this._element.nativeElement,
+                                                      this._injector,
+                                                      this._isSubmittedOrDirty,
+                                                      {
+                                                          
+                                                      });
 
         this._subscriptions.add(this._stringLocalization.textsChange.subscribe(() => this._updateStatus()));
         this._subscriptions.add(this.control.statusChanges.subscribe(() => this._updateStatus()));
@@ -117,7 +118,7 @@ export class HasErrorDirective implements OnInit, OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy(): void
+    public ngOnDestroy()
     {
         this._subscriptions.unsubscribe();
 
@@ -132,7 +133,7 @@ export class HasErrorDirective implements OnInit, OnDestroy
      * Updates status of control and css classes
      * @param onlyShow - Indication that update performs only displaying of existing errors
      */
-    private _updateStatus(onlyShow?: boolean): void
+    private _updateStatus(onlyShow?: boolean)
     {
         this._previousDirty = this.control.dirty;
         this._hasErrors = this.renderer.update(this.errorMessages, onlyShow);
@@ -142,13 +143,13 @@ export class HasErrorDirective implements OnInit, OnDestroy
     /**
      * Toggles registration of control in parent group
      */
-    private _toggleGroupHasError(): void
+    private _toggleGroupHasError()
     {
         if(this._groupHasError)
         {
             this._isSubmittedOrDirty(() => this._groupHasError.registerControl(this._id),
                                      () => this._groupHasError.unregisterControl(this._id),
-                                     this._hasErrors);
+                                     this._hasErrors)
         }
     }
 
@@ -159,7 +160,7 @@ export class HasErrorDirective implements OnInit, OnDestroy
      * @param additionalCondition - Additional condition to be evaluated
      */
     @BindThis
-    private _isSubmittedOrDirty(action: () => void, falseAction: () => void = () => {}, additionalCondition: boolean = true): void
+    private _isSubmittedOrDirty(action: () => void, falseAction: () => void = () => {}, additionalCondition: boolean = true)
     {
         //submitted form or dirty control
         if((this._submittedSvc?.submitted ||
@@ -177,7 +178,7 @@ export class HasErrorDirective implements OnInit, OnDestroy
     /**
      * Registers mutation observer which watch for changes of class list
      */
-    private _registerMutationObserver(): void
+    private _registerMutationObserver()
     {
         this._observer = new MutationObserver(() =>
         {

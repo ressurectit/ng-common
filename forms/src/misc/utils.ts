@@ -1,5 +1,5 @@
 import {NgForm, FormGroup} from '@angular/forms';
-import {deserializeFromUrlQuery, Dictionary, extend, isJsObject} from '@jscrpt/common';
+import {deserializeFromUrlQuery, extend, isJsObject} from '@jscrpt/common';
 
 /**
  * Gets indication whether controls have errors, with custom indication of submitted
@@ -7,12 +7,12 @@ import {deserializeFromUrlQuery, Dictionary, extend, isJsObject} from '@jscrpt/c
  * @param controls - Array of controls names to be checked for errors
  * @param submitted - Indication whether form was submitted
  */
-export function hasErrorCustom(form: NgForm|FormGroup, controls: string[], submitted: boolean = false): boolean
+export function hasErrorCustom(form: NgForm|FormGroup, controls: string[], submitted: boolean = false)
 {
     let conditionValid = false;
     let conditionChanged = false;
 
-    for(let x = 0; x < controls.length; x++)
+    for(var x = 0; x < controls.length; x++)
     {
         if(!form.controls[controls[x]])
         {
@@ -33,7 +33,7 @@ export function hasErrorCustom(form: NgForm|FormGroup, controls: string[], submi
  * @param errors - Array of validation errors to be checked for existance
  * @param submitted - Indication whether form was submitted
  */
-export function alertHiddenCustom(form: NgForm|FormGroup, control: string, errors: string[] = [], submitted: boolean = false): boolean
+export function alertHiddenCustom(form: NgForm|FormGroup, control: string, errors: string[] = [], submitted: boolean = false)
 {
     if(!form.controls[control])
     {
@@ -55,12 +55,12 @@ export function alertHiddenCustom(form: NgForm|FormGroup, control: string, error
  * @param form - Form containing controls
  * @param controls - Array of controls names to be checked for errors
  */
-export function hasError(form: NgForm, controls: string[]): boolean
+export function hasError(form: NgForm, controls: string[])
 {
     let conditionValid = false;
     let conditionChanged = false;
 
-    for(let x = 0; x < controls.length; x++)
+    for(var x = 0; x < controls.length; x++)
     {
         if(!form.controls[controls[x]])
         {
@@ -80,7 +80,7 @@ export function hasError(form: NgForm, controls: string[]): boolean
  * @param control - Controls name that will be checked
  * @param errors - Array of validation errors to be checked for existance
  */
-export function alertHidden(form: NgForm, control: string, errors: string[] = []): boolean
+export function alertHidden(form: NgForm, control: string, errors: string[] = [])
 {
     if(!form.controls[control])
     {
@@ -99,15 +99,15 @@ export function alertHidden(form: NgForm, control: string, errors: string[] = []
 
 /**
  * Prepares object for form builder, wraps each property in array
- * @param value - Object which properties will be wrapped to array
+ * @param value Object which properties will be wrapped to array
  */
-export function prepareForFormBuilder(value: Dictionary<any>): Dictionary
+export function prepareForFormBuilder(value: Object)
 {
-    const result: Dictionary = {};
+    let result = {};
 
     Object.keys(value).forEach(prop =>
     {
-        const val = value[prop];
+        let val = value[prop];
 
         //recursively wrap nested object properties
         if(isJsObject(val) && !Array.isArray(val))
@@ -125,9 +125,9 @@ export function prepareForFormBuilder(value: Dictionary<any>): Dictionary
 
 /**
  * Reads filter value from encoded string
- * @param defaultValue - Default value of filter, which is overriden by values from filterValue
- * @param filterValue - Encoded string containing filter value
- * @param reviver - A function that transforms the results. This function is called for each member of the object.
+ * @param defaultValue Default value of filter, which is overriden by values from filterValue
+ * @param filterValue Encoded string containing filter value
+ * @param reviver A function that transforms the results. This function is called for each member of the object.
  */
 export function readEncodedFilter<TFilter>(defaultValue: TFilter, filterValue: string, reviver?: (this: any, key: string, value: any) => any): TFilter
 {
@@ -137,7 +137,7 @@ export function readEncodedFilter<TFilter>(defaultValue: TFilter, filterValue: s
     }
     catch(e)
     {
-        console.warn('Failed to deserialize filter from encoded string! Exc:' + e);
+        console.warn("Failed to deserialize filter from encoded string! Exc:" + e);
 
         return defaultValue;
     }

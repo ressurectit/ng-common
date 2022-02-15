@@ -22,7 +22,7 @@ export interface PermanentStorage
      * @param value - Value to be stored
      * @param expires - Time when value should expire
      */
-    set(name: string, value: any, expires: Date): void;
+    set(name: string, value: any, expires: Date)
 
     /**
      * Removes value stored with 'name' from permanent storage

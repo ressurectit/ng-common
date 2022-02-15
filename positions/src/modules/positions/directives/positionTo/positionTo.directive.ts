@@ -1,7 +1,6 @@
 import {Directive, Input, ElementRef, OnChanges, SimpleChanges, Inject, Output, EventEmitter} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {nameof, isPresent} from '@jscrpt/common';
-import type {PositionsCoordinates} from 'positions';
 
 import {positionsWithFlip} from '../../../../misc/utils';
 
@@ -10,7 +9,7 @@ import {positionsWithFlip} from '../../../../misc/utils';
  */
 @Directive(
 {
-    selector: '[positionTo]'
+    selector: "[positionTo]"
 })
 export class PositionToDirective implements OnChanges
 {
@@ -26,13 +25,13 @@ export class PositionToDirective implements OnChanges
      * Relative coordinates of element
      */
     @Input()
-    public elementCoordinates: PositionsCoordinates = 'top left';
+    public elementCoordinates: Positions.PositionsCoordinates = 'top left';
 
     /**
      * Relative coordinates of target element
      */
     @Input()
-    public targetCoordinates: PositionsCoordinates = 'bottom left';
+    public targetCoordinates: Positions.PositionsCoordinates = 'bottom left';
 
     //######################### public properties - outputs #########################
 
@@ -44,7 +43,7 @@ export class PositionToDirective implements OnChanges
 
     //######################### constructor #########################
     constructor(private _element: ElementRef<HTMLElement>,
-                @Inject(DOCUMENT) private _document: Document)
+                @Inject(DOCUMENT) private _document: HTMLDocument)
     {
     }
 

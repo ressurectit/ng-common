@@ -1,8 +1,8 @@
 import {Pipe, PipeTransform, OnDestroy} from '@angular/core';
-import {GlobalizationService} from '@anglr/common';
 import {isBlank} from '@jscrpt/common';
-import numeral from 'numeral';
+import {GlobalizationService} from '@anglr/common';
 import {Subscription} from 'rxjs';
+import numeral from 'numeral';
 
 /**
  * Pipe to transform numbers to regional formatting using numeraljs.
@@ -34,11 +34,11 @@ export class NumeralPipe implements PipeTransform, OnDestroy
      * @param value - Number to format
      * @param format - Format string (optional) 
      */   
-    public transform(value: number, format: string): string
+    public transform(value: number, format: any): string
     {
         if(isBlank(value))
         {
-            return '';
+            return "";
         }
         
         if(isNaN(value))
@@ -54,7 +54,7 @@ export class NumeralPipe implements PipeTransform, OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy(): void
+    public ngOnDestroy()
     {
         if(this._globalizationChangeSubscription)
         {

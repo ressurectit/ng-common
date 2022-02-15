@@ -38,13 +38,13 @@ export function toText(property: any): string
 
     if (typeof property === 'object')
     {
-        const s = JSON.stringify(property, null, 4);
+        let s = JSON.stringify(property, null, 4);
 
         return s;
     }
 
     return property.toString();
-}
+};
 
 /**
  * Checks if a log event level includes the target log event level.

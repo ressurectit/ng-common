@@ -1,5 +1,5 @@
-import {ExistingProvider, Input, forwardRef, Directive, Attribute, OnChanges, SimpleChanges} from '@angular/core';
 import {NG_VALIDATORS, AbstractControl, Validator, ValidatorFn, ValidationErrors} from '@angular/forms';
+import {ExistingProvider, Input, forwardRef, Directive, Attribute, OnChanges, SimpleChanges} from '@angular/core';
 import {isBlank, isPresent} from '@jscrpt/common';
 
 import {Validators} from '../../misc/validators';
@@ -19,7 +19,7 @@ const MAX_NUMBER_VALIDATOR = <ExistingProvider>
  */
 @Directive(
 {
-    selector: 'input[number][maxValue][formControlName],input[number][maxValue][formControl],input[number][maxValue][ngModel]',
+    selector: "input[number][maxValue][formControlName],input[number][maxValue][formControl],input[number][maxValue][ngModel]",
     providers: [MAX_NUMBER_VALIDATOR]
 })
 export class MaxValueNumberValidatorDirective implements Validator, OnChanges
@@ -50,11 +50,11 @@ export class MaxValueNumberValidatorDirective implements Validator, OnChanges
     public maxValue?: number;
 
     //######################### constructor #########################
-    constructor(@Attribute('maxValue') maxValue: string)
+    constructor(@Attribute("maxValue") maxValue: string)
     {
-        let value;
+        var value;
 
-        if(isBlank(maxValue) || maxValue.length < 1 || isNaN(value = parseFloat(maxValue.replace(',', '.'))))
+        if(isBlank(maxValue) || maxValue.length < 1 || isNaN(value = parseFloat(maxValue.replace(",", "."))))
         {
             value = null;
         }

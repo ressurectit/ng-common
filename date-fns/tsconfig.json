@@ -1,0 +1,20 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": 
+    {
+        "baseUrl": ".",
+        "paths": 
+        {
+            "@anglr/common/forms": ["../forms/src/forms.ts"],
+            "@anglr/common": ["../src/common"]
+        }
+    },
+    "files":
+    [
+        "public_api.ts"
+    ],
+    "angularCompilerOptions":
+    {
+        "fullTemplateTypeCheck": true
+    }
+}

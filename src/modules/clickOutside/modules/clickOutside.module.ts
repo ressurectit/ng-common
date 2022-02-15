@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule} from "@angular/core";
 
 import {ClickOutsideDirective} from '../directives/clickOutside/clickOutside.directive';
 

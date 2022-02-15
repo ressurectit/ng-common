@@ -166,7 +166,7 @@ export class DefaultNotificationsService implements Notifications
      */
     public getScope(scopeName: string): Notifications
     {
-        const scopeObj = this._scopes[scopeName];
+        let scopeObj = this._scopes[scopeName];
         let scope: Notifications;
 
         // no scope yet

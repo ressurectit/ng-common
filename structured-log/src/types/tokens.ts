@@ -1,17 +1,17 @@
-import {InjectionToken, Provider, ExistingProvider, ClassProvider, FactoryProvider} from '@angular/core';
-import {LOGGER} from '@anglr/common';
-import {Sink} from 'structured-log';
+import {InjectionToken, Provider, ExistingProvider, ClassProvider, FactoryProvider} from "@angular/core";
+import {LOGGER} from "@anglr/common";
+import {Sink} from "structured-log";
 
-import {ConsoleComponentSink, LoggerRestClient} from './logger.interface';
-import {ConsoleComponentSinkService} from '../services/console/consoleComponentSink.service';
-import {LoggerService} from '../services/logger.service';
-import {ConsoleSinkConfigService} from '../services/console/consoleSinkConfig.service';
+import {ConsoleComponentSink, LoggerRestClient} from "./logger.interface";
+import {ConsoleComponentSinkService} from "../services/console/consoleComponentSink.service";
+import {LoggerService} from "../services/logger.service";
+import {ConsoleSinkConfigService} from "../services/console/consoleSinkConfig.service";
 import {RestSinkService} from '../services/rest/restSink.service';
 
 /**
  * Factory method for `ConsoleComponentSink`
  */
-export function consoleComponentSinkFactory(configSvc: ConsoleSinkConfigService): ConsoleComponentSinkService
+export function consoleComponentSinkFactory(configSvc: ConsoleSinkConfigService)
 {
     return new ConsoleComponentSinkService(configSvc);
 }

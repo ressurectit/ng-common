@@ -25,23 +25,23 @@ export function ComponentRedirectRoute(redirectFrom: string, redirectTo?: string
 {
     return function <TFunction extends Function> (target: TFunction): TFunction
     {
-        const routeDecoratedComponent: RouteDecoratedComponent = <any>target;
+        let routeDecoratedComponent: RouteDecoratedComponent = <any>target;
 
         if(isBlank(routeDecoratedComponent.routeValues) && isBlank(redirectTo))
         {
-            console.warn('Missing \'ComponentRoute\' or wrong order of decorators \'ComponentRoute\' and \'ComponentRedirectRoute\'!');
+            console.warn("Missing 'ComponentRoute' or wrong order of decorators 'ComponentRoute' and 'ComponentRedirectRoute'!");
 
             return target;
         }
 
         if(isBlank(redirectTo) && isPresent(routeDecoratedComponent.routeValues) && routeDecoratedComponent.routeValues.length > 1)
         {
-            console.warn('Multiple routes defined. Unable to set proper redirect!');
+            console.warn("Multiple routes defined. Unable to set proper redirect!");
 
             return target;
         }
 
-        const redirectRouteDecoratedComponent: RedirectRouteDecoratedComponent = <any>target;
+        let redirectRouteDecoratedComponent: RedirectRouteDecoratedComponent = <any>target;
 
         if(isBlank(redirectRouteDecoratedComponent.redirectRouteValues))
         {
@@ -69,7 +69,7 @@ export function ComponentRedirectRoute(redirectFrom: string, redirectTo?: string
         {
             path: redirectFrom,
             redirectTo: redirectTo,
-            pathMatch: pathMatchFull ? 'full' : 'prefix'
+            pathMatch: pathMatchFull ? "full" : "prefix"
         });
 
         return target;

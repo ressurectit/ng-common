@@ -1,6 +1,6 @@
-import {Component, ChangeDetectionStrategy, Inject, Optional} from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
-import {extend} from '@jscrpt/common';
+import {Component, ChangeDetectionStrategy, Inject, Optional} from "@angular/core";
+import {MatDialogRef} from "@angular/material/dialog";
+import {extend} from "@jscrpt/common";
 
 import {CONFIRMATION_DIALOG_OPTIONS} from '../../misc/tokens';
 import {TITLED_DIALOG_DATA} from '../../misc/interfaces/titledDialog.interface';

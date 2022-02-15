@@ -17,12 +17,12 @@ export const consoleAnimationTrigger = trigger('consoleAnimation',
             animate('350ms',
                     style(
                     {
-                        height: '*'
+                        height: "*"
                     })),
             animate('200ms',
                     style(
                     {
-                        opacity: '*'
+                        opacity: "*"
                     }))
         ])
     ]),

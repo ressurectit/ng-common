@@ -8,7 +8,7 @@ import {ProgressIndicatorOptions} from './progressIndicatorOptions';
 /**
  * Name of group for global progress indicator
  */
-export const DEFAULT_PROGRESS_NAME = 'GLOBAL_PROGRESS';
+export const DEFAULT_PROGRESS_NAME = "GLOBAL_PROGRESS";
 
 /**
  * Description of running requests group
@@ -91,7 +91,7 @@ export class ProgressIndicatorService
         if(config && !(config instanceof ProgressIndicatorOptions))
         {
             this.config = undefined;
-            console.warn('Provided configuration for \'ProgressIndicatorService\' is not of type \'ProgressIndicatorOptions\' and will be ignored!');
+            console.warn("Provided configuration for 'ProgressIndicatorService' is not of type 'ProgressIndicatorOptions' and will be ignored!");
         }
 
         this._runningRequests[DEFAULT_PROGRESS_NAME] =
@@ -162,7 +162,7 @@ export class ProgressIndicatorService
 
         name = this._getName(name);
 
-        const group = this._getGroup(name);
+        let group = this._getGroup(name);
 
         group.messages = [...(group.messages || []), ...(messages && messages.length ? messages : [])];
 
@@ -233,7 +233,7 @@ export class ProgressIndicatorService
 
         name = this._getName(name);
 
-        const group = this._getGroup(name);
+        let group = this._getGroup(name);
 
         if(force)
         {
@@ -286,7 +286,7 @@ export class ProgressIndicatorService
 
         name = this._getName(name);
 
-        const group = this._getGroup(name);
+        let group = this._getGroup(name);
 
         this._onRunning(name, group.running, [...(group.messages || []), message]);
     }
@@ -304,7 +304,7 @@ export class ProgressIndicatorService
 
         name = this._getName(name);
 
-        const group = this._getGroup(name);
+        let group = this._getGroup(name);
 
         this._onRunning(name, group.running, null);
     }
@@ -350,7 +350,7 @@ export class ProgressIndicatorService
      * Gets name of group based on existance of this group
      * @param name - Name of group that is requested
      */
-    private _getName(name: string): string
+    private _getName(name): string
     {
         if(name == DEFAULT_PROGRESS_NAME || !this.config.fallbackToDefault)
         {
@@ -373,7 +373,7 @@ export class ProgressIndicatorService
      */
     private _onRunning(name: string, value: boolean, messages: string[])
     {
-        const group = this._getGroup(name);
+        let group = this._getGroup(name);
 
         group.running = value;
         group.messages = messages;
@@ -387,8 +387,8 @@ export class ProgressIndicatorService
      */
     private _updateState()
     {
-        const running: {[group: string]: boolean} = {};
-        const messages: {[group: string]: string[]} = {};
+        let running: {[group: string]: boolean} = {};
+        let messages: {[group: string]: string[]} = {};
 
         Object.keys(this._runningRequests).forEach(group =>
         {

@@ -1,0 +1,27 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions":
+    {
+        "baseUrl": ".",
+        "paths":
+        {
+            "@anglr/common": ["../src/common"]
+        },
+        "types":
+        [
+            "numeral"
+        ],
+        "typeRoots":
+        [
+            "../node_modules/@types"
+        ]
+    },
+    "files":
+    [
+        "public_api.ts"
+    ],
+    "angularCompilerOptions":
+    {
+        "fullTemplateTypeCheck": true
+    }
+}

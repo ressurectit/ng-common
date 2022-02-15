@@ -1,5 +1,5 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {isPresent} from '@jscrpt/common';
+import {Pipe, PipeTransform} from "@angular/core";
+import {isPresent} from "@jscrpt/common";
 import moment from 'moment';
 
 /**
@@ -7,7 +7,7 @@ import moment from 'moment';
  */
 @Pipe(
 {
-    name: 'momentFormat'
+    name: "momentFormat"
 })
 export class MomentFormatPipe implements PipeTransform
 {
@@ -18,7 +18,7 @@ export class MomentFormatPipe implements PipeTransform
      * @param value - Value to be converted to moment
      * @param format - Formats used for formatting moment
      */
-    public transform(value: string | moment.Moment, format: string = 'L'): string
+    public transform(value: string | moment.Moment, format: string = "L"): string
     {
         if(isPresent(value))
         {

@@ -6,9 +6,9 @@ import {isDescendant} from '@jscrpt/common';
  * Directive that handles click outside of element
  */
 @Directive(
-    {
-        selector: '[clickOutside]'
-    })
+{
+    selector: "[clickOutside]"
+})
 export class ClickOutsideDirective implements OnInit, OnDestroy
 {
     //######################### public properties - inputs #########################
@@ -35,7 +35,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
 
     //######################### constructor #########################
     constructor(private _element: ElementRef<HTMLElement>,
-                @Inject(DOCUMENT) private _document: Document)
+                @Inject(DOCUMENT) private _document: HTMLDocument)
     {
     }
 
@@ -44,7 +44,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
     /**
      * Initialize component
      */
-    public ngOnInit(): void
+    public ngOnInit()
     {
         this._document.addEventListener('mouseup', this._handleClickOutside);
     }
@@ -54,7 +54,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy(): void
+    public ngOnDestroy()
     {
         this._document.removeEventListener('mouseup', this._handleClickOutside);
     }

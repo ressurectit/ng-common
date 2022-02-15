@@ -1,9 +1,9 @@
-import {Injectable, Inject} from '@angular/core';
+import {Injectable, Inject} from "@angular/core";
 import {APP_STABLE} from '@anglr/common';
 import {isPresent} from '@jscrpt/common';
-import {Sink, LogEvent, LogEventLevel} from 'structured-log';
+import {Sink, LogEvent, LogEventLevel} from "structured-log";
 
-import {toText, isEnabled} from '../../misc/utils';
+import {toText, isEnabled} from "../../misc/utils";
 import {RestSinkConfigService} from './restSinkConfig.service';
 import {LOGGER_REST_CLIENT} from '../../types/tokens';
 import {LoggerRestClient, RestLog} from '../../types/logger.interface';
@@ -50,7 +50,7 @@ export class RestSinkService implements Sink
     /**
      * Called when component is destroyed
      */
-    public ngOnDestroy(): void
+    public ngOnDestroy()
     {
         if(isPresent(this._timer))
         {
@@ -66,7 +66,7 @@ export class RestSinkService implements Sink
      * Emits events into log
      * @param events - Events to be emitted
      */
-    public emit(events: LogEvent[]): void
+    public emit(events: LogEvent[])
     {
         if(!events || !events.length)
         {
@@ -89,9 +89,9 @@ export class RestSinkService implements Sink
                 return;
             }
 
-            const logLevel = LogEventLevel[e.level].toUpperCase();
-            const timestamp = e.timestamp;
-            const message = e.messageTemplate.render(e.properties);
+            let logLevel = LogEventLevel[e.level].toUpperCase();
+            let timestamp = e.timestamp;
+            let message = e.messageTemplate.render(e.properties);
 
             this._logs.push(
             {
@@ -145,9 +145,9 @@ export class RestSinkService implements Sink
     /**
      * Updates prototype of MessageTemplate
      */
-    private _updatePrototype(e: LogEvent): void
+    private _updatePrototype(e: LogEvent)
     {
-        const messageTemplateInstance = (<any>e.messageTemplate);
+        let messageTemplateInstance = (<any>e.messageTemplate);
 
         if(messageTemplateInstance.constructor && messageTemplateInstance.constructor.prototype && messageTemplateInstance.constructor.prototype.toText)
         {

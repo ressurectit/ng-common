@@ -1,11 +1,11 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import {Pipe, PipeTransform} from "@angular/core";
 
 /**
  * Returns true if object is NaN
  */
 @Pipe(
 {
-    name: 'isNaN'
+    name: "isNaN"
 })
 export class IsNaNPipe implements PipeTransform
 {

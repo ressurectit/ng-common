@@ -1,5 +1,5 @@
-import {forwardRef, Directive, Attribute, Input, ExistingProvider, OnChanges, SimpleChanges} from '@angular/core';
 import {NG_VALIDATORS, AbstractControl, Validator, ValidatorFn, ValidationErrors} from '@angular/forms';
+import {forwardRef, Directive, Attribute, Input, ExistingProvider, OnChanges, SimpleChanges} from '@angular/core';
 import {isBlank, isPresent} from '@jscrpt/common';
 
 import {Validators} from '../../misc/validators';
@@ -19,7 +19,7 @@ const MIN_NUMBER_VALIDATOR = <ExistingProvider>
  */
 @Directive(
 {
-    selector: 'input[number][minValue][formControlName],input[number][minValue][formControl],input[number][minValue][ngModel]',
+    selector: "input[number][minValue][formControlName],input[number][minValue][formControl],input[number][minValue][ngModel]",
     providers: [MIN_NUMBER_VALIDATOR]
 })
 export class MinValueNumberValidatorDirective implements Validator, OnChanges
@@ -49,11 +49,11 @@ export class MinValueNumberValidatorDirective implements Validator, OnChanges
     public minValue?: number;
 
     //######################### constructor #########################
-    constructor(@Attribute('minValue') minValue: string)
+    constructor(@Attribute("minValue") minValue: string)
     {
-        let value;
+        var value;
 
-        if(isBlank(minValue) || minValue.length < 1 || isNaN(value = parseFloat(minValue.replace(',', '.'))))
+        if(isBlank(minValue) || minValue.length < 1 || isNaN(value = parseFloat(minValue.replace(",", "."))))
         {
             value = null;
         }

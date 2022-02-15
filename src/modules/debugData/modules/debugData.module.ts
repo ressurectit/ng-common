@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
 
-import {DebugDataComponent} from '../components/debugData/debugData.component';
+import {DebugDataComponent} from "../components/debugData/debugData.component";
 
 /**
  * Module that contains debug data component

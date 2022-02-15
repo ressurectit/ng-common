@@ -67,16 +67,16 @@ export class NumberInputControlValueAccessor implements ControlValueAccessor
             }
             
             //removing all spaces
-            value = value.replace(/\s+/g, '');
+            value = value.replace(/\s+/g, "");
             
             if(!/^[+-]?\d+(?:[,.]\d+)?$/g.test(value))
             {
                 fn(NaN);
                 
                 return;
-            }
+            };
             
-            fn(parseFloat(value.replace(',', '.'))); 
+            fn(parseFloat(value.replace(",", "."))); 
         };
     }
 

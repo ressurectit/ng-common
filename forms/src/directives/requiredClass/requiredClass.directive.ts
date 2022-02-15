@@ -1,7 +1,5 @@
-import {Directive, Optional, AfterViewInit, HostBinding, ChangeDetectorRef} from '@angular/core';
-import {FormControlDirective, FormControlName, FormControl} from '@angular/forms';
-
-//TODO: reworking using hasValidator
+import {Directive, Optional, AfterViewInit, HostBinding, ChangeDetectorRef} from "@angular/core";
+import {FormControlDirective, FormControlName, FormControl} from "@angular/forms";
 
 /**
  * Required class directive adds required class to element
@@ -42,13 +40,13 @@ export class RequiredClassDirective implements AfterViewInit
     /**
      * Called when view was initialized
      */
-    public ngAfterViewInit(): void
+    public ngAfterViewInit()
     {
-        const control = this.control;
+        let control = this.control;
 
         if(control && control.validator)
         {
-            const validationResult = control.validator(new FormControl(null));
+            let validationResult = control.validator(new FormControl(null));
             this.required = validationResult && validationResult.required;
 
             this._changeDetector.detectChanges();

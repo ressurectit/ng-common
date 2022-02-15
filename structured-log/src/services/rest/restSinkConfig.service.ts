@@ -1,5 +1,5 @@
-import {Injectable, Inject, Injector} from '@angular/core';
-import {isBlank} from '@jscrpt/common';
+import {Injectable, Inject, Injector} from "@angular/core";
+import {isBlank} from "@jscrpt/common";
 import {LogEventLevel} from 'structured-log';
 
 /**

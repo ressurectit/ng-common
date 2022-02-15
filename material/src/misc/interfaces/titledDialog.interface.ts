@@ -1,6 +1,6 @@
-import {TemplateRef, InjectionToken} from '@angular/core';
-import {MatDialogConfig} from '@angular/material/dialog';
-import {ComponentType} from '@angular/cdk/portal';
+import {TemplateRef, InjectionToken} from "@angular/core";
+import {MatDialogConfig} from "@angular/material/dialog";
+import {ComponentType} from "@angular/cdk/portal";
 
 /**
  * Configuration for opening a titled modal dialog with the MatDialog service.

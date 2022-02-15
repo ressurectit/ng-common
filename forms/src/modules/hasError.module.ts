@@ -8,16 +8,10 @@ import {GroupHasErrorDirective} from '../directives/groupHasError/groupHasError.
  */
 @NgModule(
 {
-    declarations: 
-    [
-        HasErrorDirective,
-        GroupHasErrorDirective
-    ],
-    exports: 
-    [
-        HasErrorDirective,
-        GroupHasErrorDirective
-    ]
+    declarations: [HasErrorDirective,
+                   GroupHasErrorDirective],
+    exports: [HasErrorDirective,
+              GroupHasErrorDirective]
 })
 export class HasErrorModule
 {

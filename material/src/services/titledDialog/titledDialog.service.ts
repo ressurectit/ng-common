@@ -1,9 +1,9 @@
-import {Injectable, TemplateRef} from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ComponentType} from '@angular/cdk/portal';
+import {Injectable, TemplateRef} from "@angular/core";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ComponentType} from "@angular/cdk/portal";
 
-import {TitledDialogConfig, ɵTitledDialogOptions} from '../../misc/interfaces/titledDialog.interface';
-import {TitledDialogComponent} from '../../components/titledDialog/titledDialog.component';
+import {TitledDialogConfig, ɵTitledDialogOptions} from "../../misc/interfaces/titledDialog.interface";
+import {TitledDialogComponent} from "../../components/titledDialog/titledDialog.component";
 
 /**
  * Titled dialog service used for displaying components in dialog

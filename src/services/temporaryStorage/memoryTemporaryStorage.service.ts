@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
 import {Dictionary} from '@jscrpt/common';
 
-import {TemporaryStorage} from './temporaryStorage.interface';
+import {TemporaryStorage} from "./temporaryStorage.interface";
 
 /**
  * Implementation of temporary storage using process memory
@@ -14,7 +14,7 @@ export class MemoryTemporaryStorageService implements TemporaryStorage
     /**
      * Storage used for storing values
      */
-    private _memory: Dictionary<any> = {};
+    private _memory: Dictionary = {};
 
     //######################### public methods - implementation of StringLocalization #########################
 
@@ -41,7 +41,7 @@ export class MemoryTemporaryStorageService implements TemporaryStorage
      * Removes value stored with 'name' from temporary storage
      * @param name - Name of stored value that will be removed
      */
-    public remove(name: string): void
+    public remove(name): void
     {
         delete this._memory[name];
     }
