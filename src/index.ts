@@ -1,6 +1,6 @@
 export {GlobalizationService} from './services/globalization/globalization.service';
 export {CommonDynamicModule} from './modules/commonDynamic.module';
-export {CommonLocalizeModule} from './modules/commonLocalize';
+export {CommonLocalizeModule} from './modules/commonLocalize.module';
 export {CommonUtilsModule} from './modules/commonUtils.module';
 export * from './modules/goBack';
 export {ProgressIndicatorOptions} from './modules/progressIndicator/services/progressIndicatorOptions';
@@ -20,6 +20,7 @@ export {MultiButtonModule} from './modules/multiButton/modules/multiButton.modul
 export * from './types/tokens';
 export * from './utils';
 export * from './pipes';
+export * from './decorators';
 export {CookieService} from './services/cookies/cookies.service';
 export {StatusCodeService} from './services/statusCode/statusCode.service';
 export {CookiePermanentStorageService, PermanentStorage} from './services/permanentStorage';

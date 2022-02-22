@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 11.1.0 (2022-02-22)
+
+### Features
+
+- added *experimental* `ComponentHostStyle` decorator, which applies css styles to host of component, requires at least empty style on Component
+- added *experimental* `ComponentDisplay` decorator, which applies css display style to host of component, requires at least empty style on Component
+- added *experimental* `ComponentDisplayBlock` decorator, which applies css display block style to host of component, requires at least empty style on Component
+- added *experimental* `ComponentDisplayFlex` decorator, which applies css display flex style to host of component, requires at least empty style on Component
+- added *experimental* `ScrollableContent` decorator, which applies css overflow-y scroll style to host of component, requires at least empty style on Component
+
 ## Version 11.0.0 (2022-02-22)
 
 ### Bug Fixes
