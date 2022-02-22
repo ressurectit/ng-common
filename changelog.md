@@ -9,6 +9,11 @@
 - added *experimental* `ComponentDisplayBlock` decorator, which applies css display block style to host of component, requires at least empty style on Component
 - added *experimental* `ComponentDisplayFlex` decorator, which applies css display flex style to host of component, requires at least empty style on Component
 - added *experimental* `ScrollableContent` decorator, which applies css overflow-y scroll style to host of component, requires at least empty style on Component
+- added `CastPipesModule` module that holds cast pipes
+- added `CastTypePipe` pipe that allows casting of type for templates, should be used inherited
+- added `AsHtmlElementPipe` pipe that casts EventTarget to HTMLELement
+- added `AsRequiredTypePipe` pipe that transforms type to required from `nullable` or `undefined` type
+- added `AsNgClassRequiredPipe` pipe that transforms nullable NgClass input to NgClass non nullable input
 
 ## Version 11.0.0 (2022-02-22)
 

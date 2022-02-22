@@ -17,6 +17,7 @@ export {MultiButtonComponent} from './modules/multiButton/components/multiButton
 export {MultiButtonCssClasses} from './modules/multiButton/components/multiButton/multiButton.interface';
 export {MULTI_BUTTON_CSS_CLASSES} from './modules/multiButton/misc/tokens';
 export {MultiButtonModule} from './modules/multiButton/modules/multiButton.module';
+export * from './modules/castPipes';
 export * from './types/tokens';
 export * from './utils';
 export * from './pipes';
