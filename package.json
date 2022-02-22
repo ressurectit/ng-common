@@ -6,7 +6,7 @@
     "sideEffects": false,
     "scripts": {
         "build": "ngc --declaration --declarationDir . --declarationMap && ngc -t es2015 --outDir es2015",
-        "dts:rollup": "npm run api -- api-extractor.json && npm run api -- date-fns/api-extractor.json && npm run api -- forms/api-extractor.json && npm run api -- hmr/api-extractor.json && npm run api -- hotkeys/api-extractor.json && npm run api -- material/api-extractor.json && npm run api -- moment/api-extractor.json && npm run api -- numeral/api-extractor.json && npm run api -- positions/api-extractor.json && npm run api -- router/api-extractor.json && npm run api -- store/api-extractor.json && npm run api -- structured-log/api-extractor.json",
+        "dts:rollup": "npm run api -- api-extractor.json && npm run api -- date-fns/api-extractor.json && npm run api -- forms/api-extractor.json && npm run api -- hotkeys/api-extractor.json && npm run api -- material/api-extractor.json && npm run api -- moment/api-extractor.json && npm run api -- numeral/api-extractor.json && npm run api -- positions/api-extractor.json && npm run api -- router/api-extractor.json && npm run api -- store/api-extractor.json && npm run api -- structured-log/api-extractor.json",
         "api": "api-extractor run --local --verbose -c",
         "clean": "rimraf */temp temp es2015 es2020 **/tsdoc-metadata.json src/**/*.d.ts src/**/*.d.ts.map */src/**/*.d.ts */src/**/*.d.ts.map ./*.d.ts ./*.d.ts.map */*.d.ts",
         "clean:deps": "rimraf package-lock.json node_modules",
@@ -24,16 +24,12 @@
         "doc": "path-exists docs && npm run doc:generate || echo \"No docs generated!\"",
         "predoc:generate": "cd docs && git pull && cd ..",
         "postdoc:generate": "npm run doc:save",
-        "doc:generate": "npm run doc:generate:common && npm run doc:generate:hmr && npm run doc:generate:forms && npm run doc:generate:router && npm run doc:generate:numeral && npm run doc:generate:hotkeys && npm run doc:generate:store && npm run doc:generate:moment && npm run doc:generate:date-fns && npm run doc:generate:structured-log && npm run doc:generate:positions && npm run doc:generate:material",
+        "doc:generate": "npm run doc:generate:common && npm run doc:generate:forms && npm run doc:generate:router && npm run doc:generate:numeral && npm run doc:generate:hotkeys && npm run doc:generate:store && npm run doc:generate:moment && npm run doc:generate:date-fns && npm run doc:generate:structured-log && npm run doc:generate:positions && npm run doc:generate:material",
         "doc:save": "cd docs && git add . && git commit -m \"INT: updated API docs ng-common\" && git push && cd ..",
         "doc:generate:common": "rimraf docs/content/api/ng-common && npm run doc:json:common && npm run doc:md:common && npm run doc:api:common",
         "doc:json:common": "api-extractor run --local --verbose -c api-extractor.json",
         "doc:md:common": "api-documenter markdown -i temp -o docs/content/api/ng-common",
         "doc:api:common": "copyfiles -u 1 temp/common.api.md docs/content/api/ng-common && rimraf temp",
-        "doc:generate:hmr": "rimraf docs/content/api/ng-common-hmr && npm run doc:json:hmr && npm run doc:md:hmr && npm run doc:api:hmr",
-        "doc:json:hmr": "api-extractor run --local --verbose -c hmr/api-extractor.json",
-        "doc:md:hmr": "api-documenter markdown -i hmr/temp -o docs/content/api/ng-common-hmr",
-        "doc:api:hmr": "copyfiles -u 2 hmr/temp/common-hmr.api.md docs/content/api/ng-common-hmr && rimraf hmr/temp",
         "doc:generate:forms": "rimraf docs/content/api/ng-common-forms && npm run doc:json:forms && npm run doc:md:forms && npm run doc:api:forms",
         "doc:json:forms": "api-extractor run --local --verbose -c forms/api-extractor.json",
         "doc:md:forms": "api-documenter markdown -i forms/temp -o docs/content/api/ng-common-forms",
@@ -191,14 +187,6 @@
             "es2015": "./es2015/forms/src/index.js",
             "node": "./es2015/forms/src/index.js",
             "default": "./es2020/forms/src/index.js"
-        },
-        "./hmr": {
-            "types": "./hmr/src/index.d.ts",
-            "esm2020": "./es2020/hmr/src/index.js",
-            "es2020": "./es2020/hmr/src/index.js",
-            "es2015": "./es2015/hmr/src/index.js",
-            "node": "./es2015/hmr/src/index.js",
-            "default": "./es2020/hmr/src/index.js"
         },
         "./hotkeys": {
             "types": "./hotkeys/src/index.d.ts",

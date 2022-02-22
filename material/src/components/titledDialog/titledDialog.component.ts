@@ -39,12 +39,16 @@ export class TitledDialogComponent
                 injector: Injector)
     {
         this.injector = Injector.create(
-        [
-            <ValueProvider>
-            {
-                provide: TITLED_DIALOG_DATA,
-                useValue: data.data
-            }
-        ], injector);
+        {
+            providers:
+            [
+                <ValueProvider>
+                {
+                    provide: TITLED_DIALOG_DATA,
+                    useValue: data.data
+                }
+            ],
+            parent: injector
+        });
     }
 }

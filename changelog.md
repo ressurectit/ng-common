@@ -1,5 +1,17 @@
 # Changelog
 
+## Version 11.0.0 (2022-02-22)
+
+### Bug Fixes
+
+- fixed `TitledDialogComponent`, now correctly imports `ngComponentOutletEx`
+
+### BREAKING CHANGES
+
+- *subpackage* `@anglr/common/hmr`
+   - removed whole subpackage
+   - replacement for `hmrFinishedNotification` use `simpleNotification` function from `@jscrpt/common`
+
 ## Version 10.0.1 (2022-02-22)
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
-import {CommonLocalizeModule} from '@anglr/common';
+import {CommonDynamicModule, CommonLocalizeModule} from '@anglr/common';
 
 import {TitledDialogComponent} from '../components/titledDialog/titledDialog.component';
 import {TitledDialogService} from '../services/titledDialog/titledDialog.service';
@@ -12,8 +12,9 @@ import {TitledDialogService} from '../services/titledDialog/titledDialog.service
 {
     imports:
     [
+        CommonDynamicModule,
         CommonLocalizeModule,
-        MatDialogModule
+        MatDialogModule,
     ],
     declarations:
     [
