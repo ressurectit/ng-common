@@ -5,7 +5,7 @@
     "type": "module",
     "sideEffects": false,
     "scripts": {
-        "build": "ngc --declaration --declarationDir . --declarationMap && ngc -t es2015 --outDir es2015 && npm run dts:rollup",
+        "build": "ngc --declaration --declarationDir . --declarationMap && ngc -t es2015 --outDir es2015",
         "dts:rollup": "npm run api -- api-extractor.json && npm run api -- date-fns/api-extractor.json && npm run api -- forms/api-extractor.json && npm run api -- hmr/api-extractor.json && npm run api -- hotkeys/api-extractor.json && npm run api -- material/api-extractor.json && npm run api -- moment/api-extractor.json && npm run api -- numeral/api-extractor.json && npm run api -- positions/api-extractor.json && npm run api -- router/api-extractor.json && npm run api -- store/api-extractor.json && npm run api -- structured-log/api-extractor.json",
         "api": "api-extractor run --local --verbose -c",
         "clean": "rimraf */temp temp es2015 es2020 **/tsdoc-metadata.json src/**/*.d.ts src/**/*.d.ts.map */src/**/*.d.ts */src/**/*.d.ts.map ./*.d.ts ./*.d.ts.map */*.d.ts",
@@ -23,7 +23,8 @@
         "lint": "eslint src/**/*.ts",
         "doc": "path-exists docs && npm run doc:generate || echo \"No docs generated!\"",
         "predoc:generate": "cd docs && git pull && cd ..",
-        "doc:generate": "npm run doc:generate:common && npm run doc:generate:hmr && npm run doc:generate:forms && npm run doc:generate:router && npm run doc:generate:numeral && npm run doc:generate:hotkeys && npm run doc:generate:store && npm run doc:generate:moment && npm run doc:generate:date-fns && npm run doc:generate:structured-log && npm run doc:generate:positions && npm run doc:generate:material && npm run doc:save",
+        "postdoc:generate": "npm run doc:save",
+        "doc:generate": "npm run doc:generate:common && npm run doc:generate:hmr && npm run doc:generate:forms && npm run doc:generate:router && npm run doc:generate:numeral && npm run doc:generate:hotkeys && npm run doc:generate:store && npm run doc:generate:moment && npm run doc:generate:date-fns && npm run doc:generate:structured-log && npm run doc:generate:positions && npm run doc:generate:material",
         "doc:save": "cd docs && git add . && git commit -m \"INT: updated API docs ng-common\" && git push && cd ..",
         "doc:generate:common": "rimraf docs/content/api/ng-common && npm run doc:json:common && npm run doc:md:common && npm run doc:api:common",
         "doc:json:common": "api-extractor run --local --verbose -c api-extractor.json",
@@ -156,13 +157,19 @@
     "es2020": "./es2020/src/index.js",
     "es2015": "./es2015/src/index.js",
     "module": "./es2015/src/index.js",
-    "typings": "./common.d.ts",
+    "typings": "./src/index.d.ts",
     "exports": {
         "./package.json": {
             "default": "./package.json"
         },
+        "./src/style.scss": {
+            "sass": "./src/style.scss"
+        },
+        "./styles/*": {
+            "sass": "./styles/*.scss"
+        },
         ".": {
-            "types": "./common.d.ts",
+            "types": "./src/index.d.ts",
             "esm2020": "./es2020/src/index.js",
             "es2020": "./es2020/src/index.js",
             "es2015": "./es2015/src/index.js",
@@ -170,7 +177,7 @@
             "default": "./es2020/src/index.js"
         },
         "./date-fns": {
-            "types": "./date-fns/common-date-fns.d.ts",
+            "types": "./date-fns/src/index.d.ts",
             "esm2020": "./es2020/date-fns/src/index.js",
             "es2020": "./es2020/date-fns/src/index.js",
             "es2015": "./es2015/date-fns/src/index.js",
@@ -178,7 +185,7 @@
             "default": "./es2020/date-fns/src/index.js"
         },
         "./forms": {
-            "types": "./forms/common-forms.d.ts",
+            "types": "./forms/src/index.d.ts",
             "esm2020": "./es2020/forms/src/index.js",
             "es2020": "./es2020/forms/src/index.js",
             "es2015": "./es2015/forms/src/index.js",
@@ -186,7 +193,7 @@
             "default": "./es2020/forms/src/index.js"
         },
         "./hmr": {
-            "types": "./hmr/common-hmr.d.ts",
+            "types": "./hmr/src/index.d.ts",
             "esm2020": "./es2020/hmr/src/index.js",
             "es2020": "./es2020/hmr/src/index.js",
             "es2015": "./es2015/hmr/src/index.js",
@@ -194,7 +201,7 @@
             "default": "./es2020/hmr/src/index.js"
         },
         "./hotkeys": {
-            "types": "./hotkeys/common-hotkeys.d.ts",
+            "types": "./hotkeys/src/index.d.ts",
             "esm2020": "./es2020/hotkeys/src/index.js",
             "es2020": "./es2020/hotkeys/src/index.js",
             "es2015": "./es2015/hotkeys/src/index.js",
@@ -202,7 +209,7 @@
             "default": "./es2020/hotkeys/src/index.js"
         },
         "./material": {
-            "types": "./material/common-material.d.ts",
+            "types": "./material/src/index.d.ts",
             "esm2020": "./es2020/material/src/index.js",
             "es2020": "./es2020/material/src/index.js",
             "es2015": "./es2015/material/src/index.js",
@@ -210,7 +217,7 @@
             "default": "./es2020/material/src/index.js"
         },
         "./moment": {
-            "types": "./moment/common-moment.d.ts",
+            "types": "./moment/src/index.d.ts",
             "esm2020": "./es2020/moment/src/index.js",
             "es2020": "./es2020/moment/src/index.js",
             "es2015": "./es2015/moment/src/index.js",
@@ -218,7 +225,7 @@
             "default": "./es2020/moment/src/index.js"
         },
         "./numeral": {
-            "types": "./numeral/common-numeral.d.ts",
+            "types": "./numeral/src/index.d.ts",
             "esm2020": "./es2020/numeral/src/index.js",
             "es2020": "./es2020/numeral/src/index.js",
             "es2015": "./es2015/numeral/src/index.js",
@@ -226,7 +233,7 @@
             "default": "./es2020/numeral/src/index.js"
         },
         "./positions": {
-            "types": "./positions/common-positions.d.ts",
+            "types": "./positions/src/index.d.ts",
             "esm2020": "./es2020/positions/src/index.js",
             "es2020": "./es2020/positions/src/index.js",
             "es2015": "./es2015/positions/src/index.js",
@@ -234,7 +241,7 @@
             "default": "./es2020/positions/src/index.js"
         },
         "./router": {
-            "types": "./router/common-router.d.ts",
+            "types": "./router/src/index.d.ts",
             "esm2020": "./es2020/router/src/index.js",
             "es2020": "./es2020/router/src/index.js",
             "es2015": "./es2015/router/src/index.js",
@@ -242,7 +249,7 @@
             "default": "./es2020/router/src/index.js"
         },
         "./store": {
-            "types": "./store/common-store.d.ts",
+            "types": "./store/src/index.d.ts",
             "esm2020": "./es2020/store/src/index.js",
             "es2020": "./es2020/store/src/index.js",
             "es2015": "./es2015/store/src/index.js",
@@ -250,7 +257,7 @@
             "default": "./es2020/store/src/index.js"
         },
         "./structured-log": {
-            "types": "./structured-log/common-structured-log.d.ts",
+            "types": "./structured-log/src/index.d.ts",
             "esm2020": "./es2020/structured-log/src/index.js",
             "es2020": "./es2020/structured-log/src/index.js",
             "es2015": "./es2015/structured-log/src/index.js",
