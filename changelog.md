@@ -14,6 +14,12 @@
 - added `AsHtmlElementPipe` pipe that casts EventTarget to HTMLELement
 - added `AsRequiredTypePipe` pipe that transforms type to required from `nullable` or `undefined` type
 - added `AsNgClassRequiredPipe` pipe that transforms nullable NgClass input to NgClass non nullable input
+- *subpackage* `@anglr/common/forms`
+   - added `FormPipesModule` module that holds form util pipes
+   - added `AsFormArrayPipe` pipe that tries to convert `AbstractControl` to `FormArray`
+   - added `AsFormControlPipe` pipe that tries to convert `AbstractControl` to `FormControl`
+   - added `AsFormGroupPipe` pipe that tries to convert `AbstractControl` to `FormGroup`
+   - added `GetControlPipe` pipe that gets control from `FormGroup`
 
 ## Version 11.0.0 (2022-02-22)
 

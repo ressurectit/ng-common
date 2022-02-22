@@ -10,6 +10,13 @@ import {LOGGER} from '../../../../types/tokens';
 @Pipe({name: 'castType'})
 export class CastTypePipe<TSource, TTarget extends TSource> implements PipeTransform
 {
+    //######################### protected fields #########################
+
+    /**
+     * Predicate for testing whether is value instance of something
+     */
+    protected _isInstanceOfPredicate: (value: TSource) => boolean = () => true;
+
     //######################### constructors #########################
     constructor(@Optional() @Inject(LOGGER) private _logger?: Logger)
     {
@@ -47,6 +54,6 @@ export class CastTypePipe<TSource, TTarget extends TSource> implements PipeTrans
      */
     protected _isInstanceOf(value: TSource): value is TTarget
     {
-        return true;
+        return this._isInstanceOfPredicate(value);
     }
 }

@@ -16,4 +16,5 @@ export * from './misc/types';
 export * from './modules/numberInput.module';
 export * from './modules/hasError.module';
 export * from './modules/requiredClass.module';
+export * from './modules/formPipes';
 export * from './misc/formModel';
