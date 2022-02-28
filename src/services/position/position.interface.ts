@@ -36,7 +36,7 @@ export interface PositionOptions
     /**
      * Offset which allows moving target element along the cross axis of placement
      */
-    offset: number|PositionOffset;
+    offset: PositionOffset;
 
     /**
      * Indication whether perform flip in case of collision (with view boundaries)
@@ -49,6 +49,11 @@ export interface PositionOptions
     autoUpdate: boolean|AutoUpdateOptions;
 
     /**
+     * Function that is called when auto updated is called for processing result
+     */
+    autoUpdateProcessor?: (result: PositionResult) => void;
+
+    /**
      * Mouse event that occured when positioning was called
      */
     mouseEvent?: MouseEvent;
@@ -57,12 +62,12 @@ export interface PositionOptions
 /**
  * Result of positioning process, storing new coordinates
  */
-export interface PositionResult
+export interface PositionResult<TElement extends Element = any>
 {
     /**
      * Target element to be positioned
      */
-    target: HTMLElement;
+    target: TElement;
 
     /**
      * X coordinate of position of target
@@ -93,5 +98,5 @@ export interface Position
      * @param source - Source element to be placed against
      * @param options - Optional options with informations about new position
      */
-    placeElement(target: HTMLElement, source: HTMLElement, options?: Partial<PositionOptions>): PositionResult;
+    placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Promise<PositionResult>;
 }

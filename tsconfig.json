@@ -16,14 +16,14 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "strict": true,
-        "strictNullChecks": true,
+        "strictNullChecks": false,
         "esModuleInterop": true,
         "importHelpers": true,
         "newLine": "lf",
         "rootDir": ".",
         "outDir": "es2020",
         "baseUrl": "src",
-        "paths": 
+        "paths":
         {
             "@anglr/common": ["index.ts"],
             "@anglr/common/forms": ["../forms/src/index.ts"],

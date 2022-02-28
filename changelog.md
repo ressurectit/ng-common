@@ -11,6 +11,7 @@
       - property `offset` offset which allows moving target element along the cross axis of placement
       - property `flip` indication whether perform flip in case of collision (with view boundaries)
       - property `autoUpdate` indication whether set up 'auto updating' of position
+      - method `autoUpdateProcessor` function that is called when auto updated is called for processing result
       - property `mouseEvent` mouse event that occured when positioning was called
    - new `PositionResult` interface, that represents result of positioning process, storing new coordinates
       - property `target` target element to be positioned

@@ -1,0 +1,9 @@
+{
+    "name": "@anglr/common-floating-ui",
+    "sideEffects": false,
+    "module": "../es2015/floating-ui/src/index.js",
+    "es2015": "../es2015/floating-ui/src/index.js",
+    "es2020": "../es2020/floating-ui/src/index.js",
+    "esm2020": "../es2020/floating-ui/src/index.js",
+    "typings": "./src/index.d.ts"
+}
