@@ -1,5 +1,31 @@
 # Changelog
 
+## Version 11.2.0 (2022-02-28)
+
+### Features
+
+- added new **Position**
+   - new `Position` interface, that represents service that is used for positioning two elements against each other
+   - new `PositionOptions` interface, that represents options that are passed to position service
+      - property `placement` placement of target element against source element
+      - property `offset` offset which allows moving target element along the cross axis of placement
+      - property `flip` indication whether perform flip in case of collision (with view boundaries)
+      - property `autoUpdate` indication whether set up 'auto updating' of position
+      - property `mouseEvent` mouse event that occured when positioning was called
+   - new `PositionResult` interface, that represents result of positioning process, storing new coordinates
+      - property `target` target element to be positioned
+      - property `x` X coordinate of position of target
+      - property `y` Y coordinate of position of target
+      - method `dispose` disposes instance of engine used for positioning
+   - new `AutoUpdateOptions` interface, that represents options for autoupdate specific functionality
+      - property `ancestorScroll` indication whether update position when ancestor scroll changes
+      - property `ancestorResize` indication whether update position when ancestor size changes
+      - property `elementResize` indication whether update position when target element changes size
+   - new `applyPositionResult` function, that applies `PositionResult` to target element
+   - new `PositionPlacement` enum with available positions for placement of target element against its source
+   - new `PositionOffset` enum with applied offset to position of target in cross axis relative to placement
+   - new `POSITION` *Injection Token* used for injecting service that is used for positioning of one element against another
+
 ## Version 11.1.0 (2022-02-22)
 
 ### Features

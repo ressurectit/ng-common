@@ -32,7 +32,7 @@ export {NgComponentOutletEx} from './directives/ngComponentOutletEx/ngComponentO
 export {APP_STABLE, extractAppStableResolve, runWhenModuleStable} from './utils';
 export {PROGRESS_INTERCEPTOR_PROVIDER, ProgressInterceptor} from './modules/progressIndicator/interceptors/progressInterceptor';
 export {DEFAULT_NOTIFICATIONS, DefaultNotificationsService, Notification, NotificationSeverity, Notifications, NotificationsOptions, NotificationsProvider, NotificationsScopeProvider, NotificationsScopeProviderFactory} from './services/notifications';
-export * from './services/alignment';
+export * from './services/position';
 
 //TODO: any to unknown
 //TODO: strict null checks

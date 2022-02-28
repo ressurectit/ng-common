@@ -6,7 +6,7 @@ import {PermanentStorage} from '../services/permanentStorage';
 import {Logger, DummyLoggerService} from '../services/logger';
 import {TemporaryStorage, MemoryTemporaryStorageService} from '../services/temporaryStorage';
 import {Notifications} from '../services/notifications';
-import {Alignment} from '../services/alignment';
+import {Position} from '../services/position';
 
 /**
  * Base url when using HTTP (example: http://localhost:8888/)
@@ -44,9 +44,9 @@ export const PERMANENT_STORAGE: InjectionToken<PermanentStorage> = new Injection
 export const TEMPORARY_STORAGE: InjectionToken<TemporaryStorage> = new InjectionToken<TemporaryStorage>('TEMPORARY_STORAGE', {providedIn: 'root', factory: () => new MemoryTemporaryStorageService()});
 
 /**
- * Token used for injecting service that is used for absolute alignment (AKA positioning) of one element to another
+ * Token used for injecting service that is used for positioning of one element against another
  */
-export const ALIGNMENT: InjectionToken<Alignment> = new InjectionToken<Alignment>('ALIGNMENT');
+export const POSITION: InjectionToken<Position> = new InjectionToken<Position>('POSITION');
 
 /**
  * Token used for injecting notifications service implementation
