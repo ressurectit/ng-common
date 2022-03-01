@@ -1,3 +1,5 @@
+import {Observable} from 'rxjs';
+
 import {PositionOffset, PositionPlacement} from './position.types';
 
 /**
@@ -49,11 +51,6 @@ export interface PositionOptions
     autoUpdate: boolean|AutoUpdateOptions;
 
     /**
-     * Function that is called when auto updated is called for processing result
-     */
-    autoUpdateProcessor?: (result: PositionResult) => void;
-
-    /**
      * Mouse event that occured when positioning was called
      */
     mouseEvent?: MouseEvent;
@@ -98,5 +95,5 @@ export interface Position
      * @param source - Source element to be placed against
      * @param options - Optional options with informations about new position
      */
-    placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Promise<PositionResult>;
+    placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Observable<PositionResult>;
 }

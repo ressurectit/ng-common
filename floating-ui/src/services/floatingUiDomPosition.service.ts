@@ -2,6 +2,7 @@ import {ClassProvider, Injectable} from '@angular/core';
 import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION} from '@anglr/common';
 import {extend} from '@jscrpt/common';
 import {computePosition, Placement, autoUpdate, Middleware, offset, flip} from '@floating-ui/dom';
+import {Observable} from 'rxjs';
 
 /**
  * Default options for `FloatingUiDomPosition` implementation
@@ -25,70 +26,83 @@ export class FloatingUiDomPosition implements Position
     /**
      * @inheritdoc
      */
-    public async placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Promise<PositionResult>
+    public placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Observable<PositionResult>
     {
-        const computedOptions = extend({}, defaultOptions, options);
-        const middlewares: Middleware[] = [];
-
-        this._setOffset(middlewares, computedOptions);
-        this._setFlip(middlewares, computedOptions);
-
-        const runComputation = async () =>
+        return new Observable(subscriber =>
         {
-            const result = await computePosition(source,
-                                                 target as HTMLElement,
-                                                 {
-                                                     placement: this._getPlacement(computedOptions),
-                                                     middleware: middlewares
-                                                 });
-
-            if(computedOptions.autoUpdate && computedOptions.autoUpdateProcessor)
+            (async () =>
             {
-                computedOptions.autoUpdateProcessor(
+                const computedOptions = extend({}, defaultOptions, options);
+                const middlewares: Middleware[] = [];
+
+                this._setOffset(middlewares, computedOptions);
+                this._setFlip(middlewares, computedOptions);
+
+                const runComputation = async () =>
+                {
+                    const result = await computePosition(source,
+                                                         target as HTMLElement,
+                                                         {
+                                                             placement: this._getPlacement(computedOptions),
+                                                             middleware: middlewares
+                                                         });
+
+                    if(computedOptions.autoUpdate)
+                    {
+                        subscriber.next(
+                        {
+                            target,
+                            dispose,
+                            x: result.x,
+                            y: result.y
+                        });
+                    }
+
+                    return result;
+                };
+                
+                let dispose = () => {};
+
+                if(computedOptions.autoUpdate)
+                {
+                    let options: AutoUpdateOptions;
+
+                    if(computedOptions.autoUpdate === true)
+                    {
+                        options =
+                        {
+                            ancestorResize: true,
+                            ancestorScroll: true,
+                            elementResize: true
+                        };
+                    }
+                    else
+                    {
+                        options = computedOptions.autoUpdate;
+                    }
+
+                    dispose = autoUpdate(source,
+                                         target as HTMLElement,
+                                         runComputation,
+                                         options);
+                }
+
+                const result = await runComputation();
+
+                subscriber.next(
                 {
                     target,
-                    dispose: () => {},
+                    dispose,
                     x: result.x,
                     y: result.y
                 });
-            }
 
-            return result;
-        };
-
-        const result = await runComputation();
-        let dispose = () => {};
-
-        if(computedOptions.autoUpdate)
-        {
-            let options: AutoUpdateOptions;
-
-            if(computedOptions.autoUpdate === true)
-            {
-                options =
+                if(!computedOptions.autoUpdate)
                 {
-                    ancestorResize: true,
-                    ancestorScroll: true,
-                    elementResize: true
-                };
-            }
-            else
-            {
-                options = computedOptions.autoUpdate;
-            }
-
-            dispose = autoUpdate(source,
-                                 target as HTMLElement,
-                                 runComputation,
-                                 options);
-        }
-
-        return {
-            target,
-            dispose,
-            x: result.x,
-            y: result.y
-        };
+                    subscriber.complete();
+                }
+            })();
+        });
     }
 
     //######################### protected methods #########################
@@ -115,10 +129,31 @@ export class FloatingUiDomPosition implements Position
     {
         if(options.offset != PositionOffset.None)
         {
-            //TODO: mouse enter
-
-            middlewares.push(offset(({floating, placement}) => 
+            if(options.offset == PositionOffset.MouseEnter)
             {
+                //fallback if not supported placement used
+                if(options.placement == PositionPlacement.Left ||
+                   options.placement == PositionPlacement.LeftStart ||
+                   options.placement == PositionPlacement.LeftEnd ||
+                   options.placement == PositionPlacement.Right ||
+                   options.placement == PositionPlacement.RightStart ||
+                   options.placement == PositionPlacement.RightEnd ||
+                   options.placement == PositionPlacement.Bottom ||
+                   options.placement == PositionPlacement.BottomEnd ||
+                   options.placement == PositionPlacement.Top ||
+                   options.placement == PositionPlacement.TopEnd)
+                {
+                    options.placement = PositionPlacement.TopStart;
+                }
+            }
+
+            middlewares.push(offset(({floating, placement}) =>
+            {
+                if(options.offset == PositionOffset.MouseEnter && options.mouseEvent)
+                {
+                    return options.mouseEvent.offsetX;
+                }
+
                 let dimension: number;
 
                 if(placement == 'bottom' || placement == 'bottom-start' || placement == 'bottom-end' ||
@@ -134,7 +169,12 @@ export class FloatingUiDomPosition implements Position
                 switch(options.offset)
                 {
                     default:
-                    //case PositionOffset.Full:
+                    {
+                        dimension = 0;
+
+                        break;
+                    }
+                    case PositionOffset.Full:
                     {
                         break;
                     }
@@ -157,7 +197,7 @@ export class FloatingUiDomPosition implements Position
                         break;
                     }
                 }
-                
+
                 return {
                     crossAxis: dimension
                 };
@@ -176,7 +216,7 @@ export class FloatingUiDomPosition implements Position
             default:
             // case PositionPlacement.Top:
             {
-                return 'bottom';
+                return 'top';
             }
             case PositionPlacement.TopStart:
             {
