@@ -151,7 +151,9 @@ export class FloatingUiDomPosition implements Position
             {
                 if(options.offset == PositionOffset.MouseEnter && options.mouseEvent)
                 {
-                    return options.mouseEvent.offsetX;
+                    return {
+                        crossAxis: options.mouseEvent.offsetX
+                    };
                 }
 
                 let dimension: number;
