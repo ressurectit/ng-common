@@ -36,6 +36,9 @@
    - requires `@floating-ui/dom` package of minimal version `0.3.1`
    - new `FloatingUiDomPosition` service that is used for positioning two elements against each other, using floating-ui dom implementation
    - new `FLOATING_UI_POSITION` provider for floating ui position implementation
+- *subpackage* `@anglr/common/forms`
+   - **Form Model Builder**
+      - new `FormArrayChild` decorator which defines child type for FormArray
 
 ## Version 11.1.0 (2022-02-22)
 
