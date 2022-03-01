@@ -1,6 +1,7 @@
-import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement} from '@anglr/common';
+import {ClassProvider, Injectable} from '@angular/core';
+import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION} from '@anglr/common';
 import {extend} from '@jscrpt/common';
-import {computePosition, Placement, autoUpdate} from '@floating-ui/dom';
+import {computePosition, Placement, autoUpdate, Middleware, offset, flip} from '@floating-ui/dom';
 
 /**
  * Default options for `FloatingUiDomPosition` implementation
@@ -16,6 +17,7 @@ const defaultOptions: PositionOptions =
 /**
  * Service that is used for positioning two elements against each other, using floating-ui dom implementation
  */
+@Injectable()
 export class FloatingUiDomPosition implements Position
 {
     //######################### public methods - implementation of Position #########################
@@ -26,13 +28,18 @@ export class FloatingUiDomPosition implements Position
     public async placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Promise<PositionResult>
     {
         const computedOptions = extend({}, defaultOptions, options);
+        const middlewares: Middleware[] = [];
+
+        this._setOffset(middlewares, computedOptions);
+        this._setFlip(middlewares, computedOptions);
 
         const runComputation = async () =>
         {
             const result = await computePosition(source,
                                                  target as HTMLElement,
                                                  {
-                                                     placement: this._getPlacement(computedOptions)
+                                                     placement: this._getPlacement(computedOptions),
+                                                     middleware: middlewares
                                                  });
 
             if(computedOptions.autoUpdate && computedOptions.autoUpdateProcessor)
@@ -54,7 +61,26 @@ export class FloatingUiDomPosition implements Position
 
         if(computedOptions.autoUpdate)
         {
-            dispose = autoUpdate(source, target as HTMLElement, runComputation);
+            let options: AutoUpdateOptions;
+
+            if(computedOptions.autoUpdate === true)
+            {
+                options =
+                {
+                    ancestorResize: true,
+                    ancestorScroll: true,
+                    elementResize: true
+                };
+            }
+            else
+            {
+                options = computedOptions.autoUpdate;
+            }
+
+            dispose = autoUpdate(source,
+                                 target as HTMLElement,
+                                 runComputation,
+                                 options);
         }
 
         return {
@@ -66,6 +92,78 @@ export class FloatingUiDomPosition implements Position
     }
 
     //######################### protected methods #########################
+
+    /**
+     * Sets flip middleware
+     * @param middlewares - Array of middlewares that will set
+     * @param options - Options that contains definition of flip
+     */
+    protected _setFlip(middlewares: Middleware[], options: PositionOptions): void
+    {
+        if(options.flip)
+        {
+            middlewares.push(flip());
+        }
+    }
+
+    /**
+     * Sets offset middleware
+     * @param middlewares - Array of middlewares that will set
+     * @param options - Options that contains definition of offset
+     */
+    protected _setOffset(middlewares: Middleware[], options: PositionOptions): void
+    {
+        if(options.offset != PositionOffset.None)
+        {
+            //TODO: mouse enter
+
+            middlewares.push(offset(({floating, placement}) => 
+            {
+                let dimension: number;
+
+                if(placement == 'bottom' || placement == 'bottom-start' || placement == 'bottom-end' ||
+                   placement == 'top' || placement == 'top-start' || placement == 'top-end')
+                {
+                    dimension = floating.width;
+                }
+                else
+                {
+                    dimension = floating.height;
+                }
+
+                switch(options.offset)
+                {
+                    default:
+                    //case PositionOffset.Full:
+                    {
+                        break;
+                    }
+                    case PositionOffset.Half:
+                    {
+                        dimension /= 2;
+
+                        break;
+                    }
+                    case PositionOffset.NegativeFull:
+                    {
+                        dimension *= -1;
+
+                        break;
+                    }
+                    case PositionOffset.NegativeHalf:
+                    {
+                        dimension *= -.5;
+
+                        break;
+                    }
+                }
+                
+                return {
+                    crossAxis: dimension
+                };
+            }));
+        }
+    }
 
     /**
      * Gets floating ui placement from position placement
@@ -127,3 +225,12 @@ export class FloatingUiDomPosition implements Position
         }
     }
 }
+
+/**
+ * Provider for floating ui position implementation
+ */
+export const FLOATING_UI_POSITION: ClassProvider =
+{
+    provide: POSITION,
+    useClass: FloatingUiDomPosition
+};

@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 11.2.0 (2022-02-28)
+## Version 11.2.0 (2022-03-01)
 
 ### Features
 
@@ -26,6 +26,10 @@
    - new `PositionPlacement` enum with available positions for placement of target element against its source
    - new `PositionOffset` enum with applied offset to position of target in cross axis relative to placement
    - new `POSITION` *Injection Token* used for injecting service that is used for positioning of one element against another
+   - added *subpackage* `@anglr/common/floating-ui`
+   - *subpackage* `@anglr/common/floating-ui`
+      - new `FloatingUiDomPosition` service that is used for positioning two elements against each other, using floating-ui dom implementation
+      - new `FLOATING_UI_POSITION` provider for floating ui position implementation
 
 ## Version 11.1.0 (2022-02-22)
 
