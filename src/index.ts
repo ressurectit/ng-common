@@ -2,7 +2,6 @@ export {GlobalizationService} from './services/globalization/globalization.servi
 export {CommonDynamicModule} from './modules/commonDynamic.module';
 export {CommonLocalizeModule} from './modules/commonLocalize.module';
 export {CommonUtilsModule} from './modules/commonUtils.module';
-export * from './modules/goBack';
 export {ProgressIndicatorOptions} from './modules/progressIndicator/services/progressIndicatorOptions';
 export {ProgressIndicatorComponent} from './modules/progressIndicator/components/progressIndicator/progressIndicator.component';
 export {ProgressIndicatorModule} from './modules/progressIndicator/modules/progressIndicator.module';
@@ -17,6 +16,8 @@ export {MultiButtonComponent} from './modules/multiButton/components/multiButton
 export {MultiButtonCssClasses} from './modules/multiButton/components/multiButton/multiButton.interface';
 export {MULTI_BUTTON_CSS_CLASSES} from './modules/multiButton/misc/tokens';
 export {MultiButtonModule} from './modules/multiButton/modules/multiButton.module';
+export * from './modules/goBack';
+export * from './modules/position';
 export * from './modules/castPipes';
 export * from './types/tokens';
 export * from './utils';
