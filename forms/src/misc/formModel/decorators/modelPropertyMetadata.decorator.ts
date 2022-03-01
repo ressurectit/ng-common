@@ -33,8 +33,8 @@ export function ModelPropertyMetadata<TArgs extends Dictionary<any> = any,
         //merge all other values
         trgt.ɵControlsMetadata[propertyKey as keyof TModel] = 
         {
-            ...trgt.ɵControlsMetadata[propertyKey as keyof TModel],
             ...ɵDefaultPropertyMetadata,
+            ...trgt.ɵControlsMetadata[propertyKey as keyof TModel],
             ...metadata
         };
 

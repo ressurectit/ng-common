@@ -2,6 +2,10 @@
 
 ## Version 11.2.0 (2022-03-01)
 
+### Bug Fixes
+
+- fixed `ModelPropertyMetadata` decorator metadata merging (previously multiple usages of decorator caused rewriting values with default value)
+
 ### Features
 
 - new `PositionToDirective` directive, that sets position of attached element relative to provided element
