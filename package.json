@@ -186,6 +186,14 @@
             "node": "./es2015/date-fns/src/index.js",
             "default": "./es2020/date-fns/src/index.js"
         },
+        "./floating-ui": {
+            "types": "./floating-ui/src/index.d.ts",
+            "esm2020": "./es2020/floating-ui/src/index.js",
+            "es2020": "./es2020/floating-ui/src/index.js",
+            "es2015": "./es2015/floating-ui/src/index.js",
+            "node": "./es2015/floating-ui/src/index.js",
+            "default": "./es2020/floating-ui/src/index.js"
+        },
         "./forms": {
             "types": "./forms/src/index.d.ts",
             "esm2020": "./es2020/forms/src/index.js",
