@@ -1,5 +1,42 @@
 # Changelog
 
+## Version 11.3.0 (2022-03-02)
+
+### Features
+
+- new **Tooltip** module (based on `Position` service)
+   - new `TooltipModule` module for rendering tooltips
+      - **exports**
+         - `TooltipDirective` directive
+         - `TooltipTemplateDirective` directive
+   - new `TooltipDirective` directive used for rendering tooltip
+      - **inputs**
+         - `tooltip` tooltip text that is displayed, or any data that could be passed to template
+         - `allowHtml` indication whether are html tags allowed in tooltip text
+         - `tooltipTemplate` instance of tooltip template that is used for rendering
+         - `tooltipOptions` options used for displaying tooltip
+         - `tooltipVisible` gets or sets indication whether is tooltip visible, if has boolean value, mouse events cant override this
+      - **content**
+         - child `TooltipTemplateDirective` instance of template from element content, used for rendering
+   - new `TooltipTemplateDirective` directive used for obtaining custom tooltip template
+   - new `TooltipComponent` component used for displaying tooltip content
+      - implementation of `TooltipRenderer`
+   - new `TOOLTIP_OPTIONS` injection token used for injecting tooltip options
+   - new `TooltipRenderer` interface, that represents component that is used for rendering tooltip
+      - property `data` data that are rendered in tooltip
+      - property `template` template used for rendering tooltip
+      - property `allowHtml` indication whether are html tags allowed in tooltip text
+      - property `cssClass` css class that is applied to tooltip renderer component
+      - method `registerHoverEvents` registers handlers that allows reaction to entering or leaving tooltip
+      - method `invalidateVisuals` explicitly runs invalidation of content (change detection)
+   - new `TooltipOptions` interface, that represents options used for tooltip directive
+      - property `delay` delay for displaying of tooltip on hover
+      - property `position` position where should tooltip appear relative to its parent
+      - property `allowSelection` allows selection of text in tooltip
+      - property `tooltipCssClass` css class that is applied to tooltip renderer component
+      - property `stopPropagation` indication whether stop propagation of "hover" event
+      - property `tooltipRenderer` type of tooltip renderer that is used for rendering tooltip
+
 ## Version 11.2.0 (2022-03-01)
 
 ### Bug Fixes

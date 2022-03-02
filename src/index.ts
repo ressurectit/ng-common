@@ -19,6 +19,7 @@ export {MultiButtonModule} from './modules/multiButton/modules/multiButton.modul
 export * from './modules/goBack';
 export * from './modules/position';
 export * from './modules/castPipes';
+export * from './modules/tooltip';
 export * from './types/tokens';
 export * from './utils';
 export * from './pipes';

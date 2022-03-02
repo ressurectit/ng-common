@@ -1,0 +1,10 @@
+:host
+{
+    display: block;
+    position: absolute;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    max-width: 300px;
+    user-select: text;
+}
