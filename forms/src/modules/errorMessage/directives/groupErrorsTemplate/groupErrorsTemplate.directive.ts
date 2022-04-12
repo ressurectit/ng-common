@@ -21,7 +21,7 @@ export class GroupErrorsTemplateDirective
     /**
      * Allows typechecking for template
      */
-    static ngTemplateContextGuard(_dir: GroupErrorsTemplateDirective, ctx: unknown): ctx is GroupErrorsTemplateContext
+    static ngTemplateContextGuard(_dir: GroupErrorsTemplateDirective, _ctx: unknown): _ctx is GroupErrorsTemplateContext
     {
         return true;
     }
