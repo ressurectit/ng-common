@@ -1,9 +1,9 @@
-import {Injectable, TemplateRef} from '@angular/core';
+import {Injectable, Optional, TemplateRef} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ComponentType} from '@angular/cdk/portal';
 
 import {TitledDialogConfig, ɵTitledDialogOptions} from '../../misc/interfaces/titledDialog.interface';
-import {TitledDialogComponent} from '../../components/titledDialog/titledDialog.component';
+import {TitledDialogServiceOptions} from './titledDialogService.options';
 
 /**
  * Titled dialog service used for displaying components in dialog
@@ -12,8 +12,13 @@ import {TitledDialogComponent} from '../../components/titledDialog/titledDialog.
 export class TitledDialogService
 {
     //######################### constructor #########################
-    constructor(private _dialog: MatDialog)
+    constructor(protected _dialog: MatDialog,
+                @Optional() protected _options: TitledDialogServiceOptions)
     {
+        if(!this._options || !(this._options instanceof TitledDialogServiceOptions))
+        {
+            this._options = new TitledDialogServiceOptions();
+        }
     }
 
     //######################### public methods #########################
@@ -39,6 +44,6 @@ export class TitledDialogService
             title: config.title
         } as any;
 
-        return this._dialog.open(TitledDialogComponent, config) as MatDialogRef<any, R>;
+        return this._dialog.open(this._options.titledDialogComponent, config) as MatDialogRef<any, R>;
     }
 }

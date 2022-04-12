@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 11.3.0 (2022-03-02)
+## Version 11.3.0 (2022-04-12)
 
 ### Features
 
@@ -36,6 +36,14 @@
       - property `tooltipCssClass` css class that is applied to tooltip renderer component
       - property `stopPropagation` indication whether stop propagation of "hover" event
       - property `tooltipRenderer` type of tooltip renderer that is used for rendering tooltip
+- *subpackage* `@anglr/common/material`
+   - **TITLED DIALOG**
+      - new `TitledDialogServiceOptions` class that represents, options for `TitledDialogService`
+         - `titledDialogComponent` property, type of component used for rendering titled dialog
+      - updated `TitledDialogService` service
+         - now using `TitledDialogServiceOptions`, using type of component for dialog from options
+      - new `MovableTitledDialogComponent` component, that is used as wrapper for material dialog enhanced with title, which is movable
+      - new `MovableTitledDialogModule` module for components for displaying movable titled dialog
 
 ## Version 11.2.0 (2022-03-01)
 

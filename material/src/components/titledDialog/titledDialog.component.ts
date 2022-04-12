@@ -2,7 +2,8 @@ import {Component, ChangeDetectionStrategy, Inject, Injector, ValueProvider, Tem
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ComponentType} from '@angular/cdk/portal';
 
-import {ɵTitledDialogOptions, TITLED_DIALOG_DATA} from '../../misc/interfaces/titledDialog.interface';
+import {TITLED_DIALOG_DATA} from '../../misc/tokens';
+import {ɵTitledDialogOptions} from '../../misc/interfaces/titledDialog.interface';
 
 /**
  * Component used as wrapper for material dialog enhanced with title
@@ -23,6 +24,9 @@ export class TitledDialogComponent
      */
     public injector: Injector;
 
+    /**
+     * Instance of component that will be rendered in dialog
+     */
     public get component(): ComponentType<any>
     {
         if(this.data?.componentOrTemplateRef instanceof TemplateRef)

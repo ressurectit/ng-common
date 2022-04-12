@@ -1,0 +1,14 @@
+<div class="flex-row titled-dialog-title"
+     cdkDrag
+     cdkDragRootElement=".cdk-overlay-pane" 
+     cdkDragHandle>
+    <div class="flex-1">{{data.title | localize}}</div>
+
+    <div class="pointer-cursor align-self-center close-dialog" (click)="dialogRef.close()">
+        <div class="fa fa-times"></div>
+    </div>
+</div>
+
+<div class="titled-dialog-content">
+    <ng-template [ngComponentOutletEx]="component" [ngComponentOutletExInjector]="injector"></ng-template>
+</div>

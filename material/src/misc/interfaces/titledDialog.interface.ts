@@ -1,4 +1,4 @@
-import {TemplateRef, InjectionToken} from '@angular/core';
+import {TemplateRef} from '@angular/core';
 import {MatDialogConfig} from '@angular/material/dialog';
 import {ComponentType} from '@angular/cdk/portal';
 
@@ -33,8 +33,3 @@ export interface ɵTitledDialogOptions
      */
     componentOrTemplateRef?: ComponentType<any> | TemplateRef<any>;
 }
-
-/** 
- * Injection token that can be used to access the data that was passed in to a titled dialog. 
- */
-export const TITLED_DIALOG_DATA: InjectionToken<any> = new InjectionToken<any>('TITLED_DIALOG_DATA');
