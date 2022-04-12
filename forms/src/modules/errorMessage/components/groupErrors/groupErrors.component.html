@@ -1,0 +1,7 @@
+<ng-template #defaultTemplate let-errorName>
+    <div [ngClass]="cssClass" [errorMessage]="errorName" [errors]="formGroup.errors"></div>
+</ng-template>
+
+<ng-container *ngFor="let errorName of formGroup.errors | keys | withErrorMessage; let first=first; let last=last; let index=index">
+    <ng-container *ngTemplateOutlet="template?.template ?? defaultTemplate; context: {$implicit: errorName, first, last, index, errors: formGroup.errors}"></ng-container>
+</ng-container>

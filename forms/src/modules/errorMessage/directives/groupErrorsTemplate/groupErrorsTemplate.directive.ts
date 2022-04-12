@@ -1,0 +1,28 @@
+import {Directive, TemplateRef} from '@angular/core';
+
+import {GroupErrorsTemplateContext} from './groupErrorTemplate.context';
+
+/**
+ * Obtains template for displaying form group error
+ */
+@Directive(
+{
+    selector: '[formGroupError]'
+})
+export class GroupErrorsTemplateDirective
+{
+    //######################### constructor #########################
+    constructor(public template: TemplateRef<GroupErrorsTemplateContext>)
+    {
+    }
+
+    //######################### ng language server #########################
+    
+    /**
+     * Allows typechecking for template
+     */
+    static ngTemplateContextGuard(_dir: GroupErrorsTemplateDirective, ctx: unknown): ctx is GroupErrorsTemplateContext
+    {
+        return true;
+    }
+}

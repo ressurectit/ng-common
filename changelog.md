@@ -4,6 +4,9 @@
 
 ### Features
 
+- new `KeysPipe` pipe, that gets object keys/property names
+- updated `CommonUtilsModule`
+   - added `KeysPipe` to this module
 - new **Tooltip** module (based on `Position` service)
    - new `TooltipModule` module for rendering tooltips
       - **exports**
@@ -44,6 +47,29 @@
          - now using `TitledDialogServiceOptions`, using type of component for dialog from options
       - new `MovableTitledDialogComponent` component, that is used as wrapper for material dialog enhanced with title, which is movable
       - new `MovableTitledDialogModule` module for components for displaying movable titled dialog
+- *subpackage* `@anglr/common/forms`
+   - new `ErrorMessageModule` module for error message directives, pipes and components
+      - added `WithErrorMessagePipe` pipe to this module
+      - added `GroupErrorsTemplateDirective` directive to this module
+      - added `ErrorMessageDirective` directive to this module
+      - added `GroupErrorsComponent` directive to this module
+   - new `WithErrorMessagePipe` pipe, that filters array of errors with messages
+   - new `GroupErrorsTemplateContext` interface, that is context passed to template of group error
+      - `$implicit` name/code of error
+      - `last` indication whether rendered error is last
+      - `first` indication whether rendered error is first
+      - `index` index of currently rendered item
+      - `errors` object storing all errors for form group
+   - new `GroupErrorsTemplateDirective` directive, that obtains template for displaying form group error
+   - new `ErrorMessageDirective` directive, that is used for displaying form error message
+      - **inputs**
+         - `errorMessage` name/code of error message to be displayed
+         - `errors` object storing all errors
+   - new `GroupErrorsComponent` component, that is used for rendering from group errors
+      - **inputs**
+         - `cssClass` css classes that are applied to default rendered divs
+      - **content**
+         - child `GroupErrorsTemplateDirective` custom template for rendering form group error
 
 ## Version 11.2.0 (2022-03-01)
 
