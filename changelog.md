@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 11.3.1 (2022-04-13)
+
+### Bug Fixes
+
+- *subpackage* `@anglr/common/floating-ui`
+   - fixed `FloatingUiDomPosition` position offset for `MouseEnter` for *Firefox*
+
 ## Version 11.3.0 (2022-04-13)
 
 ### Features

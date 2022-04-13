@@ -152,7 +152,7 @@ export class FloatingUiDomPosition implements Position
                 if(options.offset == PositionOffset.MouseEnter && options.mouseEvent)
                 {
                     return {
-                        crossAxis: options.mouseEvent.offsetX || ((options.mouseEvent as any).layerX ?? 0)
+                        crossAxis: options.mouseEvent.x - (options.mouseEvent.target as HTMLElement).getBoundingClientRect().x
                     };
                 }
 
