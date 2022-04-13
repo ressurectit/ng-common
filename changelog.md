@@ -15,6 +15,10 @@
    - **Form Model Builder**
       - updated `ModelDecoratorMetadata`
          - property `ɵArgs` object storing additional arguments for customization
+   - new `IGNORED_VALIDATION_ERRORS` injection token for injecting array of ignored error names when automatically processed
+   - updated `ErrorMessagesExtractor` service
+      - now supports `IGNORED_VALIDATION_ERRORS`
+      - now allows to display validation error 'value' if it is `string`
 
 ### BREAKING CHANGES
 

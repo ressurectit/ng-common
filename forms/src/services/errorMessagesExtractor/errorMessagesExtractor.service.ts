@@ -3,7 +3,7 @@ import {FormControl} from '@angular/forms';
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {StringDictionary, extend, isString} from '@jscrpt/common';
 
-import {VALIDATION_ERROR_MESSAGES} from '../../misc/types';
+import {IGNORED_VALIDATION_ERRORS, VALIDATION_ERROR_MESSAGES} from '../../misc/tokens';
 import {ValidationErrorsResult} from './errorMessagesExtractor.interface';
 
 /**
@@ -20,8 +20,6 @@ const defaultErrorMessages: StringDictionary =
     maxlength: 'Value is too long.'
 };
 
-//TODO: support exceptions for error names, allow to have string value to be used as error from error
-
 /**
  * Service used for extracting error messages from form control
  */
@@ -37,6 +35,7 @@ export class ErrorMessagesExtractor
 
     //######################### constructor #########################
     constructor(@Inject(STRING_LOCALIZATION) protected _stringLocalization: StringLocalization,
+                @Inject(IGNORED_VALIDATION_ERRORS) protected _ignoredValidationErrors: string[],
                 @Inject(VALIDATION_ERROR_MESSAGES) @Optional() globalErrorMessages?: StringDictionary)
     {
         this._errorMessages = extend(true, {}, defaultErrorMessages, globalErrorMessages);
@@ -61,7 +60,7 @@ export class ErrorMessagesExtractor
 
         const result: ValidationErrorsResult =
         {
-            errors: Object.keys(control.errors),
+            errors: Object.keys(control.errors).filter(itm => this._ignoredValidationErrors.indexOf(itm) >= 0),
             errorMessages: []
         };
 
@@ -73,6 +72,11 @@ export class ErrorMessagesExtractor
             if(errorMessages[error])
             {
                 result.errorMessages.push(this._stringLocalization.get(errorMessages[error], control.errors));
+            }
+            //display error data if it is string and there is missing translation
+            else if(isString(errorData))
+            {
+                result.errorMessages.push(errorData);
             }
             //error data are array of strings, each string is considered error message
             else if(Array.isArray(errorData))

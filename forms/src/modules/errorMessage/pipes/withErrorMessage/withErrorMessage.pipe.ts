@@ -1,7 +1,7 @@
 import {Inject, Pipe, PipeTransform} from '@angular/core';
 import {StringDictionary} from '@jscrpt/common';
 
-import {VALIDATION_ERROR_MESSAGES} from '../../../../misc/types';
+import {VALIDATION_ERROR_MESSAGES} from '../../../../misc/tokens';
 
 /**
  * Filters array of errors with messages

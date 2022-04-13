@@ -3,7 +3,7 @@ import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {Dictionary, isBlank, nameof, StringDictionary} from '@jscrpt/common';
 import {Subscription} from 'rxjs';
 
-import {VALIDATION_ERROR_MESSAGES} from '../../../../misc/types';
+import {VALIDATION_ERROR_MESSAGES} from '../../../../misc/tokens';
 
 /**
  * Directive used for displaying form error message

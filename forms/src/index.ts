@@ -12,7 +12,7 @@ export * from './services/validationErrorRenderer/validationErrorRenderer.interf
 export * from './services/validationErrorRenderer/validationErrorRenderer.service';
 export * from './misc/validators';
 export * from './misc/utils';
-export * from './misc/types';
+export * from './misc/tokens';
 export * from './modules/numberInput.module';
 export * from './modules/hasError.module';
 export * from './modules/requiredClass.module';
