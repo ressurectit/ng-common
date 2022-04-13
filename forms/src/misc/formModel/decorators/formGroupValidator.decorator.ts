@@ -17,7 +17,7 @@ export function FormGroupValidator(validator: ValidatorFn|ValidatorFnFactory): C
     
         if(!metadata.ɵValidators)
         {
-            Object.defineProperty(target, nameof<ModelDecoratorMetadata>('ɵValidators'),
+            Object.defineProperty(metadata, nameof<ModelDecoratorMetadata>('ɵValidators'),
             {
                 value: [],
                 writable: false,

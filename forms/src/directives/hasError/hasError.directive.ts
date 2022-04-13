@@ -108,7 +108,7 @@ export class HasErrorDirective implements OnInit, OnDestroy
 
         if(this._submittedSvc)
         {
-            this._subscriptions.add(this._submittedSvc.submittedChange.subscribe(() => this._isSubmittedOrDirty(() => this._updateStatus(true))));
+            this._subscriptions.add(this._submittedSvc.submittedChange.subscribe(() => this._isSubmittedOrDirty(() => this._updateStatus())));
         }
     }
 
@@ -130,12 +130,11 @@ export class HasErrorDirective implements OnInit, OnDestroy
 
     /**
      * Updates status of control and css classes
-     * @param onlyShow - Indication that update performs only displaying of existing errors
      */
-    private _updateStatus(onlyShow?: boolean): void
+    private _updateStatus(): void
     {
         this._previousDirty = this.control.dirty;
-        this._hasErrors = this.renderer.update(this.errorMessages, onlyShow);
+        this._hasErrors = this.renderer.update(this.errorMessages);
         this._toggleGroupHasError();
     }
 

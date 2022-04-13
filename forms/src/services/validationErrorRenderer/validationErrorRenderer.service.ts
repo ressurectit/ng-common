@@ -12,6 +12,8 @@ import {ValidationErrorsResult} from '../errorMessagesExtractor/errorMessagesExt
  */
 export const VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS: InjectionToken<ValidationErrorRendererFactoryOptions> = new InjectionToken<ValidationErrorRendererFactoryOptions>('VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS');
 
+//TODO: div renderer as custom component, wrapper div renderer
+
 /**
  * Service used for creating validation errors renderer
  */
@@ -124,27 +126,9 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
      * @param errorMessages - Object storing error messages to be used as override
      * @param onlyShow - Indication that update performs only displaying of existing errors
      */
-    public update(errorMessages?: StringDictionary, onlyShow: boolean = false): boolean
+    public update(errorMessages?: StringDictionary): boolean
     {
         let result = false;
-
-        if(onlyShow)
-        {
-            this._isSubmittedOrDirty(() =>
-                                     {
-                                         this._show();
-                                         this._toggleErrors();
-                                         result = true;
-                                     },
-                                     () =>
-                                     {
-                                         this._hide();
-                                         result = false;
-                                     },
-                                     !!this._lastErrors);
-
-            return result;
-        }
 
         //hides old errors
         this._toggleErrors(false);
@@ -155,8 +139,8 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
             this._isSubmittedOrDirty(() =>
                                      {
                                          this._show();
-                                         result = true;
                                          this._toggleErrors();
+                                         result = true;
                                      },
                                      () =>
                                      {

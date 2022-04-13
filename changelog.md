@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 12.0.0 (2022-04-13)
+
+### Bug Fixes
+
+- *subpackage* `@anglr/common/forms`
+   - fixed double error displaying for validations, when submit clicked
+   - fixed `FormGroupValidator` and `FormGroupAsyncValidator`, now works correctly
+
+### BREAKING CHANGES
+
+- `ValidationErrorRenderer` interface
+   - `update` method, has now only one parameter
+- `ValidationErrorRendererFactory` service
+   - now implements updated `ValidationErrorRenderer`
+
 ## Version 11.3.1 (2022-04-13)
 
 ### Bug Fixes

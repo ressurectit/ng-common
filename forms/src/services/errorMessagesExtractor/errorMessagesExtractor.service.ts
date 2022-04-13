@@ -20,6 +20,9 @@ const defaultErrorMessages: StringDictionary =
     maxlength: 'Value is too long.'
 };
 
+//TODO: move string localization service into constructor, breaking change
+//TODO: support exceptions for error names, allow to have string value to be used as error from error
+
 /**
  * Service used for extracting error messages from form control
  */

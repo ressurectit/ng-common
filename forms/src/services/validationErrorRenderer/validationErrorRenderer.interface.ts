@@ -126,7 +126,6 @@ export interface ValidationErrorRenderer
     /**
      * Updates rendered errors for current state and returns true if errors were rendered, otherwise false
      * @param errorMessages - Object storing error messages to be used as override
-     * @param onlyShow - Indication that update performs only displaying of existing errors
      */
-    update(errorMessages?: StringDictionary, onlyShow?: boolean): boolean;
+    update(errorMessages?: StringDictionary): boolean;
 }
