@@ -7,6 +7,14 @@
 - *subpackage* `@anglr/common/forms`
    - fixed double error displaying for validations, when submit clicked
    - fixed `FormGroupValidator` and `FormGroupAsyncValidator`, now works correctly
+   - fixed `buildFormGroup` function, now correctly applies form group validators
+
+### Features
+
+- *subpackage* `@anglr/common/forms`
+   - **Form Model Builder**
+      - updated `ModelDecoratorMetadata`
+         - property `ɵArgs` object storing additional arguments for customization
 
 ### BREAKING CHANGES
 
@@ -14,6 +22,8 @@
    - `update` method, has now only one parameter
 - `ValidationErrorRendererFactory` service
    - now implements updated `ValidationErrorRenderer`
+- `ErrorMessagesExtractor` service
+   - changed constructor parameters
 
 ## Version 11.3.1 (2022-04-13)
 

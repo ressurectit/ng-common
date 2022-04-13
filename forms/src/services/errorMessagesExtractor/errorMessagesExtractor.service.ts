@@ -1,4 +1,4 @@
-import {Injectable, Inject, Optional, Injector} from '@angular/core';
+import {Injectable, Inject, Optional} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {StringDictionary, extend, isString} from '@jscrpt/common';
@@ -20,7 +20,6 @@ const defaultErrorMessages: StringDictionary =
     maxlength: 'Value is too long.'
 };
 
-//TODO: move string localization service into constructor, breaking change
 //TODO: support exceptions for error names, allow to have string value to be used as error from error
 
 /**
@@ -36,17 +35,11 @@ export class ErrorMessagesExtractor
      */
     protected _errorMessages: StringDictionary;
 
-    /**
-     * String localization service
-     */
-    protected _stringLocalization: StringLocalization;
-
     //######################### constructor #########################
-    constructor(injector: Injector,
+    constructor(@Inject(STRING_LOCALIZATION) protected _stringLocalization: StringLocalization,
                 @Inject(VALIDATION_ERROR_MESSAGES) @Optional() globalErrorMessages?: StringDictionary)
     {
         this._errorMessages = extend(true, {}, defaultErrorMessages, globalErrorMessages);
-        this._stringLocalization = injector.get(STRING_LOCALIZATION);
     }
 
     //######################### public methods #########################

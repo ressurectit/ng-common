@@ -1,4 +1,5 @@
 import {AsyncValidatorFn, ValidatorFn} from '@angular/forms';
+import {Dictionary} from '@jscrpt/common';
 
 import {AsyncValidatorFnFactory, ValidatorFnFactory} from '../misc/validatorFactories';
 import {ModelPropertyDecoratorMetadata} from './modelPropertyDecoratorMetadata';
@@ -6,7 +7,7 @@ import {ModelPropertyDecoratorMetadata} from './modelPropertyDecoratorMetadata';
 /**
  * Metadata describing whole model
  */
-export interface ModelDecoratorMetadata<TModel = any>
+export interface ModelDecoratorMetadata<TModel = any, TArgs extends Dictionary<any> = any>
 {
     /**
      * Array of controls metadata
@@ -22,4 +23,9 @@ export interface ModelDecoratorMetadata<TModel = any>
      * Array of async validator functions
      */
     ɵAsyncValidators?: Array<AsyncValidatorFn|AsyncValidatorFnFactory>;
+
+    /**
+     * Object storing additional arguments for customization
+     */
+    ɵArgs?: TArgs;
 }

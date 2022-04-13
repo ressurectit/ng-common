@@ -16,16 +16,19 @@ function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecor
 {
     if(!model)
     {
-        return new FormGroup({},
-                             {
-                                 validators: model.ɵValidators?.map(validator => validator instanceof ValidatorFnFactory ? validator.valueOf()(args) : validator).filter(itm => !!itm),
-                                 asyncValidators: model.ɵAsyncValidators?.map(validator => validator instanceof AsyncValidatorFnFactory ? validator.valueOf()(args) : validator).filter(itm => !!itm)
-                             });
+        return new FormGroup({});
     }
 
     const modelMetadata: Dictionary<any> = model.ɵControlsMetadata ?? {};
+    const groupValidators = model.ɵValidators ?? [];
+    const groupAsyncValidators = model.ɵAsyncValidators ?? [];
+    const groupArgs: Dictionary<any> = model.ɵArgs ?? {};
     const properties = Object.keys(model);
-    const formGroup: FormGroup = new FormGroup({});
+    const formGroup: FormGroup = new FormGroup({},
+                                               {
+                                                   validators: groupValidators?.map(validator => validator instanceof ValidatorFnFactory ? validator.valueOf()({...groupArgs, ...args}) : validator).filter(itm => !!itm),
+                                                   asyncValidators: groupAsyncValidators?.map(validator => validator instanceof AsyncValidatorFnFactory ? validator.valueOf()({...groupArgs, ...args}) : validator).filter(itm => !!itm)
+                                               });
 
     for(const propertyName of properties)
     {
