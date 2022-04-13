@@ -1,7 +1,6 @@
-import {Component, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, HostBinding, ElementRef, HostListener} from '@angular/core';
-import {transition, trigger, useAnimation} from '@angular/animations';
-import {fadeInAnimation, fadeOutAnimation} from '@anglr/animations';
+import {Component, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, ElementRef, HostListener} from '@angular/core';
 
+import {TooltipTemplateContext} from '../../directives';
 import {TooltipRenderer} from '../../misc/tooltip.interface';
 
 /**
@@ -12,20 +11,6 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
     selector: 'tooltip-popup',
     templateUrl: 'tooltip.component.html',
     styleUrls: ['tooltip.component.css'],
-    animations:
-    [
-        trigger('fadeInOut',
-        [
-            transition(':enter', 
-            [
-                useAnimation(fadeInAnimation, {params: {duration: '260ms'}})
-            ]),
-            transition(':leave', 
-            [
-                useAnimation(fadeOutAnimation, {params: {duration: '260ms'}})
-            ])
-        ])
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
@@ -52,7 +37,7 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
     /**
      * Template used for rendering tooltip
      */
-    public template: TemplateRef<TData>|null|undefined;
+    public template: TemplateRef<TooltipTemplateContext<TData>>|null|undefined;
 
     /**
      * Indication whether are html tags allowed in tooltip text
@@ -63,15 +48,6 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
      * Css class that is applied to tooltip renderer component
      */
     public cssClass: string|null|undefined;
-
-    //######################### public properties - host #########################
-
-    /**
-     * Attach fade in/out animation to element
-     * @internal
-     */
-    @HostBinding('@fadeInOut')
-    public animation: boolean = true;
 
     //######################### constructor #########################
     constructor(protected _changeDetector: ChangeDetectorRef,

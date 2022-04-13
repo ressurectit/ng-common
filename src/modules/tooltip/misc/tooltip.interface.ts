@@ -1,6 +1,8 @@
 import {TemplateRef, Type} from '@angular/core';
+import {AnimationMetadata} from '@angular/animations';
 
 import {PositionOptions} from '../../../services/position';
+import {TooltipTemplateContext} from '../directives';
 
 /**
  * Represents component that is used for rendering tooltip
@@ -17,7 +19,7 @@ export interface TooltipRenderer<TData = any>
     /**
      * Template used for rendering tooltip
      */
-    template: TemplateRef<TData>|null|undefined;
+    template: TemplateRef<TooltipTemplateContext<TData>>|null|undefined;
 
     /**
      * Indication whether are html tags allowed in tooltip text
@@ -78,4 +80,14 @@ export interface TooltipOptions
      * Type of tooltip renderer that is used for rendering tooltip
      */
     tooltipRenderer: Type<TooltipRenderer>;
+
+    /**
+     * Animation used to tooltip component when it is displayed
+     */
+    enterAnimation: AnimationMetadata;
+
+    /**
+     * Animation used to tooltip component when it is hidden
+     */
+    exitAnimation: AnimationMetadata;
 }

@@ -6,7 +6,8 @@
 
 - new `KeysPipe` pipe, that gets object keys/property names
 - updated `CommonUtilsModule`
-   - added `KeysPipe` to this module
+   - **exports**
+      - `KeysPipe` pipe
 - updated `ClickOutsideDirective` directive
    - now allows `clickOutside` *input* to be set to `''`, allows using empty `clickOutside` binding
 - new **Tooltip** module (based on `Position` service)
@@ -24,6 +25,8 @@
       - **content**
          - child `TooltipTemplateDirective` instance of template from element content, used for rendering
    - new `TooltipTemplateDirective` directive used for obtaining custom tooltip template
+   - new `TooltipTemplateContext` interface, that is context passed to template of tooltip
+      - property `$implicit` data that should be displayed in tooltip
    - new `TooltipComponent` component used for displaying tooltip content
       - implementation of `TooltipRenderer`
    - new `TOOLTIP_OPTIONS` injection token used for injecting tooltip options
@@ -41,6 +44,8 @@
       - property `tooltipCssClass` css class that is applied to tooltip renderer component
       - property `stopPropagation` indication whether stop propagation of "hover" event
       - property `tooltipRenderer` type of tooltip renderer that is used for rendering tooltip
+      - property `enterAnimation` animation used to tooltip component when it is displayed
+      - property `exitAnimation` animation used to tooltip component when it is hidden
 - *subpackage* `@anglr/common/material`
    - **TITLED DIALOG**
       - new `TitledDialogServiceOptions` class that represents, options for `TitledDialogService`
@@ -51,10 +56,11 @@
       - new `MovableTitledDialogModule` module for components for displaying movable titled dialog
 - *subpackage* `@anglr/common/forms`
    - new `ErrorMessageModule` module for error message directives, pipes and components
-      - added `WithErrorMessagePipe` pipe to this module
-      - added `GroupErrorsTemplateDirective` directive to this module
-      - added `ErrorMessageDirective` directive to this module
-      - added `GroupErrorsComponent` directive to this module
+      - **exports**
+         - `WithErrorMessagePipe` pipe
+         - `GroupErrorsTemplateDirective` directive
+         - `ErrorMessageDirective` directive
+         - `GroupErrorsComponent` directive
    - new `WithErrorMessagePipe` pipe, that filters array of errors with messages
    - new `GroupErrorsTemplateContext` interface, that is context passed to template of group error
       - `$implicit` name/code of error
@@ -262,7 +268,7 @@
 - added *subpackage* `@anglr/common/date-fns`
 - *subpackage* `@anglr/common/date-fns`
    - `readEncodedFilterWithDates` function that reads filter value from encoded string, deserialize date properties into date
-- *subpackage* `@anglr/common/moment` 
+- *subpackage* `@anglr/common/moment`
    - added new `readEncodedFilterWithDates` function that reads filter value from encoded string, deserialize date properties into moment
 - *subpackage* `@anglr/common/store`
    - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
@@ -427,7 +433,7 @@
 - added *subpackage* `@anglr/common/date-fns`
 - *subpackage* `@anglr/common/date-fns`
    - `readEncodedFilterWithDates` function that reads filter value from encoded string, deserialize date properties into date
-- *subpackage* `@anglr/common/moment` 
+- *subpackage* `@anglr/common/moment`
    - added new `readEncodedFilterWithDates` function that reads filter value from encoded string, deserialize date properties into moment
 - *subpackage* `@anglr/common/store`
    - added new `SessionTemporaryStorageService` as `TemporaryStorage` implementation using *Session*
@@ -710,7 +716,7 @@
    - removed static class `Utils` and all its parts except `runWhenModuleStable`, `APP_STABLE`, `extractAppStableResolve` which are exported independently
 
 ## Version 6.1.0
- 
+
  - created *subpackage* `@anglr/common/hmr` containing new HMR `hmrAccept` and `hmrFinishedNotification`
     - `hmrAccept` and `hmrFinishedNotification` in `@anglr/common/` are deprecated
  - added new decorator `ModuleRoutes` used with Angular IVY for setting routes to module combining with `ComponentRoute` and `ComponentRedirectRoute` decorators
@@ -814,7 +820,7 @@
 ## Version 4.0.4
 
 - returned typescript version back to 2.4.2 and removed distJit
- 
+
 ## Version 4.0.3
 
 - changed order of constructor parameters for ProgressIndicatorService

@@ -1,5 +1,7 @@
 import {ComponentRef, ContentChild, Directive, ElementRef, EmbeddedViewRef, HostListener, Inject, Injector, Input, OnChanges, OnDestroy, Optional, SimpleChanges, TemplateRef, ViewContainerRef} from '@angular/core';
+import {AnimationBuilder, AnimationFactory} from '@angular/animations';
 import {DOCUMENT} from '@angular/common';
+import {fadeInAnimation, fadeOutAnimation} from '@anglr/animations';
 import {extend, isBlank, isPresent, nameof} from '@jscrpt/common';
 
 import {TooltipComponent} from '../../components/tooltip/tooltip.component';
@@ -7,6 +9,7 @@ import {TooltipOptions, TooltipRenderer} from '../../misc/tooltip.interface';
 import {TOOLTIP_OPTIONS} from '../../misc/tokens';
 import {applyPositionResult, Position, PositionOffset, PositionPlacement} from '../../../../services/position';
 import {TooltipTemplateDirective} from '../tooltipTemplate/tooltipTemplate.directive';
+import {TooltipTemplateContext} from '../tooltipTemplate/tooltipTemplate.context';
 import {POSITION} from '../../../../types/tokens';
 
 /**
@@ -23,7 +26,9 @@ const defaultOptions: TooltipOptions =
     allowSelection: false,
     tooltipRenderer: TooltipComponent,
     tooltipCssClass: null,
-    stopPropagation: false
+    stopPropagation: false,
+    enterAnimation: fadeInAnimation,
+    exitAnimation: fadeOutAnimation,
 };
 
 /**
@@ -46,6 +51,16 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      * Instance of HTML element for tooltip renderer
      */
     protected _tooltipElement?: HTMLElement;
+
+    /**
+     * Animation factory used for enter animation of tooltip
+     */
+    protected _enterAnimation: AnimationFactory;
+
+    /**
+     * Animation factory used for exit animation of tooltip
+     */
+    protected _exitAnimation: AnimationFactory;
 
     /**
      * Instance of options provided for this tooltip
@@ -85,7 +100,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      * Instance of tooltip template that is used for rendering
      */
     @Input()
-    public tooltipTemplate?: TemplateRef<TData>;
+    public tooltipTemplate?: TemplateRef<TooltipTemplateContext<TData>>;
 
     /**
      * Options used for displaying tooltip
@@ -98,6 +113,9 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     public set tooltipOptions(value: Partial<TooltipOptions>)
     {
         this._options = extend(true, {}, this._options, value);
+
+        this._enterAnimation = this._animationsPlayer.build(this._options.enterAnimation);
+        this._exitAnimation = this._animationsPlayer.build(this._options.exitAnimation);
     }
 
     /**
@@ -118,11 +136,15 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     constructor(protected _viewContainerRef: ViewContainerRef,
                 protected _injector: Injector,
                 protected _element: ElementRef<HTMLElement>,
+                protected _animationsPlayer: AnimationBuilder,
                 @Inject(DOCUMENT) protected _document: Document,
                 @Inject(POSITION) protected _position: Position,
-                @Optional() @Inject(TOOLTIP_OPTIONS) options?: Partial<TooltipOptions>)
+                @Optional() @Inject(TOOLTIP_OPTIONS) options?: Partial<TooltipOptions>,)
     {
         this._options = extend(true, {}, defaultOptions, options);
+
+        this._enterAnimation = this._animationsPlayer.build(this._options.enterAnimation);
+        this._exitAnimation = this._animationsPlayer.build(this._options.exitAnimation);
     }
 
     //######################### public methods - implementation of OnChanges #########################
@@ -268,9 +290,21 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     {
         if(this._tooltipComponent)
         {
-            this._tooltipComponent.destroy();
+            const component = this._tooltipComponent;
+            const element = this._tooltipElement;
+
+            const exitAnimation = this._exitAnimation.create(element);
+
+            exitAnimation.onDone(() =>
+            {
+                component.destroy();
+                exitAnimation.destroy();
+            });
+            
             this._tooltipComponent = undefined;
             this._tooltipElement = undefined;
+
+            exitAnimation.play();
         }
     }
 
@@ -295,6 +329,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
 
         // 4. Append DOM element to the body
         this._document.body.appendChild(this._tooltipElement);
+        this._enterAnimation.create(this._tooltipElement).play();
     }
 
     /**

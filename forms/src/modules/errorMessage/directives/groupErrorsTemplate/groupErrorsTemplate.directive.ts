@@ -1,6 +1,6 @@
 import {Directive, TemplateRef} from '@angular/core';
 
-import {GroupErrorsTemplateContext} from './groupErrorTemplate.context';
+import {GroupErrorsTemplateContext} from './groupErrorsTemplate.context';
 
 /**
  * Obtains template for displaying form group error
