@@ -1,12 +1,14 @@
 # Changelog
 
-## Version 11.3.0 (2022-04-12)
+## Version 11.3.0 (2022-04-13)
 
 ### Features
 
 - new `KeysPipe` pipe, that gets object keys/property names
 - updated `CommonUtilsModule`
    - added `KeysPipe` to this module
+- updated `ClickOutsideDirective` directive
+   - now allows `clickOutside` *input* to be set to `''`, allows using empty `clickOutside` binding
 - new **Tooltip** module (based on `Position` service)
    - new `TooltipModule` module for rendering tooltips
       - **exports**

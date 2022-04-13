@@ -1,23 +1,44 @@
 import {Directive, OnInit, OnDestroy, Input, EventEmitter, Output, ElementRef, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
-import {isDescendant} from '@jscrpt/common';
+import {isDescendant, isString} from '@jscrpt/common';
 
 /**
  * Directive that handles click outside of element
  */
 @Directive(
-    {
-        selector: '[clickOutside]'
-    })
+{
+    selector: '[clickOutside]'
+})
 export class ClickOutsideDirective implements OnInit, OnDestroy
 {
+    //######################### protected fields #########################
+
+    /**
+     * Variable that is used for displaying element that handles click outside
+     */
+    protected _clickOutsideCondition: boolean;
+
     //######################### public properties - inputs #########################
 
     /**
      * Variable that is used for displaying element that handles click outside
      */
     @Input('clickOutside')
-    public clickOutsideCondition: boolean;
+    public get clickOutsideCondition(): boolean
+    {
+        return this._clickOutsideCondition;
+    }
+    public set clickOutsideCondition(value: boolean)
+    {
+        if(isString(value) && value === '')
+        {
+            this._clickOutsideCondition = true;
+
+            return;
+        }
+
+        this._clickOutsideCondition = value;
+    }
 
     /**
      * Additional element that is checked for click
@@ -34,8 +55,8 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
     public clickOutsideConditionChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //######################### constructor #########################
-    constructor(private _element: ElementRef<HTMLElement>,
-                @Inject(DOCUMENT) private _document: Document)
+    constructor(protected _element: ElementRef<HTMLElement>,
+                @Inject(DOCUMENT) protected _document: Document)
     {
     }
 
@@ -59,7 +80,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
         this._document.removeEventListener('mouseup', this._handleClickOutside);
     }
 
-    //######################### private methods #########################
+    //######################### protected methods #########################
 
     /**
      * Handles click outside of element
@@ -76,4 +97,11 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
             this.clickOutsideConditionChange.emit(this.clickOutsideCondition);
         }
     }
+
+    //######################### ng language server #########################
+    
+    /**
+     * Custom input type for `clickOutsideCondition` input
+     */
+    public static ngAcceptInputType_clickOutsideCondition: boolean|'';
 }
