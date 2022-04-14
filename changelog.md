@@ -42,6 +42,17 @@
    - new `DefaultValidationErrorsComponent` component, that is default validation errors component, displaying validation errors
       - implements `ValidationErrorsComponent` interface
       - default value for `ValidationErrorRendererFactory`
+   - new `GroupHasErrorContainerDirective` directive, that is attached to parent element of inputs group and handles css class that is added to this element and registers provider for ValidationErrorsContainerView
+   - new `ValidationErrorsContainerDirective` directive, that sets view container for validation errors for current element
+   - updated `HasErrorModule` module
+      - **exports**
+         - `GroupHasErrorContainerDirective` directive
+         - `ValidationErrorsContainerDirective` directive
+   - updated `HasErrorDirective` directive
+      - **inputs**
+         - `errorsComponent` custom component used for rendering validation errors
+         - `errorsTemplate` custom template used for rendering validation errors
+   - new `ReservedSpaceValidationErrorsContainerComponent` component, that serves as container for validation errors, either component or templates with reserved space for errors
 
 ### BREAKING CHANGES
 

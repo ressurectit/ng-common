@@ -1,11 +1,11 @@
-import {Directive, ElementRef, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector, ViewContainerRef} from '@angular/core';
+import {Directive, ElementRef, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector, ViewContainerRef, AfterViewInit, Type, TemplateRef} from '@angular/core';
 import {FormControlDirective, FormControlName, FormControl, NgModel} from '@angular/forms';
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {generateId, BindThis, StringDictionary} from '@jscrpt/common';
 import {Subscription} from 'rxjs';
 
 import {ValidationErrorRendererFactory} from '../../services/validationErrorRenderer/validationErrorRenderer.service';
-import {ValidationErrorRenderer} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
+import {ValidationErrorRenderer, ValidationErrorsComponent, ValidationErrorsRendererOptions, ValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
 import {SubmittedService} from '../../services/submitted/submitted.service';
 import {GroupHasErrorDirective} from '../groupHasError/groupHasError.directive';
 import {ValidationErrorsContainerView} from '../../misc/validationErrorsContainerView';
@@ -19,7 +19,7 @@ import {ValidationErrorsContainerView} from '../../misc/validationErrorsContaine
 {
     selector: '[hasError]'
 })
-export class HasErrorDirective implements OnInit, OnDestroy
+export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
 {
     //######################### private fields #########################
 
@@ -73,6 +73,18 @@ export class HasErrorDirective implements OnInit, OnDestroy
     @Input()
     public errorMessages: StringDictionary;
 
+    /**
+     * Custom component used for rendering validation errors
+     */
+    @Input()
+    public errorsComponent?: Type<ValidationErrorsComponent>;
+
+    /**
+     * Custom template used for rendering validation errors
+     */
+    @Input()
+    public errorsTemplate?: TemplateRef<ValidationErrorsTemplateContext>;
+
     //######################### constructor #########################
     constructor(private _element: ElementRef<HTMLElement>,
                 private _rendererFactory: ValidationErrorRendererFactory,
@@ -100,20 +112,28 @@ export class HasErrorDirective implements OnInit, OnDestroy
 
         this._registerMutationObserver();
 
-        this.renderer = this._rendererFactory.create(this.control,
-                                                     this._containerView,
-                                                     this._injector,
-                                                     this._isSubmittedOrDirty);
-
         this._subscriptions.add(this._stringLocalization.textsChange.subscribe(() => this._updateStatus()));
         this._subscriptions.add(this.control.statusChanges.subscribe(() => this._updateStatus()));
-
-        this._updateStatus();
 
         if(this._submittedSvc)
         {
             this._subscriptions.add(this._submittedSvc.submittedChange.subscribe(() => this._isSubmittedOrDirty(() => this._updateStatus())));
         }
+    }
+
+    //######################### public methods - implementation of AfterViewInit #########################
+    
+    /**
+     * Called when view was initialized
+     */
+    public ngAfterViewInit(): void
+    {
+        this.renderer = this._rendererFactory.create(this.control,
+                                                     this._containerView,
+                                                     this._injector,
+                                                     this._isSubmittedOrDirty);
+
+        this._updateStatus();
     }
 
     //######################### public methods - implementation of OnDestroy #########################
@@ -137,8 +157,24 @@ export class HasErrorDirective implements OnInit, OnDestroy
      */
     private _updateStatus(): void
     {
+        if(!this.renderer)
+        {
+            return;
+        }
+
+        const opts: ValidationErrorsRendererOptions = {};
+
+        if(this.errorsTemplate)
+        {
+            opts.template = this.errorsTemplate;
+        }
+        else if(this.errorsComponent)
+        {
+            opts.component = this.errorsComponent;
+        }
+
         this._previousDirty = this.control.dirty;
-        this._hasErrors = this.renderer.update({}, this.errorMessages);
+        this._hasErrors = this.renderer.update(opts, this.errorMessages);
         this._toggleGroupHasError();
     }
 

@@ -1,5 +1,6 @@
 import {Component, ChangeDetectionStrategy, Optional, OnInit, OnDestroy, ChangeDetectorRef, Input, ContentChild} from '@angular/core';
 import {FormControlStatus, FormGroup, FormGroupDirective, FormGroupName} from '@angular/forms';
+import {slideInOutTrigger} from '@anglr/animations';
 import {Subscription} from 'rxjs';
 
 import {GroupErrorsTemplateDirective} from '../../directives';
@@ -11,6 +12,7 @@ import {GroupErrorsTemplateDirective} from '../../directives';
 {
     selector: 'form-group-errors',
     templateUrl: 'groupErrors.component.html',
+    animations: [slideInOutTrigger],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupErrorsComponent implements OnInit, OnDestroy

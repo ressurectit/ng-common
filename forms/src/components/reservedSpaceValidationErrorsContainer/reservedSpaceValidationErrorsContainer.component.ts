@@ -1,19 +1,21 @@
-import {Component, ChangeDetectionStrategy, ViewContainerRef, ComponentRef, EmbeddedViewRef} from '@angular/core';
+import {Component, ChangeDetectionStrategy, ViewContainerRef, ComponentRef, EmbeddedViewRef, ViewChild} from '@angular/core';
 
 import {ValidationErrorsResult} from '../../services/errorMessagesExtractor/errorMessagesExtractor.interface';
 import {ValidationErrorsComponent, ValidationErrorsContainerComponent, ValidationErrorsContainerOptions, ValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
 
+//TODO: optimize duplicit code
+
 /**
- * Component that serves as container for validation errors, either component or templates
+ * Component that serves as container for validation errors, either component or templates with reserved space for errors
  */
 @Component(
 {
-    selector: 'default-validation-errors-container',
-    template: '',
-    styleUrls: ['defaultValidationErrorsContainer.component.css'],
+    selector: 'reserved-space-validation-errors-container',
+    templateUrl: 'reservedSpaceValidationErrorsContainer.component.html',
+    styleUrls: ['reservedSpaceValidationErrorsContainer.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultValidationErrorsContainerComponent implements ValidationErrorsContainerComponent
+export class ReservedSpaceValidationErrorsContainerComponent implements ValidationErrorsContainerComponent
 {
     //######################### protected fields #########################
 
@@ -39,10 +41,13 @@ export class DefaultValidationErrorsContainerComponent implements ValidationErro
      */
     protected _template: EmbeddedViewRef<ValidationErrorsTemplateContext>;
 
-    //######################### constructor #########################
-    constructor(protected _viewContainer: ViewContainerRef)
-    {
-    }
+    //######################### public properties - children #########################
+
+    /**
+     * View container for rendering validation errors
+     */
+    @ViewChild('container', {static: true, read: ViewContainerRef})
+    public viewContainer: ViewContainerRef;
 
     //######################### public methods - implementation of  #########################
 
@@ -76,7 +81,7 @@ export class DefaultValidationErrorsContainerComponent implements ValidationErro
      */
     public hide(): void
     {
-        this._viewContainer.clear();
+        this.viewContainer.clear();
         this._component = null;
         this._template = null;
     }
@@ -90,7 +95,7 @@ export class DefaultValidationErrorsContainerComponent implements ValidationErro
     {
         if(!this._component)
         {
-            this._component = this._viewContainer.createComponent(this._options.component);
+            this._component = this.viewContainer.createComponent(this._options.component);
         }
 
         this._component.instance.show(this._errors, this._options);
@@ -103,7 +108,7 @@ export class DefaultValidationErrorsContainerComponent implements ValidationErro
     {
         if(!this._template)
         {
-            this._template = this._viewContainer.createEmbeddedView(this._options.template,
+            this._template = this.viewContainer.createEmbeddedView(this._options.template,
             {
                 $implicit: this._errors,
                 options: this._options

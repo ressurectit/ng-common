@@ -1,4 +1,5 @@
 export * from './components';
+export * from './directives';
 export * from './directives/numberInput/maxValueNumberValidator.directive';
 export * from './directives/numberInput/minValueNumberValidator.directive';
 export * from './directives/numberInput/numberInputValidator.directive';
