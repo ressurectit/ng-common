@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector} from '@angular/core';
+import {Directive, ElementRef, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector, ViewContainerRef} from '@angular/core';
 import {FormControlDirective, FormControlName, FormControl, NgModel} from '@angular/forms';
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {generateId, BindThis, StringDictionary} from '@jscrpt/common';
@@ -8,6 +8,7 @@ import {ValidationErrorRendererFactory} from '../../services/validationErrorRend
 import {ValidationErrorRenderer} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
 import {SubmittedService} from '../../services/submitted/submitted.service';
 import {GroupHasErrorDirective} from '../groupHasError/groupHasError.directive';
+import {ValidationErrorsContainerView} from '../../misc/validationErrorsContainerView';
 
 //TODO - add support for setting renderer factory options using input
 
@@ -75,11 +76,13 @@ export class HasErrorDirective implements OnInit, OnDestroy
     //######################### constructor #########################
     constructor(private _element: ElementRef<HTMLElement>,
                 private _rendererFactory: ValidationErrorRendererFactory,
+                private _viewContainer: ViewContainerRef,
                 @Optional() @SkipSelf() private _groupHasError: GroupHasErrorDirective,
                 @Optional() private _formControl: FormControlDirective,
                 @Optional() private _formControlName: FormControlName,
                 @Optional() private _ngModel: NgModel,
                 @Optional() private _submittedSvc: SubmittedService,
+                @Optional() private _containerView: ValidationErrorsContainerView,
                 @Inject(STRING_LOCALIZATION) protected _stringLocalization: StringLocalization,
                 protected _injector: Injector)
     {
@@ -92,14 +95,15 @@ export class HasErrorDirective implements OnInit, OnDestroy
      */
     public ngOnInit(): void
     {
+        this._containerView ??= new ValidationErrorsContainerView();
+        this._containerView.viewContainer ??= this._viewContainer;
+
         this._registerMutationObserver();
 
         this.renderer = this._rendererFactory.create(this.control,
-                                                     this._element.nativeElement,
+                                                     this._containerView,
                                                      this._injector,
-                                                     this._isSubmittedOrDirty,
-                                                     {
-                                                     });
+                                                     this._isSubmittedOrDirty);
 
         this._subscriptions.add(this._stringLocalization.textsChange.subscribe(() => this._updateStatus()));
         this._subscriptions.add(this.control.statusChanges.subscribe(() => this._updateStatus()));
@@ -134,7 +138,7 @@ export class HasErrorDirective implements OnInit, OnDestroy
     private _updateStatus(): void
     {
         this._previousDirty = this.control.dirty;
-        this._hasErrors = this.renderer.update(this.errorMessages);
+        this._hasErrors = this.renderer.update({}, this.errorMessages);
         this._toggleGroupHasError();
     }
 

@@ -4,6 +4,7 @@ import {StringDictionary} from '@jscrpt/common';
 
 import {ErrorMessagesExtractor} from '../errorMessagesExtractor/errorMessagesExtractor.service';
 import {ValidationErrorsResult} from '../errorMessagesExtractor/errorMessagesExtractor.interface';
+import {ValidationErrorsContainerView} from '../../misc/validationErrorsContainerView';
 
 /**
  * Describes function that is used for performing actions when form is submitted or dirty
@@ -26,9 +27,10 @@ export interface ValidationErrorsComponent
 {
     /**
      * Shows validation errors in component
-     * @param errors - Errors to be shown, or null if to be hidden
+     * @param errors - Errors to be shown
+     * @param options - Options used for displaying validation errors
      */
-    show(errors: ValidationErrorsResult): void;
+    show(errors: ValidationErrorsResult, options: ValidationErrorsOptions): void;
 }
 
 /**
@@ -40,12 +42,35 @@ export interface ValidationErrorsTemplateContext
      * Errors to be shown
      */
     $implicit: ValidationErrorsResult;
+
+    /**
+     * Options used for displaying validation errors
+     */
+    options: ValidationErrorsOptions;
 }
 
 /**
- * Options for ValidationErrorRenderer
+ * Component that is used for rendering validation errors container
  */
-export interface ValidationErrorsRendererOptions
+export interface ValidationErrorsContainerComponent
+{
+    /**
+     * Shows validation errors
+     * @param errors - Errors to be shown
+     * @param options - Options used for displaying validation errors
+     */
+    show(errors: ValidationErrorsResult, options: ValidationErrorsContainerOptions): void;
+
+    /**
+     * Hides validation errors
+     */
+    hide(): void;
+}
+
+/**
+ * Options for displayed validation errors
+ */
+export interface ValidationErrorsOptions
 {
     /**
      * Prefix of css classes applied to element
@@ -61,7 +86,13 @@ export interface ValidationErrorsRendererOptions
      * Css class attached to wrapper div
      */
     wrapperDivClass?: string;
+}
 
+/**
+ * Options for validation errors container
+ */
+export interface ValidationErrorsContainerOptions extends ValidationErrorsOptions
+{
     /**
      * Component used for rendering validation errors
      */
@@ -71,6 +102,17 @@ export interface ValidationErrorsRendererOptions
      * Template used for rendering validation errors
      */
     template?: TemplateRef<ValidationErrorsTemplateContext>;
+}
+
+/**
+ * Options for ValidationErrorRenderer
+ */
+export interface ValidationErrorsRendererOptions extends ValidationErrorsContainerOptions
+{
+    /**
+     * Component used for rendering validation errors container
+     */
+    container?: Type<ValidationErrorsContainerComponent>;
 }
 
 /**
@@ -93,16 +135,14 @@ export interface ValidationErrorRendererCtor
      * Creates instance of ValidationErrorRenderer
      * @param errorMessagesExtractor - Instance of service used for extracting errors from control
      * @param control - Control that is being processed for errors
-     * @param controlElement - Html element that represents control that is being processed
-     * @param document - Html document instance, used for manipulation with html
+     * @param containerView - Class that stores view container for rendering errors
      * @param injector - Injector used for obtaining dependencies
      * @param isSubmittedOrDirty - Function used for testing if control is submitted or dirty
      * @param options - Options for validation errors renderer
      */
     new(errorMessagesExtractor: ErrorMessagesExtractor,
         control: FormControl,
-        controlElement: HTMLElement,
-        document: Document,
+        containerView: ValidationErrorsContainerView,
         injector: Injector,
         isSubmittedOrDirty: IsSubmittedOrDirtyFunc,
         options: ValidationErrorsRendererOptions): ValidationErrorRenderer;
@@ -114,18 +154,14 @@ export interface ValidationErrorRendererCtor
 export interface ValidationErrorRenderer
 {
     /**
-     * Html element that is wrapping errors
-     */
-    wrapperElement: HTMLElement;
-
-    /**
      * Destroys renderer and everything that was rendered
      */
     destroy(): void;
     
     /**
      * Updates rendered errors for current state and returns true if errors were rendered, otherwise false
+     * @param options - Options for validation errors renderer
      * @param errorMessages - Object storing error messages to be used as override
      */
-    update(errorMessages?: StringDictionary): boolean;
+    update(options: ValidationErrorsRendererOptions, errorMessages?: StringDictionary): boolean;
 }

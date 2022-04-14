@@ -1,3 +1,4 @@
+export * from './components';
 export * from './directives/numberInput/maxValueNumberValidator.directive';
 export * from './directives/numberInput/minValueNumberValidator.directive';
 export * from './directives/numberInput/numberInputValidator.directive';
@@ -13,6 +14,7 @@ export * from './services/validationErrorRenderer/validationErrorRenderer.servic
 export * from './misc/validators';
 export * from './misc/utils';
 export * from './misc/tokens';
+export * from './misc/validationErrorsContainerView';
 export * from './modules/numberInput.module';
 export * from './modules/hasError.module';
 export * from './modules/requiredClass.module';

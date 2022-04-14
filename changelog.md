@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 12.0.0 (2022-04-13)
+## Version 12.0.0 (2022-04-14)
 
 ### Bug Fixes
 
@@ -19,15 +19,49 @@
    - updated `ErrorMessagesExtractor` service
       - now supports `IGNORED_VALIDATION_ERRORS`
       - now allows to display validation error 'value' if it is `string`
+   - new `ValidationErrorsOptions` interface, that are options for displayed validation errors
+      - created super interface for `ValidationErrorsContainerOptions`
+      - property `prefix` prefix of css classes applied to element
+      - property `suffix` suffix of css classes applied to element
+      - property `wrapperDivClass` css class attached to wrapper div
+   - new `ValidationErrorsContainerOptions` interface, that are options for validation errors container
+      - created super interface for `ValidationErrorsRendererOptions`
+      - property `component` component used for rendering validation errors
+      - property `template` template used for rendering validation errors
+   - updated `ValidationErrorsTemplateContext` interface
+      - property `options` options used for displaying validation errors
+   - new `ValidationErrorsContainerComponent` interface, that is component that is used for rendering validation errors container
+      - method `show` shows validation errors
+      - method `hide` hides validation errors
+   - new `ValidationErrorsContainerView` class, that holds validation errors view container
+      - property `viewContainer` gets or sets current instance of view container
+      - property `viewContainerChange` occurs when view container instance changes
+   - new `DefaultValidationErrorsContainerComponent` component, that serves as container for validation errors, either component or templates
+      - implements `ValidationErrorsContainerComponent` interface
+      - default value for `ValidationErrorRendererFactory`
+   - new `DefaultValidationErrorsComponent` component, that is default validation errors component, displaying validation errors
+      - implements `ValidationErrorsComponent` interface
+      - default value for `ValidationErrorRendererFactory`
 
 ### BREAKING CHANGES
 
 - `ValidationErrorRenderer` interface
-   - `update` method, has now only one parameter
+   - `update` method, parameters has changed
+   - removed `wrapperElement`
 - `ValidationErrorRendererFactory` service
+   - changed constructor parameters
+- `DefaultValidationErrorRenderer` class
    - now implements updated `ValidationErrorRenderer`
+   - completely refactored
+   - now using `ValidationErrorsContainerComponent` for rendering errors
 - `ErrorMessagesExtractor` service
    - changed constructor parameters
+- `HasErrorDirective` directive
+   - changed constructor parameters
+- `ValidationErrorsComponent` interface
+   - `show` now has new parameter *options*
+- `ValidationErrorRendererCtor` interface
+   - `ctor` has changed parameters
 
 ## Version 11.3.1 (2022-04-13)
 

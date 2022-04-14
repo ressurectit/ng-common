@@ -60,7 +60,7 @@ export class ErrorMessagesExtractor
 
         const result: ValidationErrorsResult =
         {
-            errors: Object.keys(control.errors).filter(itm => this._ignoredValidationErrors.indexOf(itm) >= 0),
+            errors: Object.keys(control.errors).filter(itm => this._ignoredValidationErrors.indexOf(itm) < 0),
             errorMessages: []
         };
 
