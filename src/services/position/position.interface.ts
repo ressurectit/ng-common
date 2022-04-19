@@ -77,6 +77,11 @@ export interface PositionResult<TElement extends Element = any>
     y: number;
 
     /**
+     * Indication whether there was flip applied
+     */
+    flip: boolean;
+
+    /**
      * Disposes instance of engine used for positioning
      */
     dispose(): void;

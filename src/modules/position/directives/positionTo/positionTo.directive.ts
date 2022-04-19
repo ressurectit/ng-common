@@ -1,4 +1,4 @@
-import {Directive, Input, ElementRef, OnChanges, SimpleChanges, Inject} from '@angular/core';
+import {Directive, Input, ElementRef, OnChanges, SimpleChanges, Inject, Output, EventEmitter} from '@angular/core';
 import {nameof, isPresent, isString} from '@jscrpt/common';
 
 import {applyPositionResult, Position, PositionPlacement, PositionOptions} from '../../../../services/position';
@@ -69,11 +69,11 @@ export class PositionToDirective implements OnChanges
 
     // //######################### public properties - outputs #########################
 
-    // /**
-    //  * Occurs when flip occurs during positioning
-    //  */
-    // @Output()
-    // public flip: EventEmitter<void> = new EventEmitter<void>();
+    /**
+     * Occurs when flip occurs during positioning
+     */
+    @Output()
+    public flip: EventEmitter<void> = new EventEmitter<void>();
 
     //######################### constructor #########################
     constructor(protected _target: ElementRef<HTMLElement>,
@@ -117,6 +117,11 @@ export class PositionToDirective implements OnChanges
                                                          options).toPromise();
 
         applyPositionResult(result);
+
+        if(result.flip)
+        {
+            this.flip.next();
+        }
     }
 
     //######################### ng language server #########################

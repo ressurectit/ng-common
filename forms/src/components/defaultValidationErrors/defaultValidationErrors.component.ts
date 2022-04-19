@@ -1,11 +1,8 @@
 import {Component, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding} from '@angular/core';
-import {animateChild, query, transition, trigger} from '@angular/animations';
-import {slideInOutTrigger} from '@anglr/animations';
+import {slideInOutTrigger, animateChildrenTrigger} from '@anglr/animations';
 
 import {ValidationErrorsResult} from '../../services/errorMessagesExtractor/errorMessagesExtractor.interface';
 import {ValidationErrorsComponent, ValidationErrorsOptions} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
-
-//TODO: move animation to common
 
 /**
  * Default validation errors component, displaying validation errors
@@ -18,13 +15,7 @@ import {ValidationErrorsComponent, ValidationErrorsOptions} from '../../services
     animations: 
     [
         slideInOutTrigger,
-        trigger('componentContent',
-        [
-            transition(':enter, :leave',
-            [
-                query('@*', animateChild(), {optional: true})
-            ])
-        ])
+        animateChildrenTrigger
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -49,7 +40,7 @@ export class DefaultValidationErrorsComponent implements ValidationErrorsCompone
     /**
      * Enables leave animations for internal stuff
      */
-    @HostBinding('@componentContent')
+    @HostBinding('@animateChildren')
     public animate: boolean = true;
 
     //######################### constructor #########################

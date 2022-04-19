@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 12.0.0 (2022-04-14)
+## Version 12.0.0 (2022-04-19)
 
 ### Bug Fixes
 
@@ -56,6 +56,7 @@
 
 ### BREAKING CHANGES
 
+- minimal supported version of `@anglr/animations` is `9.1.0`
 - `ValidationErrorRenderer` interface
    - `update` method, parameters has changed
    - removed `wrapperElement`
@@ -73,6 +74,22 @@
    - `show` now has new parameter *options*
 - `ValidationErrorRendererCtor` interface
    - `ctor` has changed parameters
+- **Position**
+   - updated `PositionResult`
+      - property `flip` indication whether there was flip applied
+- *subpackage* `@anglr/common/positions`
+   - **Tooltip**
+      - all tooltip is replaced with more customizable tooltip based on `Position` service
+      - removed `TooltipModule`
+      - removed `TooltipComponent`
+      - removed `TooltipDirective`
+      - removed `TOOLTIP_OPTIONS`
+      - removed `TooltipRenderer`
+      - removed `TooltipRenderer`
+   - **Position to**
+      - all position to is replaced with more customizable position to based on `Position` service
+      - removed `PositionToDirective`
+      - removed `PositionsModule`
 
 ## Version 11.3.1 (2022-04-13)
 

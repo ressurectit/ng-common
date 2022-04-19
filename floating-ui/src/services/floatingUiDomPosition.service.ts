@@ -1,6 +1,6 @@
 import {ClassProvider, Injectable} from '@angular/core';
 import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION} from '@anglr/common';
-import {extend} from '@jscrpt/common';
+import {extend, isEmptyObject} from '@jscrpt/common';
 import {computePosition, Placement, autoUpdate, Middleware, offset, flip} from '@floating-ui/dom';
 import {Observable} from 'rxjs';
 
@@ -53,6 +53,7 @@ export class FloatingUiDomPosition implements Position
                         {
                             target,
                             dispose,
+                            flip: !!result.middlewareData.flip && !isEmptyObject(result.middlewareData.flip),
                             x: result.x,
                             y: result.y
                         });
@@ -93,6 +94,7 @@ export class FloatingUiDomPosition implements Position
                 {
                     target,
                     dispose,
+                    flip: !!result.middlewareData.flip && !isEmptyObject(result.middlewareData.flip),
                     x: result.x,
                     y: result.y
                 });
