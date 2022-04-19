@@ -1,5 +1,17 @@
 # Changelog
 
+## Version 13.0.0 (2022-04-19)
+
+### Bug Fixes
+
+- fixed conflict in selectors for `TooltipTemplateDirective` and `TooltipDirective` `tooltipTemplate` input
+
+### BREAKING CHANGES
+
+- updated `TooltipDirective` directive
+   - **inputs**
+      - property `tooltipTemplate` renamed to `template`
+
 ## Version 12.0.0 (2022-04-19)
 
 ### Bug Fixes

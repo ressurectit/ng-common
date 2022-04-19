@@ -100,7 +100,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      * Instance of tooltip template that is used for rendering
      */
     @Input()
-    public tooltipTemplate?: TemplateRef<TooltipTemplateContext<TData>>;
+    public template?: TemplateRef<TooltipTemplateContext<TData>>;
 
     /**
      * Options used for displaying tooltip
@@ -341,7 +341,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
         {
             this._tooltipComponent.instance.allowHtml = this.allowHtml;
             this._tooltipComponent.instance.data = this.tooltip;
-            this._tooltipComponent.instance.template = this.tooltipTemplate ?? this.tooltipTemplateChild?.template;
+            this._tooltipComponent.instance.template = this.template ?? this.tooltipTemplateChild?.template;
             this._tooltipComponent.instance.cssClass = this._options.tooltipCssClass;
 
             this._tooltipComponent.instance.registerHoverEvents(() =>
