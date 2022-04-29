@@ -174,6 +174,11 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      */
     public ngOnDestroy(): void
     {
+        if(this._timeout)
+        {
+            clearTimeout(this._timeout);
+        }
+
         this._destroyTooltip();
     }
 

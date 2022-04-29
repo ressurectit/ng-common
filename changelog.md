@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 13.0.1 (2022-04-29)
+
+### Bug Fixes
+
+- fixed problem with tooltip staying displayed after usually page change
+
 ## Version 13.0.0 (2022-04-19)
 
 ### Bug Fixes
