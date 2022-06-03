@@ -1,3 +1,4 @@
+import {AsyncValidatorFn, ValidatorFn} from '@angular/forms';
 import {Dictionary} from '@jscrpt/common';
 
 import {AsyncValidatorFnFactoryFn, ValidatorFnFactoryFn} from '../interfaces/validator.interface';
@@ -11,8 +12,10 @@ export class ValidatorFnFactory<TArg extends Dictionary<any> = any>
     /**
      * Creates instance of ValidatorFnFactory
      * @param _factoryFn - Function used for creating ValidatorFn
+     * @param _args - Static arguments/parameters that can be passed to validator
      */
-    constructor(private _factoryFn?: ValidatorFnFactoryFn<TArg>)
+    constructor(private _factoryFn?: ValidatorFnFactoryFn<TArg>,
+                private _args?: TArg,)
     {
     }
 
@@ -23,6 +26,20 @@ export class ValidatorFnFactory<TArg extends Dictionary<any> = any>
      */
     public valueOf(): ValidatorFnFactoryFn<TArg>
     {
+        if(this._args)
+        {
+            return (args: TArg): ValidatorFn =>
+            {
+                args = 
+                {
+                    ...this._args,
+                    args
+                };
+
+                return this._factoryFn(args);
+            };
+        }
+
         return this._factoryFn;
     }
 }
@@ -36,8 +53,10 @@ export class AsyncValidatorFnFactory<TArg extends Dictionary<any> = any>
     /**
      * Creates instance of AsyncValidatorFnFactory
      * @param _factoryFn - Function used for creating AsyncValidatorFn
+     * @param _args - Static arguments/parameters that can be passed to validator
      */
-    constructor(private _factoryFn?: AsyncValidatorFnFactoryFn<TArg>)
+    constructor(private _factoryFn?: AsyncValidatorFnFactoryFn<TArg>,
+                private _args?: TArg,)
     {
     }
 
@@ -48,6 +67,20 @@ export class AsyncValidatorFnFactory<TArg extends Dictionary<any> = any>
      */
     public valueOf(): AsyncValidatorFnFactoryFn<TArg>
     {
+        if(this._args)
+        {
+            return (args: TArg): AsyncValidatorFn =>
+            {
+                args = 
+                {
+                    ...this._args,
+                    args
+                };
+
+                return this._factoryFn(args);
+            };
+        }
+
         return this._factoryFn;
     }
 }

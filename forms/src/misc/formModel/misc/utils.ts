@@ -1,6 +1,8 @@
 import {AbstractControl, FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Dictionary} from '@jscrpt/common';
 
+import {FormModelGroup} from '../../types';
+import {FormModelBuilderDefaultArgs} from '../interfaces/formModelBuilder.interface';
 import {ModelDecoratorMetadata} from '../interfaces/modelDecoratorMetadata';
 import {ModelPropertyDecoratorMetadata} from '../interfaces/modelPropertyDecoratorMetadata';
 import {ɵDefaultPropertyMetadata} from './defaults';
@@ -12,11 +14,11 @@ import {AsyncValidatorFnFactory, ValidatorFnFactory} from './validatorFactories'
  * @param args - Object storing arguments from owning component for customization
  * @returns
  */
-function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecoratorMetadata<TModel> & Dictionary<any>, args?: TArgs): FormGroup
+function buildFormGroup<TModel, TArgs extends Dictionary<any> = any>(model: ModelDecoratorMetadata<TModel> & Dictionary<any>, args?: TArgs&FormModelBuilderDefaultArgs): FormGroup<FormModelGroup<TModel>>
 {
     if(!model)
     {
-        return new FormGroup({});
+        return new FormGroup<FormModelGroup<TModel>>({} as any);
     }
 
     const modelMetadata: Dictionary<any> = model.ɵControlsMetadata ?? {};
@@ -133,7 +135,7 @@ function buildFormGroup<TModel, TArgs = Record<string, never>>(model: ModelDecor
  * @param args - Object storing arguments from owning component for customization
  * @returns
  */
-export function buildFormModel<TModel, TArgs = Record<string, never>>(model: TModel, args?: TArgs): FormGroup
+export function buildFormModel<TModel, TArgs extends Dictionary<any> = any>(model: TModel, args?: TArgs&FormModelBuilderDefaultArgs): FormGroup<FormModelGroup<TModel>>
 {
     return buildFormGroup(model as any, args);
 }

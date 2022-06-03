@@ -12,9 +12,10 @@ export * from './services/errorMessagesExtractor/errorMessagesExtractor.interfac
 export * from './services/errorMessagesExtractor/errorMessagesExtractor.service';
 export * from './services/validationErrorRenderer/validationErrorRenderer.interface';
 export * from './services/validationErrorRenderer/validationErrorRenderer.service';
-export * from './misc/validators';
-export * from './misc/utils';
 export * from './misc/tokens';
+export * from './misc/types';
+export * from './misc/utils';
+export * from './misc/validators';
 export * from './misc/validationErrorsContainerView';
 export * from './modules/numberInput.module';
 export * from './modules/hasError.module';

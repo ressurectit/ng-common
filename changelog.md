@@ -1,5 +1,48 @@
 # Changelog
 
+## Version 14.0.0 (2022-06-03)
+
+### Features
+
+- *subpackage* `@anglr/common/forms`
+   - new `FormModelGroup` type, that creates `FormGroup` generic type for model
+   - new `AsFormGroup` type, that casts `AbstractControl` to typed `FormGroup` using model
+   - new `AsFormControlsArray` type, that casts `AbstractControl` to typed `FormArray` of `FormControl` using model
+   - new `AsFormGroupArray` type, that casts `AbstractControl` to typed `FormArray` of `FormGroup` using model
+   - new `AsFormArray` type, that casts `AbstractControl` to typed `FormArray` of `AbstractControl` using model
+   - new `FormModelBuilderDefaultArgs` interface, that represents default args for form model builder
+   - new `FormModelBuilder` service, that is instance of form model builder, that creates `FormGroup` from form model, automatically providing `Injector`
+      - **methods**
+         - `build` builds form from decorated model, only for properties with non `undefined` value
+   - updated `GetControlPipe` pipe
+      - now automatically infers *control name* based on type from `AbstractControl` and returns correctly typed `AbstractControl`
+   - updated `AsFormArrayPipe` pipe
+      - now keeps generic argument from `AbstractControl`
+   - updated `AsFormControlPipe` pipe
+      - now keeps generic argument from `AbstractControl`
+   - updated `AsFormGroupPipe` pipe
+      - now keeps generic argument from `AbstractControl`
+   - updated `buildFormModel` function
+      - now returns typed `FormGroup`
+      - parameter `args` now allows to provide injector using `FormModelBuilderDefaultArgs` type
+   - updated `ValidatorFnFactory` class
+      - new constructor parameter `args`, which represents static arguments/parameters that can be passed to validator
+   - updated `AsyncValidatorFnFactory` class
+      - new constructor parameter `args`, which represents static arguments/parameters that can be passed to validator
+   - updated `ValidatorFnFactoryFn` interface
+      - now argument `args` type is also merged with `FormModelBuilderDefaultArgs`
+   - updated `AsyncValidatorFnFactoryFn` interface
+      - now argument `args` type is also merged with `FormModelBuilderDefaultArgs`
+
+### BREAKING CHANGES
+
+- minimal supported version of `@angular` is `14.0.0`
+- minimal supported version of `angular2-hotkeys` is `13.1.0`
+- dropped support of `NodeJs` version `12`
+- *subpackage* `@anglr/common/forms`
+   - updated `GetControlPipe` pipe
+      - is no longer generic
+
 ## Version 13.0.1 (2022-04-29)
 
 ### Bug Fixes
