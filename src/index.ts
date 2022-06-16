@@ -21,6 +21,8 @@ export * from './modules/position';
 export * from './modules/castPipes';
 export * from './modules/tooltip';
 export * from './types/tokens';
+export * from './types/host';
+export * from './types/styles';
 export * from './utils';
 export * from './pipes';
 export * from './decorators';

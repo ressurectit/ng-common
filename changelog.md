@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 14.1.0 (2022-06-16)
+
+### Features
+
+- new `AnimateChildrenHostFeature` constant, that enables animation of children on components
+- new `HostScrollableContentStyle` constant, that is css overflow-y scroll style to host of component
+- new `HostDisplayBlockStyle` constant, that is css display block style to host of component
+- new `HostDisplayFlexStyle` constant, that is css display flex style to host of component
+
 ## Version 14.0.0 (2022-06-08)
 
 ### Features
