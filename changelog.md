@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 14.1.1 (2022-06-30)
+
+### Bug Fixes
+
+- fixed missing exports for *progress indicator* module
+
 ## Version 14.1.0 (2022-06-16)
 
 ### Features
