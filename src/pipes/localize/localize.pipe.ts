@@ -1,4 +1,5 @@
 import {Pipe, PipeTransform, Inject, ChangeDetectorRef, OnInit, OnDestroy} from '@angular/core';
+import {isBlank} from '@jscrpt/common';
 import {Subscription} from 'rxjs';
 
 import {STRING_LOCALIZATION} from '../../types/tokens';
@@ -34,8 +35,13 @@ export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
      * @param key - Key to be localized
      * @param interpolateParams - Optional object storing interpolation parameters
      */
-    public transform(key: string, interpolateParams?: Object): string
+    public transform(key: string|undefined|null, interpolateParams?: Object): string
     {
+        if(isBlank(key))
+        {
+            return '';
+        }
+
         return this._localizationSvc.get(key, interpolateParams);
     }
 

@@ -134,7 +134,7 @@ export class PositionToDirective implements OnChanges
     //######################### ng language server #########################
     
     /**
-     * Custom input type for `positionTo` input
+     * Custom input type for `source` input
      */
-    public static ngAcceptInputType_positionTo: HTMLElement|ElementRef<HTMLElement>;
+    public static ngAcceptInputType_source: HTMLElement|ElementRef<HTMLElement>;
 }

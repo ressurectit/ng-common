@@ -1,5 +1,20 @@
 # Changelog
 
+
+## Version 14.2.0 (2022-08-09)
+
+### Features
+
+- new `BodyRenderSADirective` directive
+   - renders element into body directly at the end
+
+### Bug Fixes
+
+- update `LocalizePipe`
+   - fixed `key` parameter type added `undefined` and `null`
+- updated `PositionToDirective`
+   - fixed input `positionTo` template type check
+
 ## Version 14.1.2 (2022-10-13)
 
 ### Bug Fixes
