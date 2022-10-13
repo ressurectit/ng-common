@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 14.1.2 (2022-10-13)
+
+### Bug Fixes
+
+- updated `NumberInputControlValueAccessor` directive, which now correctly implements `setDisabledState` 
+
 ## Version 14.1.1 (2022-06-30)
 
 ### Bug Fixes

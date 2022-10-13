@@ -23,7 +23,8 @@ const NUMBER_INPUT_VALUE_ACCESSOR = <ExistingProvider>
     {
         '(change)': 'onChange($event.target.value)',
         '(input)': 'onChange($event.target.value)',
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        '[disabled]': 'disabled',
     }
 })
 export class NumberInputControlValueAccessor implements ControlValueAccessor
@@ -36,6 +37,11 @@ export class NumberInputControlValueAccessor implements ControlValueAccessor
      * Method that is called when picker was touched
      */
     public onTouched = () => {};
+
+    /**
+     * Indication whether is number input disabled
+     */
+    public disabled: boolean = false;
     
     //######################### constructor #########################
     constructor(private _renderer: Renderer2, private _elementRef: ElementRef)
@@ -45,7 +51,7 @@ export class NumberInputControlValueAccessor implements ControlValueAccessor
     //######################### public methods - implementation of ControlValueAccessor #########################
 
     /**
-     * Sets value to select
+     * @inheritdoc
      */
     public writeValue(value: any): void
     {
@@ -53,7 +59,7 @@ export class NumberInputControlValueAccessor implements ControlValueAccessor
     }
 
     /**
-     * Registers callback that is called when value of select changes
+     * @inheritdoc
      */
     public registerOnChange(fn: (data: any) => any): void
     {
@@ -81,10 +87,18 @@ export class NumberInputControlValueAccessor implements ControlValueAccessor
     }
 
     /**
-     * Registers callback that is called when select is closed
+     * @inheritdoc
      */
     public registerOnTouched(fn: () => any): void
     {
         this.onTouched = fn;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public setDisabledState?(isDisabled: boolean): void
+    {
+        this.disabled = isDisabled;
     }
 }
