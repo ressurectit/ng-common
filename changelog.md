@@ -1,12 +1,17 @@
 # Changelog
 
 
-## Version 14.2.0 (2022-08-09)
+## Version 14.2.0 (2022-10-25)
 
 ### Features
 
 - new `BodyRenderSADirective` directive
    - renders element into body directly at the end
+   - **implements**
+      - `OnInit`
+      - `OnDestroy`
+   - **inputs**
+      - `bodyRender` string that defines element in which should be template rendered, if not specified, body is used
 
 ### Bug Fixes
 
