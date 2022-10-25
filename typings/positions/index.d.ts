@@ -1,3 +1,5 @@
+export as namespace Positions;
+
 /**
  * Coordinates for positioning target
  */

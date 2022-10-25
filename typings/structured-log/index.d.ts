@@ -1,3 +1,4 @@
+export as namespace StructuredLog;
 
 export declare class BatchedSink implements Sink 
 {
