@@ -1,6 +1,12 @@
 # Changelog
 
 
+## Version 15.0.1 (2022-10-26)
+
+### Bug Fixes
+
+- updated `FloatingUiDomPosition` service, now correctly handles `PositionOffsetString` offset values
+
 ## Version 15.0.0 (2022-10-26)
 
 ### Features

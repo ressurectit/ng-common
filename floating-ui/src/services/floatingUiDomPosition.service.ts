@@ -161,7 +161,7 @@ export class FloatingUiDomPosition implements Position
                 return options.offset({elements, x, y});
             }
 
-            const {floating} = elements;
+            const floating = elements.floating as Element;
 
             if(options.offset === PositionOffset[PositionOffset.MouseEnter] && options.mouseEvent)
             {
@@ -191,11 +191,11 @@ export class FloatingUiDomPosition implements Position
             if(placement == 'bottom' || placement == 'bottom-start' || placement == 'bottom-end' ||
                 placement == 'top' || placement == 'top-start' || placement == 'top-end')
             {
-                dimension = floating.width;
+                dimension = floating.clientWidth;
             }
             else
             {
-                dimension = floating.height;
+                dimension = floating.clientHeight;
             }
 
             switch(stringOffset)
