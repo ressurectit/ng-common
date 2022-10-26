@@ -41,6 +41,7 @@
 - minimal supported version of `@angular` is `14.2.0`
 - minimal supported version of `rxjs` is `7.5.7`
 - minimal supported version of `@jscrpt/common` is `3.2.0`
+- minimal supported version of `@floating-ui` is `1.0.3`
 - minimal supported version of `tslib` is `2.4.0`
 - updated `PositionOptions` interface
    - `offset` is no longer enum, enum values are represented as string
