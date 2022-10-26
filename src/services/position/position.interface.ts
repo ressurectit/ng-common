@@ -1,6 +1,7 @@
+import {Func1} from '@jscrpt/common';
 import {Observable} from 'rxjs';
 
-import {PositionOffset, PositionPlacement} from './position.types';
+import {PositionOffsetString, PositionPlacement} from './position.types';
 
 /**
  * Options for autoupdate specific functionality
@@ -24,6 +25,64 @@ export interface AutoUpdateOptions
 }
 
 /**
+ * Defines object which describes offsets for positioned element
+ */
+export interface PositionOffsets
+{
+    /**
+     * Distance between positioned and reference element.
+     */
+    mainAxis?: number;
+
+    /**
+     * Skidding between floating and reference element.
+     */
+    crossAxis?: number;
+
+    /**
+     * Works on the same axis as crossAxis but applies only to aligned placements and works logically. The offset is inverted for -end alignments.
+     */
+    alignmentAxis?: number|null;
+}
+
+/**
+ * Stores positioned element and reference element
+ */
+export interface PositionElements<TElement extends Element = Element>
+{
+    /**
+     * Reference element against which is object positioned
+     */
+    reference: TElement;
+
+    /**
+     * Element that is positioned
+     */
+    floating: TElement;
+}
+
+/**
+ * Arguments that are passed during positioning
+ */
+export interface PositionArguments<TElement extends Element = Element>
+{
+    /**
+     * X coordinate of positioned element
+     */
+    x: number;
+
+    /**
+     * Y coordinate of positioned element
+     */
+    y: number;
+
+    /**
+     * Elements that are being used during positioning
+     */
+    elements: PositionElements<TElement>;
+}
+
+/**
  * Options that are passed to position service
  */
 export interface PositionOptions
@@ -36,9 +95,9 @@ export interface PositionOptions
     placement: PositionPlacement;
 
     /**
-     * Offset which allows moving target element along the cross axis of placement
+     * Offset which allows moving target element along the cross axis of placement, or any chosed direction
      */
-    offset: PositionOffset;
+    offset: PositionOffsetString|number|PositionOffsets|Func1<number|PositionOffsets, PositionArguments>;
 
     /**
      * Indication whether perform flip in case of collision (with view boundaries)

@@ -1,6 +1,6 @@
 import {NgModuleRef, ApplicationRef, InjectionToken} from '@angular/core';
 import {enableDebugTools} from '@angular/platform-browser';
-import {filter, first} from 'rxjs/operators';
+import {filter, first} from 'rxjs';
 
 /**
  * Method used for extraction of resolve method for promise

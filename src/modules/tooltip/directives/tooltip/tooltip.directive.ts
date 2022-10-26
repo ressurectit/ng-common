@@ -3,11 +3,12 @@ import {AnimationBuilder, AnimationFactory} from '@angular/animations';
 import {DOCUMENT} from '@angular/common';
 import {fadeInAnimation, fadeOutAnimation} from '@anglr/animations';
 import {extend, isBlank, isPresent, nameof} from '@jscrpt/common';
+import {lastValueFrom} from 'rxjs';
 
 import {TooltipComponent} from '../../components/tooltip/tooltip.component';
 import {TooltipOptions, TooltipRenderer} from '../../misc/tooltip.interface';
 import {TOOLTIP_OPTIONS} from '../../misc/tokens';
-import {applyPositionResult, Position, PositionOffset, PositionPlacement} from '../../../../services/position';
+import {applyPositionResult, Position, PositionOffset, PositionOffsetString, PositionPlacement} from '../../../../services/position';
 import {TooltipTemplateDirective} from '../tooltipTemplate/tooltipTemplate.directive';
 import {TooltipTemplateContext} from '../tooltipTemplate/tooltipTemplate.context';
 import {POSITION} from '../../../../types/tokens';
@@ -20,8 +21,8 @@ const defaultOptions: TooltipOptions =
     delay: 200,
     position:
     {
-        offset: PositionOffset.MouseEnter,
-        placement: PositionPlacement.TopStart
+        offset: nameof<typeof PositionOffset>('MouseEnter') as PositionOffsetString,
+        placement: PositionPlacement.TopStart,
     },
     allowSelection: false,
     tooltipRenderer: TooltipComponent,
@@ -267,16 +268,15 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
 
         this._showData();
 
-        this._position.placeElement(this._tooltipElement,
-                                    this._element.nativeElement,
-                                    {
-                                        placement: this._options.position.placement,
-                                        offset: this._options.position.offset,
-                                        flip: true,
-                                        mouseEvent: event,
-                                        autoUpdate: false
-                                    })
-            .toPromise()
+        lastValueFrom(this._position.placeElement(this._tooltipElement,
+                                                  this._element.nativeElement,
+                                                  {
+                                                      placement: this._options.position.placement,
+                                                      offset: this._options.position.offset,
+                                                      flip: true,
+                                                      mouseEvent: event,
+                                                      autoUpdate: false
+                                                  }))
             .then(result => applyPositionResult(result));
     }
 

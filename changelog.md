@@ -1,6 +1,50 @@
 # Changelog
 
 
+## Version 15.0.0 (2022-10-26)
+
+### Features
+
+- now also typings are available for external usage
+- new `PositionElements` interface
+   - stores positioned element and reference element
+   - **properties**
+      - `reference` reference element against which is object positioned
+      - `floating` element that is positioned
+- new `PositionOffsets` interface
+   - defines object which describes offsets for positioned element
+   - **properties**
+      - `mainAxis` distance between positioned and reference element.
+      - `crossAxis` skidding between floating and reference element.
+      - `alignmentAxis` works on the same axis as crossAxis but applies only to aligned placements and works logically. The offset is inverted for -end alignments.
+- new `PositionArguments` interface
+   - arguments that are passed during positioning
+   - **properties**
+   - `x` X coordinate of positioned element
+   - `y` Y coordinate of positioned element
+   - `elements` elements that are being used during positioning
+- new `PositionOffsetString` type
+   - type that represents available names of position offset
+- updated `PositionOptions` interface
+   - `offset` has new available definitions
+- updated `PositionToDirective` directive
+   - **implements**
+      - `OnDestroy`
+   - new **inputs**
+      - `offset` offset which allows moving target element along the cross axis of placement, or any chosed direction
+      - `autoUpdate` indication whether set up 'auto updating' of position
+   - new **outputs**
+      - `done` occurs when element was positioned
+
+### BREAKING CHANGES
+
+- minimal supported version of `@angular` is `14.2.0`
+- minimal supported version of `rxjs` is `7.5.7`
+- minimal supported version of `@jscrpt/common` is `3.2.0`
+- minimal supported version of `tslib` is `2.4.0`
+- updated `PositionOptions` interface
+   - `offset` is no longer enum, enum values are represented as string
+
 ## Version 14.2.0 (2022-10-25)
 
 ### Features

@@ -1,7 +1,6 @@
 import {Injectable, ClassProvider} from '@angular/core';
 import {HttpEvent, HttpInterceptor, HttpHandler, HttpEventType, HTTP_INTERCEPTORS, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {Observable, tap} from 'rxjs';
 
 import {ProgressIndicatorService} from '../services/progressIndicator.service';
 import {PROGRESS_INDICATOR_GROUP_NAME} from '../misc/tokens';

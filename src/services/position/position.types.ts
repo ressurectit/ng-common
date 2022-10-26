@@ -99,3 +99,8 @@ export enum PositionOffset
      */
     NegativeFull
 }
+
+/**
+ * Type that represents available names of position offset
+ */
+export type PositionOffsetString = keyof typeof PositionOffset;

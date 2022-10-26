@@ -2,6 +2,7 @@ import {Injectable, Inject} from '@angular/core';
 import {APP_STABLE} from '@anglr/common';
 import {isPresent} from '@jscrpt/common';
 import {Sink, LogEvent, LogEventLevel} from 'structured-log';
+import {lastValueFrom} from 'rxjs';
 
 import {toText, isEnabled} from '../../misc/utils';
 import {RestSinkConfigService} from './restSinkConfig.service';
@@ -29,7 +30,7 @@ export class RestSinkService implements Sink
     /**
      * Interval timer id
      */
-    private _timer: number;
+    private _timer: number|undefined|null;
 
     //######################### constructor #########################
     constructor(private _configSvc: RestSinkConfigService,
@@ -41,7 +42,7 @@ export class RestSinkService implements Sink
             this._timer = setInterval(() =>
             {
                 this.flush();
-            }, this._configSvc.secondsToFlushAfter * 1000) as any;
+            }, (this._configSvc.secondsToFlushAfter ?? 0) * 1000) as any;
         });
     }
 
@@ -128,7 +129,7 @@ export class RestSinkService implements Sink
 
         try
         {
-            promise = this._restClient.log(this._logs).toPromise();
+            promise = lastValueFrom(this._restClient.log(this._logs));
         }
         catch(e)
         {

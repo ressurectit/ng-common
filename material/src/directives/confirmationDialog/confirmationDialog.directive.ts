@@ -1,4 +1,5 @@
 import {Directive, Input, EventEmitter, Output, HostListener} from '@angular/core';
+import {lastValueFrom} from 'rxjs';
 
 import {TitledDialogService} from '../../services/titledDialog/titledDialog.service';
 import {ConfirmationDialogComponent} from '../../components/confirmationDialog/confirmationDialog.component';
@@ -19,7 +20,7 @@ export class ConfirmationDialogDirective
      * Confirmation text that is displayed in dialog
      */
     @Input('confirmation')
-    public confirmationText: string = undefined;
+    public confirmationText: string|undefined|null = undefined;
 
     /**
      * Title for confirmation dialog
@@ -31,19 +32,19 @@ export class ConfirmationDialogDirective
      * Text for confirm confirmation button
      */
     @Input()
-    public confirmationConfirm: string = undefined;
+    public confirmationConfirm: string|undefined|null = undefined;
 
     /**
      * Text for cancel confirmation button
      */
     @Input()
-    public confirmationCancel: string = undefined;
+    public confirmationCancel: string|undefined|null = undefined;
 
     /**
      * Object with css classes to be applied to confirmation dialog component
      */
     @Input()
-    public confirmationCssClasses: ConfirmationDialogCssClasses = undefined;
+    public confirmationCssClasses: ConfirmationDialogCssClasses|undefined|null = undefined;
 
     /**
      * Condidition that determines whether display confirmation dialog or skip it and run confirm directly
@@ -91,18 +92,18 @@ export class ConfirmationDialogDirective
             return;
         }
 
-        const result = await this._dialog.open<ConfirmationDialogComponent, ConfirmationDialogOptions, boolean>(ConfirmationDialogComponent,
+        const result = await lastValueFrom(this._dialog.open<ConfirmationDialogComponent, ConfirmationDialogOptions, boolean>(ConfirmationDialogComponent,
         {
             title: this.confirmationTitle,
             width: '33vw',
             data:
             {
                 confirmationText: this.confirmationText || undefined,
-                dialogCancelText: this.confirmationCancel,
-                dialogConfirmText: this.confirmationConfirm,
-                cssClasses: this.confirmationCssClasses,
+                dialogCancelText: this.confirmationCancel ?? '',
+                dialogConfirmText: this.confirmationConfirm ?? '',
+                cssClasses: this.confirmationCssClasses ?? {},
             }
-        }).afterClosed().toPromise();
+        }).afterClosed());
 
         if(result)
         {

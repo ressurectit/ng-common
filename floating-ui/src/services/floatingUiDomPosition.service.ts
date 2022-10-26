@@ -1,6 +1,6 @@
 import {ClassProvider, Injectable} from '@angular/core';
-import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION} from '@anglr/common';
-import {extend, isEmptyObject} from '@jscrpt/common';
+import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION, PositionOffsetString, PositionOffsets} from '@anglr/common';
+import {extend, isEmptyObject, isFunction, isJsObject, isNumber, nameof} from '@jscrpt/common';
 import {computePosition, Placement, autoUpdate, Middleware, offset, flip} from '@floating-ui/dom';
 import {Observable} from 'rxjs';
 
@@ -11,8 +11,8 @@ const defaultOptions: PositionOptions =
 {
     autoUpdate: false,
     flip: false,
-    offset: PositionOffset.None,
-    placement: PositionPlacement.Top
+    offset: nameof<typeof PositionOffset>('None') as PositionOffsetString,
+    placement: PositionPlacement.TopStart,
 };
 
 /**
@@ -44,7 +44,7 @@ export class FloatingUiDomPosition implements Position
                                                          target as HTMLElement,
                                                          {
                                                              placement: this._getPlacement(computedOptions),
-                                                             middleware: middlewares
+                                                             middleware: middlewares,
                                                          });
 
                     if(computedOptions.autoUpdate)
@@ -129,84 +129,111 @@ export class FloatingUiDomPosition implements Position
      */
     protected _setOffset(middlewares: Middleware[], options: PositionOptions): void
     {
-        if(options.offset != PositionOffset.None)
+        //no offset
+        if(options.offset === PositionOffset[PositionOffset.None])
         {
-            if(options.offset == PositionOffset.MouseEnter)
+            return;
+        }
+
+        if(options.offset === PositionOffset[PositionOffset.MouseEnter])
+        {
+            //fallback if not supported placement used
+            if(options.placement == PositionPlacement.Left ||
+               options.placement == PositionPlacement.LeftStart ||
+               options.placement == PositionPlacement.LeftEnd ||
+               options.placement == PositionPlacement.Right ||
+               options.placement == PositionPlacement.RightStart ||
+               options.placement == PositionPlacement.RightEnd ||
+               options.placement == PositionPlacement.Bottom ||
+               options.placement == PositionPlacement.BottomEnd ||
+               options.placement == PositionPlacement.Top ||
+               options.placement == PositionPlacement.TopEnd)
             {
-                //fallback if not supported placement used
-                if(options.placement == PositionPlacement.Left ||
-                   options.placement == PositionPlacement.LeftStart ||
-                   options.placement == PositionPlacement.LeftEnd ||
-                   options.placement == PositionPlacement.Right ||
-                   options.placement == PositionPlacement.RightStart ||
-                   options.placement == PositionPlacement.RightEnd ||
-                   options.placement == PositionPlacement.Bottom ||
-                   options.placement == PositionPlacement.BottomEnd ||
-                   options.placement == PositionPlacement.Top ||
-                   options.placement == PositionPlacement.TopEnd)
+                options.placement = PositionPlacement.TopStart;
+            }
+        }
+
+        middlewares.push(offset(({elements, placement, x, y}) =>
+        {
+            //offset is function
+            if(isFunction(options.offset))
+            {
+                return options.offset({elements, x, y});
+            }
+
+            const {floating} = elements;
+
+            if(options.offset === PositionOffset[PositionOffset.MouseEnter] && options.mouseEvent)
+            {
+                return {
+                    crossAxis: options.mouseEvent.x - (options.mouseEvent.target as HTMLElement).getBoundingClientRect().x
+                };
+            }
+
+            const stringOffset = options.offset as PositionOffsetString|number;
+
+            //offset is object
+            if(isJsObject(options.offset))
+            {
+                return options.offset as PositionOffsets;
+            }
+
+            //offset is skidding number
+            if(isNumber(stringOffset))
+            {
+                return {
+                    crossAxis: stringOffset,
+                };
+            }
+
+            let dimension: number;
+
+            if(placement == 'bottom' || placement == 'bottom-start' || placement == 'bottom-end' ||
+                placement == 'top' || placement == 'top-start' || placement == 'top-end')
+            {
+                dimension = floating.width;
+            }
+            else
+            {
+                dimension = floating.height;
+            }
+
+            switch(stringOffset)
+            {
+                default:
                 {
-                    options.placement = PositionPlacement.TopStart;
+                    dimension = 0;
+
+                    break;
+                }
+                case PositionOffset[PositionOffset.Full]:
+                {
+                    break;
+                }
+                case PositionOffset[PositionOffset.Half]:
+                {
+                    dimension /= 2;
+
+                    break;
+                }
+                case PositionOffset[PositionOffset.NegativeFull]:
+                {
+                    dimension *= -1;
+
+                    break;
+                }
+                case PositionOffset[PositionOffset.NegativeHalf]:
+                {
+                    dimension *= -.5;
+
+                    break;
                 }
             }
 
-            middlewares.push(offset(({floating, placement}) =>
-            {
-                if(options.offset == PositionOffset.MouseEnter && options.mouseEvent)
-                {
-                    return {
-                        crossAxis: options.mouseEvent.x - (options.mouseEvent.target as HTMLElement).getBoundingClientRect().x
-                    };
-                }
-
-                let dimension: number;
-
-                if(placement == 'bottom' || placement == 'bottom-start' || placement == 'bottom-end' ||
-                   placement == 'top' || placement == 'top-start' || placement == 'top-end')
-                {
-                    dimension = floating.width;
-                }
-                else
-                {
-                    dimension = floating.height;
-                }
-
-                switch(options.offset)
-                {
-                    default:
-                    {
-                        dimension = 0;
-
-                        break;
-                    }
-                    case PositionOffset.Full:
-                    {
-                        break;
-                    }
-                    case PositionOffset.Half:
-                    {
-                        dimension /= 2;
-
-                        break;
-                    }
-                    case PositionOffset.NegativeFull:
-                    {
-                        dimension *= -1;
-
-                        break;
-                    }
-                    case PositionOffset.NegativeHalf:
-                    {
-                        dimension *= -.5;
-
-                        break;
-                    }
-                }
-
-                return {
-                    crossAxis: dimension
-                };
-            }));
-        }
+            return {
+                crossAxis: dimension
+            };
+        }));
     }
 
     /**
