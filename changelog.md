@@ -1,5 +1,24 @@
 # Changelog
 
+## Version 16.0.0 (2023-10-26)
+
+### Bug Fixes
+
+- fixed `BodyRenderSADirective` now correctly works rendering into container element
+
+### Features
+
+- updated `TooltipDirective` directive
+   - now supports rendering into container
+   - new **inputs**
+      - `containerElement` string that defines element in which should be tooltip rendered, if not specified, body is used
+- updated `TooltipOptions` interface
+   - new **properties**
+      - `containerElement` string that defines element in which should be tooltip rendered, if not specified, body is used
+
+### BREAKING CHANGES
+
+- minimal supported version of `@jscrpt/common` is `3.4.0`
 
 ## Version 15.0.1 (2022-10-26)
 

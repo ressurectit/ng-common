@@ -1,5 +1,6 @@
 import {Directive, EmbeddedViewRef, Inject, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
+import {renderToBody} from '@jscrpt/common';
 
 /**
  * Renders element into body directly at the end
@@ -52,30 +53,7 @@ export class BodyRenderSADirective implements OnInit, OnDestroy
 
         this.element = this.view.rootNodes[0] as HTMLElement;
 
-        //render to specified target element
-        if(this.targetElement)
-        {
-            let element = this.document.querySelector(`body${this.targetElement}`);
-
-            if(!element)
-            {
-                const [name, css] = this.targetElement.split('.');
-
-                element = this.document.createElement(name);
-
-                if(css)
-                {
-                    element.classList.add(css);
-                }
-            }
-
-            element.appendChild(this.element);
-        }
-        //render directly to body
-        else
-        {
-            this.document.body.appendChild(this.element);
-        }
+        renderToBody(this.document, this.element, this.targetElement);
     }
 
     //######################### public methods - implementation of OnDestroy #########################

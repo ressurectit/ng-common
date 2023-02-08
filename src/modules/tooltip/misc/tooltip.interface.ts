@@ -90,4 +90,11 @@ export interface TooltipOptions
      * Animation used to tooltip component when it is hidden
      */
     exitAnimation: AnimationMetadata;
+
+    /**
+     * String that defines element in which should be tooltip rendered, if not specified, body is used
+     * 
+     * Allows also css classes to be specified (div.body-box)
+     */
+    containerElement: string|undefined|null;
 }

@@ -2,7 +2,7 @@ import {ComponentRef, ContentChild, Directive, ElementRef, EmbeddedViewRef, Host
 import {AnimationBuilder, AnimationFactory} from '@angular/animations';
 import {DOCUMENT} from '@angular/common';
 import {fadeInAnimation, fadeOutAnimation} from '@anglr/animations';
-import {extend, isBlank, isPresent, nameof} from '@jscrpt/common';
+import {extend, isBlank, isPresent, nameof, renderToBody} from '@jscrpt/common';
 import {lastValueFrom} from 'rxjs';
 
 import {TooltipComponent} from '../../components/tooltip/tooltip.component';
@@ -30,6 +30,7 @@ const defaultOptions: TooltipOptions =
     stopPropagation: false,
     enterAnimation: fadeInAnimation,
     exitAnimation: fadeOutAnimation,
+    containerElement: undefined,
 };
 
 /**
@@ -117,6 +118,11 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
 
         this._enterAnimation = this._animationsPlayer.build(this._options.enterAnimation);
         this._exitAnimation = this._animationsPlayer.build(this._options.exitAnimation);
+
+        if(this._options.containerElement && !this.containerElement)
+        {
+            this.containerElement = this._options.containerElement;
+        }
     }
 
     /**
@@ -124,6 +130,14 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      */
     @Input()
     public tooltipVisible?: boolean;
+
+    /**
+     * String that defines element in which should be tooltip rendered, if not specified, body is used
+     * 
+     * Allows also css classes to be specified (div.body-box)
+     */
+    @Input()
+    public containerElement: string|undefined|null;
 
     //######################### public properties - children #########################
 
@@ -146,6 +160,11 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
 
         this._enterAnimation = this._animationsPlayer.build(this._options.enterAnimation);
         this._exitAnimation = this._animationsPlayer.build(this._options.exitAnimation);
+
+        if(this._options.containerElement)
+        {
+            this.containerElement = this._options.containerElement;
+        }
     }
 
     //######################### public methods - implementation of OnChanges #########################
@@ -333,7 +352,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
             .rootNodes[0] as HTMLElement;
 
         // 4. Append DOM element to the body
-        this._document.body.appendChild(this._tooltipElement);
+        renderToBody(this._document, this._tooltipElement, this.containerElement);
         this._enterAnimation.create(this._tooltipElement).play();
     }
 
