@@ -1,9 +1,8 @@
 {
     "name": "@anglr/common-positions",
     "sideEffects": false,
-    "module": "../es2015/positions/src/index.js",
-    "es2015": "../es2015/positions/src/index.js",
-    "es2020": "../es2020/positions/src/index.js",
-    "esm2020": "../es2020/positions/src/index.js",
+    "module": "../es2022/positions/src/index.js",
+    "es2022": "../es2022/positions/src/index.js",
+    "esm2022": "../es2022/positions/src/index.js",
     "typings": "./src/index.d.ts"
   }

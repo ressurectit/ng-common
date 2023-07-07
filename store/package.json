@@ -1,9 +1,8 @@
 {
     "name": "@anglr/common-store",
     "sideEffects": false,
-    "module": "../es2015/store/src/index.js",
-    "es2015": "../es2015/store/src/index.js",
-    "es2020": "../es2020/store/src/index.js",
-    "esm2020": "../es2020/store/src/index.js",
+    "module": "../es2022/store/src/index.js",
+    "es2022": "../es2022/store/src/index.js",
+    "esm2022": "../es2022/store/src/index.js",
     "typings": "./src/index.d.ts"
   }

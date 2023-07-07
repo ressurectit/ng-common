@@ -5,10 +5,9 @@
     "type": "module",
     "sideEffects": false,
     "scripts": {
-        "build": "ngc --declaration --declarationDir . --declarationMap && ngc -t es2015 --outDir es2015",
-        "dts:rollup": "npm run api -- api-extractor.json && npm run api -- date-fns/api-extractor.json && npm run api -- floating-ui/api-extractor.json && npm run api -- forms/api-extractor.json && npm run api -- hotkeys/api-extractor.json && npm run api -- material/api-extractor.json && npm run api -- moment/api-extractor.json && npm run api -- numeral/api-extractor.json && npm run api -- positions/api-extractor.json && npm run api -- router/api-extractor.json && npm run api -- store/api-extractor.json && npm run api -- structured-log/api-extractor.json",
+        "build": "ngc --declaration --declarationDir . --declarationMap",
         "api": "api-extractor run --local --verbose -c",
-        "clean": "rimraf */temp temp es2015 es2020 **/tsdoc-metadata.json src/**/*.d.ts src/**/*.d.ts.map */src/**/*.d.ts */src/**/*.d.ts.map ./*.d.ts ./*.d.ts.map */*.d.ts",
+        "clean": "rimraf */temp temp es2022 **/tsdoc-metadata.json src/**/*.d.ts src/**/*.d.ts.map */src/**/*.d.ts */src/**/*.d.ts.map ./*.d.ts ./*.d.ts.map */*.d.ts",
         "clean:deps": "rimraf package-lock.json node_modules || echo 'node_modules removed'",
         "clean:all": "npm run clean && npm run clean:deps",
         "ngc": "ngc",
@@ -76,7 +75,7 @@
         "doc:api:material": "copyfiles -u 2 material/temp/common-material.api.md docs/content/api/ng-common-material && rimraf material/temp"
     },
     "engines": {
-        "node": "^14.15.0 || >=16.10.0"
+        "node": "^16.14.0 || >=18.10.0"
     },
     "repository": {
         "type": "git",
@@ -94,56 +93,56 @@
     },
     "homepage": "https://github.com/ressurectit/ng-common",
     "peerDependencies": {
-        "@angular/core": ">=14.2.0",
-        "@angular/common": ">=14.2.0",
-        "@angular/forms": ">=14.2.0",
-        "@angular/router": ">=14.2.0",
-        "@angular/platform-browser": ">=14.2.0",
-        "@angular/animations": ">=14.2.0",
-        "@angular/cdk": ">=14.2.0",
-        "@angular/material": ">=14.2.0",
+        "@angular/core": ">=16.0.3",
+        "@angular/common": ">=16.0.3",
+        "@angular/forms": ">=16.0.3",
+        "@angular/router": ">=16.0.3",
+        "@angular/platform-browser": ">=16.0.3",
+        "@angular/animations": ">=16.0.3",
+        "@angular/cdk": ">=16.0.3",
+        "@angular/material": ">=16.0.3",
         "@anglr/animations": ">=9.1.0",
         "rxjs": ">=7.5.7",
         "@jscrpt/common": ">=3.4.0",
         "numeral": "^2.0.6",
-        "angular2-hotkeys": "^13.1.0",
+        "angular2-hotkeys": ">=15.0.0",
         "store": "^2.0.12",
         "structured-log": "^0.2.0",
-        "moment": "^2.29.1",
-        "date-fns": "^2.27.0",
+        "moment": "^2.29.4",
+        "date-fns": "^2.30.0",
         "positions": "^1.6.2",
-        "@floating-ui/dom": "^1.0.3",
-        "tslib": "^2.4.0"
+        "@floating-ui/dom": "^1.4.4",
+        "tslib": "^2.6.0"
     },
     "devDependencies": {
-        "@angular/core": "^14.2.0",
-        "@angular/common": "^14.2.0",
-        "@angular/router": "^14.2.0",
-        "@angular/forms": "^14.2.0",
-        "@angular/platform-browser": "^14.2.0",
-        "@angular/animations": "^14.2.0",
-        "@angular/cdk": "^14.2.0",
-        "@angular/material": "^14.2.0",
+        "@angular/core": "^16.0.3",
+        "@angular/common": "^16.0.3",
+        "@angular/forms": "^16.0.3",
+        "@angular/router": "^16.0.3",
+        "@angular/platform-browser": "^16.0.3",
+        "@angular/animations": "^16.0.3",
+        "@angular/cdk": "^16.0.3",
+        "@angular/material": "^16.0.3",
         "@anglr/animations": "^9.1.0",
         "rxjs": "^7.5.7",
         "@jscrpt/common": "^3.4.0",
-        "angular2-hotkeys": "^13.1.0",
+        "angular2-hotkeys": "^15.0.0",
         "store": "^2.0.12",
         "structured-log": "^0.2.0",
-        "moment": "^2.29.1",
-        "date-fns": "^2.27.0",
+        "moment": "^2.29.4",
+        "date-fns": "^2.30.0",
         "positions": "^1.6.2",
-        "@floating-ui/dom": "^1.0.3",
-        "@types/node": "^14.14.31",
+        "@floating-ui/dom": "^1.4.4",
+        "@types/node": "^18.11.9",
         "@types/numeral": "^2.0.2",
         "@types/store": "^2.0.2",
-        "@types/mousetrap": "^1.6.8",
-        "@angular/compiler-cli": "^14.2.0",
-        "@angular/compiler": "^14.2.0",
-        "@angular/language-service": "^14.2.0",
-        "@microsoft/api-extractor": "7.19.2",
-        "@microsoft/api-documenter": "7.13.77",
-        "tslib": "2.4.0",
+        "@types/mousetrap": "^1.6.11",
+        "@angular/compiler-cli": "^16.0.3",
+        "@angular/compiler": "^16.0.3",
+        "@angular/language-service": "^16.0.3",
+        "@microsoft/api-extractor": "7.36.1",
+        "@microsoft/api-documenter": "7.22.24",
+        "tslib": "2.6.0",
         "eslint": "7.32.0",
         "@typescript-eslint/eslint-plugin": "4.33.0",
         "@typescript-eslint/parser": "4.33.0",
@@ -152,13 +151,10 @@
         "copyfiles": "2.4.1",
         "replace-in-file": "6.3.2",
         "path-exists-cli": "2.0.0",
-        "typescript": "4.7.2",
+        "typescript": "5.0.4",
         "npm-git-version": "2.0.0"
     },
-    "esm2020": "./es2020/src/index.js",
-    "es2020": "./es2020/src/index.js",
-    "es2015": "./es2015/src/index.js",
-    "module": "./es2015/src/index.js",
+    "module": "./es2022/src/index.js",
     "typings": "./src/index.d.ts",
     "exports": {
         "./package.json": {
@@ -175,99 +171,87 @@
         },
         ".": {
             "types": "./src/index.d.ts",
-            "esm2020": "./es2020/src/index.js",
-            "es2020": "./es2020/src/index.js",
-            "es2015": "./es2015/src/index.js",
-            "node": "./es2015/src/index.js",
-            "default": "./es2020/src/index.js"
+            "esm2022": "./es2022/src/index.js",
+            "es2022": "./es2022/src/index.js",
+            "node": "./es2022/src/index.js",
+            "default": "./es2022/src/index.js"
         },
         "./date-fns": {
             "types": "./date-fns/src/index.d.ts",
-            "esm2020": "./es2020/date-fns/src/index.js",
-            "es2020": "./es2020/date-fns/src/index.js",
-            "es2015": "./es2015/date-fns/src/index.js",
-            "node": "./es2015/date-fns/src/index.js",
-            "default": "./es2020/date-fns/src/index.js"
+            "esm2022": "./es2022/date-fns/src/index.js",
+            "es2022": "./es2022/date-fns/src/index.js",
+            "node": "./es2022/date-fns/src/index.js",
+            "default": "./es2022/date-fns/src/index.js"
         },
         "./floating-ui": {
             "types": "./floating-ui/src/index.d.ts",
-            "esm2020": "./es2020/floating-ui/src/index.js",
-            "es2020": "./es2020/floating-ui/src/index.js",
-            "es2015": "./es2015/floating-ui/src/index.js",
-            "node": "./es2015/floating-ui/src/index.js",
-            "default": "./es2020/floating-ui/src/index.js"
+            "esm2022": "./es2022/floating-ui/src/index.js",
+            "es2022": "./es2022/floating-ui/src/index.js",
+            "node": "./es2022/floating-ui/src/index.js",
+            "default": "./es2022/floating-ui/src/index.js"
         },
         "./forms": {
             "types": "./forms/src/index.d.ts",
-            "esm2020": "./es2020/forms/src/index.js",
-            "es2020": "./es2020/forms/src/index.js",
-            "es2015": "./es2015/forms/src/index.js",
-            "node": "./es2015/forms/src/index.js",
-            "default": "./es2020/forms/src/index.js"
+            "esm2022": "./es2022/forms/src/index.js",
+            "es2022": "./es2022/forms/src/index.js",
+            "node": "./es2022/forms/src/index.js",
+            "default": "./es2022/forms/src/index.js"
         },
         "./hotkeys": {
             "types": "./hotkeys/src/index.d.ts",
-            "esm2020": "./es2020/hotkeys/src/index.js",
-            "es2020": "./es2020/hotkeys/src/index.js",
-            "es2015": "./es2015/hotkeys/src/index.js",
-            "node": "./es2015/hotkeys/src/index.js",
-            "default": "./es2020/hotkeys/src/index.js"
+            "esm2022": "./es2022/hotkeys/src/index.js",
+            "es2022": "./es2022/hotkeys/src/index.js",
+            "node": "./es2022/hotkeys/src/index.js",
+            "default": "./es2022/hotkeys/src/index.js"
         },
         "./material": {
             "types": "./material/src/index.d.ts",
-            "esm2020": "./es2020/material/src/index.js",
-            "es2020": "./es2020/material/src/index.js",
-            "es2015": "./es2015/material/src/index.js",
-            "node": "./es2015/material/src/index.js",
-            "default": "./es2020/material/src/index.js"
+            "esm2022": "./es2022/material/src/index.js",
+            "es2022": "./es2022/material/src/index.js",
+            "node": "./es2022/material/src/index.js",
+            "default": "./es2022/material/src/index.js"
         },
         "./moment": {
             "types": "./moment/src/index.d.ts",
-            "esm2020": "./es2020/moment/src/index.js",
-            "es2020": "./es2020/moment/src/index.js",
-            "es2015": "./es2015/moment/src/index.js",
-            "node": "./es2015/moment/src/index.js",
-            "default": "./es2020/moment/src/index.js"
+            "esm2022": "./es2022/moment/src/index.js",
+            "es2022": "./es2022/moment/src/index.js",
+            "node": "./es2022/moment/src/index.js",
+            "default": "./es2022/moment/src/index.js"
         },
         "./numeral": {
             "types": "./numeral/src/index.d.ts",
-            "esm2020": "./es2020/numeral/src/index.js",
-            "es2020": "./es2020/numeral/src/index.js",
-            "es2015": "./es2015/numeral/src/index.js",
-            "node": "./es2015/numeral/src/index.js",
-            "default": "./es2020/numeral/src/index.js"
+            "esm2022": "./es2022/numeral/src/index.js",
+            "es2022": "./es2022/numeral/src/index.js",
+            "node": "./es2022/numeral/src/index.js",
+            "default": "./es2022/numeral/src/index.js"
         },
         "./positions": {
             "types": "./positions/src/index.d.ts",
-            "esm2020": "./es2020/positions/src/index.js",
-            "es2020": "./es2020/positions/src/index.js",
-            "es2015": "./es2015/positions/src/index.js",
-            "node": "./es2015/positions/src/index.js",
-            "default": "./es2020/positions/src/index.js"
+            "esm2022": "./es2022/positions/src/index.js",
+            "es2022": "./es2022/positions/src/index.js",
+            "node": "./es2022/positions/src/index.js",
+            "default": "./es2022/positions/src/index.js"
         },
         "./router": {
             "types": "./router/src/index.d.ts",
-            "esm2020": "./es2020/router/src/index.js",
-            "es2020": "./es2020/router/src/index.js",
-            "es2015": "./es2015/router/src/index.js",
-            "node": "./es2015/router/src/index.js",
-            "default": "./es2020/router/src/index.js"
+            "esm2022": "./es2022/router/src/index.js",
+            "es2022": "./es2022/router/src/index.js",
+            "node": "./es2022/router/src/index.js",
+            "default": "./es2022/router/src/index.js"
         },
         "./store": {
             "types": "./store/src/index.d.ts",
-            "esm2020": "./es2020/store/src/index.js",
-            "es2020": "./es2020/store/src/index.js",
-            "es2015": "./es2015/store/src/index.js",
-            "node": "./es2015/store/src/index.js",
-            "default": "./es2020/store/src/index.js"
+            "esm2022": "./es2022/store/src/index.js",
+            "es2022": "./es2022/store/src/index.js",
+            "node": "./es2022/store/src/index.js",
+            "default": "./es2022/store/src/index.js"
         },
         "./structured-log": {
             "types": "./structured-log/src/index.d.ts",
-            "esm2020": "./es2020/structured-log/src/index.js",
-            "es2020": "./es2020/structured-log/src/index.js",
-            "es2015": "./es2015/structured-log/src/index.js",
-            "node": "./es2015/structured-log/src/index.js",
-            "default": "./es2020/structured-log/src/index.js"
+            "esm2022": "./es2022/structured-log/src/index.js",
+            "es2022": "./es2022/structured-log/src/index.js",
+            "node": "./es2022/structured-log/src/index.js",
+            "default": "./es2022/structured-log/src/index.js"
         }
     }
 }

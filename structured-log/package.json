@@ -1,9 +1,8 @@
 {
     "name": "@anglr/common-structured-log",
     "sideEffects": false,
-    "module": "../es2015/structured-log/src/index.js",
-    "es2015": "../es2015/structured-log/src/index.js",
-    "es2020": "../es2020/structured-log/src/index.js",
-    "esm2020": "../es2020/structured-log/src/index.js",
+    "module": "../es2022/structured-log/src/index.js",
+    "es2022": "../es2022/structured-log/src/index.js",
+    "esm2022": "../es2022/structured-log/src/index.js",
     "typings": "./src/index.d.ts"
   }

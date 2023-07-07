@@ -1,9 +1,8 @@
 {
     "name": "@anglr/common-forms",
     "sideEffects": false,
-    "module": "../es2015/forms/src/index.js",
-    "es2015": "../es2015/forms/src/index.js",
-    "es2020": "../es2020/forms/src/index.js",
-    "esm2020": "../es2020/forms/src/index.js",
+    "module": "../es2022/forms/src/index.js",
+    "es2022": "../es2022/forms/src/index.js",
+    "esm2022": "../es2022/forms/src/index.js",
     "typings": "./src/index.d.ts"
   }

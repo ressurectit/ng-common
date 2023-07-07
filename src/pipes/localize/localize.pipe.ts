@@ -11,20 +11,21 @@ import {StringLocalization} from '../../services/stringLocalization';
 @Pipe(
 {
     name: 'localize',
-    pure: false
+    standalone: true,
+    pure: false,
 })
-export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
+export class LocalizeSAPipe implements PipeTransform, OnInit, OnDestroy
 {
     //######################### private fields #########################
 
     /**
      * Subscription for changes of texts
      */
-    private _subscription: Subscription;
+    private _subscription: Subscription|undefined|null;
 
     //######################### constructor #########################
     constructor(@Inject(STRING_LOCALIZATION) private _localizationSvc: StringLocalization,
-                private _changeDetector: ChangeDetectorRef)
+                private _changeDetector: ChangeDetectorRef,)
     {
     }
 
@@ -65,10 +66,7 @@ export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
      */
     public ngOnDestroy(): void
     {
-        if(this._subscription)
-        {
-            this._subscription.unsubscribe();
-            this._subscription = null;
-        }
+        this._subscription?.unsubscribe();
+        this._subscription = null;
     }
 }

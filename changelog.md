@@ -1,6 +1,31 @@
 # Changelog
 
-## Version 16.0.0 (2023-10-26)
+## Version 17.0.0 (2023-07-07)
+
+### Features
+
+- new `DisplayPropertiesSAPipe` pipe, that transforms array of objects or object properties into string
+   - **name** `displayProperties`
+- new `FirstUppercaseLocalizeSAPipe` pipe, that localize strings using 'StringLocalization' and converts first letter of text to uppercase
+   - **name** `firstUppercaseLocalize`
+- new `FirstUppercaseSAPipe` pipe, that converts first letter of text to uppercase
+   - **name** `firstUppercase`
+- updated `LocalizeSAPipe`
+   - now its `standalone`
+
+### BREAKING CHANGES
+
+- minimal supported version of `@angular` is `16.0.3`
+- minimal supported version of `@rxjs` is `7.5.7`
+- minimal supported version of `angular2-hotkeys` is `15.0.0`
+- minimal supported version of `moment` is `2.29.4`
+- minimal supported version of `date-fns` is `2.30.0`
+- minimal supported version of `@floating-ui/dom` is `1.4.4`
+- minimal supported version of `tslib` is `2.6.0`
+- dropped support of `NodeJs` lower than `16.14`
+- pipe `LocalizePipe` renamed to `LocalizeSAPipe`
+
+## Version 16.0.0 (2023-02-08)
 
 ### Bug Fixes
 
