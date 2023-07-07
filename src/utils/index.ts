@@ -1,5 +1,6 @@
 import {NgModuleRef, ApplicationRef, InjectionToken} from '@angular/core';
 import {enableDebugTools} from '@angular/platform-browser';
+import {Action1} from '@jscrpt/common';
 import {filter, first} from 'rxjs';
 
 /**
@@ -30,6 +31,38 @@ export function appStablePromiseFactory(): Promise<void>
  * Injection token used for obtaining promise that is resolved when application is first time stable
  */
 export const APP_STABLE: InjectionToken<Promise<void>> = new InjectionToken<Promise<void>>('APP_STABLE', {providedIn: 'root', factory: appStablePromiseFactory});
+
+/**
+ * Runs callback function when angular app is bootstrapped and stable
+ * @param appRefPromise -Promise for application reference that was bootstrapped
+ * @param callback -Callback that is called when app is stable
+ * @param angularProfiler - Indication that angular profiler should be enabled
+ */
+export function runWhenAppStable(appRefPromise: Promise<ApplicationRef>, callback: Action1<ApplicationRef>, angularProfiler?: boolean): void
+{
+    angularProfiler = angularProfiler ?? false;
+
+    appRefPromise.then(appRef => 
+    {
+        appRef.isStable
+            .pipe(filter(isStable => isStable),
+                  first())
+            .subscribe(() => 
+            {
+                const appStablePromise = appRef.injector.get(APP_STABLE);
+
+                if(angularProfiler)
+                {
+                    enableDebugTools(appRef.components[0]);
+                }
+
+                callback(appRef);
+
+                const resolveAsStable = extractAppStableResolve(appStablePromise);
+                resolveAsStable();
+            });
+    });
+}
 
 /**
  * Runs callback function when angular module is bootstrapped and stable

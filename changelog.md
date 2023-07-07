@@ -4,6 +4,7 @@
 
 ### Features
 
+- new `runWhenAppStable` function that runs callback function when angular app is bootstrapped and stable
 - new `DisplayPropertiesSAPipe` pipe, that transforms array of objects or object properties into string
    - **name** `displayProperties`
 - new `FirstUppercaseLocalizeSAPipe` pipe, that localize strings using 'StringLocalization' and converts first letter of text to uppercase

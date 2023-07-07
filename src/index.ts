@@ -30,7 +30,7 @@ export {NoStringLocalizationService, StringLocalization} from './services/string
 export {Logger} from './services/logger';
 export * from './directives/bodyRender/bodyRender.directive';
 export {NgComponentOutletEx} from './directives/ngComponentOutletEx/ngComponentOutletEx.directive';
-export {APP_STABLE, extractAppStableResolve, runWhenModuleStable} from './utils';
+export {APP_STABLE, extractAppStableResolve, runWhenModuleStable, runWhenAppStable} from './utils';
 export {DEFAULT_NOTIFICATIONS, DefaultNotificationsService, Notification, NotificationSeverity, Notifications, NotificationsOptions, NotificationsProvider, NotificationsScopeProvider, NotificationsScopeProviderFactory} from './services/notifications';
 export * from './services/position';
 
