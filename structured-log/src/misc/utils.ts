@@ -52,7 +52,7 @@ export function toText(property: any): string
  * @param target - The target level.
  * @returns True if the checked level contains the target level, or if the checked level is undefined.
  */
-export function isEnabled(level: LogEventLevel, target: LogEventLevel): boolean
+export function isEnabled(level: LogEventLevel|undefined, target: LogEventLevel): boolean
 {
     return typeof level === 'undefined' || (level & target) === target;
 }

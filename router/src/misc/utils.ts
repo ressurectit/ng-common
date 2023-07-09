@@ -1,3 +1,4 @@
+import {Type} from '@angular/core';
 import {Route} from '@angular/router';
 import {isPresent} from '@jscrpt/common';
 
@@ -16,7 +17,7 @@ interface RoutesDecoratedComponent extends RouteDecoratedComponent, RedirectRout
  * @param components - Array of components to be used for extraction
  * @returns RouteDefinition Extracted routes
  */
-export function extractRoutes(components: any[]): Route[]
+export function extractRoutes(components: Type<any>[]): Route[]
 {
     const result: Route[] = [];
     
@@ -25,7 +26,7 @@ export function extractRoutes(components: any[]): Route[]
         return result;
     }
     
-    components.forEach((component: RoutesDecoratedComponent) =>
+    (components as any[]).forEach((component: RoutesDecoratedComponent) =>
     {
         if(isPresent(component.routeValues))
         {

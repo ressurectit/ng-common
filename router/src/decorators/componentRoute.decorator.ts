@@ -23,19 +23,18 @@ export type ComponentRouteDefinition = Omit<Route, keyof Pick<Route, 'component'
  */
 export function ComponentRoute(route: ComponentRouteDefinition): ClassDecorator
 {
-
     return function <TFunction extends Function> (target: TFunction): TFunction
     {
         const rt = route as Route;
 
         rt.component = <any>target;
-        
+
         const routeDecoratedComponent: RouteDecoratedComponent = <any>target;
 
         if(isBlank(routeDecoratedComponent.routeValues))
         {
-            Object.defineProperty(target, 
-                                  'routeValues', 
+            Object.defineProperty(target,
+                                  'routeValues',
                                   {
                                       enumerable: true,
                                       configurable: false,
@@ -45,7 +44,7 @@ export function ComponentRoute(route: ComponentRouteDefinition): ClassDecorator
         }
 
         routeDecoratedComponent.routeValues.push(rt);
-        
+
         return target;
     };
 }

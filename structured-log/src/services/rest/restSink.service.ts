@@ -119,12 +119,12 @@ export class RestSinkService implements Sink
      */
     public flush(): Promise<void>
     {
-        let promise: Promise<void>;
+        let promise: Promise<void>|undefined;
 
         //no logs available
         if(!this._logs.length)
         {
-            return Promise.resolve(null);
+            return Promise.resolve();
         }
 
         try
@@ -138,7 +138,7 @@ export class RestSinkService implements Sink
 
         this._logs = [];
 
-        return promise ?? Promise.resolve(null);
+        return promise ?? Promise.resolve();
     }
 
     //######################### private methods #########################

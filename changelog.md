@@ -1,10 +1,17 @@
 # Changelog
 
-## Version 17.0.0 (2023-07-07)
+## Version 17.0.0 (2023-07-09)
 
 ### Features
 
+- new `HostFlexColumnStyle` constant that represents css display flex and flex direction column style to host of component
+- new `HostFlexRowStyle` constant that represents css display flex and flex direction row style to host of component
 - new `runWhenAppStable` function that runs callback function when angular app is bootstrapped and stable
+- new `DEVELOPER_CONSOLE_SINK` provider for `DeveloperConsoleSinkService` for logger
+- new `DeveloperConsoleSinkService` service that represents sink that is used for storing logs using browser developer console
+- new `DeveloperConsoleSinkOptions` options that are options for developer console sink
+   - **properties**
+      - `restrictToLevel` restricts logs to specified level
 - new `DisplayPropertiesSAPipe` pipe, that transforms array of objects or object properties into string
    - **name** `displayProperties`
 - new `FirstUppercaseLocalizeSAPipe` pipe, that localize strings using 'StringLocalization' and converts first letter of text to uppercase

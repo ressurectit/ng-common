@@ -7,6 +7,7 @@ import {ConsoleComponentSinkService} from '../services/console/consoleComponentS
 import {LoggerService} from '../services/logger.service';
 import {ConsoleSinkConfigService} from '../services/console/consoleSinkConfig.service';
 import {RestSinkService} from '../services/rest/restSink.service';
+import {DeveloperConsoleSinkService} from '../services/developerConsole/developerConsoleSink.service';
 
 /**
  * Factory method for `ConsoleComponentSink`
@@ -32,7 +33,7 @@ export const CONSOLE_COMPONENT_SINK_SERVICE: InjectionToken<ConsoleComponentSink
 export const LOGGER_REST_CLIENT: InjectionToken<LoggerRestClient> = new InjectionToken<LoggerRestClient>('LOGGER_REST_CLIENT');
 
 /**
- * Provider for ConsoleComponentSinkService for logger
+ * Provider for `ConsoleComponentSinkService` for logger
  */
 export const CONSOLE_COMPONENT_SINK_SERVICE_PROVIDER: Provider =
 <FactoryProvider>
@@ -43,7 +44,7 @@ export const CONSOLE_COMPONENT_SINK_SERVICE_PROVIDER: Provider =
 };
 
 /**
- * Provider for ConsoleComponentSink for logger
+ * Provider for `ConsoleComponentSink` for logger
  */
 export const CONSOLE_COMPONENT_SINK: Provider =
 <ExistingProvider>
@@ -54,13 +55,24 @@ export const CONSOLE_COMPONENT_SINK: Provider =
 };
 
 /**
- * Provider for RestSinkService for logger
+ * Provider for `RestSinkService` for logger
  */
 export const REST_SINK: Provider =
 <ClassProvider>
 {
     provide: LOGGER_SINKS,
     useClass: RestSinkService,
+    multi: true
+};
+
+/**
+ * Provider for `DeveloperConsoleSinkService` for logger
+ */
+export const DEVELOPER_CONSOLE_SINK: Provider =
+<ClassProvider>
+{
+    provide: LOGGER_SINKS,
+    useClass: DeveloperConsoleSinkService,
     multi: true
 };
 
