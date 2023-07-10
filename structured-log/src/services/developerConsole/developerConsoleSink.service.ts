@@ -77,26 +77,26 @@ export class DeveloperConsoleSinkService implements Sink
                 case LogEventLevel.error:
                 case LogEventLevel.fatal:
                 {
-                    console.log(fullMessage, 'color: #FF3131;');
+                    this._writeLog(fullMessage, 'FF3131');
 
                     break;
                 }
                 case LogEventLevel.verbose:
                 case LogEventLevel.debug:
                 {
-                    console.log(fullMessage, 'color: #31A1FF;');
+                    this._writeLog(fullMessage, '31A1FF');
 
                     break;
                 }
                 case LogEventLevel.information:
                 {
-                    console.log(fullMessage, 'color: #ffffff;');
+                    this._writeLog(fullMessage, 'ffffff');
 
                     break;
                 }
                 case LogEventLevel.warning:
                 {
-                    console.log(fullMessage, 'color: #FFC531;');
+                    this._writeLog(fullMessage, 'FFC531');
 
                     break;
                 }
@@ -124,6 +124,27 @@ export class DeveloperConsoleSinkService implements Sink
         if(messageTemplateInstance.constructor && messageTemplateInstance.constructor.prototype && messageTemplateInstance.constructor.prototype.toText)
         {
             messageTemplateInstance.constructor.prototype.toText = toText;
+        }
+    }
+
+    /**
+     * Writes message to log
+     * @param fullMessage - Full message to be written
+     * @param color - Color of message
+     */
+    private _writeLog(fullMessage: string, color: string): void
+    {
+        const match = /^(.*?)\n(.*)$/g.exec(fullMessage);
+
+        if(match)
+        {
+            console.groupCollapsed(match[1],  `color: #${color};`);
+            console.log(match[2], `color: #${color};`);
+            console.groupEnd();
+        }
+        else
+        {
+            console.log(fullMessage, `color: #${color};`);
         }
     }
 }
