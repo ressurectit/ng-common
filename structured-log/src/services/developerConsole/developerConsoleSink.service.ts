@@ -134,12 +134,15 @@ export class DeveloperConsoleSinkService implements Sink
      */
     private _writeLog(fullMessage: string, color: string): void
     {
-        const match = /^(.*?)\n(.*)$/g.exec(fullMessage);
+        const index = fullMessage.indexOf('\n');
 
-        if(match)
+        if(index >= 0)
         {
-            console.groupCollapsed(match[1],  `color: #${color};`);
-            console.log(match[2], `color: #${color};`);
+            const firstLine = fullMessage.slice(0, index);
+            const restLines = fullMessage.slice(index + 1);
+
+            console.groupCollapsed(firstLine,  `color: #${color};`);
+            console.log(restLines, `color: #${color};`);
             console.groupEnd();
         }
         else
