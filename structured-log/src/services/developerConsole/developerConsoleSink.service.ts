@@ -142,7 +142,7 @@ export class DeveloperConsoleSinkService implements Sink
             const restLines = fullMessage.slice(index + 1);
 
             console.groupCollapsed(firstLine,  `color: #${color};`);
-            console.log(restLines, `color: #${color};`);
+            console.log(`%c${restLines}`, `color: #${color};`);
             console.groupEnd();
         }
         else
