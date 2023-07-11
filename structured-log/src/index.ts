@@ -7,7 +7,7 @@ export * from './types/logger.interface';
 export * from './services/console/consoleComponentSink.service';
 export * from './services/console/consoleSinkConfig.service';
 export * from './services/logger.service';
-export * from './services/rest/restSinkConfig.service';
+export * from './services/rest/restSink.options';
 export * from './services/rest/restSink.service';
 export * from './services/developerConsole/developerConsoleSink.options';
 export * from './services/developerConsole/developerConsoleSink.service';

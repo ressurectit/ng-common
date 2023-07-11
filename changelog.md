@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 17.0.0 (2023-07-09)
+## Version 17.0.0 (2023-07-11)
 
 ### Features
 
@@ -32,6 +32,16 @@
 - minimal supported version of `tslib` is `2.6.0`
 - dropped support of `NodeJs` lower than `16.14`
 - pipe `LocalizePipe` renamed to `LocalizeSAPipe`
+- `RestSinkConfigService` renamed to `RestSinkOptions`
+- updated `RestSinkService` constructor parameters order
+- updated `DebugDataComponent`
+   - renamed `_debugDataEnabledChangeSubscription` to `debugDataEnabledChangeSubscription`
+   - `debugDataEnabledChangeSubscription` is now *nullable*
+   - renamed `_debugDataEnabledSvc` to `debugDataEnabledSvc`
+   - renamed `changeDetector` to `_changeDetector`
+   - renamed `element` to `_element`
+   - `enabled` property changed to `protected`
+   - now using `signals`
 
 ## Version 16.0.0 (2023-02-08)
 

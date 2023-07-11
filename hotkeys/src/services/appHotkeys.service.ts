@@ -28,7 +28,7 @@ export class AppHotkeysService
     /**
      * Instance of mousetrap that is attached to specific element
      */
-    private _mousetrap: MousetrapInstance = null;
+    private _mousetrap: MousetrapInstance|null = null;
 
     //######################### public properties #########################
 
@@ -87,10 +87,13 @@ export class AppHotkeysService
         }
 
         const oldHotkeys = appHotkeysService._hotkeySvc.mousetrap;
-        appHotkeysService._hotkeySvc.mousetrap = appHotkeysService._mousetrap;
+
+        if(appHotkeysService._mousetrap)
+        {
+            appHotkeysService._hotkeySvc.mousetrap = appHotkeysService._mousetrap;
+        }
 
         scopedInitialization(appHotkeysService);
-
         appHotkeysService._hotkeySvc.mousetrap = oldHotkeys;
     }
 
@@ -140,7 +143,11 @@ export class AppHotkeysService
 
         if(this._mousetrap)
         {
-            this._hotkeySvc.mousetrap = oldMouseTrap;
+            if(oldMouseTrap)
+            {
+                this._hotkeySvc.mousetrap = oldMouseTrap;
+            }
+            
             this._mousetrap.reset();
             this._mousetrap = null;
         }

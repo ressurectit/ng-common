@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, ChangeDetectorRef, ElementRef} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, signal, WritableSignal} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {DebugDataEnabledService} from '../../services/debugDataEnabled/debugDataEnabled.service';
@@ -25,21 +25,21 @@ export class DebugDataComponent implements OnDestroy, OnInit
     /**
      * Subscription for changes of debug data enabled
      */
-    protected _debugDataEnabledChangeSubscription: Subscription;
+    protected debugDataEnabledChangeSubscription: Subscription|undefined|null;
 
-    //######################### public properties - template bindings #########################
+    //######################### protected properties - template bindings #########################
 
     /**
      * Indication whether is debug data enabled
      *
      * @internal
      */
-    public enabled: boolean = false;
+    protected enabled: WritableSignal<boolean> = signal(false);
 
     //######################### constructor #########################
-    constructor(protected _debugDataEnabledSvc: DebugDataEnabledService,
-                protected _changeDetector: ChangeDetectorRef,
-                protected _element: ElementRef<HTMLElement>)
+    constructor(protected debugDataEnabledSvc: DebugDataEnabledService,
+                protected changeDetector: ChangeDetectorRef,
+                protected element: ElementRef<HTMLElement>)
     {
     }
 
@@ -50,15 +50,15 @@ export class DebugDataComponent implements OnDestroy, OnInit
      */
     public ngOnInit(): void
     {
-        this.enabled = this._debugDataEnabledSvc.enabled;
-        this._setEnabledCssClass();
+        this.enabled.set(this.debugDataEnabledSvc.enabled);
+        this.setEnabledCssClass();
 
-        this._debugDataEnabledChangeSubscription = this._debugDataEnabledSvc.enabledChange.subscribe(() =>
+        this.debugDataEnabledChangeSubscription = this.debugDataEnabledSvc.enabledChange.subscribe(() =>
         {
-            this.enabled = this._debugDataEnabledSvc.enabled;
-            this._setEnabledCssClass();
+            this.enabled.set(this.debugDataEnabledSvc.enabled);
+            this.setEnabledCssClass();
 
-            this._changeDetector.detectChanges();
+            this.changeDetector.detectChanges();
         });
     }
 
@@ -69,24 +69,24 @@ export class DebugDataComponent implements OnDestroy, OnInit
      */
     public ngOnDestroy(): void
     {
-        this._debugDataEnabledChangeSubscription?.unsubscribe();
-        this._debugDataEnabledChangeSubscription = null;
+        this.debugDataEnabledChangeSubscription?.unsubscribe();
+        this.debugDataEnabledChangeSubscription = null;
     }
 
-    //######################### private methods #########################
+    //######################### protected methods #########################
 
     /**
      * Sets enabled css class according enabled state
      */
-    private _setEnabledCssClass(): void
+    protected setEnabledCssClass(): void
     {
-        if(this.enabled)
+        if(this.enabled())
         {
-            this._element.nativeElement.classList.add(ENABLED);
+            this.element.nativeElement.classList.add(ENABLED);
         }
         else
         {
-            this._element.nativeElement.classList.remove(ENABLED);
+            this.element.nativeElement.classList.remove(ENABLED);
         }
     }
 }

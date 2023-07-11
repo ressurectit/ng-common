@@ -1,11 +1,11 @@
-import {Injectable, Inject} from '@angular/core';
+import {Injectable, Inject, Optional} from '@angular/core';
 import {APP_STABLE} from '@anglr/common';
 import {isPresent} from '@jscrpt/common';
 import {Sink, LogEvent, LogEventLevel} from 'structured-log';
 import {lastValueFrom} from 'rxjs';
 
 import {toText, isEnabled} from '../../misc/utils';
-import {RestSinkConfigService} from './restSinkConfig.service';
+import {RestSinkOptions} from './restSink.options';
 import {LOGGER_REST_CLIENT} from '../../types/tokens';
 import {LoggerRestClient, RestLog} from '../../types/logger.interface';
 
@@ -32,17 +32,31 @@ export class RestSinkService implements Sink
      */
     private _timer: number|undefined|null;
 
+    /**
+     * Configuration options for rest sink
+     */
+    private _config: RestSinkOptions;
+
     //######################### constructor #########################
-    constructor(private _configSvc: RestSinkConfigService,
-                @Inject(APP_STABLE) isStable: Promise<void>,
-                @Inject(LOGGER_REST_CLIENT) private _restClient: LoggerRestClient)
+    constructor(@Inject(APP_STABLE) isStable: Promise<void>,
+                @Inject(LOGGER_REST_CLIENT) private _restClient: LoggerRestClient,
+                @Optional() config?: RestSinkOptions,)
     {
+        if(!config || !(config instanceof RestSinkOptions))
+        {
+            this._config = new RestSinkOptions();
+        }
+        else
+        {
+            this._config = config;
+        }
+
         isStable.then(() =>
         {
             this._timer = setInterval(() =>
             {
                 this.flush();
-            }, (this._configSvc.secondsToFlushAfter ?? 0) * 1000) as any;
+            }, (this._config.secondsToFlushAfter ?? 0) * 1000) as any;
         });
     }
 
@@ -85,7 +99,7 @@ export class RestSinkService implements Sink
                 this._prototypeUpdated = true;
             }
 
-            if (!isEnabled(this._configSvc.restrictToLevel, e.level))
+            if (!isEnabled(this._config.restrictToLevel, e.level))
             {
                 return;
             }
@@ -101,14 +115,14 @@ export class RestSinkService implements Sink
                 timestamp
             });
 
-            if (isEnabled(this._configSvc.immediateFlushMinLevel, e.level))
+            if (isEnabled(this._config.immediateFlushMinLevel, e.level))
             {
                 forceFlush = true;
             }
         });
 
         //flush if number of records is bigger than max or flush is required
-        if(forceFlush || this._logs.length >= this._configSvc.flushAfterNumberOfLogs)
+        if(forceFlush || this._logs.length >= this._config.flushAfterNumberOfLogs)
         {
             this.flush();
         }
