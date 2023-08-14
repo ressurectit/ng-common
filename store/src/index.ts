@@ -1,1 +1,1 @@
-export {LocalPermanentStorageService, SessionTemporaryStorageService} from './services';
+export {LocalPermanentStorageService, SessionTemporaryStorageService, SessionTemporaryStorage, LocalPermanentStorage} from './services';

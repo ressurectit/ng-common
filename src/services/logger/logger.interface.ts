@@ -1,3 +1,5 @@
+import {Type} from '@angular/core';
+
 /**
  * Interface for general logger
  */
@@ -94,4 +96,11 @@ export interface Logger
      * @param properties - Properties that can be used to render the message template.
      */
     verbose(error: Error, messageTemplate: string, ...properties: any[]): void;
+}
+
+/**
+ * Used for restriction of logger provider type only for type decorated with logger provider
+ */
+export interface LoggerType extends Type<unknown>
+{
 }

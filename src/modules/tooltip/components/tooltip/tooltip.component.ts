@@ -1,4 +1,5 @@
 import {Component, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, ElementRef, HostListener} from '@angular/core';
+import {Invalidatable} from '@jscrpt/common';
 
 import {TooltipTemplateContext} from '../../directives';
 import {TooltipRenderer} from '../../misc/tooltip.interface';
@@ -13,19 +14,19 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
     styleUrls: ['tooltip.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
+export class TooltipComponent<TData = any> implements TooltipRenderer<TData>, Invalidatable
 {
     //######################### protected fields #########################
 
     /**
      * Called when mouse enter tooltip component, hover
      */
-    protected _enterFn: () => void = () => null;
+    protected enterFn: () => void = () => null;
 
     /**
      * Called when mouse leaves tooltip component
      */
-    protected _leaveFn: () => void = () => null;
+    protected leaveFn: () => void = () => null;
 
     //######################### public properties - implementation of TooltipRenderer #########################
 
@@ -50,8 +51,8 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
     public cssClass: string|null|undefined;
 
     //######################### constructor #########################
-    constructor(protected _changeDetector: ChangeDetectorRef,
-                protected _element: ElementRef<HTMLElement>)
+    constructor(protected changeDetector: ChangeDetectorRef,
+                protected element: ElementRef<HTMLElement>)
     {
     }
 
@@ -64,33 +65,33 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
      */
     public registerHoverEvents(enter: () => void, leave: () => void): void
     {
-        this._enterFn = enter;
-        this._leaveFn = leave;
+        this.enterFn = enter;
+        this.leaveFn = leave;
     }
 
     /**
-     * Explicitly runs invalidation of content (change detection)
+     * @inheritdoc
      */
     public invalidateVisuals(): void
     {
         if(this.cssClass)
         {
-            this._element.nativeElement.classList.add(this.cssClass);
+            this.element.nativeElement.classList.add(this.cssClass);
         }
 
-        this._changeDetector.detectChanges();
+        this.changeDetector.detectChanges();
     }
 
-    //######################### public methods - host #########################
+    //######################### protected methods - host #########################
 
     /**
      * Handles mouse enter event over tooltip
      * @internal
      */
     @HostListener('mouseenter')
-    public mouseEnter(): void
+    protected mouseEnter(): void
     {
-        this._enterFn();
+        this.enterFn();
     }
 
     /**
@@ -98,8 +99,8 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>
      * @internal
      */
     @HostListener('mouseleave')
-    public mouseLeave(): void
+    protected mouseLeave(): void
     {
-        this._leaveFn();
+        this.leaveFn();
     }
 }

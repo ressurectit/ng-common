@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 17.0.0 (2023-07-11)
+## Version 17.0.0 (2023-08-14)
 
 ### Features
 
@@ -18,8 +18,29 @@
    - **name** `firstUppercaseLocalize`
 - new `FirstUppercaseSAPipe` pipe, that converts first letter of text to uppercase
    - **name** `firstUppercase`
+- new `getProviderForType` function, that gets provider from type
+- new `TypeProvider` decorator, that attach provider to type
+- new `LoggerType` interface, that is used for restriction of logger provider type only for type decorated with logger provider
+- new `PermanentStorageType` interface, that is used for restriction of permanent storage provider type only for type decorated with permanent storage provider
+- new `PositionType` interface, that is used for restriction of position provider type only for type decorated with position provider
+- new `StringLocalizationType` interface, that is used for restriction of string localization provider type only for type decorated with string localization provider
+- new `TemporaryStorageType` interface, that is used for restriction of temporary storage provider type only for type decorated with temporary storage provider
+- new `provideLogger` function that provides logger service type
+- new `providePermanentStorage` function that provides permanent storage service type
+- new `providePosition` function that provides position service type
+- new `provideStringLocalization` function that provides string localization service type
+- new `provideTemporaryStorage` function that provides temporary storage service type
+- new `CookiePermanentStorage` type, that sets permanent storage to use cookie permanent storage when used with `providePermanentStorage`
 - updated `LocalizeSAPipe`
    - now its `standalone`
+- *subpackage* `@anglr/common/numeral`
+   - updated `NumeralSAPipe` pipe is now standalone
+- *subpackage* `@anglr/common/store`
+   - new `LocalPermanentStorage` type, that sets permanent storage to use local permanent storage when used with `providePermanentStorage`
+   - new `SessionTemporaryStorage` type, that sets temporary storage to use session temporary storage when used with `provideTemporaryStorage`
+- *subpackage* `@anglr/common/structured-log`
+   - new `provideConsoleComponentSink` function, that provides console component as sink for logger
+   - new `StructuredLogLogger` type, that sets logger to use structured log logger when used with `provideLogger`
 
 ### BREAKING CHANGES
 
@@ -34,7 +55,7 @@
 - pipe `LocalizePipe` renamed to `LocalizeSAPipe`
 - `RestSinkConfigService` renamed to `RestSinkOptions`
 - updated `RestSinkService` constructor parameters order
-- updated `DebugDataComponent`
+- updated `DebugDataComponent` component
    - renamed `_debugDataEnabledChangeSubscription` to `debugDataEnabledChangeSubscription`
    - `debugDataEnabledChangeSubscription` is now *nullable*
    - renamed `_debugDataEnabledSvc` to `debugDataEnabledSvc`
@@ -42,6 +63,19 @@
    - renamed `element` to `_element`
    - `enabled` property changed to `protected`
    - now using `signals`
+- updated `TooltipComponent` component
+   - renamed `_enterFn` to `enterFn`
+   - renamed `_leaveFn` to `leaveFn`
+   - renamed `_changeDetector` to `changeDetector`
+   - renamed `_element` to `element`
+   - `mouseEnter` is now `protected`
+   - `mouseLeave` is now `protected`
+- *subpackage* `@anglr/common/numeral`
+   - pipe `NumeralPipe` renamed to `NumeralSAPipe`
+- *subpackage* `@anglr/common/structured-log`
+   - updated `ConsoleLogModule` module
+      - removed `forRoot` method, instead use new `provideConsoleComponentSink` function
+   - removed `STRUCTURED_LOG_LOGGER` from public API, instead use new `provideLogger` with `StructuredLogLogger` type
 
 ## Version 16.0.0 (2023-02-08)
 

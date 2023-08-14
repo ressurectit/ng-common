@@ -1,14 +1,14 @@
 import {NgModule} from '@angular/core';
 
-import {NumeralPipe} from './../pipes/numeral.pipe';
+import {NumeralSAPipe} from './../pipes/numeral.pipe';
 
 /**
  * Module for components, pipes and directives that are using numeral library
  */
 @NgModule(
 {
-    declarations: [NumeralPipe],
-    exports: [NumeralPipe]
+    imports: [NumeralSAPipe],
+    exports: [NumeralSAPipe]
 })
 export class NumeralModule
 {

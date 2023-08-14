@@ -1,5 +1,5 @@
-import {Injectable, Inject} from '@angular/core';
-import {Logger as LoggerInterface} from '@anglr/common';
+import {Injectable, Inject, Provider, ClassProvider} from '@angular/core';
+import {LOGGER, Logger as LoggerInterface, PositionType, TypeProvider} from '@anglr/common';
 import {configure, Sink, Logger} from 'structured-log';
 
 import {LOGGER_SINKS} from '../types/tokens';
@@ -152,3 +152,26 @@ export class LoggerService implements LoggerInterface
         this._logger.verbose(errorOrMessageTemplate, properties);
     }
 }
+
+/**
+ * Provider for logger that is using structured log implementation
+ */
+const STRUCTURED_LOG_LOGGER: Provider =
+<ClassProvider>
+{
+    provide: LOGGER,
+    useClass: LoggerService
+};
+
+/**
+ * Type that contains provider for structured log logger when used with `provideLogger`
+ */
+@TypeProvider(STRUCTURED_LOG_LOGGER)
+class StructuredLogLoggerType
+{
+}
+
+/**
+ * Sets logger to use structured log logger when used with `provideLogger`
+ */
+export const StructuredLogLogger: PositionType = StructuredLogLoggerType;

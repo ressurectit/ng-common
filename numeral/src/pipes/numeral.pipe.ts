@@ -7,8 +7,8 @@ import {Subscription} from 'rxjs';
 /**
  * Pipe to transform numbers to regional formatting using numeraljs.
  */
-@Pipe({name: 'numeral'})
-export class NumeralPipe implements PipeTransform, OnDestroy
+@Pipe({name: 'numeral', standalone: true})
+export class NumeralSAPipe implements PipeTransform, OnDestroy
 {
     //######################### private fields #########################
     

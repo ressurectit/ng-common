@@ -1,3 +1,5 @@
+import {Type} from '@angular/core';
+
 /**
  * Provides api for implementing temporary storage
  */
@@ -21,4 +23,11 @@ export interface TemporaryStorage
      * @param name - Name of stored value that will be removed
      */
     remove(name: string): void;
+}
+
+/**
+ * Used for restriction of temporary storage provider type only for type decorated with temporary storage provider
+ */
+export interface TemporaryStorageType extends Type<unknown>
+{
 }

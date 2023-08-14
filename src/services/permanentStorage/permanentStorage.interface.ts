@@ -1,3 +1,5 @@
+import {Type} from '@angular/core';
+
 /**
  * Provides api for implementing permanent storage
  */
@@ -29,4 +31,11 @@ export interface PermanentStorage
      * @param name - Name of stored value that will be removed
      */
     remove(name: string): void;
+}
+
+/**
+ * Used for restriction of permanent storage provider type only for type decorated with permanent storage provider
+ */
+export interface PermanentStorageType extends Type<unknown>
+{
 }
