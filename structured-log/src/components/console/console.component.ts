@@ -21,7 +21,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Subscription for log changes
      */
-    private _logsChangeSubscription: Subscription;
+    private _logsChangeSubscription: Subscription|undefined|null;
 
     //######################### public properties - template bindings #########################
 

@@ -1,17 +1,18 @@
 import {Directive, Input, ElementRef, OnChanges, SimpleChanges, Inject, Output, EventEmitter, OnDestroy} from '@angular/core';
 import {nameof, isPresent, isString, Func1, NoopAction} from '@jscrpt/common';
 
-import {applyPositionResult, Position, PositionPlacement, PositionOptions, PositionOffsetString, PositionOffsets, PositionArguments, AutoUpdateOptions} from '../../../../services/position';
-import {POSITION} from '../../../../types/tokens';
+import {applyPositionResult, Position, PositionPlacement, PositionOptions, PositionOffsetString, PositionOffsets, PositionArguments, AutoUpdateOptions} from '../../services/position';
+import {POSITION} from '../../types/tokens';
 
 /**
  * Sets position of attached element relative to provided element
  */
 @Directive(
 {
-    selector: '[positionTo]'
+    selector: '[positionTo]',
+    standalone: true,
 })
-export class PositionToDirective implements OnChanges, OnDestroy
+export class PositionToSADirective implements OnChanges, OnDestroy
 {
     //######################### protected fields #########################
 
@@ -111,8 +112,8 @@ export class PositionToDirective implements OnChanges, OnDestroy
      */
     public ngOnChanges(changes: SimpleChanges): void
     {
-        if((nameof<PositionToDirective>('source') in changes ||
-            nameof<PositionToDirective>('placement') in changes) &&
+        if((nameof<PositionToSADirective>('source') in changes ||
+            nameof<PositionToSADirective>('placement') in changes) &&
            isPresent(this.source))
         {
             this._applyPosition();

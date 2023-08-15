@@ -1,4 +1,4 @@
-import {Directive, OnInit, OnDestroy, Input, EventEmitter, Output, ElementRef, Inject} from '@angular/core';
+import {Directive, OnInit, OnDestroy, Input, EventEmitter, Output, ElementRef, Inject, NgZone} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {isDescendant, isString} from '@jscrpt/common';
 
@@ -7,16 +7,17 @@ import {isDescendant, isString} from '@jscrpt/common';
  */
 @Directive(
 {
-    selector: '[clickOutside]'
+    selector: '[clickOutside]',
+    standalone: true,
 })
-export class ClickOutsideDirective implements OnInit, OnDestroy
+export class ClickOutsideSADirective implements OnInit, OnDestroy
 {
     //######################### protected fields #########################
 
     /**
      * Variable that is used for displaying element that handles click outside
      */
-    protected _clickOutsideCondition: boolean;
+    protected ɵclickOutsideCondition: boolean = false;
 
     //######################### public properties - inputs #########################
 
@@ -26,25 +27,25 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
     @Input('clickOutside')
     public get clickOutsideCondition(): boolean
     {
-        return this._clickOutsideCondition;
+        return this.ɵclickOutsideCondition;
     }
     public set clickOutsideCondition(value: boolean)
     {
         if(isString(value) && value === '')
         {
-            this._clickOutsideCondition = true;
+            this.ɵclickOutsideCondition = true;
 
             return;
         }
 
-        this._clickOutsideCondition = value;
+        this.ɵclickOutsideCondition = value;
     }
 
     /**
      * Additional element that is checked for click
      */
     @Input()
-    public clickOutsideElement: HTMLElement;
+    public clickOutsideElement: HTMLElement|undefined|null;
 
     //######################### public properties - outputs #########################
 
@@ -55,8 +56,9 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
     public clickOutsideConditionChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //######################### constructor #########################
-    constructor(protected _element: ElementRef<HTMLElement>,
-                @Inject(DOCUMENT) protected _document: Document)
+    constructor(protected element: ElementRef<HTMLElement>,
+                @Inject(DOCUMENT) protected document: Document,
+                protected ngZone: NgZone,)
     {
     }
 
@@ -67,7 +69,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
      */
     public ngOnInit(): void
     {
-        this._document.addEventListener('mouseup', this._handleClickOutside);
+        this.ngZone.runOutsideAngular(() =>
+        {
+            this.document.addEventListener('mouseup', this.handleClickOutside);
+        });
     }
 
     //######################### public methods - implementation of OnDestroy #########################
@@ -77,7 +82,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
      */
     public ngOnDestroy(): void
     {
-        this._document.removeEventListener('mouseup', this._handleClickOutside);
+        this.ngZone.runOutsideAngular(() =>
+        {
+            this.document.removeEventListener('mouseup', this.handleClickOutside);
+        });
     }
 
     //######################### protected methods #########################
@@ -86,10 +94,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy
      * Handles click outside of element
      * @param event - Mouse event object
      */
-    protected _handleClickOutside = (event: MouseEvent) =>
+    protected handleClickOutside = (event: MouseEvent) =>
     {
-        if(this._element.nativeElement != event.target &&
-           !isDescendant(this._element.nativeElement, event.target as HTMLElement) &&
+        if(this.element.nativeElement != event.target &&
+           !isDescendant(this.element.nativeElement, event.target as HTMLElement) &&
            (!this.clickOutsideElement || (this.clickOutsideElement != event.target &&
                                           !isDescendant(this.clickOutsideElement, event.target as HTMLElement))))
         {   

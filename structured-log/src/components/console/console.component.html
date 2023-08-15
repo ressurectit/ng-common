@@ -1,7 +1,7 @@
 <div class="console-data thin-scrollbar">
     <div class="console-log" [ngClass]="log?.logLevel" *ngFor="let log of currentLogs">
         <div class="console-log-icon fa" [class.fa-angle-right]="!log?.expanded" [class.fa-angle-down]="log?.expanded" (click)="log.expanded = !log.expanded"></div>
-        <div class="console-log-text" [class.expanded]="log?.expanded" (click)="copyMessage(log?.text)">{{log?.text}}</div>
+        <div class="console-log-text" [class.expanded]="log?.expanded" (click)="copyMessage(log.text)">{{log?.text}}</div>
     </div>
 
     <div class="clear-icon" (click)="clear()" title="clear log">

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Dictionary} from '@jscrpt/common';
+import {formatString} from '@jscrpt/common';
 import {Subject, Observable} from 'rxjs';
 
 import {StringLocalization} from './stringLocalization.interface';
@@ -34,18 +34,14 @@ export class NoStringLocalizationService implements StringLocalization
      * @param key - Key to be localized
      * @param interpolateParams - Optional object storing interpolation parameters
      */
-    public get(key: string, interpolateParams?: Dictionary<any>): string
+    public get(key: string, interpolateParams?: Record<string, unknown>): string
     {
         if(!interpolateParams)
         {
             return key;
         }
 
-        Object.keys(interpolateParams).forEach(prop =>
-        {
-            key = key.replace(new RegExp(`{{${prop}}}`, 'g'), interpolateParams[prop]);
-        });
 
-        return key;
+        return formatString(key, interpolateParams);
     }
 }

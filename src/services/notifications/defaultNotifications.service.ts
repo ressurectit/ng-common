@@ -79,9 +79,9 @@ export class DefaultNotificationsService implements Notifications
     /**
      * @inheritdoc
      */
-    public message(message: string, severity: NotificationSeverity): Notifications
+    public message(message: string, severity: NotificationSeverity, parameter?: Record<string, unknown>): Notifications
     {
-        const notification = new Notification(message, severity);
+        const notification = new Notification(message, severity, parameter);
         
         this._notifications.push(notification);
         this._notificationsChange.next();
@@ -101,41 +101,41 @@ export class DefaultNotificationsService implements Notifications
     /**
      * @inheritdoc
      */
-    public default(message: string): Notifications
+    public default(message: string, parameter?: Record<string, unknown>): Notifications
     {
-        return this.message(message, NotificationSeverity.Default);
+        return this.message(message, NotificationSeverity.Default, parameter);
     }
 
     /**
      * @inheritdoc
      */
-    public success(message: string): Notifications
+    public success(message: string, parameter?: Record<string, unknown>): Notifications
     {
-        return this.message(message, NotificationSeverity.Success);
+        return this.message(message, NotificationSeverity.Success, parameter);
     }
     
     /**
      * @inheritdoc
      */
-    public error(message: string): Notifications
+    public error(message: string, parameter?: Record<string, unknown>): Notifications
     {
-        return this.message(message, NotificationSeverity.Error);
+        return this.message(message, NotificationSeverity.Error, parameter);
     }
     
     /**
      * @inheritdoc
      */
-    public info(message: string): Notifications
+    public info(message: string, parameter?: Record<string, unknown>): Notifications
     {
-        return this.message(message, NotificationSeverity.Info);
+        return this.message(message, NotificationSeverity.Info, parameter);
     }
     
     /**
      * @inheritdoc
      */
-    public warning(message: string): Notifications
+    public warning(message: string, parameter?: Record<string, unknown>): Notifications
     {
-        return this.message(message, NotificationSeverity.Warning);
+        return this.message(message, NotificationSeverity.Warning, parameter);
     }
 
     /**

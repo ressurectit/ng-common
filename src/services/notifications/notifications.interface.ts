@@ -106,38 +106,44 @@ export interface Notifications
      * Displays message with specified severity
      * @param message - Message to be displayed
      * @param severity - Severity of displayed notification
+     * @param parameter - Object that is used for formatting notification message
      */
-    message(message: string, severity: NotificationSeverity): Notifications;
+    message(message: string, severity: NotificationSeverity, parameter?: Record<string, unknown>): Notifications;
 
     /**
      * Displays default notification
      * @param message - Message to be displayed
+     * @param parameter - Object that is used for formatting notification message
      */
-    default(message: string): Notifications;
+    default(message: string, parameter?: Record<string, unknown>): Notifications;
 
     /**
      * Displays success notification
      * @param message - Message to be displayed
+     * @param parameter - Object that is used for formatting notification message
      */
-    success(message: string): Notifications;
+    success(message: string, parameter?: Record<string, unknown>): Notifications;
     
     /**
      * Displays error notification
      * @param message - Message to be displayed
+     * @param parameter - Object that is used for formatting notification message
      */
-    error(message: string): Notifications;
+    error(message: string, parameter?: Record<string, unknown>): Notifications;
     
     /**
      * Displays info notification
      * @param message - Message to be displayed
+     * @param parameter - Object that is used for formatting notification message
      */
-    info(message: string): Notifications;
+    info(message: string, parameter?: Record<string, unknown>): Notifications;
     
     /**
      * Displays warning notification
      * @param message - Message to be displayed
+     * @param parameter - Object that is used for formatting notification message
      */
-    warning(message: string): Notifications;
+    warning(message: string, parameter?: Record<string, unknown>): Notifications;
 
     /**
      * Clears all displayed notifications

@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 17.0.0 (2023-08-14)
+## Version 17.0.0 (2023-08-15)
 
 ### Features
 
@@ -31,6 +31,10 @@
 - new `provideStringLocalization` function that provides string localization service type
 - new `provideTemporaryStorage` function that provides temporary storage service type
 - new `CookiePermanentStorage` type, that sets permanent storage to use cookie permanent storage when used with `providePermanentStorage`
+- updated `ClickOutsideSADirective` directive
+   - now it is `standalone`
+- updated `GoBackSADirective` directive
+   - now it is `standalone`
 - updated `LocalizeSAPipe`
    - now it is `standalone`
 - updated `IsNaNSAPipe`
@@ -43,10 +47,21 @@
    - now it is `standalone`
 - updated `UrlEncodeSAPipe`
    - now it is `standalone`
-- updated `NotificationSeverity` class
+- updated `NoStringLocalizationService` service
+   - now using `formatString` for interpolation from `@jscrpt/common`
+- updated `Notification` class
    - new **properties**
       - `parameter` gets object that is used for formatting notification message
       - new constructor parameter that sets object that is used for formatting notification message
+- updated `DefaultNotificationsService`
+   - now corresponds with `Notifications` interface
+- updated `Notifications` interface
+   - `message` method has new optional parameter `parameter` that represents object that is used for formatting notification message
+   - `default` method has new optional parameter `parameter` that represents object that is used for formatting notification message
+   - `success` method has new optional parameter `parameter` that represents object that is used for formatting notification message
+   - `error` method has new optional parameter `parameter` that represents object that is used for formatting notification message
+   - `info` method has new optional parameter `parameter` that represents object that is used for formatting notification message
+   - `warning` method has new optional parameter `parameter` that represents object that is used for formatting notification message
 - *subpackage* `@anglr/common/numeral`
    - updated `NumeralSAPipe` pipe is now standalone
 - *subpackage* `@anglr/common/store`
@@ -61,7 +76,7 @@
 ### BREAKING CHANGES
 
 - minimal supported version of `@angular` is `16.0.3`
-- minimal supported version of `@jscrpt/common` is `3.5.0`
+- minimal supported version of `@jscrpt/common` is `4.0.0`
 - minimal supported version of `@rxjs` is `7.5.7`
 - minimal supported version of `angular2-hotkeys` is `15.0.0`
 - minimal supported version of `moment` is `2.29.4`
@@ -92,6 +107,19 @@
    - renamed `_element` to `element`
    - `mouseEnter` is now `protected`
    - `mouseLeave` is now `protected`
+- directive `ClickOutsideDirective` renamed to `ClickOutsideSADirective`
+- updated `ClickOutsideSADirective` directive
+   - new constructor parameter `ngZone`
+   - property `clickOutsideElement` is now nullable
+   - renamed `_clickOutsideCondition` to `ɵclickOutsideCondition`
+   - renamed `_element` to `element`
+   - renamed `_document` to `document`
+   - renamed `_handleClickOutside` to `handleClickOutside`
+- removed `ClickOutsideModule` module, use `ClickOutsideSADirective` directly
+- directive `GoBackDirective` renamed to `GoBackSADirective`
+- removed `GoBackModule` module, use `GoBackSADirective` directly
+- directive `PositionToDirective` renamed to `PositionToSADirective`
+- removed `PositionModule` module, use `PositionToSADirective` directly
 - *subpackage* `@anglr/common/numeral`
    - pipe `NumeralPipe` renamed to `NumeralSAPipe`
 - *subpackage* `@anglr/common/structured-log`

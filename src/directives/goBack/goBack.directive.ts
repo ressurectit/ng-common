@@ -6,9 +6,10 @@ import {Location} from '@angular/common';
  */
 @Directive(
 {
-    selector: '[goBack]'
+    selector: '[goBack]',
+    standalone: true,
 })
-export class GoBackDirective
+export class GoBackSADirective
 {
     //######################### constructor #########################
     constructor(private _location: Location)
