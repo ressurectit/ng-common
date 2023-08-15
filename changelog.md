@@ -32,7 +32,21 @@
 - new `provideTemporaryStorage` function that provides temporary storage service type
 - new `CookiePermanentStorage` type, that sets permanent storage to use cookie permanent storage when used with `providePermanentStorage`
 - updated `LocalizeSAPipe`
-   - now its `standalone`
+   - now it is `standalone`
+- updated `IsNaNSAPipe`
+   - now it is `standalone`
+- updated `IsPresentSAPipe`
+   - now it is `standalone`
+- updated `KeysSAPipe`
+   - now it is `standalone`
+- updated `MergeCssClassesSAPipe`
+   - now it is `standalone`
+- updated `UrlEncodeSAPipe`
+   - now it is `standalone`
+- updated `NotificationSeverity` class
+   - new **properties**
+      - `parameter` gets object that is used for formatting notification message
+      - new constructor parameter that sets object that is used for formatting notification message
 - *subpackage* `@anglr/common/numeral`
    - updated `NumeralSAPipe` pipe is now standalone
 - *subpackage* `@anglr/common/store`
@@ -41,10 +55,13 @@
 - *subpackage* `@anglr/common/structured-log`
    - new `provideConsoleComponentSink` function, that provides console component as sink for logger
    - new `StructuredLogLogger` type, that sets logger to use structured log logger when used with `provideLogger`
+- *subpackage* `@anglr/common/floating-ui`
+   - new `FloatingUiPosition` type, that sets position to use floating ui position when used with `providePosition`
 
 ### BREAKING CHANGES
 
 - minimal supported version of `@angular` is `16.0.3`
+- minimal supported version of `@jscrpt/common` is `3.5.0`
 - minimal supported version of `@rxjs` is `7.5.7`
 - minimal supported version of `angular2-hotkeys` is `15.0.0`
 - minimal supported version of `moment` is `2.29.4`
@@ -53,6 +70,11 @@
 - minimal supported version of `tslib` is `2.6.0`
 - dropped support of `NodeJs` lower than `16.14`
 - pipe `LocalizePipe` renamed to `LocalizeSAPipe`
+- pipe `IsNaNPipe` renamed to `IsNaNSAPipe`
+- pipe `IsPresentPipe` renamed to `IsPresentSAPipe`
+- pipe `KeysPipe` renamed to `KeysSAPipe`
+- pipe `MergeCssClassesPipe` renamed to `MergeCssClassesSAPipe`
+- pipe `UrlEncodePipe` renamed to `UrlEncodeSAPipe`
 - `RestSinkConfigService` renamed to `RestSinkOptions`
 - updated `RestSinkService` constructor parameters order
 - updated `DebugDataComponent` component
@@ -76,6 +98,8 @@
    - updated `ConsoleLogModule` module
       - removed `forRoot` method, instead use new `provideConsoleComponentSink` function
    - removed `STRUCTURED_LOG_LOGGER` from public API, instead use new `provideLogger` with `StructuredLogLogger` type
+- *subpackage* `@anglr/common/floating-ui`
+   - removed `FLOATING_UI_POSITION` from public API, instead use new `providePosition` with `FloatingUiPosition` type
 
 ## Version 16.0.0 (2023-02-08)
 

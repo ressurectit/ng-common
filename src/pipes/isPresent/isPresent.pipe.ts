@@ -6,9 +6,10 @@ import {isPresent} from '@jscrpt/common';
  */
 @Pipe(
 {
-    name: 'isPresent'
+    name: 'isPresent',
+    standalone: true,
 })
-export class IsPresentPipe implements PipeTransform
+export class IsPresentSAPipe implements PipeTransform
 {
     //######################### public methods #########################
 
@@ -16,7 +17,7 @@ export class IsPresentPipe implements PipeTransform
      * Checks whether is value different from null or undefined
      * @param value - Value to be checked
      */
-    public transform(value: any): boolean
+    public transform(value: unknown): boolean
     {
         return isPresent(value);
     }

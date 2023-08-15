@@ -55,15 +55,25 @@ export class Notification
         return this._severity;
     }
 
+    /**
+     * Gets object that is used for formatting notification message
+     */
+    public get parameter(): Record<string, unknown>|undefined
+    {
+        return this._parameter;
+    }
+
     //######################### constructor #########################
     
     /**
      * Creates instance of `Notification`
      * @param _message - Message that this notification represents
      * @param _severity - Severity of notification message
+     * @param _parameter - Object that is used for formatting notification message
      */
     constructor(private _message: string,
-                private _severity: NotificationSeverity)
+                private _severity: NotificationSeverity,
+                private _parameter?: Record<string, unknown>)
     {
     }
 }

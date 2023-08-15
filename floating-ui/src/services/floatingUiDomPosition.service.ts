@@ -1,5 +1,5 @@
 import {ClassProvider, Injectable} from '@angular/core';
-import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION, PositionOffsetString, PositionOffsets} from '@anglr/common';
+import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION, PositionOffsetString, PositionOffsets, TypeProvider, PositionType} from '@anglr/common';
 import {extend, isEmptyObject, isFunction, isJsObject, isNumber, nameof} from '@jscrpt/common';
 import {computePosition, Placement, autoUpdate, Middleware, offset, flip} from '@floating-ui/dom';
 import {Observable} from 'rxjs';
@@ -300,8 +300,22 @@ export class FloatingUiDomPosition implements Position
 /**
  * Provider for floating ui position implementation
  */
-export const FLOATING_UI_POSITION: ClassProvider =
+const FLOATING_UI_POSITION: ClassProvider =
 {
     provide: POSITION,
     useClass: FloatingUiDomPosition
 };
+
+
+/**
+ * Type that contains provider for floating ui position when used with `providePosition`
+ */
+@TypeProvider(FLOATING_UI_POSITION)
+class FloatingUiPositionType
+{
+}
+
+/**
+ * Sets position to use floating ui position when used with `providePosition`
+ */
+export const FloatingUiPosition: PositionType = FloatingUiPositionType;
