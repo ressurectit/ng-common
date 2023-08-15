@@ -82,7 +82,7 @@
 - minimal supported version of `moment` is `2.29.4`
 - minimal supported version of `date-fns` is `2.30.0`
 - minimal supported version of `@floating-ui/dom` is `1.4.4`
-- minimal supported version of `tslib` is `2.6.0`
+- minimal supported version of `tslib` is `2.6.1`
 - dropped support of `NodeJs` lower than `16.14`
 - pipe `LocalizePipe` renamed to `LocalizeSAPipe`
 - pipe `IsNaNPipe` renamed to `IsNaNSAPipe`
