@@ -1,0 +1,38 @@
+@use 'sass:map';
+@use '../core/functions';
+@use '../core/mixins';
+
+$_darkDefaultTheme:
+(
+    multiButton:
+    (
+        subButton:
+        (
+            background: #333,
+            foreground: #FFF,
+            border: #333,
+        ),
+    ),
+);
+
+@function defineTheme($colors: (), $font: 'Inter')
+{
+    $colors: map.deep-merge($_darkDefaultTheme, $colors);
+
+    @return functions.defineTheme($colors, $font);
+}
+
+@mixin buildThemeTooltip()
+{
+    @include mixins.buildThemeTooltip(defineTheme());
+}
+
+@mixin buildThemeMultiButton()
+{
+    @include mixins.buildThemeMultiButton(defineTheme());
+}
+
+@mixin buildTheme()
+{
+    @include mixins.buildTheme(defineTheme());
+}

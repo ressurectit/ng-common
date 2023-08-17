@@ -1,0 +1,9 @@
+@mixin css
+{
+    tooltip-popup
+    {
+        background-color: var(--common-tooltip-background);
+        color: var(--common-tooltip-foreground);
+        box-shadow: 0 0 2px var(--common-tooltip-foreground);
+    }
+}

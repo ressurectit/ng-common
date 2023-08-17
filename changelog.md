@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 17.0.0 (2023-08-15)
+## Version 17.0.0 (2023-08-17)
 
 ### Features
 
@@ -84,6 +84,7 @@
 - minimal supported version of `@floating-ui/dom` is `1.4.4`
 - minimal supported version of `tslib` is `2.6.1`
 - dropped support of `NodeJs` lower than `16.14`
+- reworked styles, now using same technique as `@anglr/datetime` using mixins and functions to define theme
 - pipe `LocalizePipe` renamed to `LocalizeSAPipe`
 - pipe `IsNaNPipe` renamed to `IsNaNSAPipe`
 - pipe `IsPresentPipe` renamed to `IsPresentSAPipe`
@@ -122,9 +123,10 @@
 - removed `PositionModule` module, use `PositionToSADirective` directly
 - *subpackage* `@anglr/common/numeral`
    - pipe `NumeralPipe` renamed to `NumeralSAPipe`
+   - removed `NumeralModule` module, use `NumeralSAPipe` directly 
 - *subpackage* `@anglr/common/structured-log`
    - updated `ConsoleLogModule` module
-      - removed `forRoot` method, instead use new `provideConsoleComponentSink` function
+      - removed `forRoot` method, instead use new `provideConsoleComponentSink` function and you also have to provide logger using `provideLogger(StructuredLogLogger)`
    - removed `STRUCTURED_LOG_LOGGER` from public API, instead use new `provideLogger` with `StructuredLogLogger` type
 - *subpackage* `@anglr/common/floating-ui`
    - removed `FLOATING_UI_POSITION` from public API, instead use new `providePosition` with `FloatingUiPosition` type

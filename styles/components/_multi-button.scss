@@ -1,0 +1,19 @@
+@mixin css
+{
+    multi-button
+    {
+        .sub-buttons
+        {
+            box-shadow: 0 8px 10px 1px var(--common-multiButton-subButton-shadow), 0 3px 14px 2px var(--common-multiButton-subButton-shadow), 0 5px 5px -3px var(--common-multiButton-subButton-shadow);
+            background-color: var(--common-multiButton-subButton-background);
+            border: 1px solid var(--common-multiButton-subButton-border);
+
+            button
+            {
+                background-color: var(--common-multiButton-subButton-background);
+                color: var(--common-multiButton-subButton-foreground);
+                border-color: transparent;
+            }
+        }
+    }
+}

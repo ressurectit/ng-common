@@ -1,0 +1,73 @@
+@use 'sass:meta';
+@use 'sass:map';
+
+@use 'misc';
+@use '../components/multi-button' as multiButton;
+@use '../components/tooltip' as tooltip;
+
+@mixin buildThemeColorsTooltip($theme)
+{
+    @if $theme 
+    {
+        --common-tooltip-background: #{map.get(map.get($theme, 'tooltip'), 'background')};
+        --common-tooltip-foreground: #{map.get(map.get($theme, 'tooltip'), 'foreground')};
+        --common-tooltip-shadow: #{map.get(map.get($theme, 'tooltip'), 'shadow')};
+    }
+}
+
+@mixin buildThemeColorsMultiButton($theme)
+{
+    @if $theme 
+    {
+        --common-multiButton-subButton-background: #{map.get(map.get(map.get($theme, 'multiButton'), 'subButton'), 'background')};
+        --common-multiButton-subButton-foreground: #{map.get(map.get(map.get($theme, 'multiButton'), 'subButton'), 'foreground')};
+        --common-multiButton-subButton-border: #{map.get(map.get(map.get($theme, 'multiButton'), 'subButton'), 'border')};
+        --common-multiButton-subButton-shadow: #{map.get(map.get(map.get($theme, 'multiButton'), 'subButton'), 'shadow')};
+    }
+}
+
+@mixin buildThemeColors($theme)
+{
+    @include buildThemeColorsTooltip($theme);
+    @include buildThemeColorsMultiButton($theme);
+}
+
+@mixin buildThemeCssMisc
+{
+    @include misc.misc;
+}
+
+@mixin buildThemeCssTooltip
+{
+    @include tooltip.css;
+}
+
+@mixin buildThemeCssMultiButton
+{
+    @include multiButton.css;
+}
+
+@mixin buildThemeCss
+{
+    @include buildThemeCssMisc;
+    @include buildThemeCssTooltip;
+    @include buildThemeCssMultiButton;
+}
+
+@mixin buildThemeTooltip($theme)
+{
+    @include buildThemeColorsTooltip($theme);
+    @include buildThemeCssTooltip();
+}
+
+@mixin buildThemeMultiButton($theme)
+{
+    @include buildThemeColorsMultiButton($theme);
+    @include buildThemeCssMultiButton();
+}
+
+@mixin buildTheme($theme)
+{
+    @include buildThemeColors($theme);
+    @include buildThemeCss;
+}

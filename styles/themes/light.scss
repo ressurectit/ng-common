@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use '../core/functions';
+@use '../core/mixins';
+
+$_lightDefaultTheme:
+(
+    tooltip:
+    (
+        background: #FAFAFA,
+        foreground: #444,
+        shadow: #333,
+    ),
+);
+
+@function defineTheme($colors: (), $font: 'Inter')
+{
+    $colors: map.deep-merge($_lightDefaultTheme, $colors);
+
+    @return functions.defineTheme($colors, $font);
+}
+
+@mixin buildThemeTooltip()
+{
+    @include mixins.buildThemeTooltip(defineTheme());
+}
+
+@mixin buildThemeMultiButton()
+{
+    @include mixins.buildThemeMultiButton(defineTheme());
+}
+
+@mixin buildTheme()
+{
+    @include mixins.buildTheme(defineTheme());
+}
