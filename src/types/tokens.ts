@@ -2,11 +2,13 @@ import {InjectionToken, Type, inject} from '@angular/core';
 import {HttpContextToken} from '@angular/common/http';
 
 import {StringLocalization, NoStringLocalization} from '../services/stringLocalization';
-import {PermanentStorage} from '../services/permanentStorage';
+import type {PermanentStorage} from '../services/permanentStorage';
 import {TemporaryStorage, MemoryTemporaryStorage} from '../services/temporaryStorage';
-import {Notifications} from '../services/notifications';
-import {Position} from '../services/position';
-import {DefaultLogger, Logger, LoggerOptions} from '../modules/logger';
+import type {Notifications} from '../services/notifications';
+import type {Position} from '../services/position';
+import {DefaultLogger} from '../modules/logger/services/logger/logger.service';
+import {LoggerOptions} from '../modules/logger/types/loggerOptions';
+import type {Logger} from '../modules/logger/services/logger/logger.interface';
 
 /**
  * Base url when using HTTP (example: http://localhost:8888/)
