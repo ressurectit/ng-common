@@ -1,4 +1,4 @@
-import {Func1} from '@jscrpt/common';
+import {Action1} from '@jscrpt/common';
 
 import {LogLevel} from '../types';
 import {LoggerConfiguration, LoggerSinkType} from '../interfaces';
@@ -21,4 +21,4 @@ export type MinimumLevelConfig = LogLevel|MinLogLevelGetter|MinLogLevelGetterFac
 /**
  * Type of sink or function that creates sublogger with custom configuration
  */
-export type WriteToConfig = LoggerSinkType|Func1<LogLevel, LoggerConfiguration>;
+export type WriteToConfig = LoggerSinkType|Action1<LoggerConfiguration>;
