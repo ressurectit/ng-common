@@ -87,7 +87,7 @@ export class RestSink implements LoggerSink
 
         this.logs.push(
         {
-            logLevel: LogLevel[messageLog.logLevel],
+            logLevel: LogLevel[messageLog.logLevel].toLowerCase(),
             message: fullMessage,
             timestamp: messageLog.timestamp,
         });

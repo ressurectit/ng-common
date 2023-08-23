@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 18.0.1 (2023-08-23)
+
+### Bug Fixes
+
+- fixed `RestSink`
+   - now sends `LogLevel` in lowercase like before
+
 ## Version 18.0.0 (2023-08-23)
 
 ### Features
