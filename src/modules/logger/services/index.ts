@@ -1,5 +1,6 @@
+export * from './console/consoleComponent.service';
 export * from './console/consoleComponent.sink';
-export * from './console/consoleComponentSink.options';
+export * from './console/consoleComponentService.options';
 export * from './developmentConsoleSink/developmentConsole.sink';
 export * from './logger/logger.interface';
 export * from './logger/logger.service';

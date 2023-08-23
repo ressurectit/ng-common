@@ -5,7 +5,7 @@ import {LoggerConfiguration, LoggerRestClient} from '../interfaces';
 import {LoggerConfigurationImpl} from '../types/loggerConfiguration';
 import {LoggerOptions} from '../types';
 import {LOGGER_REST_CLIENT} from './tokens';
-import {ConsoleComponentSinkOptions, RestSinkOptions} from '../services';
+import {ConsoleComponentServiceOptions, RestSinkOptions} from '../services';
 
 /**
  * Provides configuration for default built-in logger
@@ -44,16 +44,16 @@ export function provideLoggerRestClient(type: Type<LoggerRestClient>): Environme
 }
 
 /**
- * Provides `ConsoleComponentSinkOptions`
+ * Provides `ConsoleComponentServiceOptions`
  * @param options - Value of options to be provided
  */
-export function provideConsoleComponentSinkOptions(options: ConsoleComponentSinkOptions): EnvironmentProviders
+export function provideConsoleComponentServiceOptions(options: ConsoleComponentServiceOptions): EnvironmentProviders
 {
     return makeEnvironmentProviders(
     [
         <ValueProvider>
         {
-            provide: ConsoleComponentSinkOptions,
+            provide: ConsoleComponentServiceOptions,
             useValue: options,
         }
     ]);

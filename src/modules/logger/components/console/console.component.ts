@@ -1,9 +1,9 @@
-import {Component, ChangeDetectionStrategy, Inject, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Subscription} from 'rxjs';
 
-import {ConsoleComponentLog, ConsoleComponentSinkData} from '../../interfaces';
-import {CONSOLE_COMPONENT_SINK_SERVICE} from '../../misc/tokens';
+import {ConsoleComponentLog} from '../../interfaces';
+import {ConsoleComponentService} from '../../services';
 
 /**
  * Component used for displaying console logs
@@ -47,7 +47,7 @@ export class ConsoleSAComponent implements OnInit, OnDestroy
     protected filterValue: string = '';
 
     //######################### constructor #########################
-    constructor(@Inject(CONSOLE_COMPONENT_SINK_SERVICE) protected consoleSvc: ConsoleComponentSinkData,
+    constructor(protected consoleSvc: ConsoleComponentService,
                 protected changeDetector: ChangeDetectorRef)
     {
     }

@@ -7,10 +7,10 @@ import {isPresent} from '@jscrpt/common';
 const MAX_LOGS: number = 1500;
 
 /**
- * Options for *console sink component*
+ * Options for *console component service*
  */
-@Injectable({providedIn: 'root', useFactory: () => new ConsoleComponentSinkOptions()})
-export class ConsoleComponentSinkOptions
+@Injectable({providedIn: 'root', useFactory: () => new ConsoleComponentServiceOptions()})
+export class ConsoleComponentServiceOptions
 {
     //######################### public properties #########################
 

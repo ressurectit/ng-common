@@ -43,6 +43,9 @@
 - new `SubLoggerSink` service, that is sink that is used as sub logger
    - **implements**
       - `LoggerSink`
+- new `ConsoleComponentSink` service, that is used for storing logs in `ConsoleComponent`
+   - **implements**
+      - `LoggerSink`
 - new `LoggerOptions` class, that are options for logger that are used during logging
    - **properties**
       - `minimumLogLevel` minimal log level, that is used for logging, logs with lower log level are ignored
@@ -68,7 +71,7 @@
    - **methods**
       - `buildMessage` builds message that will be logged in logger sink
 - new `provideLoggerRestClient` function, that provides logger rest client
-- new `provideConsoleComponentSinkOptions` function, that provides `ConsoleComponentSinkOptions`
+- new `provideConsoleComponentServiceOptions` function, that provides `ConsoleComponentServiceOptions`
 - new `provideRestSinkOptions` function, that provides `RestSinkOptions`
 - updated `LOGGER` injection token, now provides `DefaultLogger` as default value
 
@@ -111,16 +114,14 @@
 - moved `ConsoleComponent` to `@anglr/common` from `@anglr/common/structured-log`
    - renamed to `ConsoleSAComponent`
 - moved `ConsoleComponentLog` to `@anglr/common` from `@anglr/common/structured-log`
-- moved `ConsoleComponentSink` to `@anglr/common` from `@anglr/common/structured-log`
-   - renamed to `ConsoleComponentSinkData`
+   - renamed to `ConsoleComponentService` and updated to service class
 - moved `RestLog` to `@anglr/common` from `@anglr/common/structured-log`
 - moved `LoggerRestClient` to `@anglr/common` from `@anglr/common/structured-log`
-- moved `CONSOLE_COMPONENT_SINK_SERVICE` to `@anglr/common` from `@anglr/common/structured-log`
 - moved `LOGGER_REST_CLIENT` to `@anglr/common` from `@anglr/common/structured-log`
 - moved `ConsoleComponentSinkService` to `@anglr/common` from `@anglr/common/structured-log`
-   - renamed to `ConsoleComponentSink`
+   - renamed to `ConsoleComponentService`
 - moved `ConsoleSinkConfigService` to `@anglr/common` from `@anglr/common/structured-log`
-   - renamed to `ConsoleComponentSinkOptions`
+   - renamed to `ConsoleComponentServiceOptions`
 - moved `RestSinkService` to `@anglr/common` from `@anglr/common/structured-log`
    - renamed to `RestSink`
 - moved `RestSinkOptions` to `@anglr/common` from `@anglr/common/structured-log`
