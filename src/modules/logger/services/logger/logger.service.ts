@@ -1,17 +1,14 @@
-import {Injectable, forwardRef} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {isBlank} from '@jscrpt/common';
 
 import {LogLevel, LoggerOptions, MessageLog} from '../../types';
 import {loggerEnabled, useEnrichers} from '../../misc';
 import {Logger} from './logger.interface';
-import {TypeProvider} from '../../../../types/providerDecoratedType';
-import {LOGGER} from '../../../../types/tokens';
 
 /**
  * Default implementation of `Logger`
  */
 @Injectable()
-@TypeProvider({provide: LOGGER, useClass: forwardRef(() => DefaultLogger)})
 export class DefaultLogger implements Logger
 {
     //######################### constructor #########################

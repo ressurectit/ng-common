@@ -1,9 +1,11 @@
 import {InjectionToken, Type, inject} from '@angular/core';
 import {HttpContextToken} from '@angular/common/http';
 
-import {StringLocalization, NoStringLocalization} from '../services/stringLocalization';
+import type {StringLocalization} from '../services/stringLocalization';
+import {NoStringLocalization} from '../services/stringLocalization/noStringLocalization.service';
 import type {PermanentStorage} from '../services/permanentStorage';
-import {TemporaryStorage, MemoryTemporaryStorage} from '../services/temporaryStorage';
+import {MemoryTemporaryStorage} from '../services/temporaryStorage/memoryTemporaryStorage.service';
+import type {TemporaryStorage} from '../services/temporaryStorage';
 import type {Notifications} from '../services/notifications';
 import type {Position} from '../services/position';
 import {DefaultLogger} from '../modules/logger/services/logger/logger.service';
