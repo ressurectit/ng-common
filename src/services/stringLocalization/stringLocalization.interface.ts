@@ -1,4 +1,3 @@
-import {Type} from '@angular/core';
 import {Observable} from 'rxjs';
 
 /**
@@ -17,11 +16,4 @@ export interface StringLocalization
      * @param interpolateParams - Optional object storing interpolation parameters
      */
     get(key: string, interpolateParams?: Object): string;
-}
-
-/**
- * Used for restriction of string localization provider type only for type decorated with string localization provider
- */
-export interface StringLocalizationType extends Type<unknown>
-{
 }

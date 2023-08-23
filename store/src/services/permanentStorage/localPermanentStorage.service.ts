@@ -1,5 +1,5 @@
-import {ClassProvider, Injectable, Provider} from '@angular/core';
-import {PERMANENT_STORAGE, PermanentStorage, PermanentStorageType, TypeProvider} from '@anglr/common';
+import {Injectable, forwardRef} from '@angular/core';
+import {PERMANENT_STORAGE, PermanentStorage, TypeProvider} from '@anglr/common';
 import store from 'store';
 import expirePlugin from 'store/plugins/expire';
 
@@ -7,7 +7,8 @@ import expirePlugin from 'store/plugins/expire';
  * Implementation of permanent storage using LocalStorage
  */
 @Injectable()
-export class LocalPermanentStorageService implements PermanentStorage
+@TypeProvider({provide: PERMANENT_STORAGE, useClass: forwardRef(() => LocalPermanentStorage)})
+export class LocalPermanentStorage implements PermanentStorage
 {
     //######################### constructor #########################
 
@@ -69,26 +70,3 @@ export class LocalPermanentStorageService implements PermanentStorage
         store.remove(name);
     }
 }
-
-/**
- * Provider for permanent storage that is using local storage implementation
- */
-const LOCAL_PERMANENT_STORAGE: Provider =
-<ClassProvider>
-{
-    provide: PERMANENT_STORAGE,
-    useClass: LocalPermanentStorageService
-};
-
-/**
- * Type that contains provider for local permanent storage when used with `providePermanentStorage`
- */
-@TypeProvider(LOCAL_PERMANENT_STORAGE)
-class LocalPermanentStorageType
-{
-}
-
-/**
- * Sets permanent storage to use local permanent storage when used with `providePermanentStorage`
- */
-export const LocalPermanentStorage: PermanentStorageType = LocalPermanentStorageType;

@@ -8,7 +8,7 @@ import {StringLocalization} from './stringLocalization.interface';
  * Default implementation of StringLocalization, which uses 'key' as localization text
  */
 @Injectable()
-export class NoStringLocalizationService implements StringLocalization
+export class NoStringLocalization implements StringLocalization
 {
     //######################### private fields #########################
 
@@ -40,7 +40,6 @@ export class NoStringLocalizationService implements StringLocalization
         {
             return key;
         }
-
 
         return formatString(key, interpolateParams);
     }

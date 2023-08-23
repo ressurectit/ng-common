@@ -1,6 +1,6 @@
-import {ClassProvider, Injectable, Provider} from '@angular/core';
+import {Injectable, forwardRef} from '@angular/core';
 
-import {PermanentStorage, PermanentStorageType} from './permanentStorage.interface';
+import {PermanentStorage} from './permanentStorage.interface';
 import {CookieService} from '../cookies/cookies.service';
 import {PERMANENT_STORAGE} from '../../types/tokens';
 import {TypeProvider} from '../../types/providerDecoratedType';
@@ -9,7 +9,8 @@ import {TypeProvider} from '../../types/providerDecoratedType';
  * Implementation of permanent storage using cookies
  */
 @Injectable()
-export class CookiePermanentStorageService implements PermanentStorage
+@TypeProvider({provide: PERMANENT_STORAGE, useClass: forwardRef(() => CookiePermanentStorage)})
+export class CookiePermanentStorage implements PermanentStorage
 {
     //######################### constructor #########################
     constructor(private _cookies: CookieService)
@@ -62,27 +63,3 @@ export class CookiePermanentStorageService implements PermanentStorage
         this._cookies.deleteCookie(name, '/');
     }
 }
-
-
-/**
- * Provider for permanent storage that is using cookie storage implementation
- */
-const COOKIE_PERMANENT_STORAGE: Provider =
-<ClassProvider>
-{
-    provide: PERMANENT_STORAGE,
-    useClass: CookiePermanentStorageService
-};
-
-/**
- * Type that contains provider for cookie permanent storage when used with `providePermanentStorage`
- */
-@TypeProvider(COOKIE_PERMANENT_STORAGE)
-class CookiePermanentStorageType
-{
-}
-
-/**
- * Sets permanent storage to use cookie permanent storage when used with `providePermanentStorage`
- */
-export const CookiePermanentStorage: PermanentStorageType = CookiePermanentStorageType;

@@ -1,12 +1,12 @@
-import {InjectionToken, Type} from '@angular/core';
+import {InjectionToken, Type, inject} from '@angular/core';
 import {HttpContextToken} from '@angular/common/http';
 
-import {StringLocalization, NoStringLocalizationService} from '../services/stringLocalization';
+import {StringLocalization, NoStringLocalization} from '../services/stringLocalization';
 import {PermanentStorage} from '../services/permanentStorage';
-import {Logger, DummyLoggerService} from '../services/logger';
-import {TemporaryStorage, MemoryTemporaryStorageService} from '../services/temporaryStorage';
+import {TemporaryStorage, MemoryTemporaryStorage} from '../services/temporaryStorage';
 import {Notifications} from '../services/notifications';
 import {Position} from '../services/position';
+import {DefaultLogger, Logger, LoggerOptions} from '../modules/logger';
 
 /**
  * Base url when using HTTP (example: http://localhost:8888/)
@@ -26,12 +26,12 @@ export const HTTP_REQUEST_AUTH_HEADER: InjectionToken<string> = new InjectionTok
 /**
  * Token used for injecting Logger implementation
  */
-export const LOGGER: InjectionToken<Logger> = new InjectionToken<Logger>('LOGGER', {providedIn: 'root', factory: () => new DummyLoggerService()});
+export const LOGGER: InjectionToken<Logger> = new InjectionToken<Logger>('LOGGER', {providedIn: 'root', factory: () => new DefaultLogger(inject(LoggerOptions))});
 
 /**
  * Token used for injecting StringLocalization service implementation
  */
-export const STRING_LOCALIZATION: InjectionToken<StringLocalization> = new InjectionToken<StringLocalization>('STRING_LOCALIZATION', {providedIn: 'root', factory: () => new NoStringLocalizationService()});
+export const STRING_LOCALIZATION: InjectionToken<StringLocalization> = new InjectionToken<StringLocalization>('STRING_LOCALIZATION', {providedIn: 'root', factory: () => new NoStringLocalization()});
 
 /**
  * Token used for injecting permanent storage
@@ -41,7 +41,7 @@ export const PERMANENT_STORAGE: InjectionToken<PermanentStorage> = new Injection
 /**
  * Token used for injecting temporary storage
  */
-export const TEMPORARY_STORAGE: InjectionToken<TemporaryStorage> = new InjectionToken<TemporaryStorage>('TEMPORARY_STORAGE', {providedIn: 'root', factory: () => new MemoryTemporaryStorageService()});
+export const TEMPORARY_STORAGE: InjectionToken<TemporaryStorage> = new InjectionToken<TemporaryStorage>('TEMPORARY_STORAGE', {providedIn: 'root', factory: () => new MemoryTemporaryStorage()});
 
 /**
  * Token used for injecting service that is used for positioning of one element against another

@@ -10,10 +10,8 @@
 - [API Material](https://ressurectit.github.io/#/content/api/ng-common-material/common-material)
 - [API Moment](https://ressurectit.github.io/#/content/api/ng-common-moment/common-moment)
 - [API Numeral](https://ressurectit.github.io/#/content/api/ng-common-numeral/common-numeral)
-- [API Positions](https://ressurectit.github.io/#/content/api/ng-common-positions/common-positions)
 - [API Router](https://ressurectit.github.io/#/content/api/ng-common-router/common-router)
 - [API Store](https://ressurectit.github.io/#/content/api/ng-common-store/common-store)
-- [API Structured Log](https://ressurectit.github.io/#/content/api/ng-common-structured-log/common-structured-log)
 - [Samples](https://ressurectit.github.io/#/content/common#samples)
 
 

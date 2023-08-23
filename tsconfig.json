@@ -27,8 +27,6 @@
         {
             "@anglr/common": ["index.ts"],
             "@anglr/common/forms": ["../forms/src/index.ts"],
-            "structured-log" : ["../typings/structured-log/index.d.ts"],
-            "positions" : ["../typings/positions/index.d.ts"],
             "store/plugins/expire" : ["../typings/store/index.d.ts"],
         },
         "lib":

@@ -1,8 +1,8 @@
 import {Inject, Optional, Pipe, PipeTransform} from '@angular/core';
 import {isBlank} from '@jscrpt/common';
 
-import {Logger} from '../../../../services/logger/logger.interface';
 import {LOGGER} from '../../../../types/tokens';
+import {Logger} from '../../../logger';
 
 /**
  * Allows casting of type for templates, should be used inherited

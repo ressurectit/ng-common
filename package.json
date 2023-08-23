@@ -23,7 +23,7 @@
         "doc": "path-exists docs && npm run doc:generate || echo \"No docs generated!\"",
         "predoc:generate": "cd docs && git pull && cd ..",
         "postdoc:generate": "npm run doc:save",
-        "doc:generate": "npm run doc:generate:common && npm run doc:generate:forms && npm run doc:generate:router && npm run doc:generate:numeral && npm run doc:generate:hotkeys && npm run doc:generate:store && npm run doc:generate:moment && npm run doc:generate:date-fns && npm run doc:generate:floating-ui && npm run doc:generate:structured-log && npm run doc:generate:positions && npm run doc:generate:material",
+        "doc:generate": "npm run doc:generate:common && npm run doc:generate:forms && npm run doc:generate:router && npm run doc:generate:numeral && npm run doc:generate:hotkeys && npm run doc:generate:store && npm run doc:generate:moment && npm run doc:generate:date-fns && npm run doc:generate:floating-ui && npm run doc:generate:material",
         "doc:save": "cd docs && git add . && git commit -m \"INT: updated API docs ng-common\" && git push && cd ..",
         "doc:generate:common": "rimraf docs/content/api/ng-common && npm run doc:json:common && npm run doc:md:common && npm run doc:api:common",
         "doc:json:common": "api-extractor run --local --verbose -c api-extractor.json",
@@ -61,14 +61,6 @@
         "doc:json:floating-ui": "api-extractor run --local --verbose -c floating-ui/api-extractor.json",
         "doc:md:floating-ui": "api-documenter markdown -i floating-ui/temp -o docs/content/api/ng-common-floating-ui",
         "doc:api:floating-ui": "copyfiles -u 2 floating-ui/temp/common-floating-ui.api.md docs/content/api/ng-common-floating-ui && rimraf floating-ui/temp",
-        "doc:generate:structured-log": "rimraf docs/content/api/ng-common-structured-log && npm run doc:json:structured-log && npm run doc:md:structured-log && npm run doc:api:structured-log",
-        "doc:json:structured-log": "api-extractor run --local --verbose -c structured-log/api-extractor.json",
-        "doc:md:structured-log": "api-documenter markdown -i structured-log/temp -o docs/content/api/ng-common-structured-log",
-        "doc:api:structured-log": "copyfiles -u 2 structured-log/temp/common-structured-log.api.md docs/content/api/ng-common-structured-log && rimraf structured-log/temp",
-        "doc:generate:positions": "rimraf docs/content/api/ng-common-positions && npm run doc:json:positions && npm run doc:md:positions && npm run doc:api:positions",
-        "doc:json:positions": "api-extractor run --local --verbose -c positions/api-extractor.json",
-        "doc:md:positions": "api-documenter markdown -i positions/temp -o docs/content/api/ng-common-positions",
-        "doc:api:positions": "copyfiles -u 2 positions/temp/common-positions.api.md docs/content/api/ng-common-positions && rimraf positions/temp",
         "doc:generate:material": "rimraf docs/content/api/ng-common-material && npm run doc:json:material && npm run doc:md:material && npm run doc:api:material",
         "doc:json:material": "api-extractor run --local --verbose -c material/api-extractor.json",
         "doc:md:material": "api-documenter markdown -i material/temp -o docs/content/api/ng-common-material",
@@ -107,10 +99,8 @@
         "numeral": "^2.0.6",
         "angular2-hotkeys": ">=15.0.0",
         "store": "^2.0.12",
-        "structured-log": "^0.2.0",
         "moment": "^2.29.4",
         "date-fns": "^2.30.0",
-        "positions": "^1.6.2",
         "@floating-ui/dom": "^1.4.4",
         "tslib": "^2.6.1"
     },
@@ -128,12 +118,10 @@
         "@jscrpt/common": "^4.0.0",
         "angular2-hotkeys": "^15.0.0",
         "store": "^2.0.12",
-        "structured-log": "^0.2.0",
         "moment": "^2.29.4",
         "date-fns": "^2.30.0",
-        "positions": "^1.6.2",
         "@floating-ui/dom": "^1.4.4",
-        "@types/node": "^18.11.9",
+        "@types/node": "^18.15.3",
         "@types/numeral": "^2.0.2",
         "@types/store": "^2.0.2",
         "@types/mousetrap": "^1.6.11",
@@ -149,7 +137,7 @@
         "eslint-plugin-ressurectit": "0.1.0",
         "rimraf": "3.0.2",
         "copyfiles": "2.4.1",
-        "replace-in-file": "6.3.5",
+        "replace-in-file": "7.0.1",
         "path-exists-cli": "2.0.0",
         "typescript": "5.0.4",
         "npm-git-version": "2.0.0"
@@ -225,13 +213,6 @@
             "node": "./es2022/numeral/src/index.js",
             "default": "./es2022/numeral/src/index.js"
         },
-        "./positions": {
-            "types": "./positions/src/index.d.ts",
-            "esm2022": "./es2022/positions/src/index.js",
-            "es2022": "./es2022/positions/src/index.js",
-            "node": "./es2022/positions/src/index.js",
-            "default": "./es2022/positions/src/index.js"
-        },
         "./router": {
             "types": "./router/src/index.d.ts",
             "esm2022": "./es2022/router/src/index.js",
@@ -245,13 +226,6 @@
             "es2022": "./es2022/store/src/index.js",
             "node": "./es2022/store/src/index.js",
             "default": "./es2022/store/src/index.js"
-        },
-        "./structured-log": {
-            "types": "./structured-log/src/index.d.ts",
-            "esm2022": "./es2022/structured-log/src/index.js",
-            "es2022": "./es2022/structured-log/src/index.js",
-            "node": "./es2022/structured-log/src/index.js",
-            "default": "./es2022/structured-log/src/index.js"
         }
     }
 }

@@ -1,12 +1,13 @@
-import {ClassProvider, Injectable, Provider} from '@angular/core';
-import {TEMPORARY_STORAGE, TemporaryStorage, TemporaryStorageType, TypeProvider} from '@anglr/common';
+import {Injectable, forwardRef} from '@angular/core';
+import {TEMPORARY_STORAGE, TemporaryStorage, TypeProvider} from '@anglr/common';
 import store from 'store/storages/sessionStorage';
 
 /**
  * Implementation of temporary storage using SessionStorage
  */
 @Injectable()
-export class SessionTemporaryStorageService implements TemporaryStorage
+@TypeProvider({provide: TEMPORARY_STORAGE, useClass: forwardRef(() => SessionTemporaryStorage)})
+export class SessionTemporaryStorage implements TemporaryStorage
 {
     //######################### public methods - implementation of TemporaryStorage #########################
 
@@ -38,26 +39,3 @@ export class SessionTemporaryStorageService implements TemporaryStorage
         store.remove(name);
     }
 }
-
-/**
- * Provider for temporary storage that is using session storage implementation
- */
-const SESSION_TEMPORARY_STORAGE: Provider =
-<ClassProvider>
-{
-    provide: TEMPORARY_STORAGE,
-    useClass: SessionTemporaryStorageService
-};
-
-/**
- * Type that contains provider for session temporary storage when used with `provideTemporaryStorage`
- */
-@TypeProvider(SESSION_TEMPORARY_STORAGE)
-class SessionTemporaryStorageType
-{
-}
-
-/**
- * Sets temporary storage to use session temporary storage when used with `provideTemporaryStorage`
- */
-export const SessionTemporaryStorage: TemporaryStorageType = SessionTemporaryStorageType;

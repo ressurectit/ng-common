@@ -1,5 +1,106 @@
 # Changelog
 
+## Version 18.0.0 (2023-08-23)
+
+### Features
+
+- new `SinkType` decorator, that marks type as Logger sink type
+- new `isLoggerSinkType` function, that tests whether is type marked as logger sink
+- new `LoggerConfiguration` interface, that represents logger configuration instance, it is used for configuring logger sinks, enrichers, filters and everything
+   - **methods**
+      - `minimumLevel` configure minimum log level for all logger sinks
+      - `messageTemplate` sets message template for logs
+      - `messageLengthLimit` sets message length limit
+      - `enrichWith` registers enricher to be used for logger
+      - `filter` registers filter that is used for filtering out message logs
+      - `writeTo` registers logger sink into which will be logs written to, or creates sublogger with custom config
+- new `LoggerEnricher` interface, that represents logger enricher definition which allows enriching properties that can be used in log message template
+   - **methods**
+      - `enrich` logger enricher definition which allows enriching properties that can be used in log message template
+- new `LoggerEnricherType` interface, type that represents logger enricher
+- new `LoggerFilter` interface, that is definition of filter that is applied to logs coming into sinks
+- new `LoggerSink` interface, that is definition of sink, which is used to writing logs into different places
+- new `LoggerSinkType` interface, type that represents logger sink
+- new `provideLoggerConfig` function, that provides configuration for default built-in logger
+- new `MinLogLevelGetter` type, that is getter for obtaining minimum log level
+- new `MinLogLevelGetterFactory` type, that is factory that is used for obtaining minimum log level getter
+- new `MinimumLevelConfig` type, that is static log level, or function that returns log level or function that returns function which is used like getter for log level
+- new `WriteToConfig` type, that is type of sink or function that creates sublogger with custom configuration
+- new `loggerEnabled` function, that tests whether is logger sink enabled
+- new `useEnrichers` function, that creates logger properties by using enrichers
+- new `DeveloperConsoleSink` service, that is sink that is used for storing logs using browser developer console
+   - **implements** 
+      - `LoggerSink`
+- new `DefaultLogger` service, that is default implementation of `Logger`
+   - **implements**
+      - `Logger`
+- new `LogLevelEnricher` service, that is enricher used for adding logLevel and logLevelShort properties
+   - **implements**
+      - `LoggerEnricher`
+- new `SubLoggerSink` service, that is sink that is used as sub logger
+   - **implements**
+      - `LoggerSink`
+- new `LoggerOptions` class, that are options for logger that are used during logging
+   - **properties**
+      - `minimumLogLevel` minimal log level, that is used for logging, logs with lower log level are ignored
+      - `messageLengthLimit` maximal allowed length of message, if it is exceeded it is trimmed
+      - `messageTemplate` logger message template that is used for creating message log, message log itself is inside `messageLog` property
+      - `enrichers` array of enrichers that allows extending logger properties
+      - `filter` filter that filters out message logs
+      - `loggerSinks` array of logger sinks that do actual logging
+- new `LogLevel` enum, that represents log level for built in logger
+   - `Verbose` verbose logs used for tracking
+   - `Debug` debugging logs used for debugging
+   - `Information` informative log
+   - `Warning` warning log
+   - `Error` error log
+   - `Fatal` fatal error log
+   - `Off` logging is disabled
+- new `MessageLog` class, that is message log that contains all information that are used for displaying log
+   - **properties**
+      - `message` message that is used as message template for log itself
+      - `logLevel` log level of current message log
+      - `properties` properties that are "replaced" inside message
+   - **methods**
+      - `buildMessage` builds message that will be logged in logger sink
+- updated `LOGGER` injection token, now provides `DefaultLogger` as default value
+
+### BREAKING CHANGES
+
+- no longer depends on `positions`
+- no longer depends on `structured-log`
+- removed typings `positions`
+- removed typings `structured-log`
+- renamed `CookiePermanentStorageService` service to `CookiePermanentStorage`
+- removed previous `CookiePermanentStorage` constant, now use directly `CookiePermanentStorage`
+- removed `PermanentStorageType`, now using type `Type<PermanentStorage>`
+- removed `PositionType`, now using type `Type<Position>`
+- renamed `NoStringLocalizationService` service to `NoStringLocalization`
+- removed `StringLocalizationType`, now using type `Type<StringLocalization>`
+- renamed `MemoryTemporaryStorageService` service to `MemoryTemporaryStorage`
+- removed `TemporaryStorageType`, now using type `Type<TemporaryStorage>`
+- updated `provideLogger` provider, now using parameter type `Type<Logger>`
+- updated `providePermanentStorage` provider, now using parameter type `Type<PermanentStorage>`
+- updated `providePosition` provider, now using parameter type `Type<Position>`
+- updated `provideStringLocalization` provider, now using parameter type `Type<StringLocalization>`
+- updated `provideTemporaryStorage` provider, now using parameter type `Type<TemporaryStorage>`
+- renamed `LocalPermanentStorageService` service to `LocalPermanentStorage`
+- removed previous `LocalPermanentStorage` constant, now use directly `LocalPermanentStorage`
+- renamed `SessionTemporaryStorageService` service to `SessionTemporaryStorage`
+- removed previous `SessionTemporaryStorage` constant, now use directly `SessionTemporaryStorage`
+- removed `DummyLoggerService` service, replaced by `DefaultLogger`
+- updated `Logger` interface
+   - changed signature of `fatal` method
+   - changed signature of `error` method
+   - changed signature of `warn` method
+   - changed signature of `info` method
+   - changed signature of `debug` method
+   - changed signature of `verbose` method
+- *subpackage* `@anglr/common/floating-ui`
+   - removed `FloatingUiPosition` constant that was used for providing floating ui position implementation, now use directly `FloatingUiPosition`
+- removed *subpackage* `@anglr/common/positions`, use floating-ui implementation instead
+- removed *subpackage* `@anglr/common/structured-log`, use `DefaultLogger` implementation instead
+
 ## Version 17.0.0 (2023-08-17)
 
 ### Features

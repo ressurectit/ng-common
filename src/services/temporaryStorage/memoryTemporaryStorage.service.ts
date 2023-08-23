@@ -7,7 +7,7 @@ import {TemporaryStorage} from './temporaryStorage.interface';
  * Implementation of temporary storage using process memory
  */
 @Injectable()
-export class MemoryTemporaryStorageService implements TemporaryStorage
+export class MemoryTemporaryStorage implements TemporaryStorage
 {
     //######################### private fields #########################
 

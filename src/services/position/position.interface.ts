@@ -1,4 +1,3 @@
-import {Type} from '@angular/core';
 import {Func1} from '@jscrpt/common';
 import {Observable} from 'rxjs';
 
@@ -161,11 +160,4 @@ export interface Position
      * @param options - Optional options with informations about new position
      */
     placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Observable<PositionResult>;
-}
-
-/**
- * Used for restriction of position provider type only for type decorated with position provider
- */
-export interface PositionType extends Type<unknown>
-{
 }
