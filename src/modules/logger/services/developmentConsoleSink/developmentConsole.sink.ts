@@ -8,11 +8,6 @@ import {SinkType} from '../../decorators';
 @SinkType()
 export class DeveloperConsoleSink implements LoggerSink
 {
-    //######################### constructor #########################
-    constructor()
-    {
-    }
-
     //######################### public methods - implementation of LoggerSink #########################
 
     /**

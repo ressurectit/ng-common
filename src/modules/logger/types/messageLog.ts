@@ -7,6 +7,13 @@ import {LogLevel} from './logLevel.enum';
  */
 export class MessageLog<TProperties extends Record<string, unknown> = Record<string, unknown>>
 {
+    //######################### protected fields #########################
+
+    /**
+     * Datetime when was message created
+     */
+    protected now: Date = new Date();
+
     //######################### public properties #########################
 
     /**
@@ -23,6 +30,14 @@ export class MessageLog<TProperties extends Record<string, unknown> = Record<str
      * Properties that are "replaced" inside message
      */
     public readonly properties: TProperties;
+
+    /**
+     * Gets timestamp as ISO string
+     */
+    public get timestamp(): string
+    {
+        return this.now.toISOString();
+    }
 
     //######################### constructor #########################
     constructor(message: string, logLevel: LogLevel, properties: TProperties)

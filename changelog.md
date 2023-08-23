@@ -37,6 +37,9 @@
 - new `LogLevelEnricher` service, that is enricher used for adding logLevel and logLevelShort properties
    - **implements**
       - `LoggerEnricher`
+- new `TimestampEnricher` service, that is enricher used for adding timestamp as iso datetime with current date time
+   - **implements**
+      - `LoggerEnricher`
 - new `SubLoggerSink` service, that is sink that is used as sub logger
    - **implements**
       - `LoggerSink`
@@ -61,8 +64,12 @@
       - `message` message that is used as message template for log itself
       - `logLevel` log level of current message log
       - `properties` properties that are "replaced" inside message
+      - `timestamp` gets timestamp as ISO string
    - **methods**
       - `buildMessage` builds message that will be logged in logger sink
+- new `provideLoggerRestClient` function, that provides logger rest client
+- new `provideConsoleComponentSinkOptions` function, that provides `ConsoleComponentSinkOptions`
+- new `provideRestSinkOptions` function, that provides `RestSinkOptions`
 - updated `LOGGER` injection token, now provides `DefaultLogger` as default value
 
 ### BREAKING CHANGES
@@ -100,6 +107,23 @@
    - removed `FloatingUiPosition` constant that was used for providing floating ui position implementation, now use directly `FloatingUiPosition`
 - removed *subpackage* `@anglr/common/positions`, use floating-ui implementation instead
 - removed *subpackage* `@anglr/common/structured-log`, use `DefaultLogger` implementation instead
+- moved `consoleAnimationTrigger` to `@anglr/common` from `@anglr/common/structured-log`
+- moved `ConsoleComponent` to `@anglr/common` from `@anglr/common/structured-log`
+   - renamed to `ConsoleSAComponent`
+- moved `ConsoleComponentLog` to `@anglr/common` from `@anglr/common/structured-log`
+- moved `ConsoleComponentSink` to `@anglr/common` from `@anglr/common/structured-log`
+   - renamed to `ConsoleComponentSinkData`
+- moved `RestLog` to `@anglr/common` from `@anglr/common/structured-log`
+- moved `LoggerRestClient` to `@anglr/common` from `@anglr/common/structured-log`
+- moved `CONSOLE_COMPONENT_SINK_SERVICE` to `@anglr/common` from `@anglr/common/structured-log`
+- moved `LOGGER_REST_CLIENT` to `@anglr/common` from `@anglr/common/structured-log`
+- moved `ConsoleComponentSinkService` to `@anglr/common` from `@anglr/common/structured-log`
+   - renamed to `ConsoleComponentSink`
+- moved `ConsoleSinkConfigService` to `@anglr/common` from `@anglr/common/structured-log`
+   - renamed to `ConsoleComponentSinkOptions`
+- moved `RestSinkService` to `@anglr/common` from `@anglr/common/structured-log`
+   - renamed to `RestSink`
+- moved `RestSinkOptions` to `@anglr/common` from `@anglr/common/structured-log`
 
 ## Version 17.0.0 (2023-08-17)
 

@@ -1,9 +1,12 @@
+import {Injectable} from '@angular/core';
 import {isPresent} from '@jscrpt/common';
-import {LogEventLevel} from 'structured-log';
+
+import {LogLevel} from '../../types';
 
 /**
  * Options for rest sink
  */
+@Injectable({providedIn: 'root', useFactory: () => new RestSinkOptions()})
 export class RestSinkOptions
 {
     //######################### public properties #########################
@@ -21,18 +24,12 @@ export class RestSinkOptions
     /**
      * Minimal log level that will be flushed immediately
      */
-    public immediateFlushMinLevel: LogEventLevel = LogEventLevel.error;
-
-    /**
-     * Restricts logs to specified level
-     */
-    public restrictToLevel: LogEventLevel = LogEventLevel.warning;
+    public immediateFlushMinLevel: LogLevel = LogLevel.Error;
 
     //######################### constructor #########################
     constructor(secondsToFlushAfter?: number,
                 flushAfterNumberOfLogs?: number,
-                immediateFlushMinLevel?: LogEventLevel,
-                restrictToLevel?: LogEventLevel,)
+                immediateFlushMinLevel?: LogLevel,)
     {
         if(isPresent(secondsToFlushAfter))
         {
@@ -47,11 +44,6 @@ export class RestSinkOptions
         if(isPresent(immediateFlushMinLevel))
         {
             this.immediateFlushMinLevel = immediateFlushMinLevel;
-        }
-
-        if(isPresent(restrictToLevel))
-        {
-            this.restrictToLevel = restrictToLevel;
         }
     }
 }

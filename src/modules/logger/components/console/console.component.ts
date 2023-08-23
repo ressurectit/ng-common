@@ -1,8 +1,9 @@
 import {Component, ChangeDetectionStrategy, Inject, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {Subscription} from 'rxjs';
 
-import {CONSOLE_COMPONENT_SINK_SERVICE} from '../../types/tokens';
-import {ConsoleComponentSink, ConsoleComponentLog} from '../../types/logger.interface';
+import {ConsoleComponentLog, ConsoleComponentSinkData} from '../../interfaces';
+import {CONSOLE_COMPONENT_SINK_SERVICE} from '../../misc/tokens';
 
 /**
  * Component used for displaying console logs
@@ -12,37 +13,42 @@ import {ConsoleComponentSink, ConsoleComponentLog} from '../../types/logger.inte
     selector: 'console',
     templateUrl: 'console.component.html',
     styleUrls: ['console.component.css'],
+    standalone: true,
+    imports:
+    [
+        CommonModule,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConsoleComponent implements OnInit, OnDestroy
+export class ConsoleSAComponent implements OnInit, OnDestroy
 {
-    //######################### private fields #########################
+    //######################### protected fields #########################
 
     /**
      * Subscription for log changes
      */
-    private _logsChangeSubscription: Subscription|undefined|null;
+    protected logsChangeSubscription: Subscription|undefined|null;
 
-    //######################### public properties - template bindings #########################
+    //######################### protected properties - template bindings #########################
 
     /**
      * Current state of logger
      */
-    public currentLogs: ConsoleComponentLog[] = [];
+    protected currentLogs: ConsoleComponentLog[] = [];
 
     /**
      * Indication whether can use copy to clipboard
      */
-    public canCopy = navigator && navigator.clipboard;
+    protected canCopy = navigator && navigator.clipboard;
 
     /**
      * Current value of filter
      */
-    public filterValue: string = '';
+    protected filterValue: string = '';
 
     //######################### constructor #########################
-    constructor(@Inject(CONSOLE_COMPONENT_SINK_SERVICE) private _consoleSvc: ConsoleComponentSink,
-                private _changeDetector: ChangeDetectorRef)
+    constructor(@Inject(CONSOLE_COMPONENT_SINK_SERVICE) protected consoleSvc: ConsoleComponentSinkData,
+                protected changeDetector: ChangeDetectorRef)
     {
     }
 
@@ -55,10 +61,10 @@ export class ConsoleComponent implements OnInit, OnDestroy
     {
         this.setMessages();
         
-        this._logsChangeSubscription = this._consoleSvc.logsChange.subscribe(() =>
+        this.logsChangeSubscription = this.consoleSvc.logsChange.subscribe(() =>
         {
             this.setMessages();
-            this._changeDetector.detectChanges();
+            this.changeDetector.detectChanges();
         });
     }
 
@@ -69,19 +75,19 @@ export class ConsoleComponent implements OnInit, OnDestroy
      */
     public ngOnDestroy(): void
     {
-        if(this._logsChangeSubscription)
+        if(this.logsChangeSubscription)
         {
-            this._logsChangeSubscription.unsubscribe();
-            this._logsChangeSubscription = null;
+            this.logsChangeSubscription.unsubscribe();
+            this.logsChangeSubscription = null;
         }
     }
 
-    //######################### public methods - template bindings #########################
+    //######################### protected methods - template bindings #########################
 
     /**
      * Copies content of whole console log into clipboard
      */
-    public copy(): void
+    protected copy(): void
     {
         if(!navigator || !navigator.clipboard)
         {
@@ -95,7 +101,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
      * Copies message to clipboard
      * @param message - Message to be copied
      */
-    public copyMessage(message: string): void
+    protected copyMessage(message: string): void
     {
         if(!navigator || !navigator.clipboard)
         {
@@ -108,23 +114,23 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Clears existing logs
      */
-    public clear(): void
+    protected clear(): void
     {
-        this._consoleSvc.clear();
+        this.consoleSvc.clear();
     }
 
     /**
      * Sets messages using filter
      */
-    public setMessages(): void
+    protected setMessages(): void
     {
         if(!this.filterValue)
         {
-            this.currentLogs = this._consoleSvc.logs;
+            this.currentLogs = this.consoleSvc.logs;
         }
         else
         {
-            this.currentLogs = this._consoleSvc.logs.filter(log => log.text.toLowerCase().indexOf(this.filterValue.toLowerCase()) >= 0);
+            this.currentLogs = this.consoleSvc.logs.filter(log => log.text.toLowerCase().indexOf(this.filterValue.toLowerCase()) >= 0);
         }
     }
 }

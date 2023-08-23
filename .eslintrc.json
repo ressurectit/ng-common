@@ -14,8 +14,7 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "ressurectit",
-        "jest"
+        "ressurectit"
     ],
     "ignorePatterns": [
         "*.js",
