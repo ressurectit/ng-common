@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 18.1.0 (2023-09-18)
+
+### Features
+
+- new `HotkeysCheatsheetSAComponent` component, that is component used for displaying current active hotkeys as cheat cheet
+   - **implements**
+      - `OnInit`
+      - `OnDestroy`
+   - **inputs**
+      - `title` title displayed in header of cheat sheet
+   - **method**
+      - `toggleCheatSheet` toggles cheatsheet visibility
+
 ## Version 18.0.1 (2023-08-23)
 
 ### Bug Fixes
