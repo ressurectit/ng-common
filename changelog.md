@@ -21,13 +21,6 @@
 - updated `NgComponentOutletEx` directive
    - is now standalone
 
-## Version 18.0.1 (2023-08-23)
-
-### Bug Fixes
-
-- fixed `RestSink`
-   - now sends `LogLevel` in lowercase like before
-
 ## Version 18.0.0 (2023-08-23)
 
 ### Features
@@ -57,7 +50,7 @@
 - new `loggerEnabled` function, that tests whether is logger sink enabled
 - new `useEnrichers` function, that creates logger properties by using enrichers
 - new `DeveloperConsoleSink` service, that is sink that is used for storing logs using browser developer console
-   - **implements** 
+   - **implements**
       - `LoggerSink`
 - new `DefaultLogger` service, that is default implementation of `Logger`
    - **implements**
@@ -277,7 +270,7 @@
 - removed `PositionModule` module, use `PositionToSADirective` directly
 - *subpackage* `@anglr/common/numeral`
    - pipe `NumeralPipe` renamed to `NumeralSAPipe`
-   - removed `NumeralModule` module, use `NumeralSAPipe` directly 
+   - removed `NumeralModule` module, use `NumeralSAPipe` directly
 - *subpackage* `@anglr/common/structured-log`
    - updated `ConsoleLogModule` module
       - removed `forRoot` method, instead use new `provideConsoleComponentSink` function and you also have to provide logger using `provideLogger(StructuredLogLogger)`
@@ -379,7 +372,7 @@
 
 ### Bug Fixes
 
-- updated `NumberInputControlValueAccessor` directive, which now correctly implements `setDisabledState` 
+- updated `NumberInputControlValueAccessor` directive, which now correctly implements `setDisabledState`
 
 ## Version 14.1.1 (2022-06-30)
 
