@@ -1,6 +1,7 @@
 import {EventEmitter, ComponentRef, Directive, Injector, Input, OnChanges, Type, ViewContainerRef, Output} from '@angular/core';
 
 //TODO: add module as origin componentOutlet has
+//TODO: rename to SA component on next breaking change
 
 /**
  * Instantiates a single Component type and inserts its Host View into current View.
@@ -8,7 +9,8 @@ import {EventEmitter, ComponentRef, Directive, Injector, Input, OnChanges, Type,
 @Directive(
 {
     selector: '[ngComponentOutletEx]',
-    exportAs: 'ngComponentOutletEx'
+    exportAs: 'ngComponentOutletEx',
+    standalone: true,
 })
 export class NgComponentOutletEx<TComponent> implements OnChanges
 {
@@ -25,19 +27,19 @@ export class NgComponentOutletEx<TComponent> implements OnChanges
      * Type that should be dynamically created into current container
      */
     @Input() 
-    public ngComponentOutletEx: Type<TComponent>;
+    public ngComponentOutletEx: Type<TComponent>|undefined|null;
 
     /**
      * Custom injector that will be used for newly created component
      */
     @Input() 
-    public ngComponentOutletExInjector: Injector;
+    public ngComponentOutletExInjector: Injector|undefined|null;
 
     /**
      * Projectable nodes that can be injected into component
      */
     @Input() 
-    public ngComponentOutletExContent: any[][];
+    public ngComponentOutletExContent: Node[][]|undefined|null;
 
     //######################### public properties - outputs #########################
 
@@ -75,12 +77,12 @@ export class NgComponentOutletEx<TComponent> implements OnChanges
 
         if (this.ngComponentOutletEx)
         {
-            const injector = this.ngComponentOutletExInjector || this._viewContainerRef.injector;
+            const injector = this.ngComponentOutletExInjector ?? this._viewContainerRef.injector;
 
             this._componentRef = this._viewContainerRef.createComponent<TComponent>(this.ngComponentOutletEx,
                                                                                     {
-                                                                                        injector: injector,
-                                                                                        projectableNodes: this.ngComponentOutletExContent
+                                                                                        injector,
+                                                                                        projectableNodes: this.ngComponentOutletExContent ?? undefined
                                                                                     });
         }
 

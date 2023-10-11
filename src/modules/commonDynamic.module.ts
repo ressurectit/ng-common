@@ -7,7 +7,7 @@ import {NgComponentOutletEx} from '../directives/ngComponentOutletEx/ngComponent
  */
 @NgModule(
 {
-    declarations:
+    imports:
     [
         NgComponentOutletEx,
     ],

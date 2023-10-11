@@ -1,6 +1,12 @@
 # Changelog
 
-## Version 18.1.0 (2023-09-18)
+## Version 18.1.0 (2023-10-11)
+
+### Bug Fixes
+
+- fixed `RestSink`, now correctly sends log level as uppercase as was before
+- fixed `LocalizeSAPipe`, now correctly handles empty strings as key value
+- fixed `NgComponentOutletEx`, now has correct null safe types
 
 ### Features
 
@@ -12,6 +18,8 @@
       - `title` title displayed in header of cheat sheet
    - **method**
       - `toggleCheatSheet` toggles cheatsheet visibility
+- updated `NgComponentOutletEx` directive
+   - is now standalone
 
 ## Version 18.0.1 (2023-08-23)
 

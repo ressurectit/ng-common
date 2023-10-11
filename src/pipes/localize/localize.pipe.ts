@@ -38,7 +38,7 @@ export class LocalizeSAPipe implements PipeTransform, OnInit, OnDestroy
      */
     public transform(key: string|undefined|null, interpolateParams?: Object): string
     {
-        if(isBlank(key))
+        if(isBlank(key) || key === '')
         {
             return '';
         }
