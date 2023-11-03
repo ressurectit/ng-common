@@ -1,5 +1,25 @@
 # Changelog
 
+## Version 18.2.0 (2023-11-03)
+
+### Features
+
+- new `CollapsibleIconSAComponent` component, that is used for displaying collapsible icon
+   - **inputs**
+      - `visible` initial value, if visible set to true minus is displayed, otherwise plus is displayed
+      - `titleText` text of title
+      - `cssClass` css class applied to button
+   - **outputs**
+      - `visibleChange` occurs when visible change
+- new `CollapsibleTitleSAComponent` component, that is used for displaying title with collapsible icon
+   - projects content into view
+   - **inputs**
+      - `visible` initial value, if visible set to true minus is displayed, otherwise plus is displayed
+      - `cssClass` css class applied to button
+   - **outputs**
+      - `visibleChange` occurs when visible change
+
+
 ## Version 18.1.0 (2023-10-11)
 
 ### Bug Fixes

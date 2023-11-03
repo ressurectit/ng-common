@@ -3,7 +3,7 @@ import {Injectable, forwardRef} from '@angular/core';
 import {PermanentStorage} from './permanentStorage.interface';
 import {CookieService} from '../cookies/cookies.service';
 import {PERMANENT_STORAGE} from '../../types/tokens';
-import {TypeProvider} from '../../types/providerDecoratedType';
+import {TypeProvider} from '../../decorators';
 
 /**
  * Implementation of permanent storage using cookies

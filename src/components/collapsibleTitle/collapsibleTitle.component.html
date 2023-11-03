@@ -1,0 +1,5 @@
+<div class="flex-row" [ngClass]="cssClass">
+    <collapsible-icon cssClass="margin-right-small" [visible]="visible" (visibleChange)="visible = $event; visibleChange.emit($event)"></collapsible-icon>
+
+    <ng-content></ng-content>
+</div>

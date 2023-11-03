@@ -19,7 +19,6 @@ export * from './types/host';
 export * from './types/styles';
 export * from './types/tokens';
 export * from './types/providers';
-export * from './types/providerDecoratedType';
 export * from './utils';
 export {CookieService} from './services/cookies/cookies.service';
 export {StatusCodeService} from './services/statusCode/statusCode.service';

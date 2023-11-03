@@ -4,8 +4,8 @@ import {PermanentStorage} from '../services/permanentStorage/permanentStorage.in
 import {Position} from '../services/position/position.interface';
 import {StringLocalization} from '../services/stringLocalization/stringLocalization.interface';
 import {TemporaryStorage} from '../services/temporaryStorage/temporaryStorage.interface';
-import {getProviderForType} from './providerDecoratedType';
 import {Logger} from '../modules/logger';
+import {getProviderForType} from '../decorators';
 
 /**
  * Provides logger service type

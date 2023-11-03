@@ -1,0 +1,6 @@
+<a class="btn-icon" [ngClass]="cssClass" style="font-size: 1em;" (click)="visible = !visible; visibleChange.emit(visible)" [tooltip]="titleText | localize">
+    <div [class.plus]="!visible" [class.minus]="visible">
+        <span class="vertical"></span>
+        <span class="horizontal"></span>
+    </div>
+</a>

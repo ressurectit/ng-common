@@ -1,0 +1,60 @@
+:host
+{
+    display: block;
+}
+
+/** TODO: change somehow, do not use .app-page and btn-icon maybe move into app itself away from this **/
+:host-context(.app-page) .btn-icon:active
+{
+    transform: none;
+}
+
+a
+{
+    position: relative;
+    display: block;
+    width: 1em;
+    height: 1em;
+}
+
+div
+{
+    transform: translateX(calc(0.5em - 0.14em));
+}
+
+.vertical,
+.horizontal
+{
+    position: absolute;
+    border-style: solid;
+    border-width: 0.15em;
+    border-radius: 0.3em;
+    display: block;
+    height: 1em;
+}
+
+.plus .vertical
+{
+    transition: all 350ms;
+    transform: rotate(0deg);
+}
+
+.plus .horizontal
+{
+    transition: all 260ms;
+    transform: rotate(-90deg);
+    opacity: 1;
+}
+
+.minus .vertical
+{
+    transition: all 350ms;
+    transform: rotate(-90deg);
+}
+
+.minus .horizontal
+{
+    transition: all 260ms;
+    transform: rotate(-180deg);
+    opacity: 0;
+}
