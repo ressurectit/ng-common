@@ -1,5 +1,23 @@
 # Changelog
 
+## Version 19.0.0 (2023-11-09)
+
+### Feature
+
+- updated `MergeCssClassesSAPipe` pipe
+   - now supports also `undefined` and `null` values as it should
+
+### BREAKING CHANGES
+
+- minimal supported version of `node.js` is `18`
+- minimal supported version of `@angular` is `17.0.1`
+- minimal supported version of `@angular` material is `17.0.0`
+- minimal supported version of `@jscrpt/common` is `5.0.0`
+- minimal supported version of `angular2-hotkeys` is `16.0.1`
+- minimal supported version of `@floating-ui/dom` is `1.5.3`
+- minimal supported version of `tslib` is `2.6.2`
+- tooltip themes changed, previous *dark* is not *light* and vice versa, dark background should be identified as light theme since it is normally used within light app theme
+
 ## Version 18.2.0 (2023-11-09)
 
 ### Features

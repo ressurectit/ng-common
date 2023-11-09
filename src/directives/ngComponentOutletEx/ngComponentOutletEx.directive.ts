@@ -1,7 +1,6 @@
 import {EventEmitter, ComponentRef, Directive, Injector, Input, OnChanges, Type, ViewContainerRef, Output} from '@angular/core';
 
 //TODO: add module as origin componentOutlet has
-//TODO: rename to SA component on next breaking change
 
 /**
  * Instantiates a single Component type and inserts its Host View into current View.

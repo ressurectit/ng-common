@@ -4,12 +4,6 @@
 
 $_lightDefaultTheme:
 (
-    tooltip:
-    (
-        background: #FAFAFA,
-        foreground: #444,
-        shadow: #333,
-    ),
 );
 
 @function defineTheme($colors: (), $font: 'Inter')

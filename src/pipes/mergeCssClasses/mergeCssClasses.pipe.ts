@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Dictionary, isString} from '@jscrpt/common';
+import {Dictionary, isBlank, isString} from '@jscrpt/common';
 
 /**
  * Type of css class definition for NgClass and merge
@@ -17,12 +17,17 @@ export class MergeCssClassesSAPipe implements PipeTransform
      * @param value - Css class to be merged
      * @param mergeClasses - Definition of css classes that will be merged
      */
-    public transform(value: NgClassType, mergeClasses: NgClassType[]): Dictionary<boolean>
+    public transform(value: NgClassType|undefined|null, mergeClasses: (NgClassType|undefined|null)[]): Dictionary<boolean>
     {
         const result: Dictionary<boolean> = {};
 
-        function updateResult(val: NgClassType): void
+        function updateResult(val: NgClassType|undefined|null): void
         {
+            if(isBlank(val))
+            {
+                return;
+            }
+
             if(isString(val))
             {
                 result[val] = true;
