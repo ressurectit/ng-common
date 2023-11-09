@@ -1,4 +1,4 @@
-import {Optional, Injectable, PLATFORM_ID, Inject, inject} from '@angular/core';
+import {Optional, Injectable, PLATFORM_ID, inject} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 import {isPresent, isBoolean, isBlank} from '@jscrpt/common';
 import {Observable, Subject} from 'rxjs';
