@@ -1,4 +1,4 @@
-import {Optional, Injectable, PLATFORM_ID, Inject} from '@angular/core';
+import {Optional, Injectable, PLATFORM_ID, Inject, inject} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 import {isPresent, isBoolean, isBlank} from '@jscrpt/common';
 import {Observable, Subject} from 'rxjs';
@@ -47,7 +47,7 @@ export class ProgressIndicatorService
     /**
      * Indication that current code is running in browser
      */
-    private _isBrowser: boolean = isPlatformBrowser(this._platformId);
+    private _isBrowser: boolean = isPlatformBrowser(inject(PLATFORM_ID));
 
     /**
      * Information about running progress for each group
@@ -85,8 +85,7 @@ export class ProgressIndicatorService
     }
 
     //######################### constructors #########################
-    constructor(@Inject(PLATFORM_ID) private _platformId: Object,
-                @Optional() public config?: ProgressIndicatorOptions)
+    constructor(@Optional() public config?: ProgressIndicatorOptions)
     {
         if(config && !(config instanceof ProgressIndicatorOptions))
         {
@@ -98,7 +97,7 @@ export class ProgressIndicatorService
         {
             runningRequests: 0,
             running: false,
-            messages: null,
+            messages: undefined,
             timeout: null
         };
 
