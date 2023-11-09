@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 18.2.0 (2023-11-03)
+## Version 18.2.0 (2023-11-09)
 
 ### Features
 
@@ -18,7 +18,6 @@
       - `cssClass` css class applied to button
    - **outputs**
       - `visibleChange` occurs when visible change
-
 
 ## Version 18.1.0 (2023-10-11)
 
