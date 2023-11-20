@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 18.2.1 (2023-11-20)
+
+### Bug Fixes
+
+- fixed `ProgressIndicatorService` isBrowser indicator initialization
+
 ## Version 18.2.0 (2023-11-09)
 
 ### Features
