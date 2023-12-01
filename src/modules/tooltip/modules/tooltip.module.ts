@@ -11,11 +11,11 @@ import {TooltipComponent} from '../components';
 {
     imports:
     [
-        CommonModule
+        CommonModule,
+        TooltipDirective,
     ],
     declarations:
     [
-        TooltipDirective,
         TooltipTemplateDirective,
         TooltipComponent,
     ],
