@@ -38,7 +38,8 @@ const defaultOptions: TooltipOptions =
  */
 @Directive(
 {
-    selector: '[tooltip]'
+    selector: '[tooltip]',
+    standalone: true,
 })
 export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
 {

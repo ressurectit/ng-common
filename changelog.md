@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 19.1.0 (2023-12-01)
+
+### Feature
+
+- updated `TooltipDirective` directive
+   - is now `standalone`
+
 ## Version 19.0.0 (2023-11-09)
 
 ### Feature
