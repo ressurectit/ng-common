@@ -2,13 +2,13 @@ import {ComponentRef, ContentChild, Directive, ElementRef, EmbeddedViewRef, Host
 import {AnimationBuilder, AnimationFactory} from '@angular/animations';
 import {DOCUMENT} from '@angular/common';
 import {fadeInAnimation, fadeOutAnimation} from '@anglr/animations';
-import {extend, isBlank, isPresent, nameof, renderToBody} from '@jscrpt/common';
+import {RecursivePartial, extend, isBlank, isPresent, nameof, renderToBody} from '@jscrpt/common';
 import {lastValueFrom} from 'rxjs';
 
 import {TooltipComponent} from '../../components/tooltip/tooltip.component';
 import {TooltipOptions, TooltipRenderer} from '../../misc/tooltip.interface';
 import {TOOLTIP_OPTIONS} from '../../misc/tokens';
-import {applyPositionResult, Position, PositionOffset, PositionOffsetString, PositionPlacement} from '../../../../services/position';
+import {applyPositionResult, Position, PositionPlacement} from '../../../../services/position';
 import {TooltipTemplateDirective} from '../tooltipTemplate/tooltipTemplate.directive';
 import {TooltipTemplateContext} from '../tooltipTemplate/tooltipTemplate.context';
 import {POSITION} from '../../../../types/tokens';
@@ -21,8 +21,8 @@ const defaultOptions: TooltipOptions =
     delay: 200,
     position:
     {
-        offset: nameof<typeof PositionOffset>('MouseEnter') as PositionOffsetString,
-        placement: PositionPlacement.TopStart,
+        offset: 'MouseEnter',
+        placement: PositionPlacement.TopEnd,
     },
     allowSelection: false,
     tooltipRenderer: TooltipComponent,
@@ -109,11 +109,11 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      * Options used for displaying tooltip
      */
     @Input()
-    public get tooltipOptions(): Partial<TooltipOptions>
+    public get tooltipOptions(): RecursivePartial<TooltipOptions>
     {
         return this._options;
     }
-    public set tooltipOptions(value: Partial<TooltipOptions>)
+    public set tooltipOptions(value: RecursivePartial<TooltipOptions>)
     {
         this._options = extend(true, {}, this._options, value);
 

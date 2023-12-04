@@ -119,7 +119,10 @@ export class FloatingUiDomPosition implements Position
     {
         if(options.flip)
         {
-            middlewares.push(flip());
+            middlewares.push(flip(
+            {
+                fallbackAxisSideDirection: 'start',
+            }));
         }
     }
 
@@ -150,7 +153,7 @@ export class FloatingUiDomPosition implements Position
                options.placement == PositionPlacement.Top ||
                options.placement == PositionPlacement.TopEnd)
             {
-                options.placement = PositionPlacement.TopStart;
+                options.placement = PositionPlacement.TopEnd;
             }
         }
 
@@ -166,8 +169,10 @@ export class FloatingUiDomPosition implements Position
 
             if(options.offset === PositionOffset[PositionOffset.MouseEnter] && options.mouseEvent)
             {
+                const boundingRect = (options.mouseEvent.target as HTMLElement).getBoundingClientRect();
+
                 return {
-                    crossAxis: options.mouseEvent.x - (options.mouseEvent.target as HTMLElement).getBoundingClientRect().x
+                    crossAxis: boundingRect.right - options.mouseEvent.x 
                 };
             }
 
