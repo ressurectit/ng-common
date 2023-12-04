@@ -172,7 +172,7 @@ export class FloatingUiDomPosition implements Position
                 const boundingRect = (options.mouseEvent.target as HTMLElement).getBoundingClientRect();
 
                 return {
-                    crossAxis: boundingRect.right - options.mouseEvent.x 
+                    crossAxis: options.mouseEvent.x - boundingRect.right  
                 };
             }
 
