@@ -62,7 +62,7 @@ export class FloatingUiDomPosition implements Position
 
                     return result;
                 };
-                
+
                 let dispose = () => {};
 
                 if(computedOptions.autoUpdate)
@@ -169,10 +169,11 @@ export class FloatingUiDomPosition implements Position
 
             if(options.offset === PositionOffset[PositionOffset.MouseEnter] && options.mouseEvent)
             {
-                const boundingRect = (options.mouseEvent.target as HTMLElement).getBoundingClientRect();
+                const targetBoundingRect = (options.mouseEvent.target as HTMLElement).getBoundingClientRect();
+                const floatingBoundingRect = (elements.floating as HTMLElement).getBoundingClientRect();
 
                 return {
-                    crossAxis: options.mouseEvent.x - boundingRect.right  
+                    crossAxis: options.mouseEvent.x - targetBoundingRect.right + floatingBoundingRect.width
                 };
             }
 
