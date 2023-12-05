@@ -10,7 +10,8 @@ import {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from '../../mis
  */
 @Directive(
 {
-    selector: '[confirmation]'
+    selector: '[confirmation]',
+    standalone: true,
 })
 export class ConfirmationDialogDirective
 {
@@ -99,8 +100,8 @@ export class ConfirmationDialogDirective
             data:
             {
                 confirmationText: this.confirmationText || undefined,
-                dialogCancelText: this.confirmationCancel ?? '',
-                dialogConfirmText: this.confirmationConfirm ?? '',
+                dialogCancelText: this.confirmationCancel ?? undefined,
+                dialogConfirmText: this.confirmationConfirm ?? undefined,
                 cssClasses: this.confirmationCssClasses ?? {},
             }
         }).afterClosed());

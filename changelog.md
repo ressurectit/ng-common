@@ -4,7 +4,8 @@
 
 ### Bug Fixes
 
-- `fixed` overflowing 'MouseEnter' tooltip on right side of screen
+- fixed `TooltipDirective` overflowing 'MouseEnter' tooltip on right side of screen
+- fixed `ConfirmationDialogDirective`, now correctly takes global options
 
 ### Feature
 
@@ -18,6 +19,8 @@
       - `allowHtml` indication whether are html tags allowed in tooltip text
       - `ellipsisTooltip` gets or sets HTML element from which is text taken for tooltip
 - updated `TooltipDirective` directive
+   - is now `standalone`
+- updated `ConfirmationDialogDirective` directive
    - is now `standalone`
 
 ## Version 19.0.0 (2023-11-09)
