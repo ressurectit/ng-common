@@ -15,16 +15,16 @@ import {ConfirmationDialogDirective} from '../directives/confirmationDialog/conf
     [
         CommonModule,
         CommonLocalizeModule,
-        TitledDialogModule
+        TitledDialogModule,
+        ConfirmationDialogDirective,
     ],
     declarations:
     [
         ConfirmationDialogComponent,
-        ConfirmationDialogDirective
     ],
     exports:
     [
-        ConfirmationDialogDirective
+        ConfirmationDialogDirective,
     ]
 })
 export class ConfirmationDialogModule
