@@ -1,6 +1,6 @@
 import {CssDisplay} from '@jscrpt/common';
 
-import {ComponentHostStyle} from './componentHostStyle.decorator';
+import {ComponentHostStyle} from '../componentHostStyle/componentHostStyle.decorator';
 
 /**
  * Applies css display style to host of component, requires at least empty style on Component

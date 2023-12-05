@@ -1,4 +1,4 @@
-import {ComponentDisplay} from './componentDisplay.decorator';
+import {ComponentDisplay} from '../componentDisplay/componentDisplay.decorator';
 
 /**
  * Applies css display block style to host of component, requires at least empty style on Component
