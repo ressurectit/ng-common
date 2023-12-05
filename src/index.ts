@@ -28,6 +28,7 @@ export {MemoryTemporaryStorage, TemporaryStorage} from './services/temporaryStor
 export {NoStringLocalization, StringLocalization} from './services/stringLocalization';
 export * from './directives/bodyRender/bodyRender.directive';
 export * from './directives/clickOutside/clickOutside.directive';
+export * from './directives/ellipsisTooltip/ellipsisTooltip.directive';
 export * from './directives/goBack/goBack.directive';
 export * from './directives/positionTo/positionTo.directive';
 export {NgComponentOutletEx} from './directives/ngComponentOutletEx/ngComponentOutletEx.directive';

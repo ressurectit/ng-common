@@ -1,9 +1,22 @@
 # Changelog
 
-## Version 19.1.0 (2023-12-01)
+## Version 19.1.0 (2023-12-05)
+
+### Bug Fixes
+
+- `fixed` overflowing 'MouseEnter' tooltip on right side of screen
 
 ### Feature
 
+- new `AsSignal` property decorator, that creates backing field for this property as WritableSignal, reads and write to it
+- new `EllipsisTooltipSADirective` directive, that is used for displaying text from attached element in tooltip
+   - **implements**
+      - `OnChanges`
+      - `OnDestroy`
+   - **inputs**
+      - `ellipsisClass` css class appliet to element
+      - `allowHtml` indication whether are html tags allowed in tooltip text
+      - `ellipsisTooltip` gets or sets HTML element from which is text taken for tooltip
 - updated `TooltipDirective` directive
    - is now `standalone`
 
