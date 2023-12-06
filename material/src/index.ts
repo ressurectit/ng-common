@@ -11,4 +11,5 @@ export {ConfirmationDialogComponent} from './components/confirmationDialog/confi
 export {ConfirmationDialogDirective} from './directives/confirmationDialog/confirmationDialog.directive';
 export {DebugDataCopyClickDirective} from './directives/debugDataCopyClick/debugDataCopyClick.directive';
 export {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from './misc/interfaces/confirmationDialog.interface';
-export {CONFIRMATION_DIALOG_OPTIONS, TITLED_DIALOG_DATA} from './misc/tokens';
+export * from './misc/providers';
+export * from './misc/tokens';

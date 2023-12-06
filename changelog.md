@@ -1,11 +1,12 @@
 # Changelog
 
-## Version 19.1.0 (2023-12-05)
+## Version 19.1.0 (2023-12-06)
 
 ### Bug Fixes
 
 - fixed `TooltipDirective` overflowing 'MouseEnter' tooltip on right side of screen
-- fixed `ConfirmationDialogDirective`, now correctly takes global options
+- *subpackage* `@anglr/common/material`
+   - fixed `ConfirmationDialogDirective`, now correctly takes global options
 
 ### Feature
 
@@ -20,8 +21,12 @@
       - `ellipsisTooltip` gets or sets HTML element from which is text taken for tooltip
 - updated `TooltipDirective` directive
    - is now `standalone`
-- updated `ConfirmationDialogDirective` directive
-   - is now `standalone`
+- *subpackage* `@anglr/common/material`
+   - new `provideConfirmationDialogOptions` function, that provides global options for confirmation dialog
+   - updated `CONFIRMATION_DIALOG_OPTIONS` injection token
+      - now provides `RecursivePartial` type as it should
+   - updated `ConfirmationDialogDirective` directive
+      - is now `standalone`
 
 ## Version 19.0.0 (2023-11-09)
 
