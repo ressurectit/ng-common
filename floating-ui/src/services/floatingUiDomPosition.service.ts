@@ -119,10 +119,7 @@ export class FloatingUiDomPosition implements Position
     {
         if(options.flip)
         {
-            middlewares.push(flip(
-            {
-                fallbackAxisSideDirection: 'start',
-            }));
+            middlewares.push(flip());
         }
     }
 
