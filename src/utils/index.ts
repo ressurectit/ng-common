@@ -1,4 +1,4 @@
-import {NgModuleRef, ApplicationRef, InjectionToken} from '@angular/core';
+import {NgModuleRef, ApplicationRef, InjectionToken, ComponentRef, EmbeddedViewRef} from '@angular/core';
 import {enableDebugTools} from '@angular/platform-browser';
 import {Action1} from '@jscrpt/common';
 import {filter, first} from 'rxjs';
@@ -100,4 +100,13 @@ export function runWhenModuleStable(moduleRefPromise: Promise<NgModuleRef<unknow
                 }
             });
     });
+}
+
+/**
+ * Gets host html element for component
+ * @param component - Component ref of dynamically created component
+ */
+export function getHostElement<TType>(component: ComponentRef<TType>|undefined|null): HTMLElement|undefined|null
+{
+    return (component?.hostView as EmbeddedViewRef<unknown>)?.rootNodes?.[0];
 }

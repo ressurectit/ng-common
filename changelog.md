@@ -1,10 +1,11 @@
 # Changelog
 
-## Version 19.1.0 (2023-12-06)
+## Version 19.1.0 (2023-12-14)
 
 ### Bug Fixes
 
 - fixed `TooltipDirective` overflowing 'MouseEnter' tooltip on right side of screen
+- fixed `TooltipDirective` rendering tooltip only for non empty content
 - *subpackage* `@anglr/common/material`
    - fixed `ConfirmationDialogDirective`, now correctly takes global options
 
@@ -19,6 +20,7 @@
       - `ellipsisClass` css class appliet to element
       - `allowHtml` indication whether are html tags allowed in tooltip text
       - `ellipsisTooltip` gets or sets HTML element from which is text taken for tooltip
+- new `getHostElement` function, that gets host html element for component
 - updated `TooltipDirective` directive
    - is now `standalone`
 - *subpackage* `@anglr/common/material`

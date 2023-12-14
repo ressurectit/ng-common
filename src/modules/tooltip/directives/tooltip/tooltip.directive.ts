@@ -278,6 +278,12 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
      */
     protected _showTooltip(event?: MouseEvent): void
     {
+        //no data for tooltip or no template
+        if(!this.tooltip && !this.template && !this.tooltipTemplateChild)
+        {
+            return;
+        }
+
         this._createTooltip();
 
         //if element was not created do nothing
