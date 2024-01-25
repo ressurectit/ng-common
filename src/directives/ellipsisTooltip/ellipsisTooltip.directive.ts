@@ -1,5 +1,5 @@
 import {Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges, booleanAttribute, inject} from '@angular/core';
-import {nameof} from '@jscrpt/common';
+import {BindThis, nameof} from '@jscrpt/common';
 
 import {TooltipDirective} from '../../modules/tooltip';
 
@@ -37,7 +37,7 @@ export class EllipsisTooltipSADirective implements OnChanges, OnDestroy
     /**
      * Instance of mutation observer used for watching 
      */
-    protected textObserver: MutationObserver|undefined|null = new MutationObserver(() => this.tooltip.tooltip = this.allowHtml ? this.element.innerHTML : this.element.innerText);
+    protected textObserver: MutationObserver|undefined|null = new MutationObserver(this.updateTooltip);
 
     /**
      * Original css class
@@ -51,6 +51,18 @@ export class EllipsisTooltipSADirective implements OnChanges, OnDestroy
      */
     @Input()
     public ellipsisClass: string = 'text-ellipsis';
+
+    /**
+     * Tooltip prefix text to be prepended to tooltip read from content
+     */
+    @Input()
+    public tooltipPrefix: string|undefined|null;
+
+    /**
+     * Tooltip suffix text to be appended to tooltip read from content
+     */
+    @Input()
+    public tooltipSuffix: string|undefined|null;
 
     /**
      * Indication whether are html tags allowed in tooltip text
@@ -112,6 +124,12 @@ export class EllipsisTooltipSADirective implements OnChanges, OnDestroy
             this.textObserver?.disconnect();
             this.textObserver?.observe(this.element, {characterData: true, subtree: true, childList: true});
         }
+
+        if(nameof<EllipsisTooltipSADirective>('tooltipPrefix') in changes ||
+           nameof<EllipsisTooltipSADirective>('tooltipSuffix') in changes)
+        {
+            this.updateTooltip();
+        }
     }
 
     //######################### public methods - implementation of OnDestroy #########################
@@ -123,6 +141,17 @@ export class EllipsisTooltipSADirective implements OnChanges, OnDestroy
     {
         this.textObserver?.disconnect();
         this.textObserver = null;
+    }
+
+    //######################### protected methods #########################
+
+    /**
+     * Updates tooltip value
+     */
+    @BindThis
+    protected updateTooltip(): void
+    {
+        this.tooltip.tooltip = (this.tooltipPrefix ?? '') + (this.allowHtml ? this.element.innerHTML : this.element.innerText) + (this.tooltipSuffix ?? '');
     }
 
     //######################### ng language server #########################

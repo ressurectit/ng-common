@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 19.2.0 (2024-01-25)
+
+### Features
+
+- updated `EllipsisTooltipSADirective` directive
+   - **new inputs**
+      - `tooltipPrefix` tooltip prefix text to be prepended to tooltip read from content
+      - `tooltipSuffix` tooltip suffix text to be appended to tooltip read from content
+
 ## Version 19.1.0 (2023-12-14)
 
 ### Bug Fixes
