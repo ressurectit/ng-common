@@ -151,7 +151,14 @@ export class EllipsisTooltipSADirective implements OnChanges, OnDestroy
     @BindThis
     protected updateTooltip(): void
     {
-        this.tooltip.tooltip = (this.tooltipPrefix ?? '') + (this.allowHtml ? this.element.innerHTML : this.element.innerText) + (this.tooltipSuffix ?? '');
+        let text = this.allowHtml ? this.element.innerHTML : this.element.innerText;
+
+        if(text)
+        {
+            text = (this.tooltipPrefix ?? '') + text + (this.tooltipSuffix ?? '');
+        }
+
+        this.tooltip.tooltip = text;
     }
 
     //######################### ng language server #########################
