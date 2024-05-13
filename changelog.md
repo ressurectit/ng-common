@@ -4,6 +4,7 @@
 
 ### Bug Fixes
 
+- fixed `TooltipDirective` when event occur on nested element
 - fixed `TooltipDirective` dual tooltip when nested elements are marked with tooltip
 - fixed `TooltipDirective` overflowing 'MouseEnter' tooltip on right side of screen
 - fixed `TooltipDirective` rendering tooltip only for non empty content
