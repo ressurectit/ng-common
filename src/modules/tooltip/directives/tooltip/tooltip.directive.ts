@@ -1,4 +1,4 @@
-import {ComponentRef, ContentChild, Directive, ElementRef, EmbeddedViewRef, HostListener, Inject, Injector, Input, OnChanges, OnDestroy, Optional, SimpleChanges, TemplateRef, ViewContainerRef} from '@angular/core';
+import {ComponentRef, ContentChild, Directive, ElementRef, EmbeddedViewRef, HostListener, Inject, Injector, Input, OnChanges, OnDestroy, Optional, SimpleChanges, SkipSelf, TemplateRef, ViewContainerRef} from '@angular/core';
 import {AnimationBuilder, AnimationFactory} from '@angular/animations';
 import {DOCUMENT} from '@angular/common';
 import {fadeInAnimation, fadeOutAnimation} from '@anglr/animations';
@@ -27,7 +27,7 @@ const defaultOptions: TooltipOptions =
     allowSelection: false,
     tooltipRenderer: TooltipComponent,
     tooltipCssClass: null,
-    stopPropagation: false,
+    stopPropagation: false, //TODO: breaking change set to true
     enterAnimation: fadeInAnimation,
     exitAnimation: fadeOutAnimation,
     containerElement: undefined,
@@ -155,6 +155,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
                 protected _animationsPlayer: AnimationBuilder,
                 @Inject(DOCUMENT) protected _document: Document,
                 @Inject(POSITION) protected _position: Position,
+                @Optional() @SkipSelf() protected _parent?: TooltipDirective|null,
                 @Optional() @Inject(TOOLTIP_OPTIONS) options?: Partial<TooltipOptions>,)
     {
         this._options = extend(true, {}, defaultOptions, options);
@@ -203,15 +204,14 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
         this._destroyTooltip();
     }
 
-    //######################### public methods - host #########################
+    //######################### protected methods - host #########################
 
     /**
      * Handles mouse leave event, hover ends
      * @param event - Mouse event that occured
-     * @internal
      */
     @HostListener('mouseleave', ['$event'])
-    public mouseLeave(event: MouseEvent): void
+    protected mouseLeave(event: MouseEvent): void
     {
         if(this._options.stopPropagation)
         {
@@ -234,10 +234,9 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
     /**
      * Handles mouse move event, displaying tooltip
      * @param event - Mouse event that occured
-     * @internal
      */
     @HostListener('mousemove', ['$event'])
-    public mouseMove(event: MouseEvent): void
+    protected mouseMove(event: MouseEvent): void
     {
         if(this._options.stopPropagation)
         {
@@ -284,6 +283,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
             return;
         }
 
+        this._parent?._hideTooltip();
         this._createTooltip();
 
         //if element was not created do nothing

@@ -1,9 +1,10 @@
 # Changelog
 
-## Version 19.1.0 (2024-01-25)
+## Version 19.1.0 (2024-05-13)
 
 ### Bug Fixes
 
+- fixed `TooltipDirective` dual tooltip when nested elements are marked with tooltip
 - fixed `TooltipDirective` overflowing 'MouseEnter' tooltip on right side of screen
 - fixed `TooltipDirective` rendering tooltip only for non empty content
 - *subpackage* `@anglr/common/material`
