@@ -1,7 +1,7 @@
 import {Injectable, forwardRef} from '@angular/core';
 import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION, PositionOffsetString, PositionOffsets, TypeProvider} from '@anglr/common';
 import {extend, isEmptyObject, isFunction, isJsObject, isNumber, nameof} from '@jscrpt/common';
-import {computePosition, Placement, autoUpdate, Middleware, offset, flip} from '@floating-ui/dom';
+import {computePosition, Placement, autoUpdate, Middleware, offset, flip, shift} from '@floating-ui/dom';
 import {Observable} from 'rxjs';
 
 /**
@@ -38,6 +38,7 @@ export class FloatingUiDomPosition implements Position
 
                 this._setOffset(middlewares, computedOptions);
                 this._setFlip(middlewares, computedOptions);
+                middlewares.push(shift());
 
                 const runComputation = async () =>
                 {
