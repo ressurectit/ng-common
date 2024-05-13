@@ -300,11 +300,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
                                                       placement: this._options.position.placement,
                                                       offset: this._options.position.offset,
                                                       flip: true,
-                                                      mouseEvent: 
-                                                      {
-                                                          ...event,
-                                                          target: this._element.nativeElement,
-                                                      },
+                                                      mouseEvent: event,
                                                       autoUpdate: false
                                                   }))
             .then(result => applyPositionResult(result));
