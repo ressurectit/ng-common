@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 
 import {DebugDataComponent} from '../components/debugData/debugData.component';
 
@@ -10,15 +9,11 @@ import {DebugDataComponent} from '../components/debugData/debugData.component';
 {
     imports:
     [
-        CommonModule
-    ],
-    declarations:
-    [
-        DebugDataComponent
+        DebugDataComponent,
     ],
     exports:
     [
-        DebugDataComponent
+        DebugDataComponent,
     ]
 })
 export class DebugDataModule

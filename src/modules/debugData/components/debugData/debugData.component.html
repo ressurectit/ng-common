@@ -1,3 +1,4 @@
-<ng-template [ngIf]="enabled()">
-    <ng-content></ng-content>
-</ng-template>
+@if(enabled())
+{
+    <ng-content/>
+}

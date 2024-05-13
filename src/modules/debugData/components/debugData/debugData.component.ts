@@ -15,7 +15,8 @@ const ENABLED = 'enabled';
 {
     selector: 'debug-data',
     templateUrl: 'debugData.component.html',
-    styleUrls: ['debugData.component.css'],
+    styleUrl: 'debugData.component.css',
+    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DebugDataComponent implements OnDestroy, OnInit

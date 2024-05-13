@@ -4,6 +4,7 @@
 
 ### Bug Fixes
 
+- fixed `DebugDataComponent` now color styles can be imported
 - fixed `TooltipDirective` dual tooltip when nested elements are marked with tooltip
 - fixed `TooltipDirective` overflowing 'MouseEnter' tooltip on right side of screen
 - fixed `TooltipDirective` rendering tooltip only for non empty content
@@ -13,6 +14,7 @@
 ### Feature
 
 - new `AsSignal` property decorator, that creates backing field for this property as WritableSignal, reads and write to it
+- new `TrimTextPipe` pipe, that trims long text and adds 'suffix' indication of longer text
 - new `EllipsisTooltipSADirective` directive, that is used for displaying text from attached element in tooltip
    - **implements**
       - `OnChanges`
@@ -26,11 +28,18 @@
 - new `getHostElement` function, that gets host html element for component
 - updated `TooltipDirective` directive
    - is now `standalone`
+- updated `DebugDataComponent` component
+   - is now `standalone`
+- **styles**
+   - new `buildThemeColorsDebugData` mixin, that builds theme colors for debug data component
+   - new `buildThemeDebugData` mixin, that builds theme for debug data component
 - *subpackage* `@anglr/common/material`
    - new `provideConfirmationDialogOptions` function, that provides global options for confirmation dialog
    - updated `CONFIRMATION_DIALOG_OPTIONS` injection token
       - now provides `RecursivePartial` type as it should
    - updated `ConfirmationDialogDirective` directive
+      - is now `standalone`
+   - updated `DebugDataCopyClickDirective` directive
       - is now `standalone`
 
 ## Version 19.0.0 (2023-11-09)

@@ -6,7 +6,8 @@ import {Clipboard} from '@angular/cdk/clipboard';
  */
 @Directive(
 {
-    selector: 'debug-data[copyClick]'
+    selector: 'debug-data[copyClick]',
+    standalone: true,
 })
 export class DebugDataCopyClickDirective
 {
@@ -16,7 +17,7 @@ export class DebugDataCopyClickDirective
      * Data to be copied as serialized json
      */
     @Input('copyClick')
-    public data: any;
+    public data: unknown;
 
     //######################### public properties - host #########################
 

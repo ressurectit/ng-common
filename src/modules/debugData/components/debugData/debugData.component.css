@@ -4,6 +4,7 @@
     font-style: italic;
     text-shadow: 0 0 1px;
     display: none;
+    color: var(--common-debugData-foreground);
 }
 
 :host(.clickable)

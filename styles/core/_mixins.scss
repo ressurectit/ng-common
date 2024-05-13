@@ -26,10 +26,19 @@
     }
 }
 
+@mixin buildThemeColorsDebugData($theme)
+{
+    @if $theme
+    {
+        --common-debugData-foreground: #{map.get(map.get($theme, 'debugData'), 'foreground')};
+    }
+}
+
 @mixin buildThemeColors($theme)
 {
     @include buildThemeColorsTooltip($theme);
     @include buildThemeColorsMultiButton($theme);
+    @include buildThemeColorsDebugData($theme);
 }
 
 @mixin buildThemeCssMisc
@@ -64,6 +73,11 @@
 {
     @include buildThemeColorsMultiButton($theme);
     @include buildThemeCssMultiButton();
+}
+
+@mixin buildThemeDebugData($theme)
+{
+    @include buildThemeColorsDebugData($theme);
 }
 
 @mixin buildTheme($theme)
