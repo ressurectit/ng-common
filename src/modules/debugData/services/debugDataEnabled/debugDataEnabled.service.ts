@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-import {Subject, Observable} from 'rxjs';
+import {Injectable, Signal, WritableSignal, signal} from '@angular/core';
 
 /**
  * Service used for handling enabled state for debug data component
@@ -12,29 +11,16 @@ export class DebugDataEnabledService
     /**
      * Indication whether debug data copmonent is enabled
      */
-    private _enabled: boolean = false;
-
-    /**
-     * Subject used for emitting changes of enabled state
-     */
-    private _enabledChangeSubject: Subject<void> = new Subject<void>();
+    private _enabled: WritableSignal<boolean> = signal(false);
 
     //######################### public properties #########################
 
     /**
      * Indication whether debug data copmonent is enabled
      */
-    public get enabled(): boolean
+    public get enabled(): Signal<boolean>
     {
-        return this._enabled;
-    }
-
-    /**
-     * Occurs when enabled state changed
-     */
-    public get enabledChange(): Observable<void>
-    {
-        return this._enabledChangeSubject.asObservable();
+        return this._enabled.asReadonly();
     }
 
     //######################### public methods #########################
@@ -45,13 +31,6 @@ export class DebugDataEnabledService
      */
     public setEnabled(enabled: boolean = true): void
     {
-        if(this._enabled === enabled)
-        {
-            return;
-        }
-
-        this._enabled = enabled;
-
-        this._enabledChangeSubject.next();
+        this._enabled.set(enabled);
     }
 }
