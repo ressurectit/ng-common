@@ -10,15 +10,15 @@ import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 {
     selector: 'hotkeys-cheatsheet',
     templateUrl: 'cheatSheet.component.html',
-    styleUrls: ['cheatSheet.component.css'],
+    styleUrl: 'cheatSheet.component.css',
+    standalone: true,
     imports:
     [
         CommonModule,
     ],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HotkeysCheatsheetSAComponent implements OnInit, OnDestroy
+export class HotkeysCheatsheetComponent implements OnInit, OnDestroy
 {
     //######################### private fields #########################
 

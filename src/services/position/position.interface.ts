@@ -48,23 +48,23 @@ export interface PositionOffsets
 /**
  * Stores positioned element and reference element
  */
-export interface PositionElements<TElement extends Element = Element>
+export interface PositionElements<TVirtualElement = unknown>
 {
     /**
      * Reference element against which is object positioned
      */
-    reference: TElement;
+    reference: Element|TVirtualElement;
 
     /**
      * Element that is positioned
      */
-    floating: TElement;
+    floating: HTMLElement;
 }
 
 /**
  * Arguments that are passed during positioning
  */
-export interface PositionArguments<TElement extends Element = Element>
+export interface PositionArguments<TVirtualElement = unknown>
 {
     /**
      * X coordinate of positioned element
@@ -79,13 +79,13 @@ export interface PositionArguments<TElement extends Element = Element>
     /**
      * Elements that are being used during positioning
      */
-    elements: PositionElements<TElement>;
+    elements: PositionElements<TVirtualElement>;
 }
 
 /**
  * Options that are passed to position service
  */
-export interface PositionOptions
+export interface PositionOptions<TVirtualElement = unknown>
 {
     //######################### properties #########################
 
@@ -97,7 +97,7 @@ export interface PositionOptions
     /**
      * Offset which allows moving target element along the cross axis of placement, or any chosed direction
      */
-    offset: PositionOffsetString|number|PositionOffsets|Func1<number|PositionOffsets, PositionArguments>;
+    offset: PositionOffsetString|number|PositionOffsets|Func1<number|PositionOffsets, PositionArguments<TVirtualElement>>;
 
     /**
      * Indication whether perform flip in case of collision (with view boundaries)
@@ -118,7 +118,7 @@ export interface PositionOptions
 /**
  * Result of positioning process, storing new coordinates
  */
-export interface PositionResult<TElement extends Element = any>
+export interface PositionResult<TElement extends Element = Element>
 {
     /**
      * Target element to be positioned

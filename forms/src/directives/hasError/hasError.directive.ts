@@ -10,7 +10,8 @@ import {SubmittedService} from '../../services/submitted/submitted.service';
 import {GroupHasErrorDirective} from '../groupHasError/groupHasError.directive';
 import {ValidationErrorsContainerView} from '../../misc/validationErrorsContainerView';
 
-//TODO - add support for setting renderer factory options using input
+//TODO: add support for setting renderer factory options using input
+//TODO: add support for events instead of mutation observer
 
 /**
  * Directive that is attached to control element and handles css classes that are added to this element

@@ -1,5 +1,28 @@
 # Changelog
 
+## Version 20.0.0 (2024-05-29)
+
+### Features
+
+- updated `PositionResult` interface generic parameter now defaults to `Element`
+- updated `PositionOptions` interface has now new generic parameter
+- updated `PositionOptions` interface has now new generic parameter
+- *subpackage* `@anglr/common/floating-ui`
+   - now using new generic types of `Position`
+
+### BREAKING CHANGES
+
+- minimal supported version of `@angular` is `18`
+- minimal supported version of `@jscrpt/common` is `6.1.0`
+- minimal supported version of `@floating-ui/dom` is `1.6.5`
+- moved `NumeralSAPipe` pipe into `@anglr/common`
+- renamed `NumeralSAPipe` pipe to `NumeralPipe` pipe
+- renamed `HotkeysCheatsheetSAComponent` component to `HotkeysCheatsheetComponent` component
+- removed *subpackage* `@anglr/common/numeral`
+- removed dependency on `numeral.js`
+- updated `PositionElements` interface generic parameter, now refers to *virtual element type*
+- updated `PositionArguments` interface generic parameter, now refers to *virtual element type*
+
 ## Version 19.1.0 (2024-05-13)
 
 ### Bug Fixes

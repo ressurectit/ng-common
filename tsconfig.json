@@ -19,15 +19,17 @@
         "strictNullChecks": false,
         "esModuleInterop": true,
         "importHelpers": true,
+        "useDefineForClassFields": false,
+        "skipLibCheck": false,
+        "forceConsistentCasingInFileNames": true,
         "newLine": "lf",
         "rootDir": ".",
         "outDir": "es2022",
-        "baseUrl": "src",
         "paths":
         {
-            "@anglr/common": ["index.ts"],
-            "@anglr/common/forms": ["../forms/src/index.ts"],
-            "store/plugins/expire" : ["../typings/store/index.d.ts"],
+            "@anglr/common": ["./src/index.ts"],
+            "@anglr/common/forms": ["./forms/src/index.ts"],
+            "store/plugins/expire" : ["./typings/store/index.d.ts"],
         },
         "lib":
         [
@@ -43,13 +45,21 @@
     },
     "exclude":
     [
-        "node_modules"
+        "node_modules",
+        "demo"
     ],
     "angularCompilerOptions":
     {
         "strictTemplates": true,
         "compilationMode": "partial",
         "enableResourceInlining": true,
-        "strictInjectionParameters": true
+        "strictInjectionParameters": true,
+        "extendedDiagnostics":
+        {
+            "checks":
+            {
+                "interpolatedSignalNotInvoked": "error"
+            }
+        }
     }
 }

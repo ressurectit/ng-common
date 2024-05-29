@@ -6,5 +6,6 @@ export * from './isPresent/isPresent.pipe';
 export * from './keys/keys.pipe';
 export * from './localize/localize.pipe';
 export * from './mergeCssClasses/mergeCssClasses.pipe';
+export * from './numeral/numeral.pipe';
 export * from './trimText/trimText.pipe';
 export * from './urlEncode/urlEncode.pipe';

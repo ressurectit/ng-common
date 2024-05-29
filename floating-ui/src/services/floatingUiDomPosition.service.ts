@@ -1,13 +1,13 @@
 import {Injectable, forwardRef} from '@angular/core';
 import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION, PositionOffsetString, PositionOffsets, TypeProvider} from '@anglr/common';
 import {extend, isEmptyObject, isFunction, isJsObject, isNumber, nameof} from '@jscrpt/common';
-import {computePosition, Placement, autoUpdate, Middleware, offset, flip, shift} from '@floating-ui/dom';
+import {computePosition, Placement, autoUpdate, Middleware, offset, flip, shift, VirtualElement} from '@floating-ui/dom';
 import {Observable} from 'rxjs';
 
 /**
  * Default options for `FloatingUiDomPosition` implementation
  */
-const defaultOptions: PositionOptions =
+const defaultOptions: PositionOptions<VirtualElement> =
 {
     autoUpdate: false,
     flip: false,
@@ -27,7 +27,7 @@ export class FloatingUiDomPosition implements Position
     /**
      * @inheritdoc
      */
-    public placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Observable<PositionResult>
+    public placeElement(target: Element, source: Element, options?: Partial<PositionOptions<VirtualElement>>): Observable<PositionResult>
     {
         return new Observable(subscriber =>
         {
@@ -116,7 +116,7 @@ export class FloatingUiDomPosition implements Position
      * @param middlewares - Array of middlewares that will set
      * @param options - Options that contains definition of flip
      */
-    protected _setFlip(middlewares: Middleware[], options: PositionOptions): void
+    protected _setFlip(middlewares: Middleware[], options: PositionOptions<VirtualElement>): void
     {
         if(options.flip)
         {
@@ -129,7 +129,7 @@ export class FloatingUiDomPosition implements Position
      * @param middlewares - Array of middlewares that will set
      * @param options - Options that contains definition of offset
      */
-    protected _setOffset(middlewares: Middleware[], options: PositionOptions): void
+    protected _setOffset(middlewares: Middleware[], options: PositionOptions<VirtualElement>): void
     {
         //no offset
         if(options.offset === PositionOffset[PositionOffset.None])
@@ -245,7 +245,7 @@ export class FloatingUiDomPosition implements Position
      * Gets floating ui placement from position placement
      * @param options - Options containing position placement
      */
-    protected _getPlacement(options: PositionOptions): Placement
+    protected _getPlacement(options: PositionOptions<VirtualElement>): Placement
     {
         switch(options.placement)
         {

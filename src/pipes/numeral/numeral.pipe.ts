@@ -1,14 +1,14 @@
 import {Pipe, PipeTransform, OnDestroy} from '@angular/core';
 import {GlobalizationService} from '@anglr/common';
 import {isBlank} from '@jscrpt/common';
-import numeral from 'numeral';
+import numeral from '@jscrpt/common/numeral';
 import {Subscription} from 'rxjs';
 
 /**
- * Pipe to transform numbers to regional formatting using numeraljs.
+ * Pipe to transform numbers to regional formatting using numeraljs logic from @jscrpt/common/numeral.
  */
 @Pipe({name: 'numeral', standalone: true})
-export class NumeralSAPipe implements PipeTransform, OnDestroy
+export class NumeralPipe implements PipeTransform, OnDestroy
 {
     //######################### private fields #########################
     
@@ -56,11 +56,8 @@ export class NumeralSAPipe implements PipeTransform, OnDestroy
      */
     public ngOnDestroy(): void
     {
-        if(this._globalizationChangeSubscription)
-        {
-            this._globalizationChangeSubscription.unsubscribe();
-            this._globalizationChangeSubscription = null;
-        }
+        this._globalizationChangeSubscription?.unsubscribe();
+        this._globalizationChangeSubscription = null;
     }
 }
 
