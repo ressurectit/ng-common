@@ -101,7 +101,7 @@ export class PositionToSADirective implements OnChanges, OnDestroy
 
     //######################### constructor #########################
     constructor(protected target: ElementRef<HTMLElement>,
-                @Inject(POSITION) protected position: Position)
+                @Inject(POSITION) protected position: Position<HTMLElement>)
     {
     }
 
