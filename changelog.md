@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 20.0.0 (2024-05-29)
+## Version 20.0.0 (2024-05-30)
 
 ### Features
 
@@ -17,11 +17,22 @@
 - minimal supported version of `@floating-ui/dom` is `1.6.5`
 - moved `NumeralSAPipe` pipe into `@anglr/common`
 - renamed `NumeralSAPipe` pipe to `NumeralPipe` pipe
-- renamed `HotkeysCheatsheetSAComponent` component to `HotkeysCheatsheetComponent` component
+- renamed `DisplayPropertiesSAPipe` pipe to `DisplayPropertiesPipe` pipe
+- renamed `IsNaNSAPipe` pipe to `IsNaNPipe` pipe
+- renamed `IsPresentSAPipe` pipe to `IsPresentPipe` pipe
+- renamed `KeysSAPipe` pipe to `KeysPipe` pipe
+- renamed `UrlEncodeSAPipe` pipe to `UrlEncodePipe` pipe
+- renamed `CollapsibleIconSAComponent` component to `CollapsibleIconComponent` component
+- renamed `CollapsibleTitleSAComponent` component to `CollapsibleTitleComponent` component
+- renamed `BodyRenderSADirective` directive to `BodyRenderDirective` directive
+- renamed `EllipsisTooltipSADirective` directive to `EllipsisTooltipDirective` directive
+- renamed `GoBackSADirective` directive to `GoBackDirective` directive
 - removed *subpackage* `@anglr/common/numeral`
 - removed dependency on `numeral.js`
 - updated `PositionElements` interface generic parameter, now refers to *virtual element type*
 - updated `PositionArguments` interface generic parameter, now refers to *virtual element type*
+- *subpackage* `@anglr/common/hotkeys`
+   - renamed `HotkeysCheatsheetSAComponent` component to `HotkeysCheatsheetComponent` component
 
 ## Version 19.1.0 (2024-05-13)
 

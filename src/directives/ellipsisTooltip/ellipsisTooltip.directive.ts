@@ -15,7 +15,7 @@ import {TooltipDirective} from '../../modules/tooltip';
         TooltipDirective,
     ],
 })
-export class EllipsisTooltipSADirective implements OnChanges, OnDestroy
+export class EllipsisTooltipDirective implements OnChanges, OnDestroy
 {
     //######################### protected fields #########################
 
@@ -102,13 +102,13 @@ export class EllipsisTooltipSADirective implements OnChanges, OnDestroy
      */
     public ngOnChanges(changes: SimpleChanges): void
     {
-        if(nameof<EllipsisTooltipSADirective>('allowHtml') in changes)
+        if(nameof<EllipsisTooltipDirective>('allowHtml') in changes)
         {
             this.tooltip.allowHtml = this.allowHtml;
         }
 
-        if(nameof<EllipsisTooltipSADirective>('element') in changes ||
-           nameof<EllipsisTooltipSADirective>('ellipsisClass') in changes)
+        if(nameof<EllipsisTooltipDirective>('element') in changes ||
+           nameof<EllipsisTooltipDirective>('ellipsisClass') in changes)
         {
             if(this.originalCssClass != this.ellipsisClass)
             {
@@ -125,8 +125,8 @@ export class EllipsisTooltipSADirective implements OnChanges, OnDestroy
             this.textObserver?.observe(this.element, {characterData: true, subtree: true, childList: true});
         }
 
-        if(nameof<EllipsisTooltipSADirective>('tooltipPrefix') in changes ||
-           nameof<EllipsisTooltipSADirective>('tooltipSuffix') in changes)
+        if(nameof<EllipsisTooltipDirective>('tooltipPrefix') in changes ||
+           nameof<EllipsisTooltipDirective>('tooltipSuffix') in changes)
         {
             this.updateTooltip();
         }

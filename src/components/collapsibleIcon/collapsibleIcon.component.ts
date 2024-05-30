@@ -11,7 +11,7 @@ import {LocalizeSAPipe} from '../../pipes';
 {
     selector: 'collapsible-icon',
     templateUrl: 'collapsibleIcon.component.html',
-    styleUrls: ['collapsibleIcon.component.css'],
+    styleUrl: 'collapsibleIcon.component.css',
     standalone: true,
     imports:
     [
@@ -21,7 +21,7 @@ import {LocalizeSAPipe} from '../../pipes';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CollapsibleIconSAComponent
+export class CollapsibleIconComponent
 {
     //######################### public properties - inputs #########################
 

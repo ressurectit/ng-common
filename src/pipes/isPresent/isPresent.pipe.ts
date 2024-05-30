@@ -9,7 +9,7 @@ import {isPresent} from '@jscrpt/common';
     name: 'isPresent',
     standalone: true,
 })
-export class IsPresentSAPipe implements PipeTransform
+export class IsPresentPipe implements PipeTransform
 {
     //######################### public methods #########################
 

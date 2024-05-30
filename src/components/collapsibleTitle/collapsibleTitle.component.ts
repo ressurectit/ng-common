@@ -2,7 +2,7 @@ import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@
 import {CommonModule} from '@angular/common';
 
 import {HostDisplayBlockStyle} from '../../types/styles';
-import {CollapsibleIconSAComponent} from '../collapsibleIcon/collapsibleIcon.component';
+import {CollapsibleIconComponent} from '../collapsibleIcon/collapsibleIcon.component';
 
 /**
  * Component used for displaying title with collapsible icon
@@ -16,11 +16,11 @@ import {CollapsibleIconSAComponent} from '../collapsibleIcon/collapsibleIcon.com
     imports:
     [
         CommonModule,
-        CollapsibleIconSAComponent,
+        CollapsibleIconComponent,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CollapsibleTitleSAComponent
+export class CollapsibleTitleComponent
 {
     //######################### public properties - inputs #########################
 

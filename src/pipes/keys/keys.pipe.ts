@@ -5,7 +5,7 @@ import {Dictionary, isBlank} from '@jscrpt/common';
  * Gets object keys/property names
  */
 @Pipe({name: 'keys', standalone: true})
-export class KeysSAPipe implements PipeTransform
+export class KeysPipe implements PipeTransform
 {
     /**
      * Gets object keys/property names

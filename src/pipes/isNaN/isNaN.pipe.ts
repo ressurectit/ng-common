@@ -8,7 +8,7 @@ import {Pipe, PipeTransform} from '@angular/core';
     name: 'isNaN',
     standalone: true
 })
-export class IsNaNSAPipe implements PipeTransform
+export class IsNaNPipe implements PipeTransform
 {
     //######################### public methods #########################
 

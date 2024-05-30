@@ -10,7 +10,7 @@ import {renderToBody} from '@jscrpt/common';
     selector: '[bodyRender]',
     standalone: true
 })
-export class BodyRenderSADirective implements OnInit, OnDestroy
+export class BodyRenderDirective implements OnInit, OnDestroy
 {
     //######################### protected properties #########################
 

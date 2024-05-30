@@ -8,7 +8,7 @@ import {Pipe, PipeTransform} from '@angular/core';
     name: 'displayProperties',
     standalone: true,
 })
-export class DisplayPropertiesSAPipe<TItem> implements PipeTransform
+export class DisplayPropertiesPipe<TItem> implements PipeTransform
 {
     /**
      * Transforms array of objects or object properties into string
