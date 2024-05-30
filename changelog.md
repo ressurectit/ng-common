@@ -60,6 +60,8 @@
 - removed dependency on `numeral.js`
 - updated `PositionElements` interface generic parameter, now refers to *virtual element type*
 - updated `PositionArguments` interface generic parameter, now refers to *virtual element type*
+- updated default `TooltipOptions` for `TooltipDirective`
+   - property `stopPropagation` is now `true` as default
 - *subpackage* `@anglr/common/forms`
    - removed `RequiredClassModule` module, use directly `RequiredClassDirective`
    - updated `HasErrorDirective` directive, removed first parameter of constructor

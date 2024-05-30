@@ -27,7 +27,7 @@ const defaultOptions: TooltipOptions =
     allowSelection: false,
     tooltipRenderer: TooltipComponent,
     tooltipCssClass: null,
-    stopPropagation: false, //TODO: breaking change set to true
+    stopPropagation: true,
     enterAnimation: fadeInAnimation,
     exitAnimation: fadeOutAnimation,
     containerElement: undefined,
