@@ -2,11 +2,22 @@
 
 ## Version 20.0.0 (2024-05-30)
 
+### Bug Fixes
+
+- *subpackage* `@anglr/common/forms`
+   - fixed `RequiredClassDirective` directive, now it can not be created on elemen which does not have form control or form control name
+
 ### Features
 
 - updated `PositionResult` interface generic parameter now defaults to `Element`
 - updated `PositionOptions` interface has now new generic parameter
 - updated `PositionOptions` interface has now new generic parameter
+- *subpackage* `@anglr/common/forms`
+   - updated `RequiredClassDirective` directive
+      - is now `standalone`
+      - new **inputs** 
+         - `requiredClass` name of required css class that should be applied
+      - all `private`s are now `protected`
 - *subpackage* `@anglr/common/floating-ui`
    - now using new generic types of `Position`
 
@@ -31,6 +42,8 @@
 - removed dependency on `numeral.js`
 - updated `PositionElements` interface generic parameter, now refers to *virtual element type*
 - updated `PositionArguments` interface generic parameter, now refers to *virtual element type*
+- *subpackage* `@anglr/common/forms`
+   - removed `RequiredClassModule` module, use directly `RequiredClassDirective`
 - *subpackage* `@anglr/common/hotkeys`
    - renamed `HotkeysCheatsheetSAComponent` component to `HotkeysCheatsheetComponent` component
 

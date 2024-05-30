@@ -1,39 +1,47 @@
-import {Directive, Optional, AfterViewInit, HostBinding, ChangeDetectorRef} from '@angular/core';
-import {FormControlDirective, FormControlName, FormControl} from '@angular/forms';
-
-//TODO: reworking using hasValidator
+import {Directive, Optional, AfterViewInit, Renderer2, Input, ElementRef} from '@angular/core';
+import {FormControlDirective, FormControlName, FormControl, Validators} from '@angular/forms';
 
 /**
- * Required class directive adds required class to element
+ * Transforms empty class name to default class name 'required'
+ */
+function requiredClassTransform(value: string): string
+{
+    return value || 'required';
+}
+
+/**
+ * Required class directive adds required class to element if it has required validator
  */
 @Directive(
 {
-    selector: '[requiredClass]'
+    selector: '[requiredClass][formControlName],[requiredClass][formControl]',
+    standalone: true,
 })
 export class RequiredClassDirective implements AfterViewInit
 {
-    //######################### private properties #########################
+    //######################### protected properties #########################
 
     /**
      * Gets control which was assigned to this element
      */
-    private get control(): FormControl
+    protected get control(): FormControl
     {
         return (this._formControl && this._formControl.control) || (this._formControlName && this._formControlName.control);
     }
 
-    //######################### public properties - host #########################
+    //######################### public properties - inputs #########################
 
     /**
-     * Handles css class for required input
+     * Name of required css class that should be applied
      */
-    @HostBinding('class.required')
-    public required: boolean = false;
+    @Input({transform: requiredClassTransform})
+    public requiredClass: string = 'required';
 
     //######################### constructor #########################
-    constructor(@Optional() private _formControl: FormControlDirective,
-                @Optional() private _formControlName: FormControlName,
-                private _changeDetector: ChangeDetectorRef)
+    constructor(@Optional() protected _formControl: FormControlDirective,
+                @Optional() protected _formControlName: FormControlName,
+                protected _renderer: Renderer2,
+                protected _element: ElementRef<HTMLElement>,)
     {
     }
 
@@ -44,14 +52,15 @@ export class RequiredClassDirective implements AfterViewInit
      */
     public ngAfterViewInit(): void
     {
-        const control = this.control;
+        const required = this.control?.hasValidator(Validators.required);
 
-        if(control && control.validator)
+        if(required)
         {
-            const validationResult = control.validator(new FormControl(null));
-            this.required = validationResult && validationResult.required;
-
-            this._changeDetector.detectChanges();
+            this._renderer.addClass(this._element.nativeElement, this.requiredClass);
+        }
+        else
+        {
+            this._renderer.removeClass(this._element.nativeElement, this.requiredClass);
         }
     }
 }
