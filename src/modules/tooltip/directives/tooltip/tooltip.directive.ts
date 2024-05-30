@@ -41,7 +41,7 @@ const defaultOptions: TooltipOptions =
     selector: '[tooltip]',
     standalone: true,
 })
-export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
+export class TooltipDirective<TData = unknown> implements OnChanges, OnDestroy
 {
     //######################### protected fields #########################
 
@@ -154,7 +154,7 @@ export class TooltipDirective<TData = any> implements OnChanges, OnDestroy
                 protected _element: ElementRef<HTMLElement>,
                 protected _animationsPlayer: AnimationBuilder,
                 @Inject(DOCUMENT) protected _document: Document,
-                @Inject(POSITION) protected _position: Position,
+                @Inject(POSITION) protected _position: Position<HTMLElement>,
                 @Optional() @SkipSelf() protected _parent?: TooltipDirective|null,
                 @Optional() @Inject(TOOLTIP_OPTIONS) options?: Partial<TooltipOptions>,)
     {

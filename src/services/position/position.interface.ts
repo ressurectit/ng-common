@@ -149,7 +149,7 @@ export interface PositionResult<TElement extends Element = Element>
 /**
  * Service that is used for positioning two elements against each other
  */
-export interface Position
+export interface Position<TElement extends Element = Element>
 {
     //######################### methods #########################
 
@@ -159,5 +159,5 @@ export interface Position
      * @param source - Source element to be placed against
      * @param options - Optional options with informations about new position
      */
-    placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Observable<PositionResult>;
+    placeElement(target: Element, source: Element, options?: Partial<PositionOptions>): Observable<PositionResult<TElement>>;
 }

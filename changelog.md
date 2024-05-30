@@ -13,6 +13,7 @@
 - updated `PositionResult` interface generic parameter now defaults to `Element`
 - updated `PositionOptions` interface has now new generic parameter
 - updated `PositionOptions` interface has now new generic parameter
+- updated `Position` interface, now has also generic parameter for specifying result type
 - *subpackage* `@anglr/common/forms`
    - updated `RequiredClassDirective` directive
       - is now `standalone`
