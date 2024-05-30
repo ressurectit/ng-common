@@ -6,6 +6,7 @@
 
 - *subpackage* `@anglr/common/forms`
    - fixed `RequiredClassDirective` directive, now it can not be created on elemen which does not have form control or form control name
+   - fixed `HasErrorDirective` directive, now it can not be created on elemen which does not have form control or form control name or ngmodel
 
 ### Features
 
@@ -15,9 +16,15 @@
 - *subpackage* `@anglr/common/forms`
    - updated `RequiredClassDirective` directive
       - is now `standalone`
+      - all `private`s are now `protected`
       - new **inputs** 
          - `requiredClass` name of required css class that should be applied
+   - updated `HasErrorDirective` directive
+      - is now `standalone`
       - all `private`s are now `protected`
+      - all *underscore* prefixed properties and methods are now without *underscore*
+   - updated `GroupHasErrorDirective` directive
+      - is now `standalone`
 - *subpackage* `@anglr/common/floating-ui`
    - now using new generic types of `Position`
 
@@ -44,6 +51,7 @@
 - updated `PositionArguments` interface generic parameter, now refers to *virtual element type*
 - *subpackage* `@anglr/common/forms`
    - removed `RequiredClassModule` module, use directly `RequiredClassDirective`
+   - updated `HasErrorDirective` directive, removed first parameter of constructor
 - *subpackage* `@anglr/common/hotkeys`
    - renamed `HotkeysCheatsheetSAComponent` component to `HotkeysCheatsheetComponent` component
 

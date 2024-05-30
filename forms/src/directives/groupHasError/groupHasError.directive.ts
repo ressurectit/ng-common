@@ -25,7 +25,8 @@ export interface GroupHasErrorOptions
  */
 @Directive(
 {
-    selector: '[groupHasError]'
+    selector: '[groupHasError]',
+    standalone: true,
 })
 export class GroupHasErrorDirective
 {

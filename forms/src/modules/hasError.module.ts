@@ -15,10 +15,10 @@ import {DefaultValidationErrorsComponent, DefaultValidationErrorsContainerCompon
     [
         CommonModule,
         HasErrorDirective,
+        GroupHasErrorDirective,
     ],
     declarations: 
     [
-        GroupHasErrorDirective,
         GroupHasErrorContainerDirective,
         ValidationErrorsContainerDirective,
         DefaultValidationErrorsComponent,

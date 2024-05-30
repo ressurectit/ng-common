@@ -1,8 +1,8 @@
-import {Directive, ElementRef, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector, ViewContainerRef, AfterViewInit, Type, TemplateRef} from '@angular/core';
-import {FormControlDirective, FormControlName, FormControl, NgModel} from '@angular/forms';
+import {Directive, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector, ViewContainerRef, AfterViewInit, Type, TemplateRef} from '@angular/core';
+import {FormControlDirective, FormControlName, FormControl, NgModel, PristineChangeEvent} from '@angular/forms';
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {generateId, BindThis, StringDictionary} from '@jscrpt/common';
-import {Subscription} from 'rxjs';
+import {Subscription, filter} from 'rxjs';
 
 import {ValidationErrorRendererFactory} from '../../services/validationErrorRenderer/validationErrorRenderer.service';
 import {ValidationErrorRenderer, ValidationErrorsComponent, ValidationErrorsRendererOptions, ValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
@@ -11,53 +11,47 @@ import {GroupHasErrorDirective} from '../groupHasError/groupHasError.directive';
 import {ValidationErrorsContainerView} from '../../misc/validationErrorsContainerView';
 
 //TODO: add support for setting renderer factory options using input
-//TODO: add support for events instead of mutation observer
 
 /**
  * Directive that is attached to control element and handles css classes that are added to this element
  */
 @Directive(
 {
-    selector: '[hasError]',
+    selector: '[hasError][formControlName],[hasError][formControl],[hasError][ngModel]',
     standalone: true,
 })
 export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
 {
-    //######################### private fields #########################
+    //######################### protected fields #########################
 
     /**
      * Subscriptions that are destroyed with destruction of this directive
      */
-    private _subscriptions: Subscription = new Subscription();
+    protected subscriptions: Subscription = new Subscription();
 
     /**
      * Unique generated id of control
      */
-    private _id: string = generateId(10);
+    protected id: string = generateId(10);
 
     /**
      * Last value of control pristine attribute
      */
-    private _previousDirty: boolean = false;
+    protected previousDirty: boolean = false;
 
     /**
      * Indication whether currently are any errors rendered
      */
-    private _hasErrors: boolean = false;
+    protected hasErrors: boolean = false;
 
-    /**
-     * Mutation observer used for observing changes on class of element
-     */
-    private _observer: MutationObserver;
-
-    //######################### private properties #########################
+    //######################### protected properties #########################
 
     /**
      * Gets control which was assigned to this element
      */
-    private get control(): FormControl
+    protected get control(): FormControl
     {
-        return this._formControl?.control || this._formControlName?.control || this._ngModel?.control;
+        return this.formControl?.control || this.formControlName?.control || this.ngModel?.control;
     }
 
     //######################### public properties #########################
@@ -88,17 +82,16 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
     public errorsTemplate?: TemplateRef<ValidationErrorsTemplateContext>;
 
     //######################### constructor #########################
-    constructor(private _element: ElementRef<HTMLElement>,
-                private _rendererFactory: ValidationErrorRendererFactory,
-                private _viewContainer: ViewContainerRef,
-                @Optional() @SkipSelf() private _groupHasError: GroupHasErrorDirective,
-                @Optional() private _formControl: FormControlDirective,
-                @Optional() private _formControlName: FormControlName,
-                @Optional() private _ngModel: NgModel,
-                @Optional() private _submittedSvc: SubmittedService,
-                @Optional() private _containerView: ValidationErrorsContainerView,
-                @Inject(STRING_LOCALIZATION) protected _stringLocalization: StringLocalization,
-                protected _injector: Injector)
+    constructor(protected rendererFactory: ValidationErrorRendererFactory,
+                protected viewContainer: ViewContainerRef,
+                @Optional() @SkipSelf() protected groupHasError: GroupHasErrorDirective,
+                @Optional() protected formControl: FormControlDirective,
+                @Optional() protected formControlName: FormControlName,
+                @Optional() protected ngModel: NgModel,
+                @Optional() protected submittedSvc: SubmittedService,
+                @Optional() protected containerView: ValidationErrorsContainerView,
+                @Inject(STRING_LOCALIZATION) protected stringLocalization: StringLocalization,
+                protected injector: Injector,)
     {
     }
 
@@ -109,17 +102,28 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
      */
     public ngOnInit(): void
     {
-        this._containerView ??= new ValidationErrorsContainerView();
-        this._containerView.viewContainer ??= this._viewContainer;
+        this.containerView ??= new ValidationErrorsContainerView();
+        this.containerView.viewContainer ??= this.viewContainer;
 
-        this._registerMutationObserver();
+        this.subscriptions.add(this.stringLocalization.textsChange.subscribe(() => this.updateStatus()));
+        this.subscriptions.add(this.control.statusChanges.subscribe(() => this.updateStatus()));
+        this.subscriptions.add(this.control
+                                    .events
+                                    .pipe(filter(itm => itm instanceof PristineChangeEvent))
+                                    .subscribe(event =>
+                                    {
+                                        const pristineEvent = event as PristineChangeEvent;
 
-        this._subscriptions.add(this._stringLocalization.textsChange.subscribe(() => this._updateStatus()));
-        this._subscriptions.add(this.control.statusChanges.subscribe(() => this._updateStatus()));
+                                        //only if dirty(pristine) is different
+                                        if(pristineEvent.pristine == this.previousDirty)
+                                        {
+                                            this.updateStatus();
+                                        }
+                                    }));
 
-        if(this._submittedSvc)
+        if(this.submittedSvc)
         {
-            this._subscriptions.add(this._submittedSvc.submittedChange.subscribe(() => this._isSubmittedOrDirty(() => this._updateStatus())));
+            this.subscriptions.add(this.submittedSvc.submittedChange.subscribe(() => this.isSubmittedOrDirty(() => this.updateStatus())));
         }
     }
 
@@ -130,12 +134,12 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
      */
     public ngAfterViewInit(): void
     {
-        this.renderer = this._rendererFactory.create(this.control,
-                                                     this._containerView,
-                                                     this._injector,
-                                                     this._isSubmittedOrDirty);
+        this.renderer = this.rendererFactory.create(this.control,
+                                                     this.containerView,
+                                                     this.injector,
+                                                     this.isSubmittedOrDirty);
 
-        this._updateStatus();
+        this.updateStatus();
     }
 
     //######################### public methods - implementation of OnDestroy #########################
@@ -145,19 +149,18 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
      */
     public ngOnDestroy(): void
     {
-        this._subscriptions.unsubscribe();
+        this.subscriptions.unsubscribe();
 
-        this._groupHasError?.unregisterControl(this._id);
-        this._observer?.disconnect();
+        this.groupHasError?.unregisterControl(this.id);
         this.renderer?.destroy();
     }
 
-    //######################### private methods #########################
+    //######################### protected methods #########################
 
     /**
      * Updates status of control and css classes
      */
-    private _updateStatus(): void
+    protected updateStatus(): void
     {
         if(!this.renderer)
         {
@@ -175,21 +178,21 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
             opts.component = this.errorsComponent;
         }
 
-        this._previousDirty = this.control.dirty;
-        this._hasErrors = this.renderer.update(opts, this.errorMessages);
-        this._toggleGroupHasError();
+        this.previousDirty = this.control.dirty;
+        this.hasErrors = this.renderer.update(opts, this.errorMessages);
+        this.toggleGroupHasError();
     }
 
     /**
      * Toggles registration of control in parent group
      */
-    private _toggleGroupHasError(): void
+    protected toggleGroupHasError(): void
     {
-        if(this._groupHasError)
+        if(this.groupHasError)
         {
-            this._isSubmittedOrDirty(() => this._groupHasError.registerControl(this._id),
-                                     () => this._groupHasError.unregisterControl(this._id),
-                                     this._hasErrors);
+            this.isSubmittedOrDirty(() => this.groupHasError.registerControl(this.id),
+                                     () => this.groupHasError.unregisterControl(this.id),
+                                     this.hasErrors);
         }
     }
 
@@ -200,10 +203,10 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
      * @param additionalCondition - Additional condition to be evaluated
      */
     @BindThis
-    private _isSubmittedOrDirty(action: () => void, falseAction: () => void = () => {}, additionalCondition: boolean = true): void
+    protected isSubmittedOrDirty(action: () => void, falseAction: () => void = () => {}, additionalCondition: boolean = true): void
     {
         //submitted form or dirty control
-        if((this._submittedSvc?.submitted ||
+        if((this.submittedSvc?.submitted ||
             this.control?.dirty) &&
            additionalCondition)
         {
@@ -213,25 +216,5 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
         {
             falseAction();
         }
-    }
-
-    /**
-     * Registers mutation observer which watch for changes of class list
-     */
-    private _registerMutationObserver(): void
-    {
-        this._observer = new MutationObserver(() =>
-        {
-            if(this.control.dirty != this._previousDirty)
-            {
-                this._updateStatus();
-            }
-        });
-
-        this._observer.observe(this._element.nativeElement, 
-        {
-            attributeFilter: ['class'],
-            attributes: true
-        });
     }
 }
