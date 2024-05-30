@@ -12,7 +12,8 @@ import {ValidationErrorsComponent, ValidationErrorsContainerComponent, Validatio
 {
     selector: 'reserved-space-validation-errors-container',
     templateUrl: 'reservedSpaceValidationErrorsContainer.component.html',
-    styleUrls: ['reservedSpaceValidationErrorsContainer.component.css'],
+    styleUrl: 'reservedSpaceValidationErrorsContainer.component.css',
+    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReservedSpaceValidationErrorsContainerComponent implements ValidationErrorsContainerComponent

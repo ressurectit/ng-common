@@ -1,3 +1,9 @@
-<div [ngClass]="options?.wrapperDivClass" *ngIf="errors?.errorMessages?.length" @slideInOut>
-    <div *ngFor="let error of errors?.errorMessages">{{error}}</div>
-</div>
+@if(errors?.errorMessages?.length)
+{
+    <div [ngClass]="options?.wrapperDivClass" @slideInOut>
+        @for(error of errors?.errorMessages; track error)
+        {
+            <div>{{error}}</div>
+        }
+    </div>
+}

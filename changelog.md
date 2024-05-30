@@ -25,6 +25,16 @@
       - all *underscore* prefixed properties and methods are now without *underscore*
    - updated `GroupHasErrorDirective` directive
       - is now `standalone`
+   - updated `ValidationErrorsContainerDirective` directive
+      - is now `standalone`
+   - updated `GroupHasErrorContainerDirective` directive
+      - is now `standalone`
+   - updated `DefaultValidationErrorsComponent` component
+      - is now `standalone`
+   - updated `DefaultValidationErrorsContainerComponent` component
+      - is now `standalone`
+   - updated `ReservedSpaceValidationErrorsContainerComponent` component
+      - is now `standalone`
 - *subpackage* `@anglr/common/floating-ui`
    - now using new generic types of `Position`
 

@@ -1,4 +1,5 @@
 import {Component, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {slideInOutTrigger, animateChildrenTrigger} from '@anglr/animations';
 
 import {ValidationErrorsResult} from '../../services/errorMessagesExtractor/errorMessagesExtractor.interface';
@@ -11,7 +12,12 @@ import {ValidationErrorsComponent, ValidationErrorsOptions} from '../../services
 {
     selector: 'default-validation-errors',
     templateUrl: 'defaultValidationErrors.component.html',
-    styleUrls: ['defaultValidationErrors.component.css'],
+    styleUrl: 'defaultValidationErrors.component.css',
+    standalone: true,
+    imports:
+    [
+        NgClass,
+    ],
     animations: 
     [
         slideInOutTrigger,
