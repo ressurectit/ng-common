@@ -1,5 +1,19 @@
 # Changelog
 
+## Version 21.0.0 (2024-07-29)
+
+### Features
+
+- new `ScrollableContentHostFeature` host constant, that adds css class 'scrollable' to host element
+- new `WithScrollableCssClass` decorator, that applies 'scrollable' css class to components host
+
+### BREAKING CHANGES
+
+- minimal supported version of `@jscrpt/common` is `6.2.0`
+- removed *subpackage* `@anglr/common/moment`
+   - moment is no longer prefered, use date-fns for new projects
+- removed dependency on `moment`
+
 ## Version 20.0.0 (2024-05-30)
 
 ### Bug Fixes

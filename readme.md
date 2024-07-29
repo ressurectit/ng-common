@@ -8,7 +8,6 @@
 - [API Forms](https://ressurectit.github.io/#/content/api/ng-common-forms/common-forms)
 - [API Hotkeys](https://ressurectit.github.io/#/content/api/ng-common-hotkeys/common-hotkeys)
 - [API Material](https://ressurectit.github.io/#/content/api/ng-common-material/common-material)
-- [API Moment](https://ressurectit.github.io/#/content/api/ng-common-moment/common-moment)
 - [API Router](https://ressurectit.github.io/#/content/api/ng-common-router/common-router)
 - [API Store](https://ressurectit.github.io/#/content/api/ng-common-store/common-store)
 - [Samples](https://ressurectit.github.io/#/content/common#samples)
