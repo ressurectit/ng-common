@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 21.1.0 (2024-07-30)
+
+### Features
+
+- new `PageContentHostFeature` host constant, that adds css class 'page-content' to host element
+- new `WithPageContentCssClass` decorator, that applies 'page-content' css class to components host
+
 ## Version 21.0.0 (2024-07-29)
 
 ### Features

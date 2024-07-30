@@ -5,4 +5,5 @@ export * from './componentDisplayFlex/componentDisplayFlex.decorator';
 export * from './componentHostStyle/componentHostStyle.decorator';
 export * from './scrollableContent/scrollableContent.decorator';
 export * from './typeProvider/typeProvider.decorator';
-export * from './withScrollableCssClass/withScrollableCssClass.decoator';
+export * from './withPageContentCssClass/withPageContentCssClass.decorator';
+export * from './withScrollableCssClass/withScrollableCssClass.decorator';
