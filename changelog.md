@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 21.2.0 (2024-10-03)
+
+### Features
+
+- new `WithFullscreenContentCssClass` decorator, that applies 'fullscreen-content' css class to components host
+
 ## Version 21.1.0 (2024-07-30)
 
 ### Features
