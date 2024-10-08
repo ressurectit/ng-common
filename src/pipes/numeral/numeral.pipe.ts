@@ -34,7 +34,7 @@ export class NumeralPipe implements PipeTransform, OnDestroy
      * @param value - Number to format
      * @param format - Format string (optional) 
      */   
-    public transform(value: number, format: string): string
+    public transform(value: number|undefined|null, format: string): string
     {
         if(isBlank(value))
         {

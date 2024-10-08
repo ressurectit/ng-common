@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 21.2.1 (2024-10-08)
+
+### Bug Fixes
+
+- fixed `NumeralPipe` pipe, typings now correctly supports `undefined|null` as input parameter for pipe
+
 ## Version 21.2.0 (2024-10-03)
 
 ### Features
