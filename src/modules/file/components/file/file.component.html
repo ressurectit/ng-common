@@ -1,0 +1,14 @@
+<ng-container *ngTemplateOutlet="fileTemplate(); context: templateContext()"/>
+
+<input type="file" 
+       class="input-file"
+       (fileChange)="file.set($event); fileChange.emit($event)"
+       (filesChange)="files.set($event); filesChange.emit($event)"
+       (fileName)="name.set($event); fileName.emit($event)"
+       (filesNames)="names.set($event); filesNames.emit($event)"
+       (stringContentChange)="stringContentChange.emit($event)"
+       (arrayBufferContentChange)="arrayBufferContentChange.emit($event)"
+       [multiple]="multiple()"
+       [binaryContent]="binaryContent()"
+       [readContent]="readContent()"
+       [textEncoding]="textEncoding()">

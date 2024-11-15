@@ -1,0 +1,27 @@
+:host
+{
+    display: block;
+}
+
+.file-input
+{
+    display: grid;
+
+    grid-template-areas: 'button filename';
+    grid-template-rows: auto;
+    grid-template-columns: auto 1fr;
+
+    :nth-child(1),
+    :nth-child(1):before
+    {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    :nth-child(2),
+    :nth-child(2):before
+    {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}

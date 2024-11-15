@@ -1,0 +1,52 @@
+:host
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.progress
+{
+    font-size: 0.75em;
+    position: relative;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    margin-right: 4px;
+    display: flex;
+    justify-content: center;
+}
+
+.progress-value
+{
+    align-self: center;
+}
+
+.progress-indicator
+{
+    position: absolute;
+    width: 33px;
+    height: 16.5px;
+    top: 0;
+    left: 0;
+    border: 2px solid #009dd6;
+    border-bottom: none;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    animation-name: rotate-progress;
+    animation-duration: 550ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform-origin: calc(50%) calc(50% + 8.25px);
+}
+
+@keyframes rotate-progress
+{
+    from
+    {
+        transform: rotate(0deg);
+    }
+    to
+    {
+        transform: rotate(360deg);
+    }
+}

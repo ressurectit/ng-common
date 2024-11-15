@@ -49,7 +49,7 @@ export class FirstUppercaseLocalizeSAPipe implements PipeTransform, OnDestroy
      * @param value - Value to be converted
      * @param interpolateParams - Optional object storing interpolation parameters
      */
-    public transform(value: string|undefined|null, interpolateParams?: Object): string|undefined|null 
+    public transform(value: string|undefined|null, interpolateParams?: Object): string
     {
         return this.firstUppercasePipe.transform(this.localizePipe.transform(value, interpolateParams));
     }

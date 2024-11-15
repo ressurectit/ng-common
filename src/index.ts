@@ -12,8 +12,9 @@ export {MultiButtonModule} from './modules/multiButton/modules/multiButton.modul
 export * from './components';
 export * from './decorators';
 export * from './modules/castPipes';
-export * from './modules/progressIndicator';
+export * from './modules/file';
 export * from './modules/logger';
+export * from './modules/progressIndicator';
 export * from './modules/tooltip';
 export * from './pipes';
 export * from './types/host';

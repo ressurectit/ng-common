@@ -1,0 +1,16 @@
+@if(progress() | isPresent)
+{
+    <div class="progress">
+        <span class="progress-value">{{progress()}}%</span>
+        <div class="progress-indicator"></div>
+    </div>
+}
+
+<button [ngClass]="cssClass()" type="button">
+    <span [ngClass]="uploadIconClass()"></span>
+    
+    @if(uploadText())
+    {
+        <span [ngClass]="uploadTextClass()">{{uploadText() | localize}}</span>
+    }
+</button>

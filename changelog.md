@@ -1,5 +1,90 @@
 # Changelog
 
+## Version 21.3.0 (2024-11-15)
+
+### Bug Fixes
+
+- fixed `FirstUppercaseSAPipe` typings, result cant be `undefined` or `null` if parameter is not `undefined` or `null`
+- fixed `FirstUppercaseLocalizeSAPipe` typings, result cant be `undefined` or `null`
+
+### Features
+
+- new `FileComponent` component, used for obtaining file contents from disk
+   - standalone
+   - **content child**
+      - `FileTemplateDirective` template to be displayed as file input
+      - `FILE_VISUAL` instance of file visual implementation if available
+   - **inputs**
+      - `multiple` indication whether is multiple files selection enabled
+      - `readContent` indication whether read file content, working only when `multiple` is not set (for single file)
+      - `binaryContent` indication whether content of file is binary and it will be read as ArrayBuffer instead of string
+      - `textEncoding` text encoding of read string file content
+   - **outputs**
+      - `stringContentChange` occurs when file changes and `binaryContent` is not set and `readContent` is set
+      - `arrayBufferContentChange` occurs when file changes and `binaryContent` is set and `readContent` is set
+      - `fileChange` occurs when selected file changes, occurs only when `multiple` is not set
+      - `filesChange` occurs when selected files changes, occurs only when `multiple` is set
+      - `fileName` occurs when selected file changes, occurs only when `multiple` is not set, contains name of selected file
+      - `filesNames` occurs when selected files changes, occurs only when `multiple` is set, contains names of selected files
+- new `FileInputComponent` component, that represents file input template
+   - standalone
+   - **provides**
+      - `FILE_VISUAL` as itself
+   - **implements**
+      - `FileVisual`
+   - **inputs**
+      - `buttonText` text to be displayed for file button
+      - `buttonClass` css classes applied to file button
+      - `textClass` css classes applied to file text, text displaying selected files
+      - `selectedText` text to be displayed as selected
+- new `UploadButtonComponent` component, that represents upload button file template
+   - standalone
+   - **provides**
+      - `FILE_VISUAL` as itself
+   - **implements**
+      - `FileVisual`
+   - **inputs**
+      - `uploadIconClass` css classes applied tu button icon
+      - `uploadText` text to be displayed as button text
+      - `uploadTextClass` css classes for displayed text for button
+      - `cssClass` css class applied to button
+      - `progress` current progress to be displayed
+- new `FileInputDirective` directive, that allows better communication with input file
+   - standalone
+   - **export as** `file`
+   - **implements**
+      - `OnDestroy`
+   - **inputs**
+      - `multiple` indication whether is multiple files selection enabled
+      - `readContent` indication whether read file content, working only when `multiple` is not set (for single file)
+      - `binaryContent` indication whether content of file is binary and it will be read as ArrayBuffer instead of string
+      - `textEncoding` text encoding of read string file content
+   - **outputs**
+      - `stringContentChange` occurs when file changes and `binaryContent` is not set and `readContent` is set
+      - `arrayBufferContentChange` occurs when file changes and `binaryContent` is set and `readContent` is set
+      - `fileChange` occurs when selected file changes, occurs only when `multiple` is not set
+      - `filesChange` occurs when selected files changes, occurs only when `multiple` is set
+      - `fileName` occurs when selected file changes, occurs only when `multiple` is not set, contains name of selected file
+      - `filesNames` occurs when selected files changes, occurs only when `multiple` is set, contains names of selected files
+   - **methods**
+      - `clearFile` clears selection of file/files
+- new `FileTemplateDirective` directive, that is used for obtaining file component visual template
+   - standalone
+- new `FileTemplateContext` interface
+   - **properties**
+      - `file` instance of selected file or null if none is selected
+      - `fileName` name of selected file
+      - `files` instance of selected array of files or null if none is selected
+      - `filesNames` array of names of selected files
+      - `multiple` indication whether multiple files selection is enabled
+   - **methods**
+      - `clearFile` clears selected file
+- new `FileVisual` interface
+   - **properties**
+      - `fileTemplateContext` instance of file template context passed to file visual to display info about selected files
+- new `FILE_VISUAL` injection token, used for obtaining implementation of file visual component
+- new `FileModule` module, used for grouping File components and directives
+
 ## Version 21.2.1 (2024-10-08)
 
 ### Bug Fixes
@@ -51,7 +136,7 @@
    - updated `RequiredClassDirective` directive
       - is now `standalone`
       - all `private`s are now `protected`
-      - new **inputs** 
+      - new **inputs**
          - `requiredClass` name of required css class that should be applied
    - updated `HasErrorDirective` directive
       - is now `standalone`
