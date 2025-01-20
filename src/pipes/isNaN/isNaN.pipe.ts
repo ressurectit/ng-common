@@ -6,7 +6,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 @Pipe(
 {
     name: 'isNaN',
-    standalone: true
 })
 export class IsNaNPipe implements PipeTransform
 {

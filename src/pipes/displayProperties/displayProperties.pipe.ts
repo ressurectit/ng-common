@@ -6,7 +6,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 @Pipe(
 {
     name: 'displayProperties',
-    standalone: true,
 })
 export class DisplayPropertiesPipe<TItem> implements PipeTransform
 {

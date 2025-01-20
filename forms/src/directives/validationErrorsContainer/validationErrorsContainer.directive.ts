@@ -8,7 +8,6 @@ import {ValidationErrorsContainerView} from '../../misc/validationErrorsContaine
 @Directive(
 {
     selector: '[validationErrorsContainer]',
-    standalone: true,
 })
 export class ValidationErrorsContainerDirective
 {

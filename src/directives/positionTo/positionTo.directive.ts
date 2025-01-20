@@ -10,9 +10,8 @@ import {POSITION} from '../../types/tokens';
 @Directive(
 {
     selector: '[positionTo]',
-    standalone: true,
 })
-export class PositionToSADirective implements OnChanges, OnDestroy
+export class PositionToDirective implements OnChanges, OnDestroy
 {
     //######################### protected fields #########################
 
@@ -112,8 +111,8 @@ export class PositionToSADirective implements OnChanges, OnDestroy
      */
     public ngOnChanges(changes: SimpleChanges): void
     {
-        if((nameof<PositionToSADirective>('source') in changes ||
-            nameof<PositionToSADirective>('placement') in changes) &&
+        if((nameof<PositionToDirective>('source') in changes ||
+            nameof<PositionToDirective>('placement') in changes) &&
            isPresent(this.source))
         {
             this._applyPosition();

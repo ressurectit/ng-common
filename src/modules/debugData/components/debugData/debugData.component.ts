@@ -15,7 +15,6 @@ const ENABLED = 'enabled';
     selector: 'debug-data',
     templateUrl: 'debugData.component.html',
     styleUrl: 'debugData.component.css',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DebugDataComponent

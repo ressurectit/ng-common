@@ -1,6 +1,6 @@
 import {Component, ChangeDetectionStrategy, ExistingProvider, forwardRef, WritableSignal, signal, input, InputSignal, Signal, computed} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {FirstUppercaseLocalizeSAPipe,} from '@anglr/common';
+import {FirstUppercaseLocalizePipe} from '@anglr/common';
 
 import {FILE_VISUAL} from '../../misc/tokens';
 import {FileVisual} from '../../interfaces';
@@ -14,11 +14,10 @@ import {FileTemplateContext} from '../../directive';
     selector: 'file-input',
     templateUrl: 'fileInput.component.html',
     styleUrl: 'fileInput.component.css',
-    standalone: true,
     imports:
     [
         NgClass,
-        FirstUppercaseLocalizeSAPipe,
+        FirstUppercaseLocalizePipe,
     ],
     providers:
     [

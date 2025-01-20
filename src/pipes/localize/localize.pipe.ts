@@ -11,10 +11,9 @@ import {StringLocalization} from '../../services/stringLocalization';
 @Pipe(
 {
     name: 'localize',
-    standalone: true,
     pure: false,
 })
-export class LocalizeSAPipe implements PipeTransform, OnInit, OnDestroy
+export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
 {
     //######################### private fields #########################
 

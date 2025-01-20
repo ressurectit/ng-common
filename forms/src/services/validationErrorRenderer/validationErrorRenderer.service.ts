@@ -1,6 +1,7 @@
 import {Injectable, Inject, Optional, Injector, ComponentRef} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {extend, StringDictionary} from '@jscrpt/common';
+import {StringDictionary} from '@jscrpt/common';
+import {extend} from '@jscrpt/common/extend';
 
 import {ErrorMessagesExtractor} from '../errorMessagesExtractor/errorMessagesExtractor.service';
 import {ValidationErrorRenderer, IsSubmittedOrDirtyFunc, ValidationErrorsRendererOptions, ValidationErrorRendererFactoryOptions, ValidationErrorsContainerComponent} from './validationErrorRenderer.interface';

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 
-import {LocalizeSAPipe} from '../pipes/localize/localize.pipe';
+import {LocalizePipe} from '../pipes/localize/localize.pipe';
 
 /**
  * Module for common localization stuff
@@ -9,11 +9,11 @@ import {LocalizeSAPipe} from '../pipes/localize/localize.pipe';
 {
     imports:
     [
-        LocalizeSAPipe,
+        LocalizePipe,
     ],
     exports: 
     [
-        LocalizeSAPipe,
+        LocalizePipe,
     ],
 })
 export class CommonLocalizeModule

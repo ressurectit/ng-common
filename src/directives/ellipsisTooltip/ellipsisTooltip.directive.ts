@@ -9,7 +9,6 @@ import {TooltipDirective} from '../../modules/tooltip';
 @Directive(
 {
     selector: '[ellipsisTooltip]',
-    standalone: true,
     hostDirectives:
     [
         TooltipDirective,

@@ -9,8 +9,8 @@ export type NgClassType = string | string[] | Dictionary<boolean>;
 /**
  * Merges css classes that will be passed to ngClass
  */
-@Pipe({name: 'mergeCssClasses', standalone: true})
-export class MergeCssClassesSAPipe implements PipeTransform
+@Pipe({name: 'mergeCssClasses'})
+export class MergeCssClassesPipe implements PipeTransform
 {
     /**
      * Merges css classes that will be passed to ngClass

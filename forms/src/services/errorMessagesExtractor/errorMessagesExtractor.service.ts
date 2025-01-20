@@ -1,7 +1,8 @@
 import {Injectable, Inject, Optional} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
-import {StringDictionary, extend, isString} from '@jscrpt/common';
+import {StringDictionary, isString} from '@jscrpt/common';
+import {extend} from '@jscrpt/common/extend';
 
 import {IGNORED_VALIDATION_ERRORS, VALIDATION_ERROR_MESSAGES} from '../../misc/tokens';
 import {ValidationErrorsResult} from './errorMessagesExtractor.interface';

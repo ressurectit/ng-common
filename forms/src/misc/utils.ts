@@ -1,5 +1,6 @@
 import {NgForm, FormGroup} from '@angular/forms';
-import {deserializeFromUrlQuery, Dictionary, extend, isJsObject} from '@jscrpt/common';
+import {deserializeFromUrlQuery, Dictionary, isJsObject} from '@jscrpt/common';
+import {extend} from '@jscrpt/common/extend';
 
 /**
  * Gets indication whether controls have errors, with custom indication of submitted

@@ -8,9 +8,8 @@ import {isDescendant, isString} from '@jscrpt/common';
 @Directive(
 {
     selector: '[clickOutside]',
-    standalone: true,
 })
-export class ClickOutsideSADirective implements OnInit, OnDestroy
+export class ClickOutsideDirective implements OnInit, OnDestroy
 {
     //######################### protected fields #########################
 

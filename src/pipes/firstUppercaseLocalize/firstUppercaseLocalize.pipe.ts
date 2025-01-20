@@ -3,8 +3,8 @@ import {Subscription} from 'rxjs';
 
 import {STRING_LOCALIZATION} from '../../types/tokens';
 import {StringLocalization} from '../../services/stringLocalization';
-import {LocalizeSAPipe} from '../localize/localize.pipe';
-import {FirstUppercaseSAPipe} from '../firstUppercase/firstUppercase.pipe';
+import {LocalizePipe} from '../localize/localize.pipe';
+import {FirstUppercasePipe} from '../firstUppercase/firstUppercase.pipe';
 
 /**
  * Localize strings using 'StringLocalization' and converts first letter of text to uppercase
@@ -12,22 +12,21 @@ import {FirstUppercaseSAPipe} from '../firstUppercase/firstUppercase.pipe';
 @Pipe(
 {
     name: 'firstUppercaseLocalize',
-    standalone: true,
     pure: false,
 })
-export class FirstUppercaseLocalizeSAPipe implements PipeTransform, OnDestroy
+export class FirstUppercaseLocalizePipe implements PipeTransform, OnDestroy
 {
     //######################### protected fields #########################
 
     /**
      * Localize pipe used for localizing string
      */
-    protected localizePipe: LocalizeSAPipe;
+    protected localizePipe: LocalizePipe;
 
     /**
      * Pipe used for transforming first letter to uppercase
      */
-    protected firstUppercasePipe: FirstUppercaseSAPipe;
+    protected firstUppercasePipe: FirstUppercasePipe;
 
     /**
      * Subscription for changes of texts
@@ -38,8 +37,8 @@ export class FirstUppercaseLocalizeSAPipe implements PipeTransform, OnDestroy
     constructor(@Inject(STRING_LOCALIZATION) protected localizationSvc: StringLocalization,
                 protected changeDetector: ChangeDetectorRef,)
     {
-        this.localizePipe = new LocalizeSAPipe(localizationSvc, changeDetector);
-        this.firstUppercasePipe = new FirstUppercaseSAPipe();
+        this.localizePipe = new LocalizePipe(localizationSvc, changeDetector);
+        this.firstUppercasePipe = new FirstUppercasePipe();
     }
 
     //######################### public methods - PipeTransform #########################

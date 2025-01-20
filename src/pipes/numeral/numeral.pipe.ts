@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
 /**
  * Pipe to transform numbers to regional formatting using numeraljs logic from @jscrpt/common/numeral.
  */
-@Pipe({name: 'numeral', standalone: true})
+@Pipe({name: 'numeral'})
 export class NumeralPipe implements PipeTransform, OnDestroy
 {
     //######################### private fields #########################

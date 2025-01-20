@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 
-import {IsNaNPipe, IsPresentPipe, UrlEncodePipe, MergeCssClassesSAPipe, KeysPipe, TrimTextPipe} from '../pipes';
+import {IsNaNPipe, IsPresentPipe, UrlEncodePipe, MergeCssClassesPipe, KeysPipe, TrimTextPipe} from '../pipes';
 
 /**
  * Module for common utility stuff
@@ -12,7 +12,7 @@ import {IsNaNPipe, IsPresentPipe, UrlEncodePipe, MergeCssClassesSAPipe, KeysPipe
         IsNaNPipe,
         IsPresentPipe,
         UrlEncodePipe,
-        MergeCssClassesSAPipe,
+        MergeCssClassesPipe,
         KeysPipe,
         TrimTextPipe,
     ],
@@ -21,7 +21,7 @@ import {IsNaNPipe, IsPresentPipe, UrlEncodePipe, MergeCssClassesSAPipe, KeysPipe
         IsNaNPipe,
         IsPresentPipe,
         UrlEncodePipe,
-        MergeCssClassesSAPipe,
+        MergeCssClassesPipe,
         KeysPipe,
         TrimTextPipe,
     ]

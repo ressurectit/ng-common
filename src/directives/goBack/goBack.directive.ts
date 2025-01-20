@@ -7,7 +7,6 @@ import {Location} from '@angular/common';
 @Directive(
 {
     selector: '[goBack]',
-    standalone: true,
 })
 export class GoBackDirective
 {

@@ -12,15 +12,14 @@ import {ConsoleComponentService} from '../../services';
 {
     selector: 'console',
     templateUrl: 'console.component.html',
-    styleUrls: ['console.component.css'],
-    standalone: true,
+    styleUrl: 'console.component.css',
     imports:
     [
         CommonModule,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConsoleSAComponent implements OnInit, OnDestroy
+export class ConsoleComponent implements OnInit, OnDestroy
 {
     //######################### protected fields #########################
 

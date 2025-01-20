@@ -6,9 +6,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 @Pipe(
 {
     name: 'firstUppercase',
-    standalone: true,
 })
-export class FirstUppercaseSAPipe implements PipeTransform
+export class FirstUppercasePipe implements PipeTransform
 {
     /**
      * Converts first letter of text to uppercase

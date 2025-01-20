@@ -9,7 +9,6 @@ import {GroupHasErrorDirective} from '../groupHasError/groupHasError.directive';
 @Directive(
 {
     selector: '[groupHasErrorContainer]',
-    standalone: true,
     providers:
     [
         <ExistingProvider>

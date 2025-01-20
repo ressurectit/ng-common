@@ -12,7 +12,6 @@ import {CollapsibleIconComponent} from '../collapsibleIcon/collapsibleIcon.compo
     selector: 'collapsible-title',
     templateUrl: 'collapsibleTitle.component.html',
     styles: [HostDisplayBlockStyle],
-    standalone: true,
     imports:
     [
         CommonModule,

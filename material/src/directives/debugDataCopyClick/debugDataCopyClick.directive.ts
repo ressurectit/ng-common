@@ -7,7 +7,6 @@ import {Clipboard} from '@angular/cdk/clipboard';
 @Directive(
 {
     selector: 'debug-data[copyClick]',
-    standalone: true,
 })
 export class DebugDataCopyClickDirective
 {

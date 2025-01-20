@@ -8,7 +8,6 @@ import {FileTemplateContext} from './fileTemplate.context';
 @Directive(
 {
     selector: '[fileTemplate]',
-    standalone: true,
 })
 export class FileTemplateDirective
 {

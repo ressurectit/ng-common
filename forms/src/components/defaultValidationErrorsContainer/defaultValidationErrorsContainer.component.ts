@@ -11,7 +11,6 @@ import {ValidationErrorsComponent, ValidationErrorsContainerComponent, Validatio
     selector: 'default-validation-errors-container',
     template: '',
     styleUrl: 'defaultValidationErrorsContainer.component.css',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultValidationErrorsContainerComponent implements ValidationErrorsContainerComponent

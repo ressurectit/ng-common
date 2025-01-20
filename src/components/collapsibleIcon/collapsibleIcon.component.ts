@@ -2,7 +2,7 @@ import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@
 import {CommonModule} from '@angular/common';
 
 import {TooltipModule} from '../../modules/tooltip';
-import {LocalizeSAPipe} from '../../pipes';
+import {LocalizePipe} from '../../pipes';
 
 /**
  * Component used for displaying collapsible icon
@@ -12,12 +12,11 @@ import {LocalizeSAPipe} from '../../pipes';
     selector: 'collapsible-icon',
     templateUrl: 'collapsibleIcon.component.html',
     styleUrl: 'collapsibleIcon.component.css',
-    standalone: true,
     imports:
     [
         CommonModule,
         TooltipModule,
-        LocalizeSAPipe,
+        LocalizePipe,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

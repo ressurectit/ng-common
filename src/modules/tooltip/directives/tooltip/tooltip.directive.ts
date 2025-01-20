@@ -2,7 +2,8 @@ import {ComponentRef, ContentChild, Directive, ElementRef, EmbeddedViewRef, Host
 import {AnimationBuilder, AnimationFactory} from '@angular/animations';
 import {DOCUMENT} from '@angular/common';
 import {fadeInAnimation, fadeOutAnimation} from '@anglr/animations';
-import {RecursivePartial, extend, isBlank, isPresent, nameof, renderToBody} from '@jscrpt/common';
+import {RecursivePartial, isBlank, isPresent, nameof, renderToBody} from '@jscrpt/common';
+import {extend} from '@jscrpt/common/extend';
 import {lastValueFrom} from 'rxjs';
 
 import {TooltipComponent} from '../../components/tooltip/tooltip.component';
@@ -39,7 +40,6 @@ const defaultOptions: TooltipOptions =
 @Directive(
 {
     selector: '[tooltip]',
-    standalone: true,
 })
 export class TooltipDirective<TData = unknown> implements OnChanges, OnDestroy
 {

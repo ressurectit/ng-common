@@ -18,7 +18,6 @@ import {ValidationErrorsContainerView} from '../../misc/validationErrorsContaine
 @Directive(
 {
     selector: '[hasError][formControlName],[hasError][formControl],[hasError][ngModel]',
-    standalone: true,
 })
 export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
 {

@@ -11,7 +11,6 @@ import {Hotkey, HotkeysService} from 'angular2-hotkeys';
     selector: 'hotkeys-cheatsheet',
     templateUrl: 'cheatSheet.component.html',
     styleUrl: 'cheatSheet.component.css',
-    standalone: true,
     imports:
     [
         CommonModule,

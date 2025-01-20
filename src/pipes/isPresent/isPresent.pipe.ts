@@ -7,7 +7,6 @@ import {isPresent} from '@jscrpt/common';
 @Pipe(
 {
     name: 'isPresent',
-    standalone: true,
 })
 export class IsPresentPipe implements PipeTransform
 {

@@ -11,7 +11,6 @@ import {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from '../../mis
 @Directive(
 {
     selector: '[confirmation]',
-    standalone: true,
 })
 export class ConfirmationDialogDirective
 {

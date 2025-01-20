@@ -4,7 +4,7 @@ import {serializeToUrlQuery} from '@jscrpt/common';
 /**
  * Pipe that encodes data for url
  */
-@Pipe({name: 'urlEncode', standalone: true})
+@Pipe({name: 'urlEncode'})
 export class UrlEncodePipe implements PipeTransform
 {
     //######################### public methods #########################

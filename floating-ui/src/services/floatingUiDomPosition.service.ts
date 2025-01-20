@@ -1,6 +1,7 @@
 import {Injectable, forwardRef} from '@angular/core';
 import {Position, PositionResult, PositionOptions, PositionOffset, PositionPlacement, AutoUpdateOptions, POSITION, PositionOffsetString, PositionOffsets, TypeProvider} from '@anglr/common';
-import {extend, isEmptyObject, isFunction, isJsObject, isNumber, nameof} from '@jscrpt/common';
+import {extend} from '@jscrpt/common/extend';
+import {isEmptyObject, isFunction, isJsObject, isNumber, nameof} from '@jscrpt/common';
 import {computePosition, Placement, autoUpdate, Middleware, offset, flip, shift, VirtualElement} from '@floating-ui/dom';
 import {Observable} from 'rxjs';
 

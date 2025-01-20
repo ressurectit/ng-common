@@ -1,6 +1,6 @@
 import {Component, ChangeDetectionStrategy, ExistingProvider, forwardRef, WritableSignal, signal, InputSignal, input, numberAttribute, InputSignalWithTransform} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {IsPresentPipe, LocalizeSAPipe} from '@anglr/common';
+import {IsPresentPipe, LocalizePipe} from '@anglr/common';
 
 import {FILE_VISUAL} from '../../misc/tokens';
 import {FileVisual} from '../../interfaces';
@@ -14,12 +14,11 @@ import {FileTemplateContext} from '../../directive';
     selector: 'upload-button',
     templateUrl: 'uploadButton.component.html',
     styleUrl: 'uploadButton.component.css',
-    standalone: true,
     imports:
     [
         NgClass,
         IsPresentPipe,
-        LocalizeSAPipe,
+        LocalizePipe,
     ],
     providers:
     [

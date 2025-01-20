@@ -9,7 +9,6 @@ import {EventEmitter, ComponentRef, Directive, Injector, Input, OnChanges, Type,
 {
     selector: '[ngComponentOutletEx]',
     exportAs: 'ngComponentOutletEx',
-    standalone: true,
 })
 export class NgComponentOutletEx<TComponent> implements OnChanges
 {

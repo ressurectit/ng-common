@@ -1,5 +1,5 @@
 import {Directive, ElementRef} from '@angular/core';
-import {extend} from '@jscrpt/common';
+import {extend} from '@jscrpt/common/extend';
 
 /**
  * Default options for GroupHasErrorDirective
@@ -26,7 +26,6 @@ export interface GroupHasErrorOptions
 @Directive(
 {
     selector: '[groupHasError]',
-    standalone: true,
 })
 export class GroupHasErrorDirective
 {

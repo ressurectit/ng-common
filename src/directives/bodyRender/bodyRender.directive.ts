@@ -8,7 +8,6 @@ import {renderToBody} from '@jscrpt/common';
 @Directive(
 {
     selector: '[bodyRender]',
-    standalone: true
 })
 export class BodyRenderDirective implements OnInit, OnDestroy
 {

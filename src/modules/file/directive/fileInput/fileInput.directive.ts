@@ -8,7 +8,6 @@ import {BindThis, isString, NoopAction} from '@jscrpt/common';
 {
     selector: 'input[type=file]',
     exportAs: 'file',
-    standalone: true,
 })
 export class FileInputDirective implements OnDestroy
 {

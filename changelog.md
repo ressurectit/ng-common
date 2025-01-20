@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 22.0.0 (2025-01-20)
+
+### BREAKING CHANGES
+
+- minimal supported version of `@angular` packages is `19.1.0`
+- minimal supported version of `@jscrpt/common` is `7.0.0`
+- minimal supported version of `@floating-ui/dom` is `1.6.13`
+- minimal supported version of `date-fns` is `4.1.0`
+- renamed `ClickOutsideSADirective` directive to `ClickOutsideDirective`
+- renamed `PositionToSADirective` directive to `PositionToDirective`
+- renamed `ConsoleSAComponent` component to `ConsoleComponent`
+- renamed `FirstUppercaseSAPipe` pipe to `FirstUppercasePipe`
+- renamed `FirstUppercaseLocalizeSAPipe` pipe to `FirstUppercaseLocalizePipe`
+- renamed `LocalizeSAPipe` pipe to `LocalizePipe`
+- renamed `MergeCssClassesSAPipe` pipe to `MergeCssClassesPipe`
+
 ## Version 21.3.0 (2024-11-15)
 
 ### Bug Fixes

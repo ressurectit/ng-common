@@ -15,7 +15,6 @@ function requiredClassTransform(value: string): string
 @Directive(
 {
     selector: '[requiredClass][formControlName],[requiredClass][formControl]',
-    standalone: true,
 })
 export class RequiredClassDirective implements AfterViewInit
 {

@@ -3,7 +3,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 /**
  * Trims long text and adds 'suffix' indication of longer text
  */
-@Pipe({name: 'trimText', standalone: true})
+@Pipe({name: 'trimText'})
 export class TrimTextPipe implements PipeTransform
 {
     /**

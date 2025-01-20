@@ -13,7 +13,6 @@ import {ValidationErrorsComponent, ValidationErrorsOptions} from '../../services
     selector: 'default-validation-errors',
     templateUrl: 'defaultValidationErrors.component.html',
     styleUrl: 'defaultValidationErrors.component.css',
-    standalone: true,
     imports:
     [
         NgClass,

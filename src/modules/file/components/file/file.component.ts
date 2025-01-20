@@ -13,7 +13,6 @@ import {FileVisual} from '../../interfaces';
     selector: 'file',
     templateUrl: 'file.component.html',
     styleUrl: 'file.component.css',
-    standalone: true,
     imports:
     [
         NgTemplateOutlet,
