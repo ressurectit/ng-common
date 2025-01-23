@@ -1,5 +1,6 @@
 /.vscode
 demo/
+/tests
 temp/
 api-extractor.json
 appveyor.yml
