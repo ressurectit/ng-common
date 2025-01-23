@@ -7,7 +7,7 @@ import {GroupErrorsTemplateContext} from './groupErrorsTemplate.context';
  */
 @Directive(
 {
-    selector: '[formGroupError]'
+    selector: '[formGroupError]',
 })
 export class GroupErrorsTemplateDirective
 {

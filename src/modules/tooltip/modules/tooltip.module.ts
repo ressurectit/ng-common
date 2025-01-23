@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 
 import {TooltipDirective, TooltipTemplateDirective} from '../directives';
 import {TooltipComponent} from '../components';
@@ -11,11 +10,7 @@ import {TooltipComponent} from '../components';
 {
     imports:
     [
-        CommonModule,
         TooltipDirective,
-    ],
-    declarations:
-    [
         TooltipTemplateDirective,
         TooltipComponent,
     ],

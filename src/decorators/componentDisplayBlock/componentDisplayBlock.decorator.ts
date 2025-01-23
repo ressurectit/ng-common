@@ -2,7 +2,7 @@ import {ComponentDisplay} from '../componentDisplay/componentDisplay.decorator';
 
 /**
  * Applies css display block style to host of component, requires at least empty style on Component
- * 
+ *
  * @experimental
  */
 export function ComponentDisplayBlock(): ClassDecorator

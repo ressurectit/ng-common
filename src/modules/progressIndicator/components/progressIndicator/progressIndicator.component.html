@@ -2,6 +2,9 @@
     <div class="spinner"></div>
 
     <div class="messages">
-        <div *ngFor="let msg of messages; let index = index" [ngClass]="'message-' + ((messages.length - index) > 3 ? 'out' : (messages.length - index - 1))">{{msg | localize}}</div>
+        @for(msg of messages; track msg)
+        {
+            <div [ngClass]="'message-' + ((messages.length - $index) > 3 ? 'out' : (messages.length - $index - 1))">{{msg | localize}}</div>
+        }
     </div>
 </div>

@@ -1,9 +1,12 @@
 import {Component, ChangeDetectionStrategy, Optional, OnInit, OnDestroy, ChangeDetectorRef, Input, ContentChild} from '@angular/core';
+import {NgClass, NgTemplateOutlet} from '@angular/common';
 import {FormControlStatus, FormGroup, FormGroupDirective, FormGroupName} from '@angular/forms';
+import {KeysPipe} from '@anglr/common';
 import {slideInOutTrigger} from '@anglr/animations';
 import {Subscription} from 'rxjs';
 
-import {GroupErrorsTemplateDirective} from '../../directives';
+import {ErrorMessageDirective, GroupErrorsTemplateDirective} from '../../directives';
+import {WithErrorMessagePipe} from '../../pipes';
 
 /**
  * Component used for rendering from group errors
@@ -12,6 +15,14 @@ import {GroupErrorsTemplateDirective} from '../../directives';
 {
     selector: 'form-group-errors',
     templateUrl: 'groupErrors.component.html',
+    imports:
+    [
+        NgClass,
+        KeysPipe,
+        NgTemplateOutlet,
+        WithErrorMessagePipe,
+        ErrorMessageDirective,
+    ],
     animations: [slideInOutTrigger],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

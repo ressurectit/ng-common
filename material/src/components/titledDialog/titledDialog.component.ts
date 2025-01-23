@@ -1,6 +1,8 @@
 import {Component, ChangeDetectionStrategy, Inject, Injector, ValueProvider, TemplateRef} from '@angular/core';
+import {NgComponentOutlet} from '@angular/common';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ComponentType} from '@angular/cdk/portal';
+import {LocalizePipe} from '@anglr/common';
 
 import {TITLED_DIALOG_DATA} from '../../misc/tokens';
 import {ɵTitledDialogOptions} from '../../misc/interfaces/titledDialog.interface';
@@ -12,7 +14,12 @@ import {ɵTitledDialogOptions} from '../../misc/interfaces/titledDialog.interfac
 {
     selector: 'titled-dialog',
     templateUrl: 'titledDialog.component.html',
-    styleUrls: ['titledDialog.component.css'],
+    styleUrl: 'titledDialog.component.css',
+    imports:
+    [
+        LocalizePipe,
+        NgComponentOutlet,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitledDialogComponent

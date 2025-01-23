@@ -5,7 +5,7 @@ import {WritableSignal, signal} from '@angular/core';
  */
 export function AsSignal(): PropertyDecorator
 {
-    return function (target: Object, propertyKey: string|symbol): void
+    return function(target: object, propertyKey: string|symbol): void
     {
         const backingField = Symbol(propertyKey.toString());
 

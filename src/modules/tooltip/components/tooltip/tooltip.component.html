@@ -1,6 +1,14 @@
-<div *ngIf="!template && !allowHtml">{{data}}</div>
-<div *ngIf="!template && allowHtml" [innerHTML]="data"></div>
+@if(!template && !allowHtml)
+{
+    <div>{{data}}</div>
+}
 
-<ng-template [ngIf]="template">
-    <ng-container *ngTemplateOutlet="template; context: {$implicit: data}"></ng-container>
-</ng-template>
+@if(!template && allowHtml)
+{
+    <div [innerHTML]="data"></div>
+}
+
+@if(template)
+{
+    <ng-container *ngTemplateOutlet="template; context: {$implicit: data}"/>
+}

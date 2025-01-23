@@ -10,5 +10,5 @@
 </div>
 
 <div class="titled-dialog-content">
-    <ng-template [ngComponentOutletEx]="component" [ngComponentOutletExInjector]="injector"></ng-template>
+    <ng-container *ngComponentOutlet="component; injector: injector"/>
 </div>

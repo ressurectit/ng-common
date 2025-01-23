@@ -7,7 +7,7 @@ import {AsFormArrayPipe, AsFormControlPipe, AsFormGroupPipe, GetControlPipe} fro
  */
 @NgModule(
 {
-    declarations:
+    imports:
     [
         AsFormArrayPipe,
         AsFormControlPipe,

@@ -2,6 +2,7 @@
     <div [ngClass]="cssClass" [errorMessage]="errorName" [errors]="formGroup.errors" @slideInOut></div>
 </ng-template>
 
-<ng-container *ngFor="let errorName of formGroup.errors | keys | withErrorMessage; let first=first; let last=last; let index=index">
-    <ng-container *ngTemplateOutlet="template?.template ?? defaultTemplate; context: {$implicit: errorName, first, last, index, errors: formGroup.errors}"></ng-container>
-</ng-container>
+@for(errorName of formGroup.errors | keys | withErrorMessage; track errorName)
+{
+    <ng-container *ngTemplateOutlet="template?.template ?? defaultTemplate; context: {$implicit: errorName, $first, $last, $index, errors: formGroup.errors}"/>
+}

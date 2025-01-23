@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ContentChild, TemplateRef, Inject, OnDestroy, ChangeDetectorRef, Optional, ElementRef} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
+import {DOCUMENT, NgClass, NgTemplateOutlet} from '@angular/common';
 import {extend} from '@jscrpt/common/extend';
 
 import {MultiButtonCssClasses} from './multiButton.interface';
@@ -23,6 +23,11 @@ const defaultCssClasses: MultiButtonCssClasses =
     selector: 'multi-button',
     templateUrl: 'multiButton.component.html',
     styleUrl: 'multiButton.component.css',
+    imports:
+    [
+        NgClass,
+        NgTemplateOutlet,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiButtonComponent implements OnDestroy

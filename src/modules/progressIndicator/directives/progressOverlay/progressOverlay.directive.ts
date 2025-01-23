@@ -11,12 +11,12 @@ import {StringLocalization} from '../../../../services/stringLocalization';
  */
 @Directive(
 {
-    selector: '[progressOverlay]'
+    selector: '[progressOverlay]',
 })
 export class ProgressOverlayDirective implements OnInit, OnDestroy
 {
     //######################### private fields #########################
-    
+
     /**
      * Previous css position value
      */
@@ -74,7 +74,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
     }
 
     //######################### public methods - implementation of OnInit #########################
-    
+
     /**
      * Initialize component
      */
@@ -86,7 +86,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
         this._messages = this._service.messages[this.name] || [];
         this._renderProgressOverlay();
 
-        this._subscription = this._service.stateChange.subscribe(name => 
+        this._subscription = this._service.stateChange.subscribe(name =>
         {
             if(name == this.name)
             {
@@ -98,7 +98,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
     }
 
     //######################### public methods - implementation of OnDestroy #########################
-    
+
     /**
      * Called when component is destroyed
      */
@@ -153,7 +153,6 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
             this._progressElement.append(this._messagesElement);
 
             this._element.nativeElement.append(this._progressElement);
-
         }
 
         this._renderProgressMessages();
@@ -178,7 +177,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
 
             this._lastThreeMessages.unshift(messageDiv);
             this._messagesElement.append(messageDiv);
-            
+
             const outMessagesDiv = this._lastThreeMessages.splice(3);
 
             outMessagesDiv.forEach(outMsg =>

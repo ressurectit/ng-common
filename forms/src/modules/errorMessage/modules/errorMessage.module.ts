@@ -1,6 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {CommonUtilsModule} from '@anglr/common';
 
 import {GroupErrorsComponent} from '../components';
 import {ErrorMessageDirective, GroupErrorsTemplateDirective} from '../directives';
@@ -12,11 +10,6 @@ import {WithErrorMessagePipe} from '../pipes';
 @NgModule(
 {
     imports:
-    [
-        CommonModule,
-        CommonUtilsModule,
-    ],
-    declarations:
     [
         WithErrorMessagePipe,
         ErrorMessageDirective,

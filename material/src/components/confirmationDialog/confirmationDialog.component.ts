@@ -1,5 +1,7 @@
 import {Component, ChangeDetectionStrategy, Inject, Optional} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {MatDialogRef} from '@angular/material/dialog';
+import {LocalizePipe} from '@anglr/common';
 import {extend} from '@jscrpt/common/extend';
 
 import {CONFIRMATION_DIALOG_OPTIONS} from '../../misc/tokens';
@@ -32,6 +34,11 @@ const defaultOptions: ConfirmationDialogOptions =
 {
     selector: 'confirmation-dialog',
     templateUrl: 'confirmationDialog.component.html',
+    imports:
+    [
+        NgClass,
+        LocalizePipe,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmationDialogComponent

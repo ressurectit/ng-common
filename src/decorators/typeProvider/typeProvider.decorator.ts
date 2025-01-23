@@ -34,11 +34,10 @@ export function getProviderForType(type: Type<unknown>): Provider
  */
 export function TypeProvider(provider: Provider): ClassDecorator
 {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return function<TFunction extends Function> (target: TFunction): TFunction
+    return function<TFunction extends Function>(target: TFunction): TFunction
     {
         const typeWithProvider = target as ProviderDecoratedType;
-    
+
         if(!typeWithProvider.ɵɵprovider)
         {
             Object.defineProperty(typeWithProvider, nameof<ProviderDecoratedType>('ɵɵprovider'),

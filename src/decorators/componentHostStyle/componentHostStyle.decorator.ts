@@ -3,7 +3,7 @@ import {ViewEncapsulation, ɵComponentDef, ɵComponentType} from '@angular/core'
 /**
  * Applies css styles to host of component, requires at least empty style on Component
  * @param cssStyle - Css style properties to be applied
- * 
+ *
  * @experimental
  */
 export function ComponentHostStyle(cssStyle: string): ClassDecorator
@@ -25,7 +25,7 @@ export function ComponentHostStyle(cssStyle: string): ClassDecorator
         }
 
         cmpDef.styles.push(`${cmpDef.encapsulation == ViewEncapsulation.Emulated ? '[_nghost-%COMP%]' : ':host'}{${cssStyle}}`);
-        
+
         return target;
     };
 }

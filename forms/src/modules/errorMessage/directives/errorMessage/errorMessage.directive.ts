@@ -11,7 +11,7 @@ import {VALIDATION_ERROR_MESSAGES} from '../../../../misc/tokens';
 @Directive(
 {
     selector: '[errorMessage]',
-    exportAs: 'errorMessage'
+    exportAs: 'errorMessage',
 })
 export class ErrorMessageDirective implements OnChanges, OnDestroy
 {

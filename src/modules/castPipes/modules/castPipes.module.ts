@@ -7,7 +7,7 @@ import {AsHtmlElementPipe, AsNgClassRequiredPipe, AsRequiredTypePipe, CastTypePi
  */
 @NgModule(
 {
-    declarations:
+    imports:
     [
         AsHtmlElementPipe,
         AsNgClassRequiredPipe,

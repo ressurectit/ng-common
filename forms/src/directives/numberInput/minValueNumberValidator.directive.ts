@@ -11,7 +11,7 @@ const MIN_NUMBER_VALIDATOR = <ExistingProvider>
 {
     provide: NG_VALIDATORS,
     useExisting: forwardRef(() => MinValueNumberValidatorDirective),
-    multi: true
+    multi: true,
 };
 
 /**
@@ -20,7 +20,7 @@ const MIN_NUMBER_VALIDATOR = <ExistingProvider>
 @Directive(
 {
     selector: 'input[number][minValue][formControlName],input[number][minValue][formControl],input[number][minValue][ngModel]',
-    providers: [MIN_NUMBER_VALIDATOR]
+    providers: [MIN_NUMBER_VALIDATOR],
 })
 export class MinValueNumberValidatorDirective implements Validator, OnChanges
 {

@@ -9,7 +9,7 @@ const NUMBER_INPUT_VALUE_ACCESSOR = <ExistingProvider>
 {
     provide: NG_VALUE_ACCESSOR, 
     useExisting: forwardRef(() => NumberInputControlValueAccessor), 
-    multi: true
+    multi: true,
 };
 
 /**

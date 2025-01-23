@@ -2,7 +2,7 @@ import {ComponentHostStyle} from '../componentHostStyle/componentHostStyle.decor
 
 /**
  * Applies css overflow-y scroll style to host of component, requires at least empty style on Component
- * 
+ *
  * @experimental
  */
 export function ScrollableContent(): ClassDecorator

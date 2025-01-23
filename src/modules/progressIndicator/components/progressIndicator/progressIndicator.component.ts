@@ -1,7 +1,9 @@
 import {Component, Input, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {Subscription} from 'rxjs';
 
 import {ProgressIndicatorService, DEFAULT_PROGRESS_NAME} from '../../services/progressIndicator.service';
+import {LocalizePipe} from '../../../../pipes';
 
 /**
  * Component that is used for displaying global progress indicator
@@ -10,25 +12,30 @@ import {ProgressIndicatorService, DEFAULT_PROGRESS_NAME} from '../../services/pr
 {
     selector: 'progress-indicator',
     templateUrl: 'progressIndicator.component.html',
-    styleUrls: ['progressIndicator.component.css'],
+    styleUrl: 'progressIndicator.component.css',
+    imports:
+    [
+        NgClass,
+        LocalizePipe,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressIndicatorComponent implements OnDestroy
 {
     //######################### private fields #########################
-    
+
     /**
      * Subscription for changes in ProgressIndicatorService
      */
     private _subscription: Subscription|null;
-    
+
     //######################### public properties - template bindings #########################
 
     /**
      * Applied css classes
      * @internal
      */
-    public appliedClass: {[key: string]: boolean} = { 'progress-indicator': true };
+    public appliedClass: {[key: string]: boolean} = {'progress-indicator': true};
 
     /**
      * Array of messages that should be displayed
@@ -50,7 +57,7 @@ export class ProgressIndicatorComponent implements OnDestroy
     }
 
     //######################### private properties #########################
-    
+
     /**
      * Sets indication that progress indicator is running
      */
@@ -66,7 +73,7 @@ export class ProgressIndicatorComponent implements OnDestroy
         this.running = this._service.running[DEFAULT_PROGRESS_NAME];
         this.messages = this._service.messages[DEFAULT_PROGRESS_NAME] || [];
 
-        this._subscription = this._service.stateChange.subscribe(name => 
+        this._subscription = this._service.stateChange.subscribe(name =>
         {
             if(name == DEFAULT_PROGRESS_NAME)
             {
@@ -79,7 +86,7 @@ export class ProgressIndicatorComponent implements OnDestroy
     }
 
     //######################### public methods - implementation of OnDestroy #########################
-    
+
     /**
      * Called when component is destroyed
      */

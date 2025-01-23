@@ -6,7 +6,7 @@ import {isPresent} from '@jscrpt/common';
 export class ProgressIndicatorOptions
 {
     //######################### public properties #########################
-    
+
     /**
      * Timeout length after which will be progress indication displayed
      */
@@ -16,7 +16,7 @@ export class ProgressIndicatorOptions
      * Indication whether fallback to default group name
      */
     public fallbackToDefault: boolean = true;
-    
+
     //######################### constructor #########################
     constructor(timeout?: number, fallbackToDefault?: boolean)
     {

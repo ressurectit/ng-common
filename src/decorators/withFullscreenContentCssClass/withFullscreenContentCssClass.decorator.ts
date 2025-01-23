@@ -6,7 +6,7 @@ import {Writable} from '@jscrpt/common';
  */
 export function WithFullscreenContentCssClass(): ClassDecorator
 {
-    return function<TFunction extends Function> (target: TFunction): TFunction
+    return function<TFunction extends Function>(target: TFunction): TFunction
     {
         const original = ((target as unknown as ɵComponentType<unknown>).ɵcmp as ɵComponentDef<unknown>).hostBindings;
 
@@ -15,7 +15,7 @@ export function WithFullscreenContentCssClass(): ClassDecorator
         {
             original?.(rf, _ctx);
 
-            if (rf & 2)
+            if(rf & 2)
             {
                 ɵɵclassProp('fullscreen-content', true);
             }

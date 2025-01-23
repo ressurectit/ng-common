@@ -16,10 +16,7 @@ import {MovableTitledDialogComponent} from '../components/movableTitledDialog/mo
         CommonLocalizeModule,
         MatDialogModule,
         DragDropModule,
-    ],
-    declarations:
-    [
-        MovableTitledDialogComponent
+        MovableTitledDialogComponent,
     ],
 })
 export class MovableTitledDialogModule

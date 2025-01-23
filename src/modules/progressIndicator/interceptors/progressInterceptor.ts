@@ -52,9 +52,9 @@ export class ProgressInterceptor implements HttpInterceptor
 /**
  * Progress interceptor provider
  */
-export const PROGRESS_INTERCEPTOR_PROVIDER: ClassProvider = 
+export const PROGRESS_INTERCEPTOR_PROVIDER: ClassProvider =
 {
-    provide: HTTP_INTERCEPTORS, 
-    useClass: ProgressInterceptor, 
-    multi: true
+    provide: HTTP_INTERCEPTORS,
+    useClass: ProgressInterceptor,
+    multi: true,
 };

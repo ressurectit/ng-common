@@ -5,7 +5,7 @@ import {ComponentHostStyle} from '../componentHostStyle/componentHostStyle.decor
 /**
  * Applies css display style to host of component, requires at least empty style on Component
  * @param display - Css display value
- * 
+ *
  * @experimental
  */
 export function ComponentDisplay(display: CssDisplay): ClassDecorator

@@ -11,7 +11,7 @@ const MAX_NUMBER_VALIDATOR = <ExistingProvider>
 {
     provide: NG_VALIDATORS,
     useExisting: forwardRef(() => MaxValueNumberValidatorDirective),
-    multi: true
+    multi: true,
 };
 
 /**
@@ -20,7 +20,7 @@ const MAX_NUMBER_VALIDATOR = <ExistingProvider>
 @Directive(
 {
     selector: 'input[number][maxValue][formControlName],input[number][maxValue][formControl],input[number][maxValue][ngModel]',
-    providers: [MAX_NUMBER_VALIDATOR]
+    providers: [MAX_NUMBER_VALIDATOR],
 })
 export class MaxValueNumberValidatorDirective implements Validator, OnChanges
 {

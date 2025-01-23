@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 
 import {MultiButtonComponent} from '../components/multiButton/multiButton.component';
 
@@ -10,11 +9,7 @@ import {MultiButtonComponent} from '../components/multiButton/multiButton.compon
 {
     imports:
     [
-        CommonModule
-    ],
-    declarations:
-    [
-        MultiButtonComponent
+        MultiButtonComponent,
     ],
     exports:
     [

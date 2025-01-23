@@ -1,4 +1,5 @@
 import {Component, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, ElementRef, HostListener} from '@angular/core';
+import {NgTemplateOutlet} from '@angular/common';
 import {Invalidatable} from '@jscrpt/common';
 
 import {TooltipTemplateContext} from '../../directives';
@@ -11,7 +12,11 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
 {
     selector: 'tooltip-popup',
     templateUrl: 'tooltip.component.html',
-    styleUrls: ['tooltip.component.css'],
+    styleUrl: 'tooltip.component.css',
+    imports:
+    [
+        NgTemplateOutlet,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipComponent<TData = any> implements TooltipRenderer<TData>, Invalidatable

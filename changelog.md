@@ -1,6 +1,10 @@
 # Changelog
 
-## Version 22.0.0 (2025-01-20)
+## Version 22.0.0 (2025-01-23)
+
+### Features
+
+- all *components*, *directives*, *pipes* are now standalone
 
 ### BREAKING CHANGES
 

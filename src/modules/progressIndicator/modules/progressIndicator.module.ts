@@ -1,7 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 
-import {CommonLocalizeModule} from '../../commonLocalize.module';
 import {ProgressIndicatorComponent} from '../components/progressIndicator/progressIndicator.component';
 import {ProgressOverlayDirective} from '../directives/progressOverlay/progressOverlay.directive';
 
@@ -12,18 +10,13 @@ import {ProgressOverlayDirective} from '../directives/progressOverlay/progressOv
 {
     imports:
     [
-        CommonModule,
-        CommonLocalizeModule,
-    ],
-    declarations:
-    [
         ProgressIndicatorComponent,
-        ProgressOverlayDirective
+        ProgressOverlayDirective,
     ],
     exports:
     [
         ProgressIndicatorComponent,
-        ProgressOverlayDirective
+        ProgressOverlayDirective,
     ]
 })
 export class ProgressIndicatorModule
