@@ -94,6 +94,15 @@ export class FileInputDirective implements OnDestroy
     //######################### public methods #########################
 
     /**
+     * Opens file browser dialog
+     */
+    @BindThis
+    public openFileBrowser(): void
+    {
+        this.element.nativeElement.click();
+    }
+
+    /**
      * Clears selection of file/files
      */
     @BindThis
@@ -157,7 +166,7 @@ export class FileInputDirective implements OnDestroy
             }
 
             const fileReader = new FileReader();
-    
+
             fileReader.onloadend = () =>
             {
                 const result = fileReader.result;
@@ -179,7 +188,7 @@ export class FileInputDirective implements OnDestroy
                     this.arrayBufferContentChange.emit(result);
                 }
             };
-    
+
             if(this.binaryContent())
             {
                 fileReader.readAsArrayBuffer(file);

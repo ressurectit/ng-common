@@ -13,6 +13,10 @@ import {FileVisual} from '../../interfaces';
     selector: 'file',
     templateUrl: 'file.component.html',
     styleUrl: 'file.component.css',
+    host:
+    {
+        '(click)': 'fileInput().openFileBrowser()',
+    },
     imports:
     [
         NgTemplateOutlet,
@@ -130,12 +134,13 @@ export class FileComponent
             if(fileVisual)
             {
                 const fileInput = this.fileInput();
-                
+
                 fileVisual.fileTemplateContext.set(
                 {
                     file: this.file(),
                     files: this.files(),
                     clearFile: fileInput.clearFile,
+                    openFileBrowser: fileInput.openFileBrowser,
                     fileName: this.name(),
                     filesNames: this.names(),
                     multiple: this.multiple(),
@@ -151,6 +156,7 @@ export class FileComponent
                 file: this.file(),
                 files: this.files(),
                 clearFile: fileInput.clearFile,
+                openFileBrowser: fileInput.openFileBrowser,
                 fileName: this.name(),
                 filesNames: this.names(),
                 multiple: this.multiple(),

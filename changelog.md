@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 22.1.0 (2025-03-04)
+
+### Bug Fixes
+
+- fixed `FileComponent`, now hover is passed to component displayed inside
+
+### Features
+
+- updated `FileTemplateContext` interface 
+   - **new properties**
+      - `openFileBrowser` opens file browser dialog
+- updated `FileInputDirective` directive
+   - **new method**
+      - `openFileBrowser` opens file browser dialog
+
 ## Version 22.0.0 (2025-01-23)
 
 ### Features

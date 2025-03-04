@@ -12,7 +12,7 @@ import {FileTemplateContext} from './fileTemplate.context';
 export class FileTemplateDirective
 {
     //######################### ng language server #########################
-    
+
     /**
      * Allows typechecking for template
      */

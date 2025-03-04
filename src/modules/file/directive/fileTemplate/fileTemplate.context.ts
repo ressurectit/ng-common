@@ -32,4 +32,9 @@ export interface FileTemplateContext
      * Clears selected file
      */
     clearFile(): void;
+
+    /**
+     * Opens file browser dialog
+     */
+    openFileBrowser(): void;
 }
