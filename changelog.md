@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 22.2.0 (2025-03-31)
+
+### Features
+
+- updated `FileComponent` component
+   - **new inputs**
+      - `supportedExtensions` array of supported file extensions in form of '.extension'
+
 ## Version 22.1.0 (2025-03-04)
 
 ### Bug Fixes

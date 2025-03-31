@@ -53,6 +53,11 @@ export class FileComponent
      */
     protected names: WritableSignal<string[]|null|undefined> = signal(null);
 
+    /**
+     * Computed accept value
+     */
+    protected acceptValue: Signal<string|null|undefined>;
+
     //######################### protected properties - children #########################
 
     /**
@@ -92,6 +97,11 @@ export class FileComponent
      */
     public textEncoding: InputSignal<string|undefined> = input();
 
+    /**
+     * Array of supported file extensions in form of '.extension'
+     */
+    public supportedExtensions: InputSignal<string[]|undefined|null> = input();
+
     //######################### public properties - outputs #########################
 
     /**
@@ -127,6 +137,11 @@ export class FileComponent
     //######################### constructor #########################
     constructor()
     {
+        this.acceptValue = computed(() =>
+        {
+            return this.supportedExtensions()?.join(',');
+        });
+
         effect(() =>
         {
             const fileVisual = this.fileVisual();
