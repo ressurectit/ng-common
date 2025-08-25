@@ -1,5 +1,4 @@
 import {TemplateRef, Type} from '@angular/core';
-import {AnimationMetadata} from '@angular/animations';
 
 import {PositionOptions} from '../../../services/position';
 import {TooltipTemplateContext} from '../directives';
@@ -30,6 +29,16 @@ export interface TooltipRenderer<TData = any>
      * Css class that is applied to tooltip renderer component
      */
     cssClass: string|null|undefined;
+
+    /**
+     * Css class used to animate tooltip component when it is displayed
+     */
+    enterAnimation: string;
+
+    /**
+     * Css class used to animate tooltip component when it is hidden
+     */
+    exitAnimation: string;
 
     //######################### methods #########################
 
@@ -82,18 +91,18 @@ export interface TooltipOptions
     tooltipRenderer: Type<TooltipRenderer>;
 
     /**
-     * Animation used to tooltip component when it is displayed
+     * Css class used to animate tooltip component when it is displayed
      */
-    enterAnimation: AnimationMetadata;
+    enterAnimation: string;
 
     /**
-     * Animation used to tooltip component when it is hidden
+     * Css class used to animate tooltip component when it is hidden
      */
-    exitAnimation: AnimationMetadata;
+    exitAnimation: string;
 
     /**
      * String that defines element in which should be tooltip rendered, if not specified, body is used
-     * 
+     *
      * Allows also css classes to be specified (div.body-box)
      */
     containerElement: string|undefined|null;

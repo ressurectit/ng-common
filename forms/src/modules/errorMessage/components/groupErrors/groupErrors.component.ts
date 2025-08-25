@@ -2,7 +2,6 @@ import {Component, ChangeDetectionStrategy, Optional, OnInit, OnDestroy, ChangeD
 import {NgClass, NgTemplateOutlet} from '@angular/common';
 import {FormControlStatus, FormGroup, FormGroupDirective, FormGroupName} from '@angular/forms';
 import {KeysPipe} from '@anglr/common';
-import {slideInOutTrigger} from '@anglr/animations';
 import {Subscription} from 'rxjs';
 
 import {ErrorMessageDirective, GroupErrorsTemplateDirective} from '../../directives';
@@ -23,7 +22,6 @@ import {WithErrorMessagePipe} from '../../pipes';
         WithErrorMessagePipe,
         ErrorMessageDirective,
     ],
-    animations: [slideInOutTrigger],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupErrorsComponent implements OnInit, OnDestroy
@@ -84,7 +82,7 @@ export class GroupErrorsComponent implements OnInit, OnDestroy
     }
 
     //######################### public methods - implementation of OnInit #########################
-    
+
     /**
      * Initialize component
      */
@@ -101,7 +99,7 @@ export class GroupErrorsComponent implements OnInit, OnDestroy
     }
 
     //######################### public methods - implementation of OnDestroy #########################
-    
+
     /**
      * Called when component is destroyed
      */

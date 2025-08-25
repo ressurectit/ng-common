@@ -75,14 +75,14 @@ export class DefaultNotificationsService implements Notifications
     }
 
     //######################### public methods - implementation of Notifications #########################
-    
+
     /**
      * @inheritdoc
      */
     public message(message: string, severity: NotificationSeverity, parameter?: Record<string, unknown>): Notifications
     {
         const notification = new Notification(message, severity, parameter);
-        
+
         this._notifications.push(notification);
         this._notificationsChange.next();
 
@@ -113,7 +113,7 @@ export class DefaultNotificationsService implements Notifications
     {
         return this.message(message, NotificationSeverity.Success, parameter);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -121,7 +121,7 @@ export class DefaultNotificationsService implements Notifications
     {
         return this.message(message, NotificationSeverity.Error, parameter);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -129,7 +129,7 @@ export class DefaultNotificationsService implements Notifications
     {
         return this.message(message, NotificationSeverity.Info, parameter);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -194,7 +194,7 @@ export class DefaultNotificationsService implements Notifications
 
     /**
      * @inheritdoc
-     * 
+     *
      * Call this manualy for scoped instances until this is fixed https://github.com/angular/angular/issues/28738
      */
     public ngOnDestroy(): void
@@ -277,7 +277,7 @@ const notificationsFactory = (scopeName: string, token?: Function | Type<any> | 
     ];
 };
 
-Object.defineProperty(DEFAULT_NOTIFICATIONS, 'scope', 
+Object.defineProperty(DEFAULT_NOTIFICATIONS, 'scope',
 {
     get()
     {
@@ -286,7 +286,7 @@ Object.defineProperty(DEFAULT_NOTIFICATIONS, 'scope',
             return notificationsFactory(scopeName, token);
         };
 
-        Object.defineProperty(func, 'random', 
+        Object.defineProperty(func, 'random',
         {
             get()
             {

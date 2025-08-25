@@ -1,6 +1,5 @@
-import {Component, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding} from '@angular/core';
+import {Component, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {slideInOutTrigger, animateChildrenTrigger} from '@anglr/animations';
 
 import {ValidationErrorsResult} from '../../services/errorMessagesExtractor/errorMessagesExtractor.interface';
 import {ValidationErrorsComponent, ValidationErrorsOptions} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
@@ -17,11 +16,6 @@ import {ValidationErrorsComponent, ValidationErrorsOptions} from '../../services
     [
         NgClass,
     ],
-    animations: 
-    [
-        slideInOutTrigger,
-        animateChildrenTrigger
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultValidationErrorsComponent implements ValidationErrorsComponent
@@ -33,20 +27,12 @@ export class DefaultValidationErrorsComponent implements ValidationErrorsCompone
      * @internal
      */
     public errors: ValidationErrorsResult;
-    
+
     /**
      * Options used for displaying validation errors
      * @internal
      */
     public options: ValidationErrorsOptions;
-
-    //######################### public properties - host #########################
-
-    /**
-     * Enables leave animations for internal stuff
-     */
-    @HostBinding('@animateChildren')
-    public animate: boolean = true;
 
     //######################### constructor #########################
     constructor(protected _changeDetector: ChangeDetectorRef)

@@ -1,5 +1,28 @@
 # Changelog
 
+## Version 23.0.0 (2025-08-25)
+
+### Features
+
+- existing animations refactored to css animations
+
+### BREAKING CHANGES
+
+- new optional dependency `@css-styles/themes` containing css animations
+- minimal supported version of `@angular` packages is `22.2.0`
+- removed dependency on deprecated `@angular/animations`
+- removed dependency on `@anglr/animations`
+- removed `consoleAnimationTrigger` replaced with new animations API
+- all animations in package reworked to new animations API
+- updated `TooltipRenderer` interface
+   - **new properties**
+      - `enterAnimation` css class used to animate tooltip component when it is displayed
+      - `exitAnimation` css class used to animate tooltip component when it is hidden
+- updated `TooltipOptions` interface
+   - **properties**
+      - `enterAnimation` updated type to `string`
+      - `exitAnimation` updated type to `string`
+
 ## Version 22.2.0 (2025-03-31)
 
 ### Features

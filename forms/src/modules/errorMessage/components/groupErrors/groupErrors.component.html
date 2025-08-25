@@ -1,5 +1,5 @@
 <ng-template #defaultTemplate let-errorName>
-    <div [ngClass]="cssClass" [errorMessage]="errorName" [errors]="formGroup.errors" @slideInOut></div>
+    <div [ngClass]="cssClass" [errorMessage]="errorName" [errors]="formGroup.errors" animate.enter="slide-in" animate.leave="slide-out"></div>
 </ng-template>
 
 @for(errorName of formGroup.errors | keys | withErrorMessage; track errorName)

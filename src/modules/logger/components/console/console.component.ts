@@ -13,6 +13,11 @@ import {ConsoleComponentService} from '../../services';
     selector: 'console',
     templateUrl: 'console.component.html',
     styleUrl: 'console.component.css',
+    host:
+    {
+        'animate.enter': 'slide-in',
+        'animate.leave': 'slide-out',
+    },
     imports:
     [
         CommonModule,
@@ -52,14 +57,14 @@ export class ConsoleComponent implements OnInit, OnDestroy
     }
 
     //######################### public methods - implementation of OnInit #########################
-    
+
     /**
      * Initialize component
      */
     public ngOnInit(): void
     {
         this.setMessages();
-        
+
         this.logsChangeSubscription = this.consoleSvc.logsChange.subscribe(() =>
         {
             this.setMessages();
@@ -68,7 +73,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
     }
 
     //######################### public methods - implementation of OnDestroy #########################
-    
+
     /**
      * Called when component is destroyed
      */

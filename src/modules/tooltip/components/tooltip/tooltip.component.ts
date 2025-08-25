@@ -13,6 +13,11 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
     selector: 'tooltip-popup',
     templateUrl: 'tooltip.component.html',
     styleUrl: 'tooltip.component.css',
+    host:
+    {
+        'animate.enter': 'enterAnimation',
+        'animate.leave': 'exitAnimation',
+    },
     imports:
     [
         NgTemplateOutlet,
@@ -54,6 +59,16 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>, In
      * Css class that is applied to tooltip renderer component
      */
     public cssClass: string|null|undefined;
+
+    /**
+     * Animation used to tooltip component when it is displayed
+     */
+    public enterAnimation: string;
+
+    /**
+     * Animation used to tooltip component when it is hidden
+     */
+    public exitAnimation: string;
 
     //######################### constructor #########################
     constructor(protected changeDetector: ChangeDetectorRef,

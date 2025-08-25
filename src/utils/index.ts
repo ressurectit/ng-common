@@ -14,7 +14,7 @@ export function extractAppStableResolve(appStablePromise: Promise<void>): () => 
 
 /**
  * Factory used for creating APP_STABLE promise
- * 
+ *
  * @internal
  */
 export function appStablePromiseFactory(): Promise<void>
@@ -42,12 +42,12 @@ export function runWhenAppStable(appRefPromise: Promise<ApplicationRef>, callbac
 {
     angularProfiler = angularProfiler ?? false;
 
-    appRefPromise.then(appRef => 
+    appRefPromise.then(appRef =>
     {
         appRef.isStable
             .pipe(filter(isStable => isStable),
                   first())
-            .subscribe(() => 
+            .subscribe(() =>
             {
                 const appStablePromise = appRef.injector.get(APP_STABLE);
 
@@ -74,14 +74,14 @@ export function runWhenModuleStable(moduleRefPromise: Promise<NgModuleRef<unknow
 {
     angularProfiler = angularProfiler || false;
 
-    moduleRefPromise.then((moduleRef: NgModuleRef<unknown>) => 
+    moduleRefPromise.then((moduleRef: NgModuleRef<unknown>) =>
     {
         const appRef: ApplicationRef = moduleRef.injector.get(ApplicationRef);
 
         appRef.isStable
             .pipe(filter((isStable: boolean) => isStable),
                   first())
-            .subscribe(() => 
+            .subscribe(() =>
             {
                 const appStablePromise = moduleRef.injector.get(APP_STABLE);
 

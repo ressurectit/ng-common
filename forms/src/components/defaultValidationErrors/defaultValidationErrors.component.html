@@ -1,6 +1,6 @@
 @if(errors?.errorMessages?.length)
 {
-    <div [ngClass]="options?.wrapperDivClass" @slideInOut>
+    <div [ngClass]="options?.wrapperDivClass" animate.enter="slide-in" animate.leave="slide-out">
         @for(error of errors?.errorMessages; track error)
         {
             <div>{{error}}</div>
