@@ -15,8 +15,8 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
     styleUrl: 'tooltip.component.css',
     host:
     {
-        'animate.enter': 'enterAnimation',
-        'animate.leave': 'exitAnimation',
+        '[animate.enter]': 'enterAnimation',
+        '[animate.leave]': 'exitAnimation',
     },
     imports:
     [
