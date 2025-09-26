@@ -1,5 +1,5 @@
 import {InjectionToken, Type, inject} from '@angular/core';
-import {HttpContextToken} from '@angular/common/http';
+import {HttpContextToken, HttpInterceptorFn} from '@angular/common/http';
 
 import type {StringLocalization} from '../services/stringLocalization';
 import {NoStringLocalization} from '../services/stringLocalization/noStringLocalization.service';
@@ -65,4 +65,4 @@ export const NOTIFICATIONS_SCOPE: InjectionToken<string> = new InjectionToken<st
 /**
  * Http context token storing array of ignored interceptors types
  */
-export const IGNORED_INTERCEPTORS: HttpContextToken<Type<unknown>[]> = new HttpContextToken<Type<unknown>[]>(() => []);
+export const IGNORED_INTERCEPTORS: HttpContextToken<Array<Type<unknown>|HttpInterceptorFn>> = new HttpContextToken<Array<Type<unknown>|HttpInterceptorFn>>(() => []);
