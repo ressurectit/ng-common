@@ -5,8 +5,9 @@ import {TooltipTemplateContext} from '../directives';
 
 /**
  * Represents component that is used for rendering tooltip
+ * @template TData - Type of data passed to tooltip
  */
-export interface TooltipRenderer<TData = any>
+export interface TooltipRenderer<TData = unknown>
 {
     //######################### properties #########################
 
@@ -30,16 +31,6 @@ export interface TooltipRenderer<TData = any>
      */
     cssClass: string|null|undefined;
 
-    /**
-     * Css class used to animate tooltip component when it is displayed
-     */
-    enterAnimation: string;
-
-    /**
-     * Css class used to animate tooltip component when it is hidden
-     */
-    exitAnimation: string;
-
     //######################### methods #########################
 
     /**
@@ -58,7 +49,7 @@ export interface TooltipRenderer<TData = any>
 /**
  * Options used for tooltip directive
  */
-export interface TooltipOptions
+export interface TooltipOptions<TData = unknown>
 {
     /**
      * Delay for displaying of tooltip on hover
@@ -88,17 +79,17 @@ export interface TooltipOptions
     /**
      * Type of tooltip renderer that is used for rendering tooltip
      */
-    tooltipRenderer: Type<TooltipRenderer>;
+    tooltipRenderer: Type<TooltipRenderer<TData>>;
 
     /**
-     * Css class used to animate tooltip component when it is displayed
+     * Css class/classes used to animate tooltip component when it is displayed
      */
-    enterAnimation: string;
+    enterAnimation: string|string[];
 
     /**
-     * Css class used to animate tooltip component when it is hidden
+     * Css class/classes used to animate tooltip component when it is hidden
      */
-    exitAnimation: string;
+    exitAnimation: string|string[];
 
     /**
      * String that defines element in which should be tooltip rendered, if not specified, body is used

@@ -7,24 +7,20 @@ import {TooltipRenderer} from '../../misc/tooltip.interface';
 
 /**
  * Component used for displaying tooltip content
+ * @template TData - Type of data passed to tooltip
  */
 @Component(
 {
     selector: 'tooltip-popup',
     templateUrl: 'tooltip.component.html',
     styleUrl: 'tooltip.component.css',
-    host:
-    {
-        '[animate.enter]': 'enterAnimation',
-        '[animate.leave]': 'exitAnimation',
-    },
     imports:
     [
         NgTemplateOutlet,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TooltipComponent<TData = any> implements TooltipRenderer<TData>, Invalidatable
+export class TooltipComponent<TData = unknown> implements TooltipRenderer<TData>, Invalidatable
 {
     //######################### protected fields #########################
 
@@ -59,16 +55,6 @@ export class TooltipComponent<TData = any> implements TooltipRenderer<TData>, In
      * Css class that is applied to tooltip renderer component
      */
     public cssClass: string|null|undefined;
-
-    /**
-     * Animation used to tooltip component when it is displayed
-     */
-    public enterAnimation: string;
-
-    /**
-     * Animation used to tooltip component when it is hidden
-     */
-    public exitAnimation: string;
 
     //######################### constructor #########################
     constructor(protected changeDetector: ChangeDetectorRef,

@@ -1,5 +1,6 @@
-import {ComponentRef, ContentChild, Directive, ElementRef, HostListener, Inject, Injector, Input, OnChanges, OnDestroy, Optional, SimpleChanges, SkipSelf, TemplateRef, ViewContainerRef} from '@angular/core';
+import {ComponentRef, ContentChild, Directive, ElementRef, HostListener, Inject, Injector, Input, inputBinding, OnChanges, OnDestroy, Optional, SimpleChanges, SkipSelf, TemplateRef, ViewContainerRef} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
+import {AnimateDirective} from '@anglr/animations';
 import {RecursivePartial, isBlank, isPresent, nameof, renderToBody} from '@jscrpt/common';
 import {extend} from '@jscrpt/common/extend';
 import {lastValueFrom} from 'rxjs';
@@ -57,7 +58,7 @@ export class TooltipDirective<TData = unknown> implements OnChanges, OnDestroy
     /**
      * Instance of options provided for this tooltip
      */
-    protected _options: TooltipOptions;
+    protected _options: TooltipOptions<TData>;
 
     /**
      * Indication whether there is active show tooltip request
@@ -98,11 +99,11 @@ export class TooltipDirective<TData = unknown> implements OnChanges, OnDestroy
      * Options used for displaying tooltip
      */
     @Input()
-    public get tooltipOptions(): RecursivePartial<TooltipOptions>
+    public get tooltipOptions(): RecursivePartial<TooltipOptions<TData>>
     {
         return this._options;
     }
-    public set tooltipOptions(value: RecursivePartial<TooltipOptions>)
+    public set tooltipOptions(value: RecursivePartial<TooltipOptions<TData>>)
     {
         this._options = extend(true, {}, this._options, value);
 
@@ -141,7 +142,7 @@ export class TooltipDirective<TData = unknown> implements OnChanges, OnDestroy
                 @Inject(DOCUMENT) protected _document: Document,
                 @Inject(POSITION) protected _position: Position<HTMLElement>,
                 @Optional() @SkipSelf() protected _parent?: TooltipDirective|null,
-                @Optional() @Inject(TOOLTIP_OPTIONS) options?: Partial<TooltipOptions>,)
+                @Optional() @Inject(TOOLTIP_OPTIONS) options?: Partial<TooltipOptions<TData>>,)
     {
         this._options = extend(true, {}, defaultOptions, options);
 
@@ -322,6 +323,17 @@ export class TooltipDirective<TData = unknown> implements OnChanges, OnDestroy
             .createComponent(this._options.tooltipRenderer,
                              {
                                  injector: this._injector,
+                                 directives:
+                                 [
+                                     {
+                                         type: AnimateDirective,
+                                         bindings:
+                                         [
+                                             inputBinding(nameof<AnimateDirective>('enterAnimation'), () => this._options.enterAnimation || []),
+                                             inputBinding(nameof<AnimateDirective>('leaveAnimation'), () => this._options.exitAnimation || []),
+                                         ],
+                                     },
+                                 ],
                              });
 
         // 3. Get DOM element from component
@@ -338,8 +350,6 @@ export class TooltipDirective<TData = unknown> implements OnChanges, OnDestroy
     {
         if(this._tooltipComponent)
         {
-            this._tooltipComponent.instance.enterAnimation = this._options.enterAnimation;
-            this._tooltipComponent.instance.exitAnimation = this._options.exitAnimation;
             this._tooltipComponent.instance.allowHtml = this.allowHtml;
             this._tooltipComponent.instance.data = this.tooltip;
             this._tooltipComponent.instance.template = this.template ?? this.tooltipTemplateChild?.template;
