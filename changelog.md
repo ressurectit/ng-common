@@ -1,12 +1,16 @@
 # Changelog
 
-## Version 23.0.0 (2025-09-26)
+## Version 23.0.0 (2025-09-29)
 
 ### Features
 
 - existing animations refactored to css animations
+- new `progressInterceptor` function, that is progress interceptor used for intercepting http requests and displaying progress indicatior
+   - used as replacement of deprecated `ProgressInterceptor` together with `PROGRESS_INTERCEPTOR_PROVIDER`
 - updated `TooltipOptions` interface
    - is now generic with `TData` with default `unknown`
+- updated `IGNORED_INTERCEPTORS` http context token
+   - now also accepts `HttpInterceptorFn` function together with `Type<unknown>`
 
 ### BREAKING CHANGES
 
