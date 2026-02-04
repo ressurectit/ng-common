@@ -1,12 +1,13 @@
-import {Component, ChangeDetectionStrategy, Inject, Optional} from '@angular/core';
-import {NgClass} from '@angular/common';
+import {Component, ChangeDetectionStrategy, Inject, Optional, Injector, ValueProvider} from '@angular/core';
+import {NgComponentOutlet, NgTemplateOutlet} from '@angular/common';
 import {MatDialogRef} from '@angular/material/dialog';
 import {LocalizePipe} from '@anglr/common';
+import {TITLED_DIALOG_DATA} from '@anglr/common/material';
 import {extend} from '@jscrpt/common/extend';
 
 import {CONFIRMATION_DIALOG_OPTIONS} from '../../misc/tokens';
-import {TITLED_DIALOG_DATA} from '../../misc/tokens';
 import {ConfirmationDialogOptions} from '../../misc/interfaces/confirmationDialog.interface';
+import {ConfirmationDialogChoiceComponent} from '../confirmationDialogChoice/confirmationDialogChoice.component';
 
 /**
  * Default options for dialog
@@ -23,8 +24,9 @@ const defaultOptions: ConfirmationDialogOptions =
         closeButton: 'btn btn-danger margin-right-extra-small',
         closeButtonIcon: 'fa fa-ban',
         confirmButton: 'btn btn-primary',
-        confirmButtonIcon: 'fa fa-check'
-    }
+        confirmButtonIcon: 'fa fa-check',
+    },
+    choiceComponent: ConfirmationDialogChoiceComponent,
 };
 
 /**
@@ -36,14 +38,20 @@ const defaultOptions: ConfirmationDialogOptions =
     templateUrl: 'confirmationDialog.component.html',
     imports:
     [
-        NgClass,
+        NgTemplateOutlet,
+        NgComponentOutlet,
         LocalizePipe,
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmationDialogComponent
 {
     //######################### public properties - template bindings #########################
+
+    /**
+     * Injector used for creating component or template
+     */
+    public injector: Injector;
 
     /**
      * Options used for confirmation dialog component
@@ -53,9 +61,27 @@ export class ConfirmationDialogComponent
 
     //######################### constructor #########################
     constructor(@Inject(TITLED_DIALOG_DATA) data: ConfirmationDialogOptions,
-                public dialog: MatDialogRef<ConfirmationDialogOptions, boolean>,
-                @Inject(CONFIRMATION_DIALOG_OPTIONS) @Optional() options: ConfirmationDialogOptions)
+                public dialog: MatDialogRef<ConfirmationDialogOptions, unknown>,
+                @Inject(CONFIRMATION_DIALOG_OPTIONS) @Optional() options: ConfirmationDialogOptions,
+                injector: Injector)
     {
         this.options = extend(true, {}, defaultOptions, options ?? {}, data);
+        this.injector = Injector.create(
+            {
+                providers:
+                [
+                    <ValueProvider>
+                    {
+                        provide: CONFIRMATION_DIALOG_OPTIONS,
+                        useValue: this.options,
+                    },
+                ],
+                parent: injector,
+            });
+
+        if(!this.options.choiceComponent && !this.options.template)
+        {
+            throw new Error('Confirmation dialog requires either choice component or template to be provided!');
+        }
     }
 }

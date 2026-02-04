@@ -1,9 +1,11 @@
-import {Directive, Input, EventEmitter, Output, HostListener} from '@angular/core';
+import {Directive, Input, EventEmitter, Output, HostListener, TemplateRef, ContentChild} from '@angular/core';
+import {TitledDialogConfig, TitledDialogService} from '@anglr/common/material';
 import {lastValueFrom} from 'rxjs';
 
-import {TitledDialogService} from '../../services/titledDialog/titledDialog.service';
 import {ConfirmationDialogComponent} from '../../components/confirmationDialog/confirmationDialog.component';
 import {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from '../../misc/interfaces/confirmationDialog.interface';
+import {ConfirmationDialogChoiceTemplateContext} from '../confirmationDialogChoiceTemplate/confirmationDialogChoiceTemplate.context';
+import {ConfirmationDialogChoiceTemplateDirective} from '../confirmationDialogChoiceTemplate/confirmationDialogChoiceTemplate.directive';
 
 /**
  * Directive that enables confirmation dialog on click
@@ -47,6 +49,12 @@ export class ConfirmationDialogDirective
     public confirmationCssClasses: ConfirmationDialogCssClasses|undefined|null = undefined;
 
     /**
+     * Custom options for confirmation dialog
+     */
+    @Input()
+    public confirmationDialogOptions: Partial<TitledDialogConfig<ConfirmationDialogOptions>>|undefined|null = undefined;
+
+    /**
      * Condidition that determines whether display confirmation dialog or skip it and run confirm directly
      */
     @Input()
@@ -58,6 +66,12 @@ export class ConfirmationDialogDirective
     @Input()
     public preventDefaultsAndPropagation: boolean = true;
 
+    /**
+     * Instance of tooltip template that is used for rendering button container
+     */
+    @Input('choiceTemplate')
+    public confirmationDialogChoiceTemplate?: TemplateRef<ConfirmationDialogChoiceTemplateContext>;
+
     //######################### public properties - outputs #########################
 
     /**
@@ -65,6 +79,14 @@ export class ConfirmationDialogDirective
      */
     @Output()
     public confirm: EventEmitter<void> = new EventEmitter<void>();
+
+    //######################### public properties - children #########################
+
+    /**
+     * Instance of template from element content, used for rendering
+     */
+    @ContentChild(ConfirmationDialogChoiceTemplateDirective)
+    public confirmationDialogChoiceTemplateChild?: ConfirmationDialogChoiceTemplateDirective;
 
     //######################### constructor #########################
     constructor(private _dialog: TitledDialogService)
@@ -96,13 +118,15 @@ export class ConfirmationDialogDirective
         {
             title: this.confirmationTitle,
             width: '33vw',
+            ...this.confirmationDialogOptions,
             data:
             {
                 confirmationText: this.confirmationText || undefined,
                 dialogCancelText: this.confirmationCancel ?? undefined,
                 dialogConfirmText: this.confirmationConfirm ?? undefined,
                 cssClasses: this.confirmationCssClasses ?? {},
-            }
+                template: this.confirmationDialogChoiceTemplate ?? this.confirmationDialogChoiceTemplateChild?.template,
+            },
         }).afterClosed());
 
         if(result)

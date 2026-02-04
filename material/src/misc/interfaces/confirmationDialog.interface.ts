@@ -1,3 +1,7 @@
+import {TemplateRef, Type} from '@angular/core';
+
+import {ConfirmationDialogChoiceTemplateContext} from '../../directives/confirmationDialogChoiceTemplate/confirmationDialogChoiceTemplate.context';
+
 /**
  * Css classes for confirmation dialog component
  */
@@ -43,7 +47,7 @@ export interface ConfirmationDialogOptions
      * Text that is displayed as confirmation text (localization constant)
      */
     confirmationText?: string;
-    
+
     /**
      * Text that is displayed as cancel button text (localization constant)
      */
@@ -53,4 +57,14 @@ export interface ConfirmationDialogOptions
      * Text that is displayed as confirm button text (localization constant)
      */
     dialogConfirmText?: string;
+
+    /**
+     * Template used for rendering buttons container
+     */
+    template?: TemplateRef<ConfirmationDialogChoiceTemplateContext>;
+
+    /**
+     * Component used for rendering buttons container
+     */
+    choiceComponent?: Type<unknown>;
 }

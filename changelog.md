@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 24.0.0 (2026-02-04)
+
+### Features
+
+- updated `ConfirmationDialogDirective` directive
+   - **new inputs**
+      - `choiceTemplate` custom template for rendering confirmation dialog buttons container
+      - `confirmationDialogOptions` options for confirmation dialog component
+- new `ConfirmationDialogChoiceTemplateDirective` directive, that defines custom template for confirmation dialog buttons container
+- updated `ConfirmationDialogComponent` component
+   - **new options**
+      - `choiceComponent` custom component used for rendering confirmation dialog buttons container
+
 ## Version 23.0.0 (2025-09-29)
 
 ### Features

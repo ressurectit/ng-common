@@ -1,0 +1,11 @@
+<div [ngClass]="options.cssClasses?.buttonsContainerDiv">
+    <button [ngClass]="options.cssClasses?.closeButton" (click)="dialog.close(false)">
+        <span [ngClass]="options.cssClasses?.closeButtonIcon"></span>
+        <span>{{options.dialogCancelText | localize}}</span>
+    </button>
+    
+    <button [ngClass]="options.cssClasses?.confirmButton" (click)="dialog.close(true)">
+        <span [ngClass]="options.cssClasses?.confirmButtonIcon"></span>
+        <span>{{options.dialogConfirmText | localize}}</span>
+    </button>
+</div>
