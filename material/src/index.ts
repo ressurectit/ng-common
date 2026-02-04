@@ -9,6 +9,8 @@ export {TitledDialogComponent} from './components/titledDialog/titledDialog.comp
 export {MovableTitledDialogComponent} from './components/movableTitledDialog/movableTitledDialog.component';
 export {ConfirmationDialogComponent} from './components/confirmationDialog/confirmationDialog.component';
 export {ConfirmationDialogDirective} from './directives/confirmationDialog/confirmationDialog.directive';
+export {ConfirmationDialogChoiceTemplateDirective} from './directives/confirmationDialogChoiceTemplate/confirmationDialogChoiceTemplate.directive';
+export {ConfirmationDialogChoiceTemplateContext} from './directives/confirmationDialogChoiceTemplate/confirmationDialogChoiceTemplate.context';
 export {DebugDataCopyClickDirective} from './directives/debugDataCopyClick/debugDataCopyClick.directive';
 export {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from './misc/interfaces/confirmationDialog.interface';
 export * from './misc/providers';
