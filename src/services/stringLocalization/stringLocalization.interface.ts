@@ -1,19 +1,16 @@
-import {Observable} from 'rxjs';
+import {Signal} from '@angular/core';
 
 /**
- * Provides api to localize strings
+ * Api to localize strings
  */
 export interface StringLocalization
 {
-    /**
-     * Occurs when indication that locale has changes and strings should be obtained again, because they have changed
-     */
-    readonly textsChange: Observable<void>;
+    //######################### methods #########################
 
     /**
      * Gets localized string for specified key, interpolation might be used
      * @param key - Key to be localized
      * @param interpolateParams - Optional object storing interpolation parameters
      */
-    get(key: string, interpolateParams?: Object): string;
+    get(key: string|Signal<string>, interpolateParams?: Record<string, any>|Signal<Record<string, any>>|null): Signal<string>;
 }

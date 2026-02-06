@@ -17,6 +17,7 @@ export * from './modules/logger';
 export * from './modules/progressIndicator';
 export * from './modules/tooltip';
 export * from './pipes';
+export * from './types/classes';
 export * from './types/host';
 export * from './types/styles';
 export * from './types/tokens';

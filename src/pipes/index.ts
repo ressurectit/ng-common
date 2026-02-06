@@ -1,6 +1,7 @@
 export * from './displayProperties/displayProperties.pipe';
 export * from './firstUppercase/firstUppercase.pipe';
 export * from './firstUppercaseLocalize/firstUppercaseLocalize.pipe';
+export * from './interpolateParams/interpolateParams.pipe';
 export * from './isNaN/isNaN.pipe';
 export * from './isPresent/isPresent.pipe';
 export * from './keys/keys.pipe';

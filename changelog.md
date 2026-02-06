@@ -4,6 +4,16 @@
 
 ### Features
 
+- new `LocalizationString` class, that is special string holding parameters for localization
+   - **properties**
+      - `interpolateParams` object storing arguments for parametrization of string
+- new `InterpolateParamsPipe` pipe, that gets localization interpolation parameters from `LocalizationString`
+- updated `NoStringLocalization` service
+   - updated to correspond with new `StringLocalization` interface
+- updated `LocalizePipe` pipe
+   - now also accepts `LocalizationString` as pipe value
+- updated `FirstUppercaseLocalizePipe` pipe
+   - now also accepts `LocalizationString` as pipe value
 - subpackage `@anglr/common/forms`
    - new `ValidationError` component, that is component used for displaying validation error
       - **implements**
@@ -76,6 +86,8 @@
       - **methods**
          - `setViewContainer` sets view container to register
    - new `provideValidatonErrorMessages` provider function, that provides validation error messages globally
+   - updated `HasErrorDirective` directive
+      - now does not update on change of language, needs refactoring
 - subpackage `@anglr/common/material`
    - new `ConfirmationDialogChoiceTemplateDirective` directive, that defines custom template for confirmation dialog buttons container
    - new `ConfirmationDialogChoiceTemplateContext` interface, that represents context passed to template of confirmation dialog choice
@@ -100,7 +112,15 @@
 - minimal supported version of `@jscrpt/common` package is `7.1.0`
 - minimal supported version of `@css-styles/themes` package is `2.4.0`
 - minimal supported version of `@floating-ui/dom` package is `1.7.5`
+- updated `StringLocalization` interface
+   - removed `textsChange` property, now using signals
+   - `get` method 
+      - returns `Signal<string>` instead of `string`
+      - takes also `Signal` based values
+      - second paremeter is more strict `Record<string, any>`
 - subpackage `@anglr/common/forms`
+   - updated `ErrorMessageDirective` directive
+      - now does not update on change of language, needs refactoring
    - renamed `ValidationErrorsContainerComponent` interface to `LegacyValidationErrorsContainerComponent`, because new implementation has same name, if you are using template or reactive forms use *legacy* implementation
    - renamed `ValidationErrorsContainerOptions` interface to `LegacyValidationErrorsContainerOptions`, because new implementation has same name, if you are using template or reactive forms use *legacy* implementation
    - renamed `ValidationErrorsTemplateContext` interface to `LegacyValidationErrorsTemplateContext`, because new implementation has same name, if you are using template or reactive forms use *legacy* implementation

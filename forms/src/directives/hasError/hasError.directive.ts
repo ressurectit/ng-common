@@ -1,7 +1,6 @@
-import {Directive, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector, ViewContainerRef, AfterViewInit, Type, TemplateRef} from '@angular/core';
+import {Directive, Optional, SkipSelf, OnInit, OnDestroy, Input, Injector, ViewContainerRef, AfterViewInit, Type, TemplateRef} from '@angular/core';
 import {toObservable} from '@angular/core/rxjs-interop';
 import {FormControlDirective, FormControlName, FormControl, NgModel, PristineChangeEvent} from '@angular/forms';
-import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {generateId, BindThis, StringDictionary} from '@jscrpt/common';
 import {Subscription, filter, skip} from 'rxjs';
 
@@ -90,7 +89,6 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
                 @Optional() protected ngModel: NgModel,
                 @Optional() protected submittedSvc: SubmittedService,
                 @Optional() protected containerView: ValidationErrorsContainerView,
-                @Inject(STRING_LOCALIZATION) protected stringLocalization: StringLocalization,
                 protected injector: Injector,)
     {
     }
@@ -105,7 +103,6 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
         this.containerView ??= new ValidationErrorsContainerView();
         this.containerView.viewContainer ??= this.viewContainer;
 
-        this.subscriptions.add(this.stringLocalization.textsChange.subscribe(() => this.updateStatus()));
         this.subscriptions.add(this.control.statusChanges.subscribe(() => this.updateStatus()));
         this.subscriptions.add(this.control
                                     .events

@@ -1,9 +1,9 @@
-import {Pipe, PipeTransform, Inject, ChangeDetectorRef, OnInit, OnDestroy} from '@angular/core';
+import {Pipe, PipeTransform, inject, Signal} from '@angular/core';
 import {isBlank} from '@jscrpt/common';
-import {Subscription} from 'rxjs';
 
 import {STRING_LOCALIZATION} from '../../types/tokens';
 import {StringLocalization} from '../../services/stringLocalization';
+import {LocalizationString} from '../../types/classes';
 
 /**
  * Localize strings using 'StringLocalization'
@@ -13,20 +13,29 @@ import {StringLocalization} from '../../services/stringLocalization';
     name: 'localize',
     pure: false,
 })
-export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
+export class LocalizePipe implements PipeTransform
 {
-    //######################### private fields #########################
+    //######################### protected fields #########################
 
     /**
-     * Subscription for changes of texts
+     * Instance of localization service
      */
-    private _subscription: Subscription|undefined|null;
+    protected localizationSvc: StringLocalization = inject(STRING_LOCALIZATION);
 
-    //######################### constructor #########################
-    constructor(@Inject(STRING_LOCALIZATION) private _localizationSvc: StringLocalization,
-                private _changeDetector: ChangeDetectorRef,)
-    {
-    }
+    /**
+     * Cached signal translation value
+     */
+    protected cachedSignal: Signal<string>|undefined|null;
+
+    /**
+     * Last value of used key
+     */
+    protected lastKey: string|LocalizationString|undefined|null;
+
+    /**
+     * Last value of interpolation parameters
+     */
+    protected lastParams: Record<string, any>|undefined|null;
 
     //######################### public methods #########################
 
@@ -35,37 +44,21 @@ export class LocalizePipe implements PipeTransform, OnInit, OnDestroy
      * @param key - Key to be localized
      * @param interpolateParams - Optional object storing interpolation parameters
      */
-    public transform(key: string|undefined|null, interpolateParams?: Object): string
+    public transform(key: string|LocalizationString|undefined|null, interpolateParams?: Record<string, any>|null): string
     {
         if(isBlank(key) || key === '')
         {
             return '';
         }
 
-        return this._localizationSvc.get(key, interpolateParams);
-    }
-
-    //######################### public methods - implementation of OnInit #########################
-    
-    /**
-     * Initialize component
-     */
-    public ngOnInit(): void
-    {
-        this._subscription = this._localizationSvc.textsChange.subscribe(() =>
+        //TODO: maybe in future add lodash to check also key changes using equal
+        if(key !== this.lastKey || interpolateParams != this.lastParams)
         {
-            this._changeDetector.markForCheck();
-        });
-    }
+            this.cachedSignal = this.localizationSvc.get(key.toString(), (key instanceof LocalizationString) ? key.interpolateParams : interpolateParams);
+            this.lastKey = key;
+            this.lastParams = interpolateParams;
+        }
 
-    //######################### public methods - implementation of OnDestroy #########################
-    
-    /**
-     * Called when component is destroyed
-     */
-    public ngOnDestroy(): void
-    {
-        this._subscription?.unsubscribe();
-        this._subscription = null;
+        return this.cachedSignal!();
     }
 }

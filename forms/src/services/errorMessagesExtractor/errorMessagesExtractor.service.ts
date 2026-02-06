@@ -18,7 +18,7 @@ const defaultErrorMessages: StringDictionary =
     minValue: 'Value is too small.',
     maxValue: 'Value is too big.',
     minlength: 'Value is short.',
-    maxlength: 'Value is too long.'
+    maxlength: 'Value is too long.',
 };
 
 /**
@@ -72,7 +72,7 @@ export class ErrorMessagesExtractor
             //error message is present for error
             if(errorMessages[error])
             {
-                result.errorMessages.push(this._stringLocalization.get(errorMessages[error], control.errors));
+                result.errorMessages.push(this._stringLocalization.get(errorMessages[error], control.errors)());
             }
             //display error data if it is string and there is missing translation
             else if(isString(errorData))
@@ -86,7 +86,7 @@ export class ErrorMessagesExtractor
                 {
                     if(isString(errorItm))
                     {
-                        result.errorMessages.push(this._stringLocalization.get(errorItm, control.errors));
+                        result.errorMessages.push(this._stringLocalization.get(errorItm, control.errors)());
                     }
                 });
             }

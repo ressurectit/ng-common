@@ -1,6 +1,5 @@
-import {Injectable} from '@angular/core';
+import {computed, Injectable, isSignal, signal, Signal} from '@angular/core';
 import {formatString} from '@jscrpt/common';
-import {Subject, Observable} from 'rxjs';
 
 import {StringLocalization} from './stringLocalization.interface';
 
@@ -10,23 +9,6 @@ import {StringLocalization} from './stringLocalization.interface';
 @Injectable()
 export class NoStringLocalization implements StringLocalization
 {
-    //######################### private fields #########################
-
-    /**
-     * Subject used for emitting when indication that locale has changes and strings should be obtained again, because they have changed
-     */
-    private _textsChangeSubject: Subject<void> = new Subject<void>();
-
-    //######################### public properties - implementation of StringLocalization #########################
-
-    /**
-     * Occurs when indication that locale has changes and strings should be obtained again, because they have changed
-     */
-    public get textsChange(): Observable<void>
-    {
-        return this._textsChangeSubject.asObservable();
-    }
-
     //######################### public methods - implementation of StringLocalization #########################
 
     /**
@@ -34,13 +16,18 @@ export class NoStringLocalization implements StringLocalization
      * @param key - Key to be localized
      * @param interpolateParams - Optional object storing interpolation parameters
      */
-    public get(key: string, interpolateParams?: Record<string, unknown>): string
+    public get(key: string|Signal<string>, interpolateParams?: Record<string, any>|Signal<Record<string, any>>|null): Signal<string>
     {
         if(!interpolateParams)
         {
-            return key;
+            if(isSignal(key))
+            {
+                return key;
+            }
+
+            return signal(key);
         }
 
-        return formatString(key, interpolateParams);
+        return computed(() => formatString(isSignal(key) ? key() : key, isSignal(interpolateParams) ? interpolateParams() : interpolateParams));
     }
 }

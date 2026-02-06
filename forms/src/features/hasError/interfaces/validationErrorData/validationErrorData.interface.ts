@@ -18,5 +18,5 @@ export interface ValidationErrorData
     /**
      * Arguments for parametrization of message
      */
-    args: Record<string, unknown>;
+    args: Record<string, any>;
 }

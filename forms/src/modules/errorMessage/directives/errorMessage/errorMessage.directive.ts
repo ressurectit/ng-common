@@ -13,7 +13,7 @@ import {VALIDATION_ERROR_MESSAGES} from '../../../../misc/tokens';
     selector: '[errorMessage]',
     exportAs: 'errorMessage',
 })
-export class ErrorMessageDirective implements OnChanges, OnDestroy
+export class ErrorMessageDirective implements OnChanges
 {
     //######################### protected properties #########################
 
@@ -41,7 +41,6 @@ export class ErrorMessageDirective implements OnChanges, OnDestroy
                 @Inject(STRING_LOCALIZATION) protected _localization: StringLocalization,
                 @Inject(VALIDATION_ERROR_MESSAGES) protected _errorMessages: StringDictionary,)
     {
-        this._initSubscriptions.add(this._localization.textsChange.subscribe(() => this._showMessage()));
     }
 
     //######################### public methods - implementation of OnChanges #########################
@@ -55,17 +54,6 @@ export class ErrorMessageDirective implements OnChanges, OnDestroy
         {
             this._showMessage();
         }
-    }
-
-    //######################### public methods - implementation of OnDestroy #########################
-
-    /**
-     * Called when component is destroyed
-     */
-    public ngOnDestroy(): void
-    {
-        this._initSubscriptions?.unsubscribe();
-        this._initSubscriptions = null;
     }
 
     //######################### protected methods #########################
@@ -83,7 +71,7 @@ export class ErrorMessageDirective implements OnChanges, OnDestroy
         }
 
         const errorMessage = this._errorMessages[this.errorName];
-        const message = this._localization.get(errorMessage, this.errors);
+        const message = this._localization.get(errorMessage, this.errors)();
 
         this._element.nativeElement.innerHTML = message;
     }

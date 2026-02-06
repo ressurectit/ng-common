@@ -1,10 +1,8 @@
-import {Pipe, PipeTransform, Inject, ChangeDetectorRef, OnDestroy} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Pipe, PipeTransform} from '@angular/core';
 
-import {STRING_LOCALIZATION} from '../../types/tokens';
-import {StringLocalization} from '../../services/stringLocalization';
 import {LocalizePipe} from '../localize/localize.pipe';
 import {FirstUppercasePipe} from '../firstUppercase/firstUppercase.pipe';
+import {LocalizationString} from '../../types/classes';
 
 /**
  * Localize strings using 'StringLocalization' and converts first letter of text to uppercase
@@ -14,32 +12,19 @@ import {FirstUppercasePipe} from '../firstUppercase/firstUppercase.pipe';
     name: 'firstUppercaseLocalize',
     pure: false,
 })
-export class FirstUppercaseLocalizePipe implements PipeTransform, OnDestroy
+export class FirstUppercaseLocalizePipe implements PipeTransform
 {
     //######################### protected fields #########################
 
     /**
      * Localize pipe used for localizing string
      */
-    protected localizePipe: LocalizePipe;
+    protected localizePipe: LocalizePipe = new LocalizePipe();
 
     /**
      * Pipe used for transforming first letter to uppercase
      */
-    protected firstUppercasePipe: FirstUppercasePipe;
-
-    /**
-     * Subscription for changes of texts
-     */
-    protected subscription: Subscription|undefined|null;
-
-    //######################### constructor #########################
-    constructor(@Inject(STRING_LOCALIZATION) protected localizationSvc: StringLocalization,
-                protected changeDetector: ChangeDetectorRef,)
-    {
-        this.localizePipe = new LocalizePipe(localizationSvc, changeDetector);
-        this.firstUppercasePipe = new FirstUppercasePipe();
-    }
+    protected firstUppercasePipe: FirstUppercasePipe = new FirstUppercasePipe();
 
     //######################### public methods - PipeTransform #########################
 
@@ -48,28 +33,8 @@ export class FirstUppercaseLocalizePipe implements PipeTransform, OnDestroy
      * @param value - Value to be converted
      * @param interpolateParams - Optional object storing interpolation parameters
      */
-    public transform(value: string|undefined|null, interpolateParams?: Object): string
+    public transform(value: string|LocalizationString|undefined|null, interpolateParams?: Record<string, any>|null): string
     {
         return this.firstUppercasePipe.transform(this.localizePipe.transform(value, interpolateParams));
-    }
-
-    //######################### public methods - implementation of OnInit #########################
-    
-    /**
-     * Initialize component
-     */
-    public ngOnInit(): void
-    {
-        this.subscription = this.localizationSvc.textsChange.subscribe(() => this.changeDetector.markForCheck());
-    }
-
-    //######################### public methods - implementation of OnDestroy #########################
-    
-    /**
-     * Called when component is destroyed
-     */
-    public ngOnDestroy(): void
-    {
-        this.localizePipe.ngOnDestroy();
     }
 }
