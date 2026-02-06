@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, ViewContainerRef, ComponentRef, EmbeddedViewRef, ViewChild} from '@angular/core';
 
 import {ValidationErrorsResult} from '../../services/errorMessagesExtractor/errorMessagesExtractor.interface';
-import {ValidationErrorsComponent, ValidationErrorsContainerComponent, ValidationErrorsContainerOptions, ValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
+import {ValidationErrorsComponent, LegacyValidationErrorsContainerComponent, LegacyValidationErrorsContainerOptions, LegacyValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
 
 //TODO: optimize duplicit code
 
@@ -15,7 +15,7 @@ import {ValidationErrorsComponent, ValidationErrorsContainerComponent, Validatio
     styleUrl: 'reservedSpaceValidationErrorsContainer.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReservedSpaceValidationErrorsContainerComponent implements ValidationErrorsContainerComponent
+export class ReservedSpaceValidationErrorsContainerComponent implements LegacyValidationErrorsContainerComponent
 {
     //######################### protected fields #########################
 
@@ -24,12 +24,12 @@ export class ReservedSpaceValidationErrorsContainerComponent implements Validati
      * @internal
      */
     protected _errors: ValidationErrorsResult;
-    
+
     /**
      * Options used for displaying validation errors
      * @internal
      */
-    protected _options: ValidationErrorsContainerOptions;
+    protected _options: LegacyValidationErrorsContainerOptions;
 
     /**
      * Instance of component reference for rendered errors
@@ -39,7 +39,7 @@ export class ReservedSpaceValidationErrorsContainerComponent implements Validati
     /**
      * Instance of template reference for rendered errors
      */
-    protected _template: EmbeddedViewRef<ValidationErrorsTemplateContext>;
+    protected _template: EmbeddedViewRef<LegacyValidationErrorsTemplateContext>;
 
     //######################### public properties - children #########################
 
@@ -57,7 +57,7 @@ export class ReservedSpaceValidationErrorsContainerComponent implements Validati
      * @param options - Options used for displaying validation errors
      * @param errorClasses - Array of css error classes
      */
-    public show(errors: ValidationErrorsResult, options: ValidationErrorsContainerOptions): void
+    public show(errors: ValidationErrorsResult, options: LegacyValidationErrorsContainerOptions): void
     {
         this._errors = errors;
         this._options = options;

@@ -17,13 +17,13 @@ export function readEncodedFilterWithDates<TFilter>(defaultValue: TFilter, filte
         if(isString(value) && dateRegex.test(value))
         {
             const val = parseISO(value);
-        
+
             //invalid date
             if(isNaN(val.valueOf()))
             {
                 return null;
             }
-            
+
             return val;
         }
 

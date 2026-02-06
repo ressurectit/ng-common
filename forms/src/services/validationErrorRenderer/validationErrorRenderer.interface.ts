@@ -36,7 +36,7 @@ export interface ValidationErrorsComponent
 /**
  * Context passed to template that is used for rendering validation errors
  */
-export interface ValidationErrorsTemplateContext
+export interface LegacyValidationErrorsTemplateContext
 {
     /**
      * Errors to be shown
@@ -52,14 +52,14 @@ export interface ValidationErrorsTemplateContext
 /**
  * Component that is used for rendering validation errors container
  */
-export interface ValidationErrorsContainerComponent
+export interface LegacyValidationErrorsContainerComponent
 {
     /**
      * Shows validation errors
      * @param errors - Errors to be shown
      * @param options - Options used for displaying validation errors
      */
-    show(errors: ValidationErrorsResult, options: ValidationErrorsContainerOptions): void;
+    show(errors: ValidationErrorsResult, options: LegacyValidationErrorsContainerOptions): void;
 
     /**
      * Hides validation errors
@@ -91,7 +91,7 @@ export interface ValidationErrorsOptions
 /**
  * Options for validation errors container
  */
-export interface ValidationErrorsContainerOptions extends ValidationErrorsOptions
+export interface LegacyValidationErrorsContainerOptions extends ValidationErrorsOptions
 {
     /**
      * Component used for rendering validation errors
@@ -101,18 +101,18 @@ export interface ValidationErrorsContainerOptions extends ValidationErrorsOption
     /**
      * Template used for rendering validation errors
      */
-    template?: TemplateRef<ValidationErrorsTemplateContext>;
+    template?: TemplateRef<LegacyValidationErrorsTemplateContext>;
 }
 
 /**
  * Options for ValidationErrorRenderer
  */
-export interface ValidationErrorsRendererOptions extends ValidationErrorsContainerOptions
+export interface ValidationErrorsRendererOptions extends LegacyValidationErrorsContainerOptions
 {
     /**
      * Component used for rendering validation errors container
      */
-    container?: Type<ValidationErrorsContainerComponent>;
+    container?: Type<LegacyValidationErrorsContainerComponent>;
 }
 
 /**

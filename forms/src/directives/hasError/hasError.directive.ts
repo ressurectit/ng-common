@@ -1,14 +1,15 @@
 import {Directive, Optional, SkipSelf, OnInit, OnDestroy, Inject, Input, Injector, ViewContainerRef, AfterViewInit, Type, TemplateRef} from '@angular/core';
+import {toObservable} from '@angular/core/rxjs-interop';
 import {FormControlDirective, FormControlName, FormControl, NgModel, PristineChangeEvent} from '@angular/forms';
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {generateId, BindThis, StringDictionary} from '@jscrpt/common';
-import {Subscription, filter} from 'rxjs';
+import {Subscription, filter, skip} from 'rxjs';
 
 import {ValidationErrorRendererFactory} from '../../services/validationErrorRenderer/validationErrorRenderer.service';
-import {ValidationErrorRenderer, ValidationErrorsComponent, ValidationErrorsRendererOptions, ValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
-import {SubmittedService} from '../../services/submitted/submitted.service';
+import {ValidationErrorRenderer, ValidationErrorsComponent, ValidationErrorsRendererOptions, LegacyValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
 import {GroupHasErrorDirective} from '../groupHasError/groupHasError.directive';
 import {ValidationErrorsContainerView} from '../../misc/validationErrorsContainerView';
+import {SubmittedService} from '../../features';
 
 //TODO: add support for setting renderer factory options using input
 
@@ -78,7 +79,7 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
      * Custom template used for rendering validation errors
      */
     @Input()
-    public errorsTemplate?: TemplateRef<ValidationErrorsTemplateContext>;
+    public errorsTemplate?: TemplateRef<LegacyValidationErrorsTemplateContext>;
 
     //######################### constructor #########################
     constructor(protected rendererFactory: ValidationErrorRendererFactory,
@@ -95,7 +96,7 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
     }
 
     //######################### public methods - implementation of OnInit #########################
-    
+
     /**
      * Initialize component
      */
@@ -122,27 +123,27 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
 
         if(this.submittedSvc)
         {
-            this.subscriptions.add(this.submittedSvc.submittedChange.subscribe(() => this.isSubmittedOrDirty(() => this.updateStatus())));
+            this.subscriptions.add(toObservable(this.submittedSvc.submitted, {injector: this.injector}).pipe(skip(1)).subscribe(() => this.isSubmittedOrDirty(() => this.updateStatus())));
         }
     }
 
     //######################### public methods - implementation of AfterViewInit #########################
-    
+
     /**
      * Called when view was initialized
      */
     public ngAfterViewInit(): void
     {
         this.renderer = this.rendererFactory.create(this.control,
-                                                     this.containerView,
-                                                     this.injector,
-                                                     this.isSubmittedOrDirty);
+                                                    this.containerView,
+                                                    this.injector,
+                                                    this.isSubmittedOrDirty);
 
         this.updateStatus();
     }
 
     //######################### public methods - implementation of OnDestroy #########################
-    
+
     /**
      * Called when component is destroyed
      */
@@ -190,8 +191,8 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
         if(this.groupHasError)
         {
             this.isSubmittedOrDirty(() => this.groupHasError.registerControl(this.id),
-                                     () => this.groupHasError.unregisterControl(this.id),
-                                     this.hasErrors);
+                                    () => this.groupHasError.unregisterControl(this.id),
+                                    this.hasErrors);
         }
     }
 
@@ -205,7 +206,7 @@ export class HasErrorDirective implements OnInit, AfterViewInit, OnDestroy
     protected isSubmittedOrDirty(action: () => void, falseAction: () => void = () => {}, additionalCondition: boolean = true): void
     {
         //submitted form or dirty control
-        if((this.submittedSvc?.submitted ||
+        if((this.submittedSvc?.submitted() ||
             this.control?.dirty) &&
            additionalCondition)
         {

@@ -4,7 +4,7 @@ import {StringDictionary} from '@jscrpt/common';
 import {extend} from '@jscrpt/common/extend';
 
 import {ErrorMessagesExtractor} from '../errorMessagesExtractor/errorMessagesExtractor.service';
-import {ValidationErrorRenderer, IsSubmittedOrDirtyFunc, ValidationErrorsRendererOptions, ValidationErrorRendererFactoryOptions, ValidationErrorsContainerComponent} from './validationErrorRenderer.interface';
+import {ValidationErrorRenderer, IsSubmittedOrDirtyFunc, ValidationErrorsRendererOptions, ValidationErrorRendererFactoryOptions, LegacyValidationErrorsContainerComponent} from './validationErrorRenderer.interface';
 import {ValidationErrorsResult} from '../errorMessagesExtractor/errorMessagesExtractor.interface';
 import {VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS} from '../../misc/tokens';
 import {ValidationErrorsContainerView} from '../../misc/validationErrorsContainerView';
@@ -68,7 +68,7 @@ export class DefaultValidationErrorRenderer implements ValidationErrorRenderer
     /**
      * Component used as validation errors container
      */
-    protected _container: ComponentRef<ValidationErrorsContainerComponent>;
+    protected _container: ComponentRef<LegacyValidationErrorsContainerComponent>;
 
     //######################### constructor #########################
     constructor(protected _errorMessagesExtractor: ErrorMessagesExtractor,

@@ -1,11 +1,12 @@
 import {Directive, Input, EventEmitter, Output, HostListener, TemplateRef, ContentChild} from '@angular/core';
-import {TitledDialogConfig, TitledDialogService} from '@anglr/common/material';
 import {lastValueFrom} from 'rxjs';
 
 import {ConfirmationDialogComponent} from '../../components/confirmationDialog/confirmationDialog.component';
 import {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from '../../misc/interfaces/confirmationDialog.interface';
 import {ConfirmationDialogChoiceTemplateContext} from '../confirmationDialogChoiceTemplate/confirmationDialogChoiceTemplate.context';
 import {ConfirmationDialogChoiceTemplateDirective} from '../confirmationDialogChoiceTemplate/confirmationDialogChoiceTemplate.directive';
+import {TitledDialogConfig} from '../../misc/interfaces/titledDialog.interface';
+import {TitledDialogService} from '../../services/titledDialog/titledDialog.service';
 
 /**
  * Directive that enables confirmation dialog on click
@@ -67,7 +68,7 @@ export class ConfirmationDialogDirective
     public preventDefaultsAndPropagation: boolean = true;
 
     /**
-     * Instance of tooltip template that is used for rendering button container
+     * Instance of confirmation dialog template that is used for rendering button container
      */
     @Input('choiceTemplate')
     public confirmationDialogChoiceTemplate?: TemplateRef<ConfirmationDialogChoiceTemplateContext>;
@@ -80,13 +81,13 @@ export class ConfirmationDialogDirective
     @Output()
     public confirm: EventEmitter<void> = new EventEmitter<void>();
 
-    //######################### public properties - children #########################
+    //######################### protected properties - children #########################
 
     /**
      * Instance of template from element content, used for rendering
      */
     @ContentChild(ConfirmationDialogChoiceTemplateDirective)
-    public confirmationDialogChoiceTemplateChild?: ConfirmationDialogChoiceTemplateDirective;
+    protected confirmationDialogChoiceTemplateChild?: ConfirmationDialogChoiceTemplateDirective;
 
     //######################### constructor #########################
     constructor(private _dialog: TitledDialogService)

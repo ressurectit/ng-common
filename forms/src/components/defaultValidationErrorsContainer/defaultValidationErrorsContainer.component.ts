@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, ViewContainerRef, ComponentRef, EmbeddedViewRef} from '@angular/core';
 
 import {ValidationErrorsResult} from '../../services/errorMessagesExtractor/errorMessagesExtractor.interface';
-import {ValidationErrorsComponent, ValidationErrorsContainerComponent, ValidationErrorsContainerOptions, ValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
+import {ValidationErrorsComponent, LegacyValidationErrorsContainerComponent, LegacyValidationErrorsContainerOptions, LegacyValidationErrorsTemplateContext} from '../../services/validationErrorRenderer/validationErrorRenderer.interface';
 
 /**
  * Component that serves as container for validation errors, either component or templates
@@ -13,7 +13,7 @@ import {ValidationErrorsComponent, ValidationErrorsContainerComponent, Validatio
     styleUrl: 'defaultValidationErrorsContainer.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultValidationErrorsContainerComponent implements ValidationErrorsContainerComponent
+export class DefaultValidationErrorsContainerComponent implements LegacyValidationErrorsContainerComponent
 {
     //######################### protected fields #########################
 
@@ -27,7 +27,7 @@ export class DefaultValidationErrorsContainerComponent implements ValidationErro
      * Options used for displaying validation errors
      * @internal
      */
-    protected _options: ValidationErrorsContainerOptions;
+    protected _options: LegacyValidationErrorsContainerOptions;
 
     /**
      * Instance of component reference for rendered errors
@@ -37,7 +37,7 @@ export class DefaultValidationErrorsContainerComponent implements ValidationErro
     /**
      * Instance of template reference for rendered errors
      */
-    protected _template: EmbeddedViewRef<ValidationErrorsTemplateContext>;
+    protected _template: EmbeddedViewRef<LegacyValidationErrorsTemplateContext>;
 
     //######################### constructor #########################
     constructor(protected _viewContainer: ViewContainerRef)
@@ -52,7 +52,7 @@ export class DefaultValidationErrorsContainerComponent implements ValidationErro
      * @param options - Options used for displaying validation errors
      * @param errorClasses - Array of css error classes
      */
-    public show(errors: ValidationErrorsResult, options: ValidationErrorsContainerOptions): void
+    public show(errors: ValidationErrorsResult, options: LegacyValidationErrorsContainerOptions): void
     {
         this._errors = errors;
         this._options = options;

@@ -7,12 +7,13 @@ export * from './directives/numberInput/numberInputControlValueAccessor.directiv
 export * from './directives/hasError/hasError.directive';
 export * from './directives/groupHasError/groupHasError.directive';
 export * from './directives/requiredClass/requiredClass.directive';
+export * from './features';
 export * from './services/errorMessagesExtractor/errorMessagesExtractor.interface';
 export * from './services/errorMessagesExtractor/errorMessagesExtractor.service';
 export * from './services/formModelBuilder/formModelBuilder.service';
-export * from './services/submitted/submitted.service';
 export * from './services/validationErrorRenderer/validationErrorRenderer.interface';
 export * from './services/validationErrorRenderer/validationErrorRenderer.service';
+export * from './misc/providers';
 export * from './misc/tokens';
 export * from './misc/types';
 export * from './misc/utils';

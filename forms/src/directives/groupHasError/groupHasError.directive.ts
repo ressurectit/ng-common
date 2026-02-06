@@ -4,7 +4,7 @@ import {extend} from '@jscrpt/common/extend';
 /**
  * Default options for GroupHasErrorDirective
  */
-const defaultOptions: GroupHasErrorOptions =
+const defaultOptions: LegacyGroupHasErrorOptions =
 {
     cssClass: 'has-error'
 };
@@ -12,7 +12,7 @@ const defaultOptions: GroupHasErrorOptions =
 /**
  * Options for GroupHasErrorDirective
  */
-export interface GroupHasErrorOptions
+export interface LegacyGroupHasErrorOptions
 {
     /**
      * Css class applied to element when there is an error
@@ -34,7 +34,7 @@ export class GroupHasErrorDirective
     /**
      * Options for this directive
      */
-    private _options: GroupHasErrorOptions = null;
+    private _options: LegacyGroupHasErrorOptions = null;
 
     /**
      * Array of invalid controls

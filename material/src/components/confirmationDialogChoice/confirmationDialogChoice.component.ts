@@ -1,5 +1,4 @@
 import {Component, ChangeDetectionStrategy, Optional, Inject} from '@angular/core';
-import {NgClass} from '@angular/common';
 import {MatDialogRef} from '@angular/material/dialog';
 import {LocalizePipe} from '@anglr/common';
 
@@ -15,25 +14,22 @@ import {CONFIRMATION_DIALOG_OPTIONS} from '../../misc/tokens';
     templateUrl: 'confirmationDialogChoice.component.html',
     imports:
     [
-        NgClass,
         LocalizePipe,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmationDialogChoiceComponent
 {
-    //######################### public properties - template bindings #########################
+    //######################### protected properties - template bindings #########################
 
     /**
      * Options used for confirmation dialog component
-     * @internal
      */
-    public options: ConfirmationDialogOptions;
+    protected options: ConfirmationDialogOptions;
 
     //######################### constructor #########################
-    constructor(public dialog: MatDialogRef<ConfirmationDialogOptions, boolean>,
-                @Inject(CONFIRMATION_DIALOG_OPTIONS) @Optional() options: ConfirmationDialogOptions,
-    )
+    constructor(protected dialog: MatDialogRef<ConfirmationDialogOptions, boolean>,
+                @Inject(CONFIRMATION_DIALOG_OPTIONS) @Optional() options: ConfirmationDialogOptions,)
     {
         this.options = options;
     }

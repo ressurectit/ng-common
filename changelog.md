@@ -1,17 +1,113 @@
 # Changelog
 
-## Version 24.0.0 (2026-02-04)
+## Version 24.0.0 (2026-02-06)
 
 ### Features
 
-- updated `ConfirmationDialogDirective` directive
-   - **new inputs**
-      - `choiceTemplate` custom template for rendering confirmation dialog buttons container
-      - `confirmationDialogOptions` options for confirmation dialog component
-- new `ConfirmationDialogChoiceTemplateDirective` directive, that defines custom template for confirmation dialog buttons container
-- updated `ConfirmationDialogComponent` component
-   - **new options**
-      - `choiceComponent` custom component used for rendering confirmation dialog buttons container
+- subpackage `@anglr/common/forms`
+   - new `ValidationError` component, that is component used for displaying validation error
+      - **implements**
+         - `ValidationErrorComponent`
+      - **inputs**
+         - `error` instance of validation error data to be displayed
+   - new `ValidationErrorsContainer` component, that is component used as container displaying validation errors 
+      - **implements**
+         - `ValidationErrorsContainerComponent`
+      - **inputs**
+         - `errors` array of errors that should be displayed in container
+         - `options` options for validation errors container
+   - new `GroupHasError` directive, that is attached to parent element of inputs group and handles css class that is added to this element
+      - **inputs**
+         - `cssClass` css class that is applied to element
+      - **methods**
+         - `registerFormField` registers form field as invalid
+         - `unregisterFormField` unregisters form field
+   - new `HasError` directive, that is attached to form field element and handles rendering of validation errors
+      - **inputs**
+         - `validatioErrorTemplate` custom template for validation error
+         - `options` options for has error directive
+   - new `ValidationErrorsViewContainer` directive, that defines view container for validation errors, using this directive registers view container in `ValidationErrorsViewContainerRegister`
+   - new `GroupHasErrorOptions` interface, that represent options for `GroupHasError` directive
+      - **properties**
+         - `cssClass` css class applied to element when there is an error
+   - new `HasErrorOptions` interface, that represents options for `HasError` directive
+      - **properties**
+         - `validationErrorsContainerRendererOptions` options for validation errors container renderer
+         - `validationErrorsContainerRendererType` type that is used for rendering validation errors container and placing it in html
+   - new `ValidationErrorComponent` interface, that is definition of validation error component
+      - **properties**
+         - `error` instance of validation error data to be displayed
+   - new `ValidationErrorData` interface, that data used for displaying validation error
+      - **properties**
+         - `type` type of validation error
+         - `message` message of validation error (could be also validation error message template, if args are available)
+         - `args` arguments for parametrization of message
+   - new `ValidationErrorsContainerComponent` interface, that is definition of validation errors container
+      - **properties**
+         - `errors` array of errors that should be displayed in container
+         - `options` options for validation errors container
+   - new `ValidationErrorsContainerOptions` interface, that represents options for validation errors container
+      - **properties**
+         - `validationErrorType` type that is used for rendering validation error
+         - `validationErrorTemplate` template used for rendering validation error, this has higher precendence than `validationErrorType`
+         - `cssClass` css class that is applied to validation errors container itself
+         - `validationErrorAnimateEnter` animation used for animating validation error when appearing
+         - `validationErrorAnimateLeave` animation used for animating validation error when disappearing
+   - new `ValidationErrorsContainerRenderer` interface, that defines validation errors container renderer, used for rendering validation errors container, it is created inside injection context
+   - new `ValidationErrorsContainerRendererCtor` interface, that defines type (constructor) for creating instance of `ValidationErrorsContainerRenderer`
+   - new `ValidationErrorsContainerRendererOptions` interface, that represents options for validation errors container renderer
+      - **properties**
+         - `validationErrorsContainerType` type that is used for rendering validation errors container
+         - `validationErrorsContainerOptions` options for validation errors container
+   - new `ValidationErrorsTemplateContext` interface, that is context for validation error template
+      - **properties**
+         - `$implicit` data used for displaying validation error
+   - new `provideHasErrorOptions` provider function, that provides has error global options
+   - new `provideGroupHasErrorOptions` provider function, that provides group has error global options
+   - new `HAS_ERROR_OPTIONS` injection token used for injecting global `HasErrorOptions`
+   - new `GROUP_HAS_ERROR_OPTIONS` injection token used for injecting global `GroupHasErrorOptions`
+   - new `InlineValidationErrorsContainerRenderer` service, that represents validation errors container renderer, used for rendering validation errors container, it is created inside injection context
+      - Renders validation errors below form field
+      - **implements**
+         - `ValidationErrorsContainerRenderer`
+   - new `ValidationErrorsViewContainerRegister` service, that is used as register for validation errors view container
+      - **properties**
+         - `viewContainer` gets view container used for rendering validation errors
+      - **methods**
+         - `setViewContainer` sets view container to register
+   - new `provideValidatonErrorMessages` provider function, that provides validation error messages globally
+- subpackage `@anglr/common/material`
+   - new `ConfirmationDialogChoiceTemplateDirective` directive, that defines custom template for confirmation dialog buttons container
+   - new `ConfirmationDialogChoiceTemplateContext` interface, that represents context passed to template of confirmation dialog choice
+      - **properties**
+         - `$implicit` data that should be displayed in confirmation dialog choice template
+         - `dialogRef` reference to dialog instance
+   - new `ConfirmationDialogChoiceComponent` component, that is confirmation dialog choice container component
+   - updated `ConfirmationDialogDirective` directive
+      - **new inputs**
+         - `choiceTemplate` custom confirmation dialog template for rendering confirmation dialog buttons container
+         - `confirmationDialogOptions` options for confirmation dialog component
+   - updated `ConfirmationDialogComponent` component
+      - now supports better customization of choice buttons area, you can use custom template or component to render these buttons
+   - updated `ConfirmationDialogOptions` interface
+      - **new properties**
+         - `template` template used for rendering buttons container
+         - `choiceComponent` component used for rendering buttons container
+
+### BREAKING CHANGES
+
+- minimal supported version of `@angular` packages is `21.1.3`
+- minimal supported version of `@jscrpt/common` package is `7.1.0`
+- minimal supported version of `@css-styles/themes` package is `2.4.0`
+- minimal supported version of `@floating-ui/dom` package is `1.7.5`
+- subpackage `@anglr/common/forms`
+   - renamed `ValidationErrorsContainerComponent` interface to `LegacyValidationErrorsContainerComponent`, because new implementation has same name, if you are using template or reactive forms use *legacy* implementation
+   - renamed `ValidationErrorsContainerOptions` interface to `LegacyValidationErrorsContainerOptions`, because new implementation has same name, if you are using template or reactive forms use *legacy* implementation
+   - renamed `ValidationErrorsTemplateContext` interface to `LegacyValidationErrorsTemplateContext`, because new implementation has same name, if you are using template or reactive forms use *legacy* implementation
+   - renamed `GroupHasErrorOptions` interface to `LegacyGroupHasErrorOptions`, because new implementation has same name, if you are using template or reactive forms use *legacy* implementation
+   - update `SubmittedService` service
+      - now using signals
+      - removed `submittedChange`
 
 ## Version 23.0.0 (2025-09-29)
 

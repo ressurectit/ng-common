@@ -68,7 +68,7 @@ export class ErrorMessagesExtractor
         result.errors.forEach(error =>
         {
             const errorData = control.errors[error];
-            
+
             //error message is present for error
             if(errorMessages[error])
             {

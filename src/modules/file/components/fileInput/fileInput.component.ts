@@ -1,10 +1,10 @@
 import {Component, ChangeDetectionStrategy, ExistingProvider, forwardRef, WritableSignal, signal, input, InputSignal, Signal, computed} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {FirstUppercaseLocalizePipe} from '@anglr/common';
 
 import {FILE_VISUAL} from '../../misc/tokens';
 import {FileVisual} from '../../interfaces';
 import {FileTemplateContext} from '../../directive';
+import {FirstUppercaseLocalizePipe} from '../../../../pipes';
 
 /**
  * Component that represents file input template
@@ -37,7 +37,7 @@ export class FileInputComponent implements FileVisual
      * Selected text value based on file template context or selected text input
      */
     protected selectedTextValue: Signal<string|undefined|null>;
-    
+
     //######################### public properties - implementation of FileVisual #########################
 
     /**

@@ -1,10 +1,10 @@
 import {Component, ChangeDetectionStrategy, ExistingProvider, forwardRef, WritableSignal, signal, InputSignal, input, numberAttribute, InputSignalWithTransform} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {IsPresentPipe, LocalizePipe} from '@anglr/common';
 
 import {FILE_VISUAL} from '../../misc/tokens';
 import {FileVisual} from '../../interfaces';
 import {FileTemplateContext} from '../../directive';
+import {IsPresentPipe, LocalizePipe} from '../../../../pipes';
 
 /**
  * Component that represents upload button file template

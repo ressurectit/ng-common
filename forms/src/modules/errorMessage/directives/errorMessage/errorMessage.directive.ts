@@ -45,7 +45,7 @@ export class ErrorMessageDirective implements OnChanges, OnDestroy
     }
 
     //######################### public methods - implementation of OnChanges #########################
-    
+
     /**
      * Called when input value changes
      */
@@ -58,7 +58,7 @@ export class ErrorMessageDirective implements OnChanges, OnDestroy
     }
 
     //######################### public methods - implementation of OnDestroy #########################
-    
+
     /**
      * Called when component is destroyed
      */

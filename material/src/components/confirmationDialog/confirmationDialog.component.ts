@@ -2,10 +2,9 @@ import {Component, ChangeDetectionStrategy, Inject, Optional, Injector, ValuePro
 import {NgComponentOutlet, NgTemplateOutlet} from '@angular/common';
 import {MatDialogRef} from '@angular/material/dialog';
 import {LocalizePipe} from '@anglr/common';
-import {TITLED_DIALOG_DATA} from '@anglr/common/material';
 import {extend} from '@jscrpt/common/extend';
 
-import {CONFIRMATION_DIALOG_OPTIONS} from '../../misc/tokens';
+import {CONFIRMATION_DIALOG_OPTIONS, TITLED_DIALOG_DATA} from '../../misc/tokens';
 import {ConfirmationDialogOptions} from '../../misc/interfaces/confirmationDialog.interface';
 import {ConfirmationDialogChoiceComponent} from '../confirmationDialogChoice/confirmationDialogChoice.component';
 
@@ -46,38 +45,37 @@ const defaultOptions: ConfirmationDialogOptions =
 })
 export class ConfirmationDialogComponent
 {
-    //######################### public properties - template bindings #########################
+    //######################### protected properties - template bindings #########################
 
     /**
      * Injector used for creating component or template
      */
-    public injector: Injector;
+    protected injector: Injector;
 
     /**
      * Options used for confirmation dialog component
-     * @internal
      */
-    public options: ConfirmationDialogOptions;
+    protected options: ConfirmationDialogOptions;
 
     //######################### constructor #########################
     constructor(@Inject(TITLED_DIALOG_DATA) data: ConfirmationDialogOptions,
-                public dialog: MatDialogRef<ConfirmationDialogOptions, unknown>,
+                protected dialog: MatDialogRef<ConfirmationDialogOptions, unknown>,
                 @Inject(CONFIRMATION_DIALOG_OPTIONS) @Optional() options: ConfirmationDialogOptions,
                 injector: Injector)
     {
         this.options = extend(true, {}, defaultOptions, options ?? {}, data);
         this.injector = Injector.create(
-            {
-                providers:
-                [
-                    <ValueProvider>
-                    {
-                        provide: CONFIRMATION_DIALOG_OPTIONS,
-                        useValue: this.options,
-                    },
-                ],
-                parent: injector,
-            });
+        {
+            providers:
+            [
+                <ValueProvider>
+                {
+                    provide: CONFIRMATION_DIALOG_OPTIONS,
+                    useValue: this.options,
+                },
+            ],
+            parent: injector,
+        });
 
         if(!this.options.choiceComponent && !this.options.template)
         {
