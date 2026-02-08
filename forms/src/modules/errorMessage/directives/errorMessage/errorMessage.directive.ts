@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Inject, Input, OnChanges, OnDestroy, SimpleChanges} from '@angular/core';
+import {Directive, ElementRef, Inject, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {StringLocalization, STRING_LOCALIZATION} from '@anglr/common';
 import {Dictionary, isBlank, nameof, StringDictionary} from '@jscrpt/common';
 import {Subscription} from 'rxjs';
