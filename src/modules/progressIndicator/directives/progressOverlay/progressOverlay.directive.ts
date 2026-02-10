@@ -173,7 +173,7 @@ export class ProgressOverlayDirective implements OnInit, OnDestroy
         for(const message of newMessages)
         {
             const messageDiv = this._document.createElement('div');
-            messageDiv.textContent = this._localizationSvc.get(message)();
+            messageDiv.textContent = this._localizationSvc.get(message, null, true)();
 
             this._lastThreeMessages.unshift(messageDiv);
             this._messagesElement.append(messageDiv);

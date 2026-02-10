@@ -71,7 +71,7 @@ export class ErrorMessageDirective implements OnChanges
         }
 
         const errorMessage = this._errorMessages[this.errorName];
-        const message = this._localization.get(errorMessage, this.errors)();
+        const message = this._localization.get(errorMessage, this.errors, true)();
 
         this._element.nativeElement.innerHTML = message;
     }

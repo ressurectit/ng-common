@@ -62,7 +62,7 @@ export class ErrorMessagesExtractor
         const result: ValidationErrorsResult =
         {
             errors: Object.keys(control.errors).filter(itm => this._ignoredValidationErrors.indexOf(itm) < 0),
-            errorMessages: []
+            errorMessages: [],
         };
 
         result.errors.forEach(error =>
@@ -72,7 +72,7 @@ export class ErrorMessagesExtractor
             //error message is present for error
             if(errorMessages[error])
             {
-                result.errorMessages.push(this._stringLocalization.get(errorMessages[error], control.errors)());
+                result.errorMessages.push(this._stringLocalization.get(errorMessages[error], control.errors, true)());
             }
             //display error data if it is string and there is missing translation
             else if(isString(errorData))
@@ -86,7 +86,7 @@ export class ErrorMessagesExtractor
                 {
                     if(isString(errorItm))
                     {
-                        result.errorMessages.push(this._stringLocalization.get(errorItm, control.errors)());
+                        result.errorMessages.push(this._stringLocalization.get(errorItm, control.errors, true)());
                     }
                 });
             }

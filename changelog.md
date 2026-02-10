@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 24.1.0 (2026-02-10)
+
+- updated `StringLocalization` interface
+   - new optional parameter `syncRead` that indicates whether perform sync read, that means value will be available right away, but it will not be updated when language change
+- updated `ProgressOverlayDirective` directive
+   - now using sync read of `StringLocalization`
+- updated `ErrorMessagesExtractor` service
+   - now using sync read of `StringLocalization`
+- updated `ErrorMessageDirective` directive
+   - now using sync read of `StringLocalization`
+
 ## Version 24.0.0 (2026-02-09)
 
 ### Features
