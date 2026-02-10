@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 24.1.1 (2026-02-10)
+
+- updated `HasError` directive
+   - now correctly sends data to `ValidationErrorData.args` for each validaton error
+
+
 ## Version 24.1.0 (2026-02-10)
 
 - updated `StringLocalization` interface

@@ -120,8 +120,7 @@ export class HasError<T>
                     return <ValidationErrorData>{
                         message: (error.message ? error.message : this.messages[error.kind]) ?? `No Message for ${error.kind}`,
                         type: error.kind,
-                        //TODO: remove this or find way how to provide it
-                        args: {},
+                        args: error,
                     };
                 });
             }
