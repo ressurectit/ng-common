@@ -1,12 +1,23 @@
 # Changelog
 
+## Version 24.2.0 (2026-02-23)
+
+### Features
+
+- updated `AsSignal` decorator
+   - new optional parameter `transform` which allows transform of value before its written
+
 ## Version 24.1.1 (2026-02-10)
+
+### Bug Fixes
 
 - updated `HasError` directive
    - now correctly sends data to `ValidationErrorData.args` for each validaton error
 
 
 ## Version 24.1.0 (2026-02-10)
+
+### Features
 
 - updated `StringLocalization` interface
    - new optional parameter `syncRead` that indicates whether perform sync read, that means value will be available right away, but it will not be updated when language change
