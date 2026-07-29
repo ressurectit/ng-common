@@ -7,8 +7,8 @@ import {isBlank} from '@jscrpt/common';
  */
 const NUMBER_INPUT_VALUE_ACCESSOR = <ExistingProvider>
 {
-    provide: NG_VALUE_ACCESSOR, 
-    useExisting: forwardRef(() => NumberInputControlValueAccessor), 
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => NumberInputControlValueAccessor),
     multi: true,
 };
 
@@ -19,7 +19,7 @@ const NUMBER_INPUT_VALUE_ACCESSOR = <ExistingProvider>
 {
     selector: 'input[number][formControlName],input[number][formControl],input[number][ngModel]',
     providers: [NUMBER_INPUT_VALUE_ACCESSOR],
-    host: 
+    host:
     {
         '(change)': 'onChange($event.target.value)',
         '(input)': 'onChange($event.target.value)',
@@ -30,9 +30,9 @@ const NUMBER_INPUT_VALUE_ACCESSOR = <ExistingProvider>
 export class NumberInputControlValueAccessor implements ControlValueAccessor
 {
     //######################### public properties #########################
-    
+
     public onChange = (_: any) => {};
-    
+
     /**
      * Method that is called when picker was touched
      */
@@ -42,7 +42,7 @@ export class NumberInputControlValueAccessor implements ControlValueAccessor
      * Indication whether is number input disabled
      */
     public disabled: boolean = false;
-    
+
     //######################### constructor #########################
     constructor(private _renderer: Renderer2, private _elementRef: ElementRef)
     {
@@ -63,26 +63,26 @@ export class NumberInputControlValueAccessor implements ControlValueAccessor
      */
     public registerOnChange(fn: (data: any) => any): void
     {
-        this.onChange = (value: string) => 
-        { 
+        this.onChange = (value: string) =>
+        {
             if(isBlank(value) || value == '')
             {
                 fn(null);
-                
+
                 return;
             }
-            
+
             //removing all spaces
             value = value.replace(/\s+/g, '');
-            
+
             if(!/^[+-]?\d+(?:[,.]\d+)?$/g.test(value))
             {
                 fn(NaN);
-                
+
                 return;
             }
-            
-            fn(parseFloat(value.replace(',', '.'))); 
+
+            fn(parseFloat(value.replace(',', '.')));
         };
     }
 

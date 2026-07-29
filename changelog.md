@@ -1,5 +1,23 @@
 # Changelog
 
+## Version 25.0.0 (2026-07-29)
+
+### Features
+
+- subpackage `@anglr/common/forms`
+   - new `NumberInputFormControl` directive, form value control for number input
+      - **implements**
+         - `FormValueControl`
+
+### BREAKING CHANGES
+
+- minimal supported version of `Node` is `22.22.3` (recommended version is `26`)
+- minimal supported version of `@angular` is `22.0.4`
+- minimal supported version of `@jscrpt/common` is `7.1.1`
+- minimal supported version of `@css-styles/themes` is `2.6.0`
+- minimal supported version of `@floating-ui/dom` is `1.8.0`
+- minimal supported version of `rxjs` is `7.8.2`
+
 ## Version 24.2.0 (2026-02-23)
 
 ### Features

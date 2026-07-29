@@ -36,7 +36,7 @@ export class GroupHasError
     /**
      * Computed css class that is applied
      */
-    protected computedCssClass: Signal<string|string[]|undefined|null>;
+    protected computedCssClass: Signal<string|readonly string[]|undefined|null>;
 
     //######################### public properties - inputs #########################
 
