@@ -1,5 +1,31 @@
 # Changelog
 
+## Version 26.0.0 (2026-08-14)
+
+### Features
+
+- subpackage `@anglr/common/material`
+   - new `PopoverTriggerDirective` directive, that displays popover with template content anchored to host element on click
+      - **implements**
+         - `OnDestroy`
+      - **inputs**
+         - `popoverTrigger` template rendered as popover content
+         - `popoverPosition` placement of popover against trigger element, flips to opposite side when there is not enough space
+         - `popoverOffset` gap in pixels between trigger and popover panel
+         - `popoverPanelClass` extra css class(es) applied to overlay panel
+      - **outputs**
+         - `popoverOpened` emits after popover was opened
+         - `popoverClosed` emits after popover was closed
+      - **methods**
+         - `toggle` toggles popover open/closed
+         - `open` opens popover
+         - `close` closes popover
+         - `isOpen` gets whether popover is currently open
+
+### BREAKING CHANGES
+
+- minimal supported version of `@jscrpt/common` is `7.3.0`
+
 ## Version 25.0.0 (2026-07-29)
 
 ### Features

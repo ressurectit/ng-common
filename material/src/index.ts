@@ -13,5 +13,6 @@ export {ConfirmationDialogChoiceTemplateDirective} from './directives/confirmati
 export {ConfirmationDialogChoiceTemplateContext} from './directives/confirmationDialogChoiceTemplate/confirmationDialogChoiceTemplate.context';
 export {DebugDataCopyClickDirective} from './directives/debugDataCopyClick/debugDataCopyClick.directive';
 export {ConfirmationDialogOptions, ConfirmationDialogCssClasses} from './misc/interfaces/confirmationDialog.interface';
+export * from './features';
 export * from './misc/providers';
 export * from './misc/tokens';
