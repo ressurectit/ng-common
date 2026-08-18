@@ -1,5 +1,5 @@
-import {Directive, effect, ElementRef, inject, Injector, input, InputSignal, InputSignalWithTransform, OnDestroy, output, OutputEmitterRef, signal, TemplateRef, untracked, ViewContainerRef, WritableSignal} from '@angular/core';
-import {_IdGenerator} from '@angular/cdk/a11y';
+import {booleanAttribute, Directive, effect, ElementRef, inject, Injector, input, InputSignal, InputSignalWithTransform, OnDestroy, output, OutputEmitterRef, signal, TemplateRef, untracked, ViewContainerRef, WritableSignal} from '@angular/core';
+import {_IdGenerator, FocusMonitor, FocusOrigin, InteractivityChecker} from '@angular/cdk/a11y';
 import {hasModifierKey} from '@angular/cdk/keycodes';
 import {createFlexibleConnectedPositionStrategy, createOverlayRef, createRepositionScrollStrategy, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
@@ -86,6 +86,16 @@ export class PopoverTriggerDirective implements OnDestroy
     protected readonly document = inject(DOCUMENT);
 
     /**
+     * Checker used for finding first tabbable element inside popover panel
+     */
+    protected readonly interactivityChecker = inject(InteractivityChecker);
+
+    /**
+     * Monitor used for restoring focus with explicit origin
+     */
+    protected readonly focusMonitor: FocusMonitor = inject(FocusMonitor);
+
+    /**
      * Unique id of the overlay panel, used for aria-controls
      */
     protected readonly panelId: string = inject(_IdGenerator).getId('popover-');
@@ -112,6 +122,16 @@ export class PopoverTriggerDirective implements OnDestroy
      */
     public popoverPanelClass: InputSignal<string|string[]|undefined> = input<string|string[]|undefined>(undefined);
 
+    /**
+     * Indication whether popover is displayed also when trigger element obtains focus using keyboard
+     */
+    public popoverOpenOnFocus: InputSignalWithTransform<boolean, string|boolean> = input<boolean, boolean|string>(false, {transform: booleanAttribute});
+
+    /**
+     * Indication whether opening of popover is blocked, already opened popover can still be closed
+     */
+    public popoverDisabled: InputSignalWithTransform<boolean, string|boolean> = input<boolean, boolean|string>(false, {transform: booleanAttribute});
+
     //######################### public properties - outputs #########################
 
     /**
@@ -137,6 +157,24 @@ export class PopoverTriggerDirective implements OnDestroy
                 {
                     this.close();
                 }
+            });
+        });
+
+        effect(onCleanup =>
+        {
+            if(!this.popoverOpenOnFocus())
+            {
+                return;
+            }
+
+            const subscription = this.focusMonitor
+                .monitor(this.elementRef)
+                .subscribe(origin => this._openOnFocus(origin));
+
+            onCleanup(() =>
+            {
+                subscription.unsubscribe();
+                this.focusMonitor.stopMonitoring(this.elementRef);
             });
         });
     }
@@ -173,7 +211,7 @@ export class PopoverTriggerDirective implements OnDestroy
      */
     public open(): void
     {
-        if(this._overlayRef())
+        if(this.popoverDisabled() || this._overlayRef())
         {
             return;
         }
@@ -191,7 +229,8 @@ export class PopoverTriggerDirective implements OnDestroy
         panel.id = this.panelId;
         panel.setAttribute('role', 'dialog');
         panel.tabIndex = -1;
-        panel.focus();
+
+        this._focusFirstTabbable(panel);
 
         const reposition = (): void => overlayRef.updatePosition();
         this.document.addEventListener('scroll', reposition, true);
@@ -215,12 +254,16 @@ export class PopoverTriggerDirective implements OnDestroy
         this._unlistenScroll?.();
         this._unlistenScroll = null;
 
+        const panel = overlayRef.overlayElement;
+        const activeElement = this.document.activeElement;
+        const focusInside = !!activeElement && (panel === activeElement || panel.contains(activeElement));
+
         overlayRef.dispose();
         this._overlayRef.set(null);
 
-        if(this._previouslyFocused && this.document.contains(this._previouslyFocused))
+        if(focusInside && this._previouslyFocused && this.document.contains(this._previouslyFocused))
         {
-            this._previouslyFocused.focus();
+            this.focusMonitor.focusVia(this._previouslyFocused, 'program');
         }
 
         this._previouslyFocused = null;
@@ -279,6 +322,31 @@ export class PopoverTriggerDirective implements OnDestroy
                 this.close();
             }
         });
+    }
+
+    /**
+     * Opens popover when trigger element obtained focus using keyboard
+     * @param origin - Origin of obtained focus
+     */
+    private _openOnFocus(origin: FocusOrigin): void
+    {
+        if(origin != 'keyboard')
+        {
+            return;
+        }
+
+        this.open();
+    }
+
+    /**
+     * Moves focus to first tabbable element inside popover panel, falls back to panel itself when there is none
+     * @param panel - Overlay panel element
+     */
+    private _focusFirstTabbable(panel: HTMLElement): void
+    {
+        const focusable = Array.from(panel.querySelectorAll<HTMLElement>('*')).find(element => this.interactivityChecker.isTabbable(element));
+
+        (focusable ?? panel).focus();
     }
 
     /**

@@ -1,5 +1,22 @@
 # Changelog
 
+## Version 26.1.0 (2026-08-18)
+
+### Bug Fixes
+
+- subpackage `@anglr/common/material`
+   - updated `PopoverTriggerDirective` directive
+      - fixed restoring of focus on close, focus is now restored programmatically, so origin of last user interaction is not reported to focus monitors of trigger element
+      - focus on close is now restored only when it was still inside of popover panel, so it is not stolen back when user already moved it elsewhere
+
+### Features
+
+- subpackage `@anglr/common/material`
+   - updated `PopoverTriggerDirective` directive
+      - **new inputs**
+         - `popoverOpenOnFocus` indication whether popover is displayed also when trigger element obtains focus using keyboard
+         - `popoverDisabled` indication whether opening of popover is blocked, already opened popover can still be closed
+
 ## Version 26.0.0 (2026-08-14)
 
 ### Features
