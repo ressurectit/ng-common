@@ -1,5 +1,25 @@
 # Changelog
 
+## Version 27.0.0 (2026-08-20)
+
+### Features
+
+- subpackage `@anglr/common/material`
+   - new `PopoverTriggerOptions` interface, that represents options used for programmatic configuration of `PopoverTriggerDirective` directive, used when directive is applied as host directive and its configuration is owned by host component
+      - **properties**
+         - `content` signal with template rendered as popover content
+         - `disabled` signal with indication whether opening of popover is blocked, already opened popover can still be closed
+         - `openOnFocus` signal with indication whether popover is displayed also when trigger element obtains focus using keyboard
+   - updated `PopoverTriggerDirective` directive
+      - **new methods**
+         - `configure` configures popover programmatically, used when directive is applied as host directive and its configuration is owned by host component, takes precedence over inputs
+
+### BREAKING CHANGES
+
+- subpackage `@anglr/common/material`
+   - updated `PopoverTriggerDirective` directive
+      - `popoverTrigger` input is no longer required and its type changed from `InputSignal<TemplateRef<unknown>>` to `InputSignal<TemplateRef<unknown>|undefined>`, which allows applying directive as host directive with its content set using `configure` method, existing usage `[popoverTrigger]="template"` in templates stays unchanged
+
 ## Version 26.1.0 (2026-08-18)
 
 ### Bug Fixes

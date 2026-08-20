@@ -1,4 +1,4 @@
-import {booleanAttribute, Directive, effect, ElementRef, inject, Injector, input, InputSignal, InputSignalWithTransform, OnDestroy, output, OutputEmitterRef, signal, TemplateRef, untracked, ViewContainerRef, WritableSignal} from '@angular/core';
+import {booleanAttribute, computed, Directive, effect, ElementRef, inject, Injector, input, InputSignal, InputSignalWithTransform, OnDestroy, output, OutputEmitterRef, signal, Signal, TemplateRef, untracked, ViewContainerRef, WritableSignal} from '@angular/core';
 import {_IdGenerator, FocusMonitor, FocusOrigin, InteractivityChecker} from '@angular/cdk/a11y';
 import {hasModifierKey} from '@angular/cdk/keycodes';
 import {createFlexibleConnectedPositionStrategy, createOverlayRef, createRepositionScrollStrategy, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
@@ -7,6 +7,7 @@ import {DOCUMENT} from '@angular/common';
 import {PositionPlacement} from '@anglr/common';
 import {isString, eventDispatchesNativeClick} from '@jscrpt/common';
 
+import {PopoverTriggerOptions} from '../../interfaces/popoverTriggerOptions/popoverTriggerOptions.interface';
 import {getPopoverPositions} from '../../misc/utils';
 
 /**
@@ -63,6 +64,11 @@ export class PopoverTriggerDirective implements OnDestroy
      */
     private _unlistenScroll: (() => void)|null = null;
 
+    /**
+     * Configuration set programmatically, null when directive is configured using inputs
+     */
+    private readonly _options: WritableSignal<PopoverTriggerOptions|null> = signal(null);
+
     //######################### protected properties #########################
 
     /**
@@ -100,12 +106,27 @@ export class PopoverTriggerDirective implements OnDestroy
      */
     protected readonly panelId: string = inject(_IdGenerator).getId('popover-');
 
+    /**
+     * Template that is rendered as popover content, programmatic configuration takes precedence over input
+     */
+    protected readonly content: Signal<TemplateRef<unknown>|undefined> = computed(() => this._options()?.content() ?? this.popoverTrigger());
+
+    /**
+     * Indication whether opening of popover is blocked, programmatic configuration takes precedence over input
+     */
+    protected readonly disabled: Signal<boolean> = computed(() => this._options()?.disabled?.() ?? this.popoverDisabled());
+
+    /**
+     * Indication whether popover is displayed also when trigger element obtains focus using keyboard, programmatic configuration takes precedence over input
+     */
+    protected readonly openOnFocus: Signal<boolean> = computed(() => this._options()?.openOnFocus?.() ?? this.popoverOpenOnFocus());
+
     //######################### public properties - inputs #########################
 
     /**
-     * Template rendered as popover content
+     * Template rendered as popover content, ignored when content was set programmatically using `configure` method
      */
-    public popoverTrigger: InputSignal<TemplateRef<unknown>> = input.required();
+    public popoverTrigger: InputSignal<TemplateRef<unknown>|undefined> = input<TemplateRef<unknown>|undefined>(undefined);
 
     /**
      * Placement of popover against trigger element, flips to opposite side when there is not enough space
@@ -123,12 +144,12 @@ export class PopoverTriggerDirective implements OnDestroy
     public popoverPanelClass: InputSignal<string|string[]|undefined> = input<string|string[]|undefined>(undefined);
 
     /**
-     * Indication whether popover is displayed also when trigger element obtains focus using keyboard
+     * Indication whether popover is displayed also when trigger element obtains focus using keyboard, ignored when it was set programmatically using `configure` method
      */
     public popoverOpenOnFocus: InputSignalWithTransform<boolean, string|boolean> = input<boolean, boolean|string>(false, {transform: booleanAttribute});
 
     /**
-     * Indication whether opening of popover is blocked, already opened popover can still be closed
+     * Indication whether opening of popover is blocked, already opened popover can still be closed, ignored when it was set programmatically using `configure` method
      */
     public popoverDisabled: InputSignalWithTransform<boolean, string|boolean> = input<boolean, boolean|string>(false, {transform: booleanAttribute});
 
@@ -149,7 +170,7 @@ export class PopoverTriggerDirective implements OnDestroy
     {
         effect(() =>
         {
-            this.popoverTrigger();
+            this.content();
 
             untracked(() =>
             {
@@ -162,7 +183,7 @@ export class PopoverTriggerDirective implements OnDestroy
 
         effect(onCleanup =>
         {
-            if(!this.popoverOpenOnFocus())
+            if(!this.openOnFocus())
             {
                 return;
             }
@@ -192,6 +213,15 @@ export class PopoverTriggerDirective implements OnDestroy
     //######################### public methods #########################
 
     /**
+     * Configures popover programmatically, used when directive is applied as host directive and its configuration is owned by host component, takes precedence over inputs
+     * @param options - Options used for configuring popover
+     */
+    public configure(options: PopoverTriggerOptions): void
+    {
+        this._options.set(options);
+    }
+
+    /**
      * Toggles popover open/closed
      */
     public toggle(): void
@@ -211,7 +241,9 @@ export class PopoverTriggerDirective implements OnDestroy
      */
     public open(): void
     {
-        if(this.popoverDisabled() || this._overlayRef())
+        const content = this.content();
+
+        if(this.disabled() || this._overlayRef() || !content)
         {
             return;
         }
@@ -223,7 +255,7 @@ export class PopoverTriggerDirective implements OnDestroy
 
         this._subscribeDismissEvents(overlayRef);
 
-        overlayRef.attach(new TemplatePortal(this.popoverTrigger(), this.viewContainerRef));
+        overlayRef.attach(new TemplatePortal(content, this.viewContainerRef));
 
         const panel = overlayRef.overlayElement;
         panel.id = this.panelId;
