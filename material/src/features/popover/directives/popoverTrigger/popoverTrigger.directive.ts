@@ -392,7 +392,7 @@ export class PopoverTriggerDirective implements OnDestroy
             {
                 positionStrategy: createFlexibleConnectedPositionStrategy(this.injector, this.elementRef)
                     .withFlexibleDimensions(false)
-                    .withPush(false)
+                    .withPush(true)
                     .withPositions(getPopoverPositions(this.popoverPosition(), this.popoverOffset())),
                 scrollStrategy: createRepositionScrollStrategy(this.injector),
                 panelClass: panelClass ? ['popover-panel'].concat(panelClass) : 'popover-panel',

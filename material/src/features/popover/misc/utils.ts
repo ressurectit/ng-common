@@ -34,6 +34,16 @@ const oppositeSides: Record<PopoverSide, PopoverSide> =
     };
 
 /**
+ * Alignments used as fallback on cross axis when there is not enough space for configured alignment
+ */
+const fallbackAlignments: Record<PopoverAlignment, PopoverAlignment[]> =
+    {
+        start: ['end', 'center'],
+        end: ['start', 'center'],
+        center: ['start', 'end'],
+    };
+
+/**
  * Builds single connected position for popover displayed at side with cross axis alignment
  * @param side - Side of trigger element at which popover is displayed
  * @param alignment - Alignment of popover on cross axis of side
@@ -66,16 +76,17 @@ function getPopoverPosition(side: PopoverSide, alignment: PopoverAlignment, offs
 }
 
 /**
- * Builds connected positions for placement of popover, opposite side serves as flip fallback
+ * Builds connected positions for placement of popover, remaining alignments on cross axis and opposite side serve as flip fallbacks
  * @param placement - Placement of popover against trigger element
  * @param offset - Gap in pixels between trigger and popover panel
  */
 export function getPopoverPositions(placement: PositionPlacement, offset: number): ConnectedPosition[]
 {
     const[side, alignment] = placementSides[placement];
+    const alignments = [alignment, ...fallbackAlignments[alignment]];
 
     return [
-        getPopoverPosition(side, alignment, offset),
-        getPopoverPosition(oppositeSides[side], alignment, offset),
+        ...alignments.map(align => getPopoverPosition(side, align, offset)),
+        ...alignments.map(align => getPopoverPosition(oppositeSides[side], align, offset)),
     ];
 }

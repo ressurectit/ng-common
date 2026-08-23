@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 27.0.1 (2026-08-23)
+
+### Bug Fixes
+
+- subpackage `@anglr/common/material`
+   - updated `PopoverTriggerDirective` directive
+      - fixed overflowing of popover panel outside of viewport on cross axis, popover now flips its alignment when there is not enough space for configured one, previously only side of popover was flipped and alignment stayed unchanged
+      - popover panel is now pushed back into viewport as last resort, when there is not enough space for any of available positions
+
 ## Version 27.0.0 (2026-08-20)
 
 ### Features
