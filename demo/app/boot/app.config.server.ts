@@ -4,12 +4,12 @@ import {provideServerRendering} from '@angular/platform-server';
 import {appConfig} from './app.config';
 
 //Server configuration
-const serverConfig: ApplicationConfig = 
+const serverConfig: ApplicationConfig =
 {
-    providers: 
+    providers:
     [
         provideServerRendering(),
-    ]
+    ],
 };
 
 /**

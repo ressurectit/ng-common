@@ -12,7 +12,7 @@
             {
                 "build":
                 {
-                    "builder": "@angular-devkit/build-angular:application",
+                    "builder": "@angular/build:application",
                     "options":
                     {
                         "baseHref": "/",
@@ -34,11 +34,15 @@
                         ],
                         "allowedCommonJsDependencies":
                         [
+                            "mousetrap",
                             "extend",
+                            "sourcemapped-stacktrace",
                             "store",
-                            "node-localstorage",
-                            "store/plugins/expire",
-                            "store/storages/sessionStorage"
+                            "dayjs",
+                            "@braintree/sanitize-url",
+                            "dompurify",
+                            "elkjs",
+                            "cytoscape-cose-bilkent"
                         ],
                         "scripts":
                         [
@@ -47,13 +51,11 @@
                                 "bundleName": "configBrowserOverride"
                             }
                         ],
-                        "server": "app/main.server.ts",
-                        "prerender": false,
-                        "ssr":
+                        "serviceWorker": false,
+                        "security": 
                         {
-                            "entry": "server.ts"
-                        },
-                        "serviceWorker": false
+                            "autoCsp": false
+                        }
                     },
                     "configurations":
                     {
@@ -68,8 +70,8 @@
                             [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "1mb",
-                                    "maximumError": "2mb"
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "4mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -77,7 +79,8 @@
                                     "maximumError": "4kb"
                                 }
                             ],
-                            "outputHashing": "all"
+                            "outputHashing": "all",
+                            "serviceWorker": "ngsw-config.json"
                         },
                         "development":
                         {
@@ -95,7 +98,7 @@
                 },
                 "serve":
                 {
-                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "builder": "@angular/build:dev-server",
                     "options":
                     {
                         "hmr": true,
@@ -123,7 +126,7 @@
         "cache":
         {
             "environment": "local",
-            "enabled": false
+            "enabled": true
         },
         "analytics": false,
         "warnings":

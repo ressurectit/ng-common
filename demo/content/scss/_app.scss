@@ -3,12 +3,12 @@
 @use '@css-styles/themes' as themes;
 @use '@anglr/common/styles' as anglrCommon;
 
+@use 'parts/app' as app;
+
 //---------------------- PAGE STYLING ----------------------
 .app-page
 {
     font-family: var(--font-family);
-    -webkit-user-select: none;
-    user-select: none;
     background-color: var(--page-background);
     color: var(--page-foreground);
 
@@ -28,7 +28,9 @@
     @include themes.css-common-components;
     @include themes.css-forms;
     @include themes.css-grid;
+    @include themes.css-texts;
     @include themes.css-titles;
+    @include app.css;
 
     //############## MISC ##############
 

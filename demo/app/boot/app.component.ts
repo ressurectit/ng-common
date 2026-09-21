@@ -1,6 +1,6 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+
 
 /**
  * Application root component
@@ -10,14 +10,11 @@ import {RouterModule} from '@angular/router';
     selector: 'app',
     templateUrl: 'app.component.html',
     styleUrl: 'app.component.scss',
-    standalone: true,
     imports:
     [
-        CommonModule,
-        RouterModule,
+        RouterOutlet,
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppSAComponent
+export class AppComponent
 {
 }

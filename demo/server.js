@@ -9,6 +9,30 @@ import yargs from 'yargs/yargs';
 import {hideBin} from 'yargs/helpers';
 import {extendConnectUse} from 'nodejs-connect-extensions';
 import dotenv from 'dotenv';
+import mime from 'mime-types';
+
+const consoleLog = console.log;
+const consoleError = console.error;
+const consoleWarn = console.warn;
+const logs = [];
+
+console.log = (message, ...optionalParams) =>
+{
+    logs.push(JSON.stringify(message) + ', ' + optionalParams.map(itm => JSON.stringify(itm)).join(', '));
+    consoleLog(message, ...optionalParams);
+};
+
+console.error = (message, ...optionalParams) =>
+{
+    logs.push('ERROR: ' + JSON.stringify(message) + ', ' + optionalParams.map(itm => JSON.stringify(itm)).join(', '));
+    consoleError(message, ...optionalParams);
+};
+
+console.warn = (message, ...optionalParams) =>
+{
+    logs.push('WARNING: ' + JSON.stringify(message) + ', ' + optionalParams.map(itm => JSON.stringify(itm)).join(', '));
+    consoleWarn(message, ...optionalParams);
+};
 
 async function run()
 {
@@ -16,62 +40,64 @@ async function run()
     const server = express();
 
     server.use(compression());
-    
+
     dotenv.config();
-    
+
     extendConnectUse(server);
-    
+
     const dirName = dirname(fileURLToPath(import.meta.url));
     const wwwroot = path.join(dirName, 'wwwroot', 'browser');
     const indexHtml = path.join(wwwroot, 'index.html')
     const serverPath = path.join(dirName, 'wwwroot', 'server', 'server.mjs');
     const proxyUrlFile = path.join(dirName, 'proxyUrl.js');
-    let proxyUrl = "http://127.0.0.1:8080";
+    let proxyUrl = 'http://127.0.0.1:8080';
     let port = process.env['PORT'] || 8888;
 
     if(fs.existsSync(proxyUrlFile))
     {
         proxyUrl = (await import('./proxyUrl.js')).default;
     }
-    
+
     if(process.env.SERVER_PROXY_HOST)
     {
         proxyUrl = process.env.SERVER_PROXY_HOST;
     }
-    
+
     console.log(`Using proxy url '${proxyUrl}'`);
-    
+
     //start with dev port
     if(!!argv.devPort)
     {
         port = 8880;
     }
-    
+
+    server.get('/consoleLog', (_, res) => res.send(logs));
+
     function error(err, req, res)
     {
-        if(err.code == "ECONNREFUSED" || err.code == "ECONNRESET")
+        if(err.code == 'ECONNREFUSED' || err.code == 'ECONNRESET')
         {
-            res.writeHead(503,
+            res.writeHead?.(503,
             {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
             });
-    
+
             res.end('Remote server is offline.');
-    
+
             return;
         }
-    
-        res.writeHead(504,
+
+        res.writeHead?.(504,
         {
-            'Content-Type': 'text/plain'
+            'Content-Type': 'text/plain',
         });
-    
+
         res.end('Failed to proxy request.');
     }
-    
+
     //proxy special requests to other location
-    server.use(createProxyMiddleware(['/api'],
-                                     {
+    server.use(createProxyMiddleware({
+                                         pathFilter: ['/api'],
                                          target: proxyUrl,
                                          ws: true,
                                          secure: false,
@@ -81,17 +107,19 @@ async function run()
                                              error,
                                          },
                                      }));
-    
+
     server.set('view engine', 'html');
     server.set('views', wwwroot);
-    
+
     // Serve static files from /browser
-    server.get('*.*', express.static(wwwroot, 
+    server.use(express.static(wwwroot,
     {
         maxAge: '1y',
-        setHeaders: (res, path) => 
+        setHeaders: (res, path) =>
         {
-            if (express.static.mime.lookup(path) === 'text/html') 
+            if (mime.lookup(path) === 'text/html' ||
+                mime.lookup(path) === 'text/markdown' ||
+                path.indexOf('configBrowserOverride') >= 0)
             {
                 // Skip cache on html to load new builds.
                 res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -101,23 +129,43 @@ async function run()
         }
     }));
 
-    
     if(fs.existsSync(serverPath) && !argv.devPort)
     {
         const {applyServerSideRendering} = await import('./wwwroot/server/server.mjs');
-        
+
         applyServerSideRendering(server);
     }
     else
     {
-        server.get('/*', (_, res) => res.sendFile(indexHtml));
+        server.use((_, res) =>
+        {
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Expires', '-1');
+            res.setHeader('Pragma', 'no-cache');
+
+            return res.sendFile(indexHtml);
+        });
     }
-    
+
     //create node.js http server and listen on port
-    server.listen(port, () =>
+    const runningServer = server.listen(port, () =>
     {
         console.log(`Listening on port ${port} => http://localhost:${port}`);
     });
+
+    process.on('SIGINT', shutdown);
+
+    // Do graceful shutdown
+    function shutdown()
+    {
+        console.log('Shutting down server!');
+
+        runningServer.close(() =>
+        {
+            console.log('Server has stopped, closing application');
+            process.exit();
+        });
+    }
 }
 
 run();

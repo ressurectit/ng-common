@@ -1,4 +1,4 @@
-import {ClassProvider, ValueProvider, Provider, EnvironmentProviders, importProvidersFrom, provideExperimentalZonelessChangeDetection} from '@angular/core';
+import {ClassProvider, ValueProvider, Provider, EnvironmentProviders, importProvidersFrom} from '@angular/core';
 import {provideClientHydration} from '@angular/platform-browser';
 import {provideRouter, withComponentInputBinding} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -24,15 +24,11 @@ export const appProviders: (Provider|EnvironmentProviders)[] =
     //######################### CLIENT HYDRATION #########################
     provideClientHydration(),
 
-
-    //######################### ZONELESS #########################
-    provideExperimentalZonelessChangeDetection(),
-
     //######################### GLOBALIZATION SERVICE #########################
     <ClassProvider>
     {
         provide: GlobalizationService,
-        useClass: GlobalizationServiceImpl
+        useClass: GlobalizationServiceImpl,
     },
 
     //######################### TOOLTIP #########################
@@ -76,7 +72,7 @@ export const appProviders: (Provider|EnvironmentProviders)[] =
             birthNumber: 'Nesprávny formát rodného čísla.',
             email: 'Položka musí byť email.',
             availableUsername: 'Prihlasovacie meno je použité',
-        }
+        },
     },
     <ValueProvider>
     {
@@ -84,7 +80,7 @@ export const appProviders: (Provider|EnvironmentProviders)[] =
         useValue: <ValidationErrorRendererFactoryOptions>
         {
             container: ReservedSpaceValidationErrorsContainerComponent
-        }
+        },
     },
 
     //######################### TITLED DIALOG #########################
@@ -93,7 +89,7 @@ export const appProviders: (Provider|EnvironmentProviders)[] =
     <ValueProvider>
     {
         provide: TitledDialogServiceOptions,
-        useValue: new TitledDialogServiceOptions(MovableTitledDialogComponent)
+        useValue: new TitledDialogServiceOptions(MovableTitledDialogComponent),
     },
 
     //######################### CONFIRMATION DIALOG #########################

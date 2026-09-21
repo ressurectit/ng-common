@@ -5,7 +5,6 @@ packages/
 **/mockLogger/mocks/
 **/config/version.json
 **/config/config.*.json
-**/server.mock.*.cjs
 !**/config/config.development.json
 configOverride.js
 configBrowserOverride.js

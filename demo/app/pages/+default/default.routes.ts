@@ -1,6 +1,6 @@
-import {HomeComponent} from './home/home.component';
+import {homeRoute} from './home/home.route';
 
-export const components =
+export const defaultRoutes =
 [
-    HomeComponent,
+    homeRoute,
 ];

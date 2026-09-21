@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig =
         ...appProviders,
         importProvidersFrom(HotkeyModule.forRoot(
         {
-            cheatSheetCloseEsc: true
+            cheatSheetCloseEsc: true,
         })),
     ],
 };

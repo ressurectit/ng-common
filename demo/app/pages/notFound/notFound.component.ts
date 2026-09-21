@@ -1,5 +1,6 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component} from '@angular/core';
 import {StatusCodeService} from '@anglr/common';
+
 
 /**
  * Page displayed when url was not found
@@ -8,8 +9,6 @@ import {StatusCodeService} from '@anglr/common';
 {
     selector: 'not-found-view',
     templateUrl: 'notFound.component.html',
-    standalone: true,
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class NotFoundComponent
 {

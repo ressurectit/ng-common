@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 28.0.0 (2026-09-21)
+
+### BREAKING CHANGES
+
+- minimal supported version of `@angular` is `22.1.7`
+- minimal supported version of `@jscrpt/common` is `7.4.1`
+- minimal supported version of `@css-styles/themes` is `2.7.0`
+
 ## Version 27.0.1 (2026-08-23)
 
 ### Bug Fixes

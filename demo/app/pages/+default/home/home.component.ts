@@ -1,5 +1,5 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {ComponentRedirectRoute, ComponentRoute} from '@anglr/common/router';
+import {Component} from '@angular/core';
+import {WithScrollableCssClass} from '@anglr/common';
 
 /**
  * Home component
@@ -8,14 +8,11 @@ import {ComponentRedirectRoute, ComponentRoute} from '@anglr/common/router';
 {
     selector: 'home-view',
     templateUrl: 'home.component.html',
-    standalone: true,
     imports:
     [
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
-@ComponentRedirectRoute('', 'home')
-@ComponentRoute({path: 'home'})
-export class HomeComponent
+@WithScrollableCssClass()
+export default class HomeComponent
 {
 }

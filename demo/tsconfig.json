@@ -19,11 +19,15 @@
         "esModuleInterop": true,
         "importHelpers": true,
         "useDefineForClassFields": false,
-        "skipLibCheck": false,
+        "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "newLine": "lf",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "outDir": "wwwroot/app-tsc",
+        "paths":
+        {
+            "store/plugins/expire" : ["../typings/store/index.d.ts"],
+        },
         "lib":
         [
             "ES2022",
@@ -58,11 +62,15 @@
         "strictInjectionParameters": true,
         "strictInputAccessModifiers": true,
         "strictTemplates": true,
+        "strictStandalone": true,
         "extendedDiagnostics":
         {
             "checks":
             {
-                "interpolatedSignalNotInvoked": "error"
+                "interpolatedSignalNotInvoked": "error",
+                "unusedStandaloneImports": "error",
+                "uninvokedFunctionInEventBinding": "error",
+                "missingControlFlowDirective": "error"
             }
         }
     }
