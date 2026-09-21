@@ -24,9 +24,15 @@
         "newLine": "lf",
         "moduleResolution": "bundler",
         "outDir": "wwwroot/app-tsc",
+        "rootDir": "..",
         "paths":
         {
             "store/plugins/expire" : ["../typings/store/index.d.ts"],
+            "@anglr/common": ["../src/index.ts"],
+            "@anglr/common/store": ["../store/src/index.ts"],
+            "@anglr/common/forms": ["../forms/src/index.ts"],
+            "@anglr/common/material": ["../material/src/index.ts"],
+            "@anglr/common/floating-ui": ["../floating-ui/src/index.ts"]
         },
         "lib":
         [
@@ -63,6 +69,7 @@
         "strictInputAccessModifiers": true,
         "strictTemplates": true,
         "strictStandalone": true,
+        "typeCheckHostBindings": false,
         "extendedDiagnostics":
         {
             "checks":

@@ -58,7 +58,7 @@ export class FloatingUiDomPosition implements Position
                             dispose,
                             flip: !!result.middlewareData.flip && !isEmptyObject(result.middlewareData.flip),
                             x: result.x,
-                            y: result.y
+                            y: result.y,
                         });
                     }
 
@@ -77,7 +77,7 @@ export class FloatingUiDomPosition implements Position
                         {
                             ancestorResize: true,
                             ancestorScroll: true,
-                            elementResize: true
+                            elementResize: true,
                         };
                     }
                     else
@@ -99,7 +99,7 @@ export class FloatingUiDomPosition implements Position
                     dispose,
                     flip: !!result.middlewareData.flip && !isEmptyObject(result.middlewareData.flip),
                     x: result.x,
-                    y: result.y
+                    y: result.y,
                 });
 
                 if(!computedOptions.autoUpdate)
@@ -168,11 +168,11 @@ export class FloatingUiDomPosition implements Position
 
             if(options.offset === PositionOffset[PositionOffset.MouseEnter] && options.mouseEvent)
             {
-                const targetBoundingRect = (options.mouseEvent.target as HTMLElement).getBoundingClientRect();
+                const targetBoundingRect = elements.reference.getBoundingClientRect();
                 const floatingBoundingRect = (elements.floating as HTMLElement).getBoundingClientRect();
 
                 return {
-                    crossAxis: options.mouseEvent.x - targetBoundingRect.right + floatingBoundingRect.width
+                    crossAxis: options.mouseEvent.x - targetBoundingRect.right + floatingBoundingRect.width,
                 };
             }
 
@@ -237,7 +237,7 @@ export class FloatingUiDomPosition implements Position
             }
 
             return {
-                crossAxis: dimension
+                crossAxis: dimension,
             };
         }));
     }

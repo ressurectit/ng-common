@@ -2,6 +2,12 @@
 
 ## Version 28.0.0 (2026-09-21)
 
+### Bug Fixes
+
+- subpackage `@anglr/common/floating-ui`
+   - updated `FloatingUiDomPosition` service
+      - fixed *MouseEnter* offset cross axis calculation, now uses bounding rect of `reference` element instead of the mouse event target, so positioning is correct when the hovered element differs from the reference element
+
 ### BREAKING CHANGES
 
 - minimal supported version of `@angular` is `22.1.7`

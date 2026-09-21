@@ -38,7 +38,7 @@ export const appProviders: (Provider|EnvironmentProviders)[] =
         useValue: <RecursivePartial<TooltipOptions>>
         {
             stopPropagation: true,
-        }
+        },
     },
 
     //######################### PERMANENT STORAGE #########################

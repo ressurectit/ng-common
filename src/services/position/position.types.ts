@@ -61,7 +61,7 @@ export enum PositionPlacement
     /**
      * Target is placed on the bottom (below) of source element at the end (right) of its width
      */
-    BottomEnd
+    BottomEnd,
 }
 
 /**
@@ -97,7 +97,7 @@ export enum PositionOffset
     /**
      * Negative offset equal to full size of target
      */
-    NegativeFull
+    NegativeFull,
 }
 
 /**
