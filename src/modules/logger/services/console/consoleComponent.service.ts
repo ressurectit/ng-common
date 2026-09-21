@@ -1,4 +1,4 @@
-import {Injectable, Signal, WritableSignal, inject, signal} from '@angular/core';
+import {Injectable, Signal, WritableSignal, inject, signal, untracked} from '@angular/core';
 
 import {ConsoleComponentServiceOptions} from './consoleComponentService.options';
 import {ConsoleComponentLog} from '../../interfaces';
@@ -38,7 +38,7 @@ export class ConsoleComponentService
      */
     public clear(): void
     {
-        this.currentLogs.set([]);
+        untracked(() => this.currentLogs.set([]));
     }
 
     /**
@@ -47,19 +47,22 @@ export class ConsoleComponentService
      */
     public log(log: ConsoleComponentLog): void
     {
-        this.currentLogs.update(logs =>
+        untracked(() =>
         {
-            logs.push(log);
-
-            //TRIM LOGS
-            if(logs.length > this.options.maxLogsCount)
+            this.currentLogs.update(logs =>
             {
-                const removeCount = logs.length - this.options.maxLogsCount;
+                logs.push(log);
 
-                logs.splice(0, removeCount);
-            }
+                //TRIM LOGS
+                if(logs.length > this.options.maxLogsCount)
+                {
+                    const removeCount = logs.length - this.options.maxLogsCount;
 
-            return [...logs];
+                    logs.splice(0, removeCount);
+                }
+
+                return [...logs];
+            });
         });
     }
 }

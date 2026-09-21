@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 28.0.1 (2026-09-21)
+
+### Bug Fixes
+
+- updated `ConsoleComponentService` service
+   - fixed `clear` and `log` methods now update logs inside `untracked`, so reading the `logs` signal is no longer tracked as a reactive dependency when logs are cleared or added and can be safely called even from computed
+
 ## Version 28.0.0 (2026-09-21)
 
 ### Bug Fixes
