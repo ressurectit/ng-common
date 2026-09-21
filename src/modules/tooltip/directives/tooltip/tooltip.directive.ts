@@ -304,7 +304,14 @@ export class TooltipDirective<TData = unknown> implements OnChanges, OnDestroy
     {
         if(this._tooltipComponent)
         {
-            this._viewContainerRef.clear();
+            const index = this._viewContainerRef.indexOf(this._tooltipComponent.hostView);
+
+            if(index === -1)
+            {
+                throw new Error('TooltipDirective: Tooltip component not found in view container');
+            }
+
+            this._viewContainerRef.remove(index);
             this._tooltipComponent = undefined;
             this._tooltipElement = undefined;
         }

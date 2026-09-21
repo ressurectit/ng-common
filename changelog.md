@@ -4,6 +4,8 @@
 
 ### Bug Fixes
 
+- updated `TooltipDirective` directive
+   - fixed destroying of tooltip, now removes only its own tooltip view from view container instead of clearing whole view container, so other views sharing the same view container are no longer removed
 - subpackage `@anglr/common/floating-ui`
    - updated `FloatingUiDomPosition` service
       - fixed *MouseEnter* offset cross axis calculation, now uses bounding rect of `reference` element instead of the mouse event target, so positioning is correct when the hovered element differs from the reference element
