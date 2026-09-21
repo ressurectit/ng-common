@@ -10,11 +10,22 @@
    - updated `FloatingUiDomPosition` service
       - fixed *MouseEnter* offset cross axis calculation, now uses bounding rect of `reference` element instead of the mouse event target, so positioning is correct when the hovered element differs from the reference element
 
+### Features
+
+- updated `Console` component
+   - **new inputs**
+      - `filterRegex` array of regular expressions used for filtering logs
+
 ### BREAKING CHANGES
 
 - minimal supported version of `@angular` is `22.1.7`
 - minimal supported version of `@jscrpt/common` is `7.4.1`
 - minimal supported version of `@css-styles/themes` is `2.7.0`
+- updated `ConsoleComponentService` service
+   - removed `logsChange` property, use `logs` signal instead
+   - `logs` property type changed from `ConsoleComponentLog[]` to `Signal<ConsoleComponentLog[]>`
+- updated `ConsoleComponent` component
+   - renamed to `Console`
 
 ## Version 27.0.1 (2026-08-23)
 

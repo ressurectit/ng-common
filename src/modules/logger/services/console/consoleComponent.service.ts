@@ -1,5 +1,4 @@
-import {Injectable, inject} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Injectable, Signal, WritableSignal, inject, signal} from '@angular/core';
 
 import {ConsoleComponentServiceOptions} from './consoleComponentService.options';
 import {ConsoleComponentLog} from '../../interfaces';
@@ -15,12 +14,7 @@ export class ConsoleComponentService
     /**
      * Array of current logs
      */
-    protected currentLogs: ConsoleComponentLog[] = [];
-
-    /**
-     * Subject used for indicating logs change
-     */
-    protected logsChangeSubject: Subject<void> = new Subject<void>();
+    protected currentLogs: WritableSignal<ConsoleComponentLog[]> = signal([]);
 
     /**
      * Options for this sink
@@ -30,21 +24,13 @@ export class ConsoleComponentService
     //######################### public properties #########################
 
     /**
-     * Occurs when logs change
-     */
-    public get logsChange(): Observable<void>
-    {
-        return this.logsChangeSubject.asObservable();
-    }
-
-    /**
      * Gets current logs
      */
-    public get logs(): ConsoleComponentLog[]
+    public get logs(): Signal<ConsoleComponentLog[]>
     {
-        return this.currentLogs;
+        return this.currentLogs.asReadonly();
     }
-    
+
     //######################### public methods #########################
 
     /**
@@ -52,8 +38,7 @@ export class ConsoleComponentService
      */
     public clear(): void
     {
-        this.currentLogs = [];
-        this.logsChangeSubject.next();
+        this.currentLogs.set([]);
     }
 
     /**
@@ -62,16 +47,19 @@ export class ConsoleComponentService
      */
     public log(log: ConsoleComponentLog): void
     {
-        this.currentLogs.push(log);
-
-        //TRIM LOGS
-        if(this.currentLogs.length > this.options.maxLogsCount)
+        this.currentLogs.update(logs =>
         {
-            const removeCount = this.currentLogs.length - this.options.maxLogsCount;
+            logs.push(log);
 
-            this.currentLogs.splice(0, removeCount);
-        }
+            //TRIM LOGS
+            if(logs.length > this.options.maxLogsCount)
+            {
+                const removeCount = logs.length - this.options.maxLogsCount;
 
-        this.logsChangeSubject.next();
+                logs.splice(0, removeCount);
+            }
+
+            return [...logs];
+        });
     }
 }

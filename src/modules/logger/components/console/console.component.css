@@ -7,9 +7,25 @@
     height: 50%;
 }
 
+.console-container,
 .console-data
 {
     background-color: #000000c7;
+    border-bottom: 1px solid #AAA;
+}
+
+.filter-btn
+{
+    background-color: #1b1b1b;
+    color: #FFF;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.console-data
+{
     border: none;
     border-bottom: 1px solid #AAA;
     border-radius: 0;

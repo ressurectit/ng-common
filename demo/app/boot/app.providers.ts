@@ -3,7 +3,7 @@ import {provideClientHydration} from '@angular/platform-browser';
 import {provideRouter, withComponentInputBinding} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
 import {LocalPermanentStorage} from '@anglr/common/store';
-import {GlobalizationService, providePosition, provideLoggerConfig, DeveloperConsoleSink, LogLevelEnricher, TimestampEnricher, LogLevel, ConsoleComponentSink, RestSink, providePermanentStorage, TOOLTIP_OPTIONS, TooltipOptions} from '@anglr/common';
+import {GlobalizationService, providePosition, provideLoggerConfig, DeveloperConsoleSink, LogLevelEnricher, TimestampEnricher, LogLevel, ConsoleComponentSink, providePermanentStorage, TOOLTIP_OPTIONS, TooltipOptions} from '@anglr/common';
 import {ReservedSpaceValidationErrorsContainerComponent, ValidationErrorRendererFactoryOptions, VALIDATION_ERROR_MESSAGES, VALIDATION_ERROR_RENDERER_FACTORY_OPTIONS} from '@anglr/common/forms';
 import {MovableTitledDialogComponent, TitledDialogServiceOptions, TitledDialogService, provideConfirmationDialogOptions} from '@anglr/common/material';
 import {FloatingUiDomPosition} from '@anglr/common/floating-ui';
@@ -48,8 +48,6 @@ export const appProviders: (Provider|EnvironmentProviders)[] =
     provideLoggerConfig(config => config
         .writeTo(cfg => cfg.writeTo(ConsoleComponentSink)
                            .minimumLevel(LogLevel.Information))
-        .writeTo(cfg => cfg.writeTo(RestSink)
-                           .minimumLevel(LogLevel.Error))
         .writeTo(DeveloperConsoleSink)
         .enrichWith(LogLevelEnricher)
         .enrichWith(TimestampEnricher)

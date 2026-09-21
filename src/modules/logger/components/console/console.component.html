@@ -1,18 +1,43 @@
 <div class="console-data thin-scrollbar">
-    <div class="console-log" [ngClass]="log?.logLevel | lowercase" *ngFor="let log of currentLogs">
-        <div class="console-log-icon fa" [class.fa-angle-right]="!log?.expanded" [class.fa-angle-down]="log?.expanded" (click)="log.expanded = !log.expanded"></div>
-        <div class="console-log-text" [class.expanded]="log?.expanded" (click)="copyMessage(log.text)">{{log?.text}}</div>
-    </div>
+    @for(log of currentLogs(); track $index)
+    {
+        <div class="console-log" [class]="log.logLevel | lowercase">
+            <div class="console-log-icon fas" [class.fa-angle-right]="!log.expanded" [class.fa-angle-down]="log.expanded" (click)="log.expanded = !log.expanded"></div>
+            <div class="console-log-text" [class.expanded]="log.expanded" (click)="copyMessage(log.text)">{{log.text}}</div>
+        </div>
+    }
 
     <div class="clear-icon" (click)="clear()" title="clear log">
-        <div class="fa fa-times"></div>
+        <div class="fas fa-times"></div>
     </div>
 
-    <div class="copy-icon" (click)="copy()" title="copy to clipboard" *ngIf="canCopy">
-        <div class="fa fa-copy"></div>
-    </div>
+    @if(canCopy)
+    {
+        <div class="copy-icon" (click)="copy()" title="copy to clipboard">
+            <div class="fas fa-copy"></div>
+        </div>
+    }
 </div>
 
+@if(filteringTags().length > 0)
+{
+    <div class="flex-row gap-small console-container">
+        @for(tag of filteringTags(); track $index)
+        {
+            @let tagValue = tag[1];
+
+            <button type="button" class="filter-btn" (click)="tagValue.update(val => val === true ? false : val === false ? undefined : true)">
+                @if(tagValue() | isPresent)
+                {
+                    <span class="fas" [class.fa-check]="tagValue() === true" [class.fa-times]="tagValue() === false"></span>
+                }
+
+                <span>{{tag[0]}}</span>
+            </button>
+        }
+    </div>
+}
+
 <div class="console-filter">
-    <input type="text" placeholder="Filter messages" (input)="filterValue = $any($event.target).value; setMessages()">
+    <input type="text" placeholder="Filter messages" (input)="filterValue.set($any($event.target).value)">
 </div>

@@ -1,9 +1,9 @@
-import {Component, ChangeDetectionStrategy, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {Subscription} from 'rxjs';
+import {Component, computed, input, InputSignal, signal, Signal, WritableSignal} from '@angular/core';
+import {LowerCasePipe} from '@angular/common';
 
 import {ConsoleComponentLog} from '../../interfaces';
 import {ConsoleComponentService} from '../../services';
+import {IsPresentPipe} from '../../../../pipes';
 
 /**
  * Component used for displaying console logs
@@ -20,25 +20,18 @@ import {ConsoleComponentService} from '../../services';
     },
     imports:
     [
-        CommonModule,
+        LowerCasePipe,
+        IsPresentPipe,
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConsoleComponent implements OnInit, OnDestroy
+export class Console
 {
-    //######################### protected fields #########################
-
-    /**
-     * Subscription for log changes
-     */
-    protected logsChangeSubscription: Subscription|undefined|null;
-
     //######################### protected properties - template bindings #########################
 
     /**
      * Current state of logger
      */
-    protected currentLogs: ConsoleComponentLog[] = [];
+    protected currentLogs: Signal<ConsoleComponentLog[]>;
 
     /**
      * Indication whether can use copy to clipboard
@@ -48,42 +41,51 @@ export class ConsoleComponent implements OnInit, OnDestroy
     /**
      * Current value of filter
      */
-    protected filterValue: string = '';
+    protected filterValue: WritableSignal<string> = signal('');
+
+    /**
+     * Filtering tags derived from filterRegex
+     */
+    protected filteringTags: Signal<[RegExp, WritableSignal<boolean|undefined|null>][]>;
+
+    //######################### public properties - inputs #########################
+
+    /**
+     * Array of regular expressions used for filtering logs
+     */
+    public filterRegex: InputSignal<RegExp[]> = input([]);
 
     //######################### constructor #########################
-    constructor(protected consoleSvc: ConsoleComponentService,
-                protected changeDetector: ChangeDetectorRef)
+    constructor(protected consoleSvc: ConsoleComponentService,)
     {
-    }
+        this.filteringTags = computed(() => this.filterRegex().map(regex => [regex, signal(undefined)] as [RegExp, WritableSignal<boolean|undefined|null>]));
 
-    //######################### public methods - implementation of OnInit #########################
-
-    /**
-     * Initialize component
-     */
-    public ngOnInit(): void
-    {
-        this.setMessages();
-
-        this.logsChangeSubscription = this.consoleSvc.logsChange.subscribe(() =>
+        this.currentLogs = computed(() =>
         {
-            this.setMessages();
-            this.changeDetector.detectChanges();
+            let logs = this.consoleSvc.logs();
+            const tags = this.filteringTags();
+
+            const orTags = tags.filter(([_, tagValue]) => tagValue() === true).map(([regex]) => regex);
+            const andTags = tags.filter(([_, tagValue]) => tagValue() === false).map(([regex]) => regex);
+            const orLogs = [];
+
+            for(const regex of orTags)
+            {
+                orLogs.push(...logs.filter(log => regex.test(log.text)));
+            }
+
+            if(orTags.length)
+            {
+                logs = orLogs;
+            }
+
+            for(const regex of andTags)
+            {
+                logs = logs.filter(log => !regex.test(log.text));
+            }
+
+            return logs.filter(log => log.text.toLowerCase().indexOf(this.filterValue().toLowerCase()) >= 0);
         });
-    }
-
-    //######################### public methods - implementation of OnDestroy #########################
-
-    /**
-     * Called when component is destroyed
-     */
-    public ngOnDestroy(): void
-    {
-        if(this.logsChangeSubscription)
-        {
-            this.logsChangeSubscription.unsubscribe();
-            this.logsChangeSubscription = null;
-        }
     }
 
     //######################### protected methods - template bindings #########################
@@ -98,7 +100,7 @@ export class ConsoleComponent implements OnInit, OnDestroy
             return;
         }
 
-        navigator.clipboard.writeText(this.currentLogs.map(log => log.text).join('\n'));
+        navigator.clipboard.writeText(this.currentLogs().map(log => log.text).join('\n'));
     }
 
     /**
@@ -121,20 +123,5 @@ export class ConsoleComponent implements OnInit, OnDestroy
     protected clear(): void
     {
         this.consoleSvc.clear();
-    }
-
-    /**
-     * Sets messages using filter
-     */
-    protected setMessages(): void
-    {
-        if(!this.filterValue)
-        {
-            this.currentLogs = this.consoleSvc.logs;
-        }
-        else
-        {
-            this.currentLogs = this.consoleSvc.logs.filter(log => log.text.toLowerCase().indexOf(this.filterValue.toLowerCase()) >= 0);
-        }
     }
 }

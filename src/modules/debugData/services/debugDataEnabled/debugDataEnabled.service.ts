@@ -6,21 +6,21 @@ import {Injectable, Signal, WritableSignal, signal} from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class DebugDataEnabledService
 {
-    //######################### private fields #########################
+    //######################### protected fields #########################
 
     /**
-     * Indication whether debug data copmonent is enabled
+     * Indication whether debug data component is enabled
      */
-    private _enabled: WritableSignal<boolean> = signal(false);
+    protected enabledSignal: WritableSignal<boolean> = signal(false);
 
     //######################### public properties #########################
 
     /**
-     * Indication whether debug data copmonent is enabled
+     * Indication whether debug data component is enabled
      */
     public get enabled(): Signal<boolean>
     {
-        return this._enabled.asReadonly();
+        return this.enabledSignal.asReadonly();
     }
 
     //######################### public methods #########################
@@ -31,6 +31,6 @@ export class DebugDataEnabledService
      */
     public setEnabled(enabled: boolean = true): void
     {
-        this._enabled.set(enabled);
+        this.enabledSignal.set(enabled);
     }
 }
