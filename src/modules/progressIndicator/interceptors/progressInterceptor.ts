@@ -1,6 +1,6 @@
 import {Injectable, ClassProvider, inject, Injector, runInInjectionContext} from '@angular/core';
 import {HttpEvent, HttpInterceptor, HttpHandler, HttpEventType, HTTP_INTERCEPTORS, HttpRequest, HttpHandlerFn} from '@angular/common/http';
-import {Observable, tap} from 'rxjs';
+import {defer, Observable, tap} from 'rxjs';
 
 import {ProgressIndicatorService} from '../services/progressIndicator.service';
 import {PROGRESS_INDICATOR_GROUP_NAME} from '../misc/tokens';
@@ -13,32 +13,49 @@ import {IGNORED_INTERCEPTORS} from '../../../types/tokens';
  */
 export function progressInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>>
 {
+    //interceptor is ignored
+    if(req.context.get(IGNORED_INTERCEPTORS).some(itm => itm == ProgressInterceptor || itm == progressInterceptor))
+    {
+        return next(req);
+    }
+
     const indicatorSvc = inject(ProgressIndicatorService);
+    const groupName = req.context.get(PROGRESS_INDICATOR_GROUP_NAME);
 
-    return next(req)
-            .pipe(tap(
+    //defer - state is per subscription (retry/resubscribe creates new request)
+    return defer(() =>
+    {
+        let running = false;
+
+        const stop = () =>
+        {
+            if(running)
             {
-                next: event =>
-                {
-                    //interceptor is ignored
-                    if(req.context.get(IGNORED_INTERCEPTORS).some(itm => itm == ProgressInterceptor || itm == progressInterceptor))
-                    {
-                        return;
-                    }
+                running = false;
+                indicatorSvc.hideProgress(groupName);
+            }
+        };
 
-                    //request started
-                    if(event.type == HttpEventType.Sent)
-                    {
-                        indicatorSvc.showProgress(req.context.get(PROGRESS_INDICATOR_GROUP_NAME));
-                    }
-                    //response received
-                    else if(event.type == HttpEventType.Response)
-                    {
-                        indicatorSvc.hideProgress(req.context.get(PROGRESS_INDICATOR_GROUP_NAME));
-                    }
-                },
-                error: () => indicatorSvc.hideProgress(req.context.get(PROGRESS_INDICATOR_GROUP_NAME)),
-            }));
+        return next(req)
+            .pipe(tap(
+                  {
+                      next: event =>
+                      {
+                          //request started
+                          if(event.type == HttpEventType.Sent && !running)
+                          {
+                              running = true;
+                              indicatorSvc.showProgress(groupName);
+                          }
+                          //response received
+                          else if(event.type == HttpEventType.Response)
+                          {
+                              stop();
+                          }
+                      },
+                      unsubscribe: stop,
+                  }));
+    });
 }
 
 /**

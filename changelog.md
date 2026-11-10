@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 28.0.2 (2026-11-10)
+
+### Bug Fixes
+
+- updated `progressInterceptor` function
+   - fixed *progress indicator* staying visible when request is cancelled (unsubscribed), progress is now hidden also on unsubscribe
+   - fixed unbalanced show/hide of *progress indicator* on retry or resubscribe, state is now tracked per subscription, so progress is shown only once and hidden only if it was shown
+   - ignored interceptor check is now evaluated once before request is processed, so ignored requests are passed through without any progress handling
+
 ## Version 28.0.1 (2026-09-21)
 
 ### Bug Fixes
