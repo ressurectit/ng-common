@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 28.0.3 (2026-11-11)
+
+### Bug Fixes
+
+- updated `progressInterceptor` function
+   - fixed *progress indicator* staying visible when request fails with error, progress is now hidden also on error
+
 ## Version 28.0.2 (2026-11-10)
 
 ### Bug Fixes

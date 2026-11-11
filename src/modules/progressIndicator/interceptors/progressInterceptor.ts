@@ -53,6 +53,7 @@ export function progressInterceptor(req: HttpRequest<unknown>, next: HttpHandler
                               stop();
                           }
                       },
+                      error: stop,
                       unsubscribe: stop,
                   }));
     });
